@@ -284,5 +284,27 @@ document.getElementById("pause").addEventListener("click",pause);
 
 
 
+state = new GameState();
+a = new Tower({x:40,y:20},state);
+b = new Building({x:200,y:80}, state);
+drawTower(a);
+drawBuilding(b);
+cp = getClosestPoints(a,b);
+drawLine(cp[0],cp[1]);
+
+b2 = new Building({x:345,y:74}, state);
+drawBuilding(b2);
+cp = getClosestPoints(b,b2);
+drawLine(cp[0],cp[1]);
+
+b3 = new Building({x:35,y:114}, state);
+drawBuilding(b3);
+cp = getClosestPoints(b3,b);
+drawLine(cp[0],cp[1]);
+
+cp = getClosestPoints(b3,a);
+drawLine(cp[0],cp[1]);
+
+
 
 // ok
