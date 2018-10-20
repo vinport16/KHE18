@@ -7,15 +7,32 @@ function drawEverything(state){
 
 function drawWorld(state){
 	for(var i in state.world){
-		if(state.world[i].width != null){
-			drawBuilding(state.world[i]);
-		}else if(state.world[i] instanceof Ship){
-			drawShip(state.world[i]);
-		}else if(state.world[i] instanceof Tower){
-			drawTower(state.world[i]);
+    gobj = state.world[i];
+		if(gobj.width != null){
+			drawBuilding(gobj);
+		}else if(gobj instanceof Ship){
+			drawShip(gobj);
+		}else if(gobj instanceof Tower){
+			drawTower(gobj);
 		}else{
-			console.log(typeof state.world[i]);
+			console.log(typeof gobj);
 		}
+
+    if(gobj.connected){
+      others = gobj.connected;
+      for(var j in others){
+        points = getClosestPoints(gobj, others[j], "rgba(0,200,150,0.1)");
+        drawLine(points[0],points[1]);
+      }
+    }
+
+    if(gobj.activeConnections){
+      others = gobj.activeConnections;
+      for(var j in others){
+        points = getClosestPoints(gobj, others[j], "rgba(0,200,150,0.1)");
+        drawLine(points[0],points[1]);
+      }
+    }
 	}
 }
 

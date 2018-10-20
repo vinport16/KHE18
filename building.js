@@ -72,3 +72,7 @@ Building.prototype.charge = function(){
     this.energy = this.energyMax;
   }
 }
+
+Building.prototype.step = function(state){
+  this.charge();
+}
