@@ -57,16 +57,16 @@ function makeShips(n,wave){
   }
 }
 
-a = new GoliathTower({x:1*70+20,y:1+75},state);
-state.world.push(a);
-b = new GoliathTower({x:2*70+20,y:2+75},state);
-state.world.push(b);
-c = new GoliathTower({x:3*70+20,y:3+75},state);
-state.world.push(c);
-d = new GoliathTower({x:4*70+20,y:4+75},state);
-state.world.push(d);
+// a = new GoliathTower({x:1*70+20,y:1+75},state);
+// state.world.push(a);
+// b = new GoliathTower({x:2*70+20,y:2+75},state);
+// state.world.push(b);
+// c = new GoliathTower({x:3*70+20,y:3+75},state);
+// state.world.push(c);
+// d = new GoliathTower({x:4*70+20,y:4+75},state);
+// state.world.push(d);
 
-//makeTowers(20, 5);//makeTowers(number of towers, number of types of towers);
+makeTowers(20, 5);//makeTowers(number of towers, number of types of towers);
 makeBuildings(20);//makeBuildings(number of buildings)
 makeShips(15,1);//makeShips(number of Ships, wave#)
 makeShips(8,2);
