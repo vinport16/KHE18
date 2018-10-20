@@ -3,7 +3,10 @@ function sleep(ms) {
 }
 
 state = new GameState();
+state.position = {x:-canvas.width/2,y:-canvas.height/2};
 paused = false;
+
+placeBuilding(new Building({x:0,y:0},state), state);
 
 
 
