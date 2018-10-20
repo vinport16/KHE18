@@ -149,6 +149,27 @@ function pause(){
 
 document.getElementById("pause").addEventListener("click",pause);
 
+function resetDrag(){
+  canvas.addEventListener("mousedown", function(event){
+    originalpos = state.position;
+    clickpos = getVector(event);
+    canvas.addEventListener("mousemove", function(event){
+      dragpos = getVector(event);
+
+      state.position = add(originalpos,subtract(clickpos,dragpos));
+      drawEverything(state);
+
+    });
+
+    canvas.addEventListener("mouseup", function(event){
+      clearListeners(state);
+      resetDrag();
+    });
+  });
+}
+
+resetDrag();
+
 
 
 
