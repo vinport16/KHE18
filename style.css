@@ -1,0 +1,122 @@
+body{
+  padding: 0px;
+  margin: 5px;
+  background: linear-gradient(-10deg,rgb(0,150,255),rgb(250,250,255));
+  font-family: sans-serif;
+}
+
+canvas{
+  background: linear-gradient(10deg,rgb(0,10,20),rgb(0,30,50));
+  border-radius: 10px;
+}
+
+div.display{
+
+  float: right;
+  width: 29%;
+  height: 100%;
+}
+
+table{
+  width: 100%;
+}
+table.prices{
+  width:auto;
+  text-align: right;
+  font-family: monospace;
+  font-size: 18px;
+}
+
+button{
+  width: 100%;
+  height: 40px;
+  font-size: 15px;
+  border-radius: 7px;
+  background: linear-gradient(160deg,rgba(210,180,220,0.5),rgba(200,150,250,0.5));
+}
+
+button.building{
+  background: linear-gradient(160deg,rgba(190,160,220,0.7),rgba(120,120,250,0.7));
+}
+
+button.tower1{
+  background: linear-gradient(160deg,rgba(220,220,200,1),rgba(220,220,100,1));
+}
+
+button.tower2{
+  background: linear-gradient(160deg,rgba(255,200,100,1),rgba(230,140,100,1));
+}
+
+button.pause{
+  font-weight: bold;
+  color: blue;
+}
+button.cancel{
+  font-weight: bold;
+  color: red;
+}
+
+div.textbox{
+  height: 88%;
+  width: 100%;
+  overflow-y: scroll;
+}
+
+div.message{
+
+  font-size: 15pt;
+
+}
+
+div.text{
+  padding: 5px;
+  height: auto;
+}
+
+div.gems{
+  height: 4%;
+  background-color: rgba(50,50,50,1);
+  font-size: 18pt;
+  padding-top: 2.5%;
+  text-align: center;
+  color: gold;
+  border-radius: 10px;
+  margin-bottom: 2%;
+}
+
+div.energy{
+  height: 5%;
+  background-color: gray;
+  border-radius: 10px;
+}
+
+div.amount{
+  height: 100%;
+  background-color: green;
+  width: 8%;
+  color: white;
+  font-size: 18pt;
+  overflow-x: visible;
+  border-radius: 10px;
+}
+
+span.tooltip {
+    visibility: hidden;
+    width: 300px;
+    background-color: rgba(160,150,255,0.8);
+    /* box-shadow: 0 0 5px 5px rgba(250,230,200,0.8); */
+    color: black;
+    text-align: left;
+    border-radius: 6px;
+    padding: 5px;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    top: 6%;
+    right: 29%;
+}
+
+button:hover:enabled .tooltip {
+    visibility: visible;
+}
