@@ -14,7 +14,7 @@ function Structure(pos, price, maxHealth, ER, state){
 
 }
 
-this.findConnectedEnergyPath(){
+this.findConnectedEnergyPath = function() {
   var q = [[this]];
   var visited = [this];
   while(q.length != 0){
@@ -36,7 +36,7 @@ this.findConnectedEnergyPath(){
   return false;
 }
 
-this.getEnergyFor(n){
+this.getEnergyFor = function(n){
   var available = 0;
   var paths = [];
   var amounts = [];
