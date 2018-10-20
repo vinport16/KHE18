@@ -50,7 +50,7 @@ Tower.prototype.step = function(state) {
 Tower.prototype.shipInRange = function(state){
   for(i in state.world){
     gobj = state.world[i];
-    if(gobj.enemy && distanceBetween(gobj,this) <= this.range && (gobj instanceof Ship)){
+    if(gobj.enemy && distanceBetween(gobj, this) <= this.range && (gobj instanceof Ship)){
       return gobj;
     }
   }

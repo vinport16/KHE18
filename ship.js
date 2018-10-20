@@ -113,7 +113,7 @@ MotherShip.prototype.constructor = MotherShip;
 
 MotherShip.prototype.shoot = function(state){
 	var target = this.selectTarget(state);
-	var babyShip = new Ship(this.pos, state);
+	var babyShip = new Ship(duplicate(this.position), state);
 	state.world.push(babyShip);
 }
 
@@ -142,11 +142,12 @@ GrandmotherShip.prototype.shoot = function(state){
 	var randInt = getRandomInt(0,10);
 	var babyShip;
 	if(randInt > 7){
-		var babyShip = new MotherShip(this.pos, state);
+		var babyShip = new MotherShip(duplicate(this.position), state);
+		state.world.push(babyShip);
 	}else{
-		var babyShip = new BigShip(this.pos, state);
+		var babyShip = new BigShip(duplicate(this.position), state);
+		state.world.push(babyShip);
 	}
-	state.world.push(babyShip);
 }
 
 function SpeedyShip(pos, state) {
