@@ -32,28 +32,18 @@ BBL2a = [
 	{cost:400, energyMax: 500, energyRate: 2, color:"orange", tree: false}];
 BBL2b = [
 	{cost:300, maxHealth: 700, color:"gold", tree: false}];
-
 basicBuildingTree = [
 	{cost:150, energyMax: 300, color:"yellow", tree: BBL2a}, 
 	{cost:100, maxHealth: 500, color:"silver", tree: BBL2b}];
 
-SPL2a = [
-	{cost:400, energyMax: 400, energyRate: 5, color:"orange", tree: false}];
+SPL2a = [{cost:400, energyMax: 400, energyRate: 5, color:"orange", tree: false}];
+solarPanelTree = [{cost:150, energyMax: 300, energyRate: 2, color:"yellow", tree: SPL2a}];
 
-solarPanelTree = [
-	{cost:150, energyMax: 300, energyRate = 2; color:"yellow", tree: SPL2a}];
+SFL2a = [{cost:400, energyMax: 800, energyRate: 20, color:"orange", tree: false}];
+solarFarmTree = [{cost:150, energyMax: 600, energyRate: 15, color:"yellow", tree: SFL2a}];
 
-SFL2a = [
-	{cost:400, energyMax: 800, energyRate: 20, color:"orange", tree: false}];
-
-solarFarmTree = [
-	{cost:150, energyMax: 600, energyRate = 15; color:"yellow", tree: SFL2a}];
-
-PPL2a = [
-	{cost:400, energyMax: 500, energyRate: 1, color:"orange", tree: false}];
-
-powerPlantTree = [
-	{cost:150, energyMax: 200, energyRate: 0.75, color:"yellow", tree: PPL2a}];
+PPL2a = [{cost:400, energyMax: 500, energyRate: 1, color:"orange", tree: false}];
+powerPlantTree = [{cost:150, energyMax: 200, energyRate: 0.75, color:"yellow", tree: PPL2a}];
 
 /*
 	cost
