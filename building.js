@@ -3,6 +3,7 @@
 function Building(pos, state){
   
   this.height = 30;
+  console.log(this.height);
   this.width = 30;
 
   Structure.call(this, pos, 100, 100, 100, state);

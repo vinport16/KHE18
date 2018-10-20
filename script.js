@@ -23,12 +23,12 @@ function drawCircle(position, r, fill, stroke){
   ctx.stroke();
 }
 
-function drawRectangle(tl, br, fill, stroke){
+function drawRectangle(tl, h, w, fill, stroke){
   ctx.beginPath();
   ctx.fillStyle = fill;
   ctx.strokeStyle = stroke;
   ctx.lineWidth = 1;
-  ctx.rect(tl.x, tl.y, br.x, br.y);
+  ctx.rect(tl.x, tl.y, w, h);
   ctx.fill();
   ctx.stroke();
 }
@@ -78,16 +78,21 @@ function drawProtoTower(proto){
 }
 
 function drawBuilding(o){
-  drawRectangle(o.topLeft,subtract(o.bottomRight,o.topLeft),"rgba(0,255,0,0.1)","rgba(100,255,255,1)");
+  console.log("In drawbuilding");
+  var topLeft = subtract(o.position,{x:o.width/2,y:o.height/2});
+  var bottomRight = add(o.position,{x:o.width/2,y:o.height/2});
+  drawRectangle(topLeft, o.height, o.width,"rgba(0,255,0,0.1)","rgba(100,255,255,1)");
   //draw energy level
-  var p1 = subtract(o.topLeft,{x:0,y:3});
-  var p2 = {x:o.bottomRight.x,y:p1.y};
+  var p1 = subtract(topLeft,{x:0,y:3});
+  var p2 = {x:bottomRight.x,y:p1.y};
+  console.log("hi1");
   drawLine(p1,p2,"rgba(100,100,100,1)");
+  console.log("hi2");
   p2.x = p1.x + (o.energy/o.energyMax)*(p2.x-p1.x);
   drawLine(p1,p2,"rgba(100,150,200,1)");
   //draw health level
-  p1 = subtract(o.topLeft,{x:0,y:6});
-  p2 = {x:o.bottomRight.x,y:p1.y};
+  p1 = subtract(topLeft,{x:0,y:6});
+  p2 = {x:bottomRight.x,y:p1.y};
   drawLine(p1,p2,"rgba(200,50,50,1)");
   p2.x = p1.x + (o.health/o.maxHealth)*(p2.x-p1.x);
   drawLine(p1,p2,"rgba(150,200,150,1)");
