@@ -1,7 +1,7 @@
 //ship.js
 
 function Ship(pos, state) {
-	this.radius = 20;
+	this.radius = 13;
 	this.maxHealth = 130;
 	this.health = this.maxHealth;
 	this.color = "red";

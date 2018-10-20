@@ -55,13 +55,23 @@ Projectile.prototype.collisionCheck = function(state){
 		if(gobj instanceof Projectile){
 		}else if(gobj.width != null){
 			if(this.checkRect(this,gobj)){
-				gobj.health -= this.damage;
-				this.delete(state);
+				if(this.damage > gobj.health){
+					gobj.health -= this.damage;
+					this.health -= this.damage;
+				}else{
+					gobj.health -= this.damage;
+					this.delete(state);
+				}
 			}
 		}else{
 			if(this.checkCircle(this,gobj)){
-				gobj.health -= this.damage;
-				this.delete(state);
+				if(this.damage > gobj.health){
+					gobj.health -= this.damage;
+					this.health -= this.damage;
+				}else{
+					gobj.health -= this.damage;
+					this.delete(state);
+				}
 			}
 		}
 		if(gobj.health <= 0){
