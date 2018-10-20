@@ -12,6 +12,18 @@ function Structure(pos, price, maxHealth, ER, state){
 
   state.world;
 
+  for(var i = 0; i < state.world.length; i++){
+    var o2 = state.world[i];
+    if(distance(closestPoints(this,o2)[0],closestPoints(this,o2)[1]) < o1.energyRange + o2.energyRange){
+      this.connect(o2);
+    }
+  }
+
+}
+
+this.connect = function(struct){
+  this.connected.push(struct);
+  struct.connected.push(this);
 }
 
 this.findConnectedEnergyPath = function() {
