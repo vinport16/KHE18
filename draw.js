@@ -2,6 +2,7 @@
 
 function drawEverything(state){
 	clearCanvas();
+  clearMap();
 	drawWorld(state);
 }
 
@@ -10,10 +11,13 @@ function drawWorld(state){
     gobj = state.world[i];
 		if(gobj.width != null){
 			drawBuilding(gobj, state);
+      mapDrawBuilding(gobj, state);
 		}else if(gobj instanceof Ship){
 			drawShip(gobj, state);
+      mapDrawShip(gobj, state);
 		}else if(gobj instanceof Tower){
 			drawTower(gobj, state);
+      mapDrawTower(gobj, state);
 		}else if(gobj instanceof Projectile){
       drawProjectile(gobj, state);
     }else{
@@ -40,6 +44,10 @@ function drawWorld(state){
 
 function clearCanvas(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
+}
+
+function clearMap(){
+  maptx.clearRect(0,0,map.width,map.height);
 }
 
 function clearListeners(state){
@@ -79,6 +87,28 @@ function drawLine(v1, v2, stroke){
 	ctx.lineWidth = 2;
 	ctx.strokeStyle = stroke;
 	ctx.stroke();
+}
+
+function mapDrawTower(tower,state){
+  rp = relative(tower.position, state);
+  rp = divide(rp,mapscale);
+  rp = add(rp,{x:map.width/4, y:map.height/4});
+  radius = tower.range/mapscale;
+  maptx.beginPath();
+  maptx.arc(rp.x, rp.y, radius, 0, 2 * Math.PI, false);
+  maptx.fillStyle = "rgba(0,255,0,0.06)";
+  maptx.strokeStyle = "rgba(255,255,255,0.0)";
+  maptx.lineWidth = 1;
+  maptx.fill();
+  maptx.stroke();
+}
+
+function mapDrawBuilding(building, state){
+
+}
+
+function mapDrawShip(ship, state){
+
 }
 
 function drawTower(o,state){
