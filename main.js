@@ -24,20 +24,16 @@ function makeTowers(n,t){
     i++;
   }
   while(i<3*n/t){
-    a = new LongRangeTower({x:i*70+20,y:i+75},state);
+    a = new SeekingTower({x:i*70+20,y:i+75},state);
     state.world.push(a);
     i++;
   }
   while(i<4*n/t){
-    a = new MachineGunTower({x:i*70+20,y:i+75},state);
+    a = new MultiShotTower({x:i*70+20,y:i+75},state);
     state.world.push(a);
     i++;
   }
-  while(i<5*n/t){
-    a = new GoliathTower({x:i*70+20,y:i+75},state);
-    state.world.push(a);
-    i++;
-  }
+  
 }
 function makeBuildings(n){
   i = 0;
@@ -65,12 +61,13 @@ function makeShips(n,wave){
 // d = new GoliathTower({x:4*70+20,y:4+75},state);
 // state.world.push(d);
 
-makeTowers(20, 5);//makeTowers(number of towers, number of types of towers);
+makeTowers(20, 4);//makeTowers(number of towers, number of types of towers);
 makeBuildings(20);//makeBuildings(number of buildings)
 makeShips(15,1);//makeShips(number of Ships, wave#)
 makeShips(8,2);
 makeShips(5,3);
 makeShips(30,4);
+
 
 
 

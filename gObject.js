@@ -45,8 +45,7 @@ Projectile.prototype.move = function(){
 		this.velocity = multiply(unitVector(subtract(getClosestPoints(this.target,this)[0],this.position)), this.speed);
   	}
   	this.position = add(this.position, this.velocity);
-  	 
-
+  	
 }
 
 Projectile.prototype.collisionCheck = function(state){
