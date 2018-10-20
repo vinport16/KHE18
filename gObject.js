@@ -7,9 +7,9 @@ var GameObject = function(pos){
 }
 
 GameObject.prototype.delete = function(state) {
-  	var index = state.world.indexOf(this);
+  var index = state.world.indexOf(this);
 	if (index !== -1) state.world.splice(index, 1);
-  	self.destroyed = true;
+  this.destroyed = true;
 };
 
 GameObject.prototype.step = function(state) {

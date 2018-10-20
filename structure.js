@@ -21,8 +21,8 @@ function Structure(pos, price, maxHealth, ER, state){
 Structure.prototype = Object.create(GameObject.prototype);
 Structure.prototype.constructor = Structure;
 
-Structure.prototype.destroy = function(state){
-  GameObject.prototype.destroy.call(this, state);
+Structure.prototype.delete = function(state){
+  GameObject.prototype.delete.call(this, state);
   for( i in this.connected){
     index = this.connected[i].connected.indexOf(this);
     if (index !== -1) this.connected[i].connected.splice(index, 1);
