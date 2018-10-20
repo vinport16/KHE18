@@ -10,6 +10,7 @@ function Ship(pos, state) {
 	this.currentBuffer = 10;
 	this.projectileSpeed = 10; 
 	this.projectileDamage = 30;
+	this.maxHealth = 100;
 }
 Ship.prototype = Object.create(GameObject.prototype);
 Ship.prototype.constructor = Ship;

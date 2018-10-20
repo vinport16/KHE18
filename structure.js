@@ -12,7 +12,6 @@ function Structure(pos, price, maxHealth, ER, state){
 
   for(var i = 0; i < state.world.length; i++){
     var o2 = state.world[i];
-    console.log(distanceBetween(this,o2));
     if(distanceBetween(this,o2) < this.energyRange + o2.energyRange){
       this.connect(o2);
     }

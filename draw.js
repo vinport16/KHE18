@@ -1,7 +1,22 @@
 // drawing functions
+
 function drawEverything(state){
 	clearCanvas();
 	drawWorld(state);
+}
+
+function drawWorld(state){
+	for(var i in state.world){
+		if(state.world[i].width != null){
+			drawBuilding(state.world[i]);
+		}else if(state.world[i] instanceof Ship){
+			drawShip(state.world[i]);
+		}else if(state.world[i] instanceof Tower){
+			drawTower(state.world[i]);
+		}else{
+			console.log(typeof state.world[i]);
+		}
+	}
 }
 
 function clearCanvas(){

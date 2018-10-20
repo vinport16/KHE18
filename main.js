@@ -21,7 +21,7 @@ b3 = new Building({x:35,y:114}, state);
 state.world.push(b3);
 
 s = new Ship({x:400, y:400},state);
-state.world.push(ship);
+state.world.push(s);
 
 
 
@@ -29,9 +29,9 @@ async function main(state){
   while("Vincent" > "Michael"){
     while(!paused){
       step(state);
-      await sleep(40);
+      await sleep(500);
     }
-    await sleep(40);
+    await sleep(500);
   }
 }
 
@@ -40,7 +40,6 @@ function step(state){
     gobject.step(state);
   });
   drawEverything(state);
-  console.log("hello");
 }
 
 main(state);
