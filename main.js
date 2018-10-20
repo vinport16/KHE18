@@ -14,12 +14,14 @@ function getRandomInt(min, max) {
 }
 
 function makeShips(point, r1, r2, n, state){
-  for(i = 0; i < n; i++){
+  for(i = 0; i < n/2; i++){
     state.world.push(new Ship(makePointIn(point,r1,r2),state));
   }
+  state.world.push(new BigShip(makePointIn(point,r1,r2),state));
+  
 }
 
-makeShips(zeroVector,800,850,50,state);
+makeShips(zeroVector,800,850,5,state);
 
 async function main(state){
   while("Vincent" > "Michael"){

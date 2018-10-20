@@ -17,6 +17,7 @@ function Tower(pos, state){
   this.enemy = false;
   this.tree = basicTowerTree;
   this.kills = 0;
+  this.targetType = "closest";
 
   Structure.call(this, pos, 100, this.health, 20, state);
 } 
@@ -57,14 +58,36 @@ Tower.prototype.shipInRange = function(state){
 }
 
 Tower.prototype.selectTarget = function(state){
-  closest = [false, this.range];
-  for(i in state.world){
-    gobj = state.world[i];
-    if(gobj.enemy && gobj.maxHealth && distanceBetween(gobj,this) <= closest[1]){
-      closest = [gobj, distanceBetween(gobj,this)];
+  var target = [false, this.range];
+  if(this.targetType == "closest"){
+    closest = [false, this.range];
+    for(i in state.world){
+      gobj = state.world[i];
+      if(gobj.enemy && gobj.maxHealth && distanceBetween(gobj,this) <= closest[1]){
+        closest = [gobj, distanceBetween(gobj,this)];
+      }
     }
+    target = closest;
+  }else if(this.targetType == "strongest"){
+    strongest = [false, 0];
+    for(i in state.world){
+      gobj = state.world[i];
+      if(gobj.enemy && gobj.maxHealth && (gobj.maxHealth > strongest[1]) && distanceBetween(gobj,this) <= this.range){
+        strongest = [gobj, gobj.maxHealth];
+      }
+    }
+    target = strongest;
+  }else if(this.targetType == "farthest"){
+    farthest = [false, 0];
+    for(i in state.world){
+      gobj = state.world[i];
+      if(gobj.enemy && gobj.maxHealth && distanceBetween(gobj,this) > farthest[1] && distanceBetween(gobj,this) <= this.range){
+        farthest = [gobj, distanceBetween(gobj,this)];
+      }
+    }
+    target = farthest;
   }
-  return closest[0];
+  return target[0];
 }
 
 
@@ -84,6 +107,7 @@ function HeavyTower(pos, state){
   this.enemy = false;
   this.tree = heavyTowerTree;
   this.kills = 0;
+  this.targetType = "closest";
 
   Structure.call(this, pos, 150, this.health, 40, state);
 } 
@@ -105,6 +129,7 @@ function SeekingTower(pos, state){
   this.enemy = false;
   this.tree = seekingTowerTree;
   this.kills = 0;
+  this.targetType = "closest";
 
   Structure.call(this, pos, 10, this.health, 30, state);
 } 
@@ -126,6 +151,7 @@ function MultiShotTower(pos, state){
   this.enemy = false;
   this.tree = multishotTowerTree;
   this.kills = 0;
+  this.targetType = "closest";
 
   Structure.call(this, pos, 150, this.health, 40, state);
 } 
