@@ -78,11 +78,16 @@ function describeTower(element,tower){
 // setup
 
 var canvas = document.getElementById("canvas");
-
 canvas.width = (document.body.clientWidth-10) * 0.70 ;
 canvas.height = document.body.clientHeight - 10 ;
-
 var ctx = canvas.getContext("2d");
+
+
+var map = document.getElementById("map");
+map.width = (document.body.clientWidth-10) * 0.28 ;
+map.height = map.width/1.3 ;
+var maptx = map.getContext("2d");
+var mapscale = 10;
 
 function toggleHeal(){
   heal = !heal;
