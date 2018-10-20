@@ -8,7 +8,7 @@ function Building(pos, state){
   Structure.call(this, pos, 100, 300, 100, state);
 
   this.energyMax = 100;
-  this.energyRate = 5;
+  this.energyRate = 20/25.0;
   this.energy = 0;
 
 }

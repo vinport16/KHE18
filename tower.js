@@ -2,17 +2,15 @@
 //wires 
 
 function Tower(pos, state){
-	this.radius = 15;
-	
-	
+	this.radius = 10;
 	this.health = 100; 
 	this.color = "blue";
-	this.range = 5000;
-	this.bufferTime = 40; //frames
-	this.currentBuffer = 10;
+	this.range = 200;
+	this.bufferTime = 25; //frames
+	this.currentBuffer = this.bufferTime;
 	this.projectileSpeed = 10;
-	this.projectileDamage = 20;
-	this.projectileEnergy = 100;
+	this.projectileDamage = 30;
+	this.projectileEnergy = 20;
   this.destroyed = false;
 
   Structure.call(this, pos, 10, this.health, 100, state);
@@ -59,21 +57,20 @@ Tower.prototype.selectTarget = function(state){
   }
   return closest[0];
 }
-
-function BigTower(pos, state){
-  this.radius = 25;
-  Tower.call(this, pos, state);
-  
+//OTHER TOWER TYPES BELOW
+function HeavyTower(pos, state){
+  this.radius = 15;
   this.health = 100; 
-  this.price = 100;
   this.color = "blue";
-  this.range = 100;
-  this.energyRange = 100;
-  this.maxHealth = 100;
-  this.bufferTime = 24; //frames
-  this.currentBuffer = 24;
-  this.projectileSpeed = 8;
-  this.projectileDamage = 80;
+  this.range = 5000;
+  this.bufferTime = 40; //frames
+  this.currentBuffer = 10;
+  this.projectileSpeed = 10;
+  this.projectileDamage = 20;
+  this.projectileEnergy = 100;
+  this.destroyed = false;
+
+  Structure.call(this, pos, 10, this.health, 100, state);
 } 
-BigTower.prototype = Object.create(Tower.prototype);
-BigTower.prototype.constructor = BigTower;
+HeavyTower.prototype = Object.create(Tower.prototype);
+HeavyTower.prototype.constructor = HeavyTower;

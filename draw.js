@@ -23,16 +23,16 @@ function drawWorld(state){
     if(gobj.connected){
       others = gobj.connected;
       for(var j in others){
-        points = getClosestPoints(gobj, others[j], "rgba(0,200,150,0.1)");
-        drawLine(points[0],points[1]);
+        points = getClosestPoints(gobj, others[j]);
+        drawLine(points[0],points[1],  "rgba(20,80,200,0.3)");
       }
     }
 
     if(gobj.activeConnections){
       others = gobj.activeConnections;
       for(var j in others){
-        points = getClosestPoints(gobj, others[j], "rgba(0,200,150,0.1)");
-        drawLine(points[0],points[1]);
+        points = getClosestPoints(gobj, others[j]);
+        drawLine(points[0],points[1],  "rgba(50,255,200,0.5)");
       }
     }
 	}

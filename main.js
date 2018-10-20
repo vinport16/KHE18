@@ -8,41 +8,35 @@ paused = false;
 
 
 
+function makeTowers(n){
+  i = 0;
+  while(i<n){
+    a = new Tower({x:i*90+100,y:i+75},state);
+    state.world.push(a);
+    i++;
+  }
+}
+function makeBuildings(n){
+  i = 0;
+  while(i<n){
+    a = new Building({x:i*70+100,y:i+25},state);
+    state.world.push(a);
+    i++;
+  }
+}
+function makeShips(n){
+  i = 0;
+  while(i<n){
+    a = new Ship({x:i*80+100,y:i+505},state);
+    state.world.push(a);
+    i++;
+  }
+}
 
-a = new Tower({x:40,y:20},state);
-state.world.push(a);
+makeTowers(6);
+makeBuildings(6);
+makeShips(6);
 
-a1 = new Tower({x:400,y:20},state);
-state.world.push(a1);
-a2 = new Tower({x:200,y:20},state);
-state.world.push(a2);
-a3 = new Tower({x:200,y:200},state);
-state.world.push(a3);
-a3 = new Tower({x:200,y:200},state);
-state.world.push(a3);
-a3 = new Tower({x:800,y:200},state);
-state.world.push(a3);
-
-b = new Building({x:200,y:80}, state);
-state.world.push(b);
-
-b1 = new Building({x:800,y:20}, state);
-state.world.push(b1);
-
-b2 = new Building({x:345,y:74}, state);
-state.world.push(b2);
-
-b4 = new Building({x:380,y:74}, state);
-state.world.push(b4);
-
-b3 = new Building({x:35,y:114}, state);
-state.world.push(b3);
-
-s = new Ship({x:400, y:400},state);
-state.world.push(s);
-
-s1 = new Ship({x:100, y:400},state);
-state.world.push(s1);
 
 
 

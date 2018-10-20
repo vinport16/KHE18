@@ -2,21 +2,20 @@
 
 function Ship(pos, state) {
 	this.radius = 20;
-	GameObject.call(this, pos);
-
-	this.health = 300;
+	this.maxHealth = 130;
+	this.health = this.maxHealth;
 	this.color = "red";
-  	this.speed = 3;
+  	this.speed = 2;
   	this.stopDistance = 20;
   	this.target;
-	this.bufferTime = 10;
-	this.currentBuffer = 10;
+	this.bufferTime = 25;
+	this.currentBuffer = this.bufferTime;
   	this.range = 60;
 	this.projectileSpeed = 10; 
-	this.projectileDamage = 40;
-	this.maxHealth = 300;
+	this.projectileDamage = 20;
   	this.enemy = true;
   	this.destroyed = false;
+  	GameObject.call(this, pos);
 }
 Ship.prototype = Object.create(GameObject.prototype);
 Ship.prototype.constructor = Ship;
