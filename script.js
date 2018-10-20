@@ -100,6 +100,13 @@ function toggleHeal(){
 
 document.getElementById("heal").addEventListener("click",toggleHeal);
 
+var controlButtons = [
+  document.getElementById("pause"),
+  document.getElementById("cancel"),
+  document.getElementById("ships"),
+  document.getElementById("heal")
+]
+
 function disableAllButtons(){
   var buttons = document.getElementsByTagName("button");
   for(var i = 0; i < buttons.length; i++){
@@ -118,36 +125,13 @@ var paused = false;
 function pause(){
   paused = !paused;
   if(!paused){
-    document.getElementById("defaultBuilding").disabled = true;
-    document.getElementById("defaultTower").disabled = true;
-    document.getElementById("battery").disabled = true;
-    document.getElementById("rangedTower").disabled = true;
-    document.getElementById("solarFarm").disabled = true;
-    document.getElementById("heavyTower").disabled = true;
-    document.getElementById("chaingunTower").disabled = true;
-    document.getElementById("seekingTower").disabled = true;
-    document.getElementById("repairBuilding").disabled = true;
-    document.getElementById("fusionGenerator").disabled = true;
-    document.getElementById("missileTower").disabled = true;
-    document.getElementById("goliathTower").disabled = true;
-    document.getElementById("relay").disabled = true;
-    document.getElementById("selectObject").disabled = true;
+    disableAllButtons();
+    for(var i = 0; i < controlButtons.length; i++){
+      controlButtons[i].disabled = false;
+    } 
     document.getElementById("pause").innerHTML = "pause";
   }else{
-    document.getElementById("defaultBuilding").disabled = false;
-    document.getElementById("defaultTower").disabled = false;
-    document.getElementById("battery").disabled = false;
-    document.getElementById("rangedTower").disabled = false;
-    document.getElementById("solarFarm").disabled = false;
-    document.getElementById("heavyTower").disabled = false;
-    document.getElementById("chaingunTower").disabled = false;
-    document.getElementById("seekingTower").disabled = false;
-    document.getElementById("repairBuilding").disabled = false;
-    document.getElementById("fusionGenerator").disabled = false;
-    document.getElementById("missileTower").disabled = false;
-    document.getElementById("goliathTower").disabled = false;
-    document.getElementById("relay").disabled = false;
-    document.getElementById("selectObject").disabled = false;
+    enableAllButtons();
     document.getElementById("pause").innerHTML = "resume";
   }
 }

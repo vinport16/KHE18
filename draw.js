@@ -107,7 +107,7 @@ function mapDrawTower(tower,state){
 
 function mapDrawBuilding(building, state){
   rp = multiply({x:map.width/2, y:map.height/2}, mapscale);
-  rp = add(building.position, subtract(rp, add(state.position, {x:canvas.width/2, y:canvas.height/2})));
+  rp = add(subtract(building.position,{x:building.width/2, y:building.height/2}), subtract(rp, add(state.position, {x:canvas.width/2, y:canvas.height/2})));
   rp = divide(rp,mapscale);
   width = building.width/mapscale;
   height = building.height/mapscale;
