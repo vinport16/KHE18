@@ -85,7 +85,7 @@ function getClosestPoints(go1, go2){
   }else if(go1.radius && go2.width){
     return getPointsCircRec(go1, go2);
   }else if(go1.width && go2.radius){
-    return getPointsCircRec(go2, go1);
+    return getPointsCircRec(go2, go1).reverse();
   }else{
     return getPointsRecs(go1, go2);
   }

@@ -31,11 +31,11 @@ Structure.prototype.findConnectedEnergyPath = function() {
   var visited = [this];
   while(q.length != 0){
     var b = q[0][q[0].length-1];
-    if(b.maxEnergy && b.energy > 0){
+    if(b.energyMax && b.energy > 0){
       return(q[0]);
     }else{
       for(var i = 0; i < b.connected.length; i++){
-        if(!visited.includes(b.connected[i]) && b.connected[i].destroyed == undefined){
+        if(!visited.includes(b.connected[i])){
           var path = copyArray(q[0]);
           path.push(b.connected[i]);
           visited.push(b.connected[i]);
