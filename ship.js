@@ -22,8 +22,7 @@ Ship.prototype.constructor = Ship;
 
 Ship.prototype.shoot = function(state){
 	var target = this.selectTarget(state);
-	var bullet = new Projectile(target, this.position, this.projectileSpeed, this.projectileDamage, state);
-	bullet.enemy = true;
+	var bullet = new Projectile(target, this.position, this.projectileSpeed, this.projectileDamage, true, state);
 	state.world.push(bullet);
 }
 

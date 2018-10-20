@@ -26,6 +26,9 @@ state.world.push(b3);
 s = new Ship({x:400, y:400},state);
 state.world.push(s);
 
+s1 = new Ship({x:100, y:400},state);
+state.world.push(s1);
+
 
 
 async function main(state){

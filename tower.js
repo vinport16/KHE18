@@ -11,15 +11,16 @@ function Tower(pos, state){
 	this.bufferTime = 40; //frames
 	this.currentBuffer = 10;
 	this.projectileSpeed = 10;
-	this.projectileDamage = 50;
+	this.projectileDamage = 20;
 	this.projectileEnergy = 100;
+  this.destroyed = false;
 } 
 Tower.prototype = Object.create(Structure.prototype);
 Tower.prototype.constructor = Tower;
 
 Tower.prototype.shoot = function(state){
 	var target = this.selectTarget(state);
-	var bullet = new Projectile(target, this.position, this.projectileSpeed, this.projectileDamage, state);
+	var bullet = new Projectile(target, this.position, this.projectileSpeed, this.projectileDamage, false, state);
 	state.world.push(bullet);
 }
 
