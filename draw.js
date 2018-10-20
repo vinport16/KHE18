@@ -14,6 +14,7 @@ function drawWorld(state){
 			drawShip(gobj, state);
 		}else if(gobj instanceof Tower){
 			drawTower(gobj, state);
+      drawRange(gobj, state);
 		}else if(gobj instanceof Projectile){
       drawProjectile(gobj, state);
     }else{

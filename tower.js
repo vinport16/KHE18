@@ -16,6 +16,7 @@ function Tower(pos, state){
   this.destroyed = false;
   this.enemy = false;
   this.tree = basicTowerTree;
+  this.kills = 0;
 
   Structure.call(this, pos, 100, this.health, 20, state);
 } 
@@ -82,6 +83,7 @@ function HeavyTower(pos, state){
   this.destroyed = false;
   this.enemy = false;
   this.tree = heavyTowerTree;
+  this.kills = 0;
 
   Structure.call(this, pos, 150, this.health, 40, state);
 } 
@@ -102,6 +104,7 @@ function SeekingTower(pos, state){
   this.destroyed = false;
   this.enemy = false;
   this.tree = seekingTowerTree;
+  this.kills = 0;
 
   Structure.call(this, pos, 10, this.health, 30, state);
 } 
@@ -122,6 +125,7 @@ function MultiShotTower(pos, state){
   this.destroyed = false;
   this.enemy = false;
   this.tree = multishotTowerTree;
+  this.kills = 0;
 
   Structure.call(this, pos, 150, this.health, 40, state);
 } 
