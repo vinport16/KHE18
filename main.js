@@ -3,6 +3,7 @@ function sleep(ms) {
 }
 
 state = new GameState();
+paused = false;
 
 
 
@@ -24,14 +25,14 @@ state.world.push(ship);
 
 
 
-
-while("Vincent" > "Michael"){
-  while(!paused){
+async function main(state){
+  while("Vincent" > "Michael"){
+    while(!paused){
       step(state);
+      await sleep(40);
+    }
     await sleep(40);
   }
-  await sleep(40);
-
 }
 
 function step(state){
@@ -39,4 +40,7 @@ function step(state){
     gobject.step(state);
   });
   drawEverything(state);
+  console.log("hello");
 }
+
+main(state);
