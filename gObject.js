@@ -15,7 +15,7 @@ GameObject.prototype.delete = function(state) {
 GameObject.prototype.step = function(state) {
 };
 
-var Projectile = function(tar, radius, pos, speed, damage, enemy, state){
+var Projectile = function(tar, radius, pos, speed, damage, enemy, parent, state){
 	this.target = tar; 
 	this.position = pos;
 	GameObject.call(this, pos);
@@ -26,6 +26,7 @@ var Projectile = function(tar, radius, pos, speed, damage, enemy, state){
 	this.speed = speed;
 	this.damage = damage;
   	this.enemy = enemy;
+  	this.parent = parent;
   	var pColor = function(enemy){
   		if(enemy){
   			return "red";
@@ -40,11 +41,14 @@ var Projectile = function(tar, radius, pos, speed, damage, enemy, state){
 Projectile.prototype = Object.create(GameObject.prototype);
 Projectile.prototype.constructor = Projectile;
 
-Projectile.prototype.move = function(){
+Projectile.prototype.move = function(state){
 	if(!this.target.destroyed){
 		this.velocity = multiply(unitVector(subtract(getClosestPoints(this.target,this)[0],this.position)), this.speed);
   	}
   	this.position = add(this.position, this.velocity);
+  	if(this.position.x > 2000 || this.position.x < -2000 || this.position.y > 2000 || this.position.y < -2000){
+  		this.delete(state);
+  	}
   	
 }
 
@@ -52,20 +56,11 @@ Projectile.prototype.collisionCheck = function(state){
 	for(var i in state.world){
 		gobj = state.world[i];
 		if(gobj instanceof Projectile){
-		}else if(gobj.width != null){
-			if(this.checkRect(this,gobj)){
-				if(this.damage > gobj.health){
-					this.damage -= gobj.health;
-					gobj.delete(state);
-				}else{
-					gobj.health -= this.damage;
-					this.delete(state);
-				}
-			}
 		}else{
-			if(checkCircleOverlap(this, gobj) && !(sameTeam(this, gobj))){
+			if(checkOverlap(this,gobj) && !(sameTeam(this, gobj))){
 				if(this.damage > gobj.health){
 					this.damage -= gobj.health;
+					this.parent.kills++;
 					gobj.delete(state);
 				}else{
 					gobj.health -= this.damage;
@@ -74,50 +69,10 @@ Projectile.prototype.collisionCheck = function(state){
 			}
 		}
 	}
-}
-
-Projectile.prototype.projCollision = function(p, state){
-	
-}
-
-Projectile.prototype.checkRect = function(p,o){
-	if(!p.enemy){
-		return false;
-	}
-	var topLeft = subtract(o.position,{x:o.width/2,y:o.height/2});
-  	var bottomRight = add(o.position,{x:o.width/2,y:o.height/2});
-
-  	// var width = Math.abs(topLeft.x - bottomRight.x);
-  	// var height = Math.abs(topLeft.y - bottomRight.y);
-
-  	var x = Math.abs(p.position.x - (topLeft.x+bottomRight.x)/2);
-  	var y = Math.abs(p.position.y - (topLeft.y+bottomRight.y)/2);
-
-  	if (x > (o.width/2 + p.radius)) { return false; }
-  	if (y > (o.height/2 + p.radius)) { return false; }
-
-  	if (x <= (o.width/2)) { return true; }
-  	if (y <= (o.height/2)) { return true; }
-
-  	var cornerDistance_sq = (x - o.width/2)*(x - o.width/2) +  (y - o.height/2)*(y - o.height/2);
-
-	return cornerDistance_sq <= (p.radius*p.radius);
-}
-
-Projectile.prototype.checkCircle = function(o){
-	if((this.enemy && o instanceof Ship) || (!this.enemy && o instanceof Tower)){
-		return false;
-	}
-	var distance = Math.sqrt( (this.position.x-o.position.x)*(this.position.x-o.position.x) + (this.position.y-o.position.y)*(this.position.y-o.position.y) );
-      	if(distance < o.radius){
-        	return true;
-		}else{
-			return false;
-		}
 }
 
 Projectile.prototype.step = function(state){
-  this.move();
+  this.move(state);
   this.collisionCheck(state);
 }
 
