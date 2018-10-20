@@ -31,7 +31,7 @@ Structure.prototype.findConnectedEnergyPath = function() {
   var visited = [this];
   while(q.length != 0){
     var b = q[0][q[0].length-1];
-    if(b.type == "building" && b.energy > 0){
+    if(b.maxEnergy && b.energy > 0){
       return(q[0]);
     }else{
       for(var i = 0; i < b.connected.length; i++){
