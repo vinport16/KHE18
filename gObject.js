@@ -15,17 +15,17 @@ GameObject.prototype.delete = function(state) {
 GameObject.prototype.step = function(state) {
 };
 
-var Projectile = function(tar, pos, speed, damage, bad, state){
+var Projectile = function(tar, radius, pos, speed, damage, enemy, state){
 	this.target = tar; 
 	this.position = pos;
 	GameObject.call(this, pos);
-	this.radius = 3;
+	this.radius = radius;
 	//this.velocity = multiply(unitVector(subtract(getClosestPoints(this.target,this)[0], this.position)), speed);
 	this.velocity = multiply(unitVector(subtract(getClosestPoints(this.target,this)[0],this.position)), this.speed);
 	this.acceleration = 0.1;
 	this.speed = speed;
 	this.damage = damage;
-  	this.enemy = bad;
+  	this.enemy = enemy;
   	var pColor = function(enemy){
   		if(enemy){
   			return "red";
@@ -56,26 +56,23 @@ Projectile.prototype.collisionCheck = function(state){
 		}else if(gobj.width != null){
 			if(this.checkRect(this,gobj)){
 				if(this.damage > gobj.health){
-					gobj.health -= this.damage;
-					this.health -= this.damage;
+					this.damage -= gobj.health;
+					gobj.delete(state);
 				}else{
 					gobj.health -= this.damage;
 					this.delete(state);
 				}
 			}
 		}else{
-			if(this.checkCircle(this,gobj)){
+			if(checkCircleOverlap(this, gobj) && !(sameTeam(this, gobj))){
 				if(this.damage > gobj.health){
-					gobj.health -= this.damage;
-					this.health -= this.damage;
+					this.damage -= gobj.health;
+					gobj.delete(state);
 				}else{
 					gobj.health -= this.damage;
 					this.delete(state);
 				}
 			}
-		}
-		if(gobj.health <= 0){
-			gobj.delete(state);
 		}
 	}
 }
@@ -108,11 +105,11 @@ Projectile.prototype.checkRect = function(p,o){
 	return cornerDistance_sq <= (p.radius*p.radius);
 }
 
-Projectile.prototype.checkCircle = function(p,o){
-	if((p.enemy && o instanceof Ship) || (!p.enemy && o instanceof Tower)){
+Projectile.prototype.checkCircle = function(o){
+	if((this.enemy && o instanceof Ship) || (!this.enemy && o instanceof Tower)){
 		return false;
 	}
-	var distance = Math.sqrt( (p.position.x-o.position.x)*(p.position.x-o.position.x) + (p.position.y-o.position.y)*(p.position.y-o.position.y) );
+	var distance = Math.sqrt( (this.position.x-o.position.x)*(this.position.x-o.position.x) + (this.position.y-o.position.y)*(this.position.y-o.position.y) );
       	if(distance < o.radius){
         	return true;
 		}else{

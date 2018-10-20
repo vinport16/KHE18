@@ -91,6 +91,80 @@ function getClosestPoints(go1, go2){
   }
 }
 
+function sameTeam(o1,o2){
+  if(o1.enemy == o2.enemy){
+    return true;
+  }
+  return false;
+}
+
+
+function checkOverlap(o1, o2){
+  if(o1.width != null && o2.width != null){
+    return checkRectOverlap(o1,o2);
+  }else if(o1.width != null && o2.width == null){
+    return checkMixedOverlap(o2,o1);
+  }else if(o1.width == null && o2.width != null){
+    return checkMixedOverlap(o1,o2);
+  }else if(o1.width == null && o2.width == null){
+    return checkCircleOverlap(o1,o2);
+  }else{
+    console.log("there is a problem if this is printed.");
+  }
+}
+
+function checkMixedOverlap(c,r){
+  rp = relative(r.position, state);
+  var topLeft = subtract(rp,{x:r.width/2,y:r.height/2});
+  var bottomRight = add(rp,{x:r.width/2,y:r.height/2});
+
+  var width = Math.abs(topLeft.x - bottomRight.x);
+  var height = Math.abs(topLeft.y - bottomRight.y);
+  
+  var x = Math.abs(c.position.x - (topLeft.x+bottomRight.x)/2);
+  var y = Math.abs(c.position.y - (topLeft.y+bottomRight.y)/2);
+
+  if (x > (width/2 + c.radius)) { return false; }
+  if (y > (height/2 + c.radius)) { return false; }
+
+  if (x <= (width/2)) { return true; }
+  if (y <= (height/2)) { return true; }
+
+  var cornerDistance_sq = (x - width/2)*(x - width/2) +  (y - height/2)*(y - height/2);
+
+  return cornerDistance_sq <= (c.radius*c.radius);
+}
+
+function checkRectOverlap(r1, r2){
+  r1rp = relative(r1.position, state);
+  r2rp = relative(r2.position, state);
+
+  function rectanglesOverlap(aw, ah, acx, acy, bw, bh, bcx, bcy){
+    var w = 0.5 * (aw + bw);
+    var h = 0.5 * (ah + bh);
+    var dx = acx - bcx;
+    var dy = acy - bcy;
+
+    if (Math.abs(dx) <= w && Math.abs(dy) <= h)
+    {
+      return true;
+    }
+    return false;
+  }
+
+  return rectanglesOverlap(r1.width, r1.height, r1rp.x, r1rp.y, r2.width, r2.height, r2rp.x, r2rp.y);
+}
+
+function checkCircleOverlap(c1, c2){
+  var distance = Math.sqrt( (c1.position.x-c2.position.x)*(c1.position.x-c2.position.x) + (c1.position.y-c2.position.y)*(c1.position.y-c2.position.y) );
+    if(distance < c1.radius + c2.radius){
+      return true;
+    }else{
+      return false;
+    }
+}
+
+
 function distanceBetween(go1, go2){
   points = getClosestPoints(go1,go2);
   return distance(points[0],points[1]);

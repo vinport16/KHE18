@@ -10,6 +10,7 @@ function Building(pos, state){
   this.energyMax = 100;
   this.energyRate = 20/25.0;
   this.energy = 0;
+  this.enemy = false;
 
 }
 

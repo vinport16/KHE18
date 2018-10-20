@@ -11,7 +11,9 @@ function Tower(pos, state){
 	this.projectileSpeed = 10;
 	this.projectileDamage = 30;
 	this.projectileEnergy = 20;
+  this.projectileSize = 3;
   this.destroyed = false;
+  this.enemy = false;
   //this.tree = basicTowerTree;
 
   Structure.call(this, pos, 100, this.health, 100, state);
@@ -25,7 +27,7 @@ Tower.prototype.upgrade = function(state){
 
 Tower.prototype.shoot = function(state){
 	var target = this.selectTarget(state);
-	var bullet = new Projectile(target, this.position, this.projectileSpeed, this.projectileDamage, false, state);
+	var bullet = new Projectile(target, this.projectileSize, this.position, this.projectileSpeed, this.projectileDamage, false, state);
 	state.world.push(bullet);
 }
 
@@ -73,7 +75,9 @@ function HeavyTower(pos, state){
   this.projectileSpeed = 5;
   this.projectileDamage = 100;
   this.projectileEnergy = 50;
+  this.projectileSize = 5;
   this.destroyed = false;
+  this.enemy = false;
 
   Structure.call(this, pos, 150, this.health, 100, state);
 } 
@@ -90,7 +94,9 @@ function LongRangeTower(pos, state){
   this.projectileSpeed = 12;
   this.projectileDamage = 20;
   this.projectileEnergy = 30;
+  this.projectileSize = 3;
   this.destroyed = false;
+  this.enemy = false;
 
   Structure.call(this, pos, 10, this.health, 100, state);
 } 
@@ -107,7 +113,9 @@ function MachineGunTower(pos, state){
   this.projectileSpeed = 15;
   this.projectileDamage = 10;
   this.projectileEnergy = 15;
+  this.projectileSize = 2;
   this.destroyed = false;
+  this.enemy = false;
 
   Structure.call(this, pos, 10, this.health, 100, state);
 } 
@@ -119,12 +127,14 @@ function GoliathTower(pos, state){
   this.health = 400; 
   this.color = "orange";
   this.range = 50;
-  this.bufferTime = 250; //frames
+  this.bufferTime = 150; //frames
   this.currentBuffer = this.bufferTime;
   this.projectileSpeed = 8;
   this.projectileDamage = 500;
   this.projectileEnergy = 300;
+  this.projectileSize = 15;
   this.destroyed = false;
+  this.enemy = false;
 
   Structure.call(this, pos, 10, this.health, 100, state);
 } 

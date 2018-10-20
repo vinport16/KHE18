@@ -5,7 +5,9 @@ function sleep(ms) {
 state = new GameState();
 paused = false;
 
-
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
 
 function makeTowers(n,t){
@@ -47,16 +49,27 @@ function makeBuildings(n){
 function makeShips(n,wave){
   i = 0;
   while(i<n){
-    a = new Ship({x:i*80+20,y:i+200+300*wave},state);
+    a = new Ship({x:i*80+20,y:i+200+getRandomInt(300*wave, 500*wave)},state);
     state.world.push(a);
     i++;
   }
 }
 
-makeTowers(20, 5);
-makeBuildings(12);
-makeShips(12,1);
-makeShips(8,2)
+a = new GoliathTower({x:1*70+20,y:1+75},state);
+state.world.push(a);
+b = new GoliathTower({x:2*70+20,y:2+75},state);
+state.world.push(b);
+c = new GoliathTower({x:3*70+20,y:3+75},state);
+state.world.push(c);
+d = new GoliathTower({x:4*70+20,y:4+75},state);
+state.world.push(d);
+
+//makeTowers(20, 5);//makeTowers(number of towers, number of types of towers);
+makeBuildings(20);//makeBuildings(number of buildings)
+makeShips(15,1);//makeShips(number of Ships, wave#)
+makeShips(8,2);
+makeShips(5,3);
+makeShips(30,4);
 
 
 
