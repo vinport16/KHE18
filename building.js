@@ -1,16 +1,14 @@
 //Building
 
 function Building(pos, state){
-  
-  this.height = 30;
+  this.height = 50;
   this.width = 30;
-
-  Structure.call(this, pos, 100, 300, 100, state);
-
+  this.maxHealth = 300;
   this.energyMax = 100;
   this.energyRate = 20/25.0;
   this.energy = 0;
   this.enemy = false;
+  Structure.call(this, pos, 100, this.maxHealth, 100, state);
 
 }
 
@@ -77,3 +75,48 @@ Building.prototype.charge = function(){
 Building.prototype.step = function(state){
   this.charge();
 }
+
+//OTHER BUILDING TYPES 
+function SolarPanel(pos, state){
+  
+  this.height = 150;
+  this.width = 100;
+  this.maxHealth = 25;
+  this.energyMax = 200;
+  this.energyRate = 1;
+  this.energy = 0;
+  this.enemy = false;
+  Structure.call(this, pos, 100, this.maxHealth, 200, state);
+
+}
+SolarPanel.prototype = Object.create(Building.prototype);
+SolarPanel.prototype.constructor = SolarPanel;
+
+function SolarFarm(pos, state){
+  
+  this.height = 300;
+  this.width = 400;
+  this.maxHealth = 80;
+  this.energyMax = 500;
+  this.energyRate = 10;
+  this.energy = 0;
+  this.enemy = false;
+  Structure.call(this, pos, 100, this.maxHealth, 500, state);
+
+}
+SolarFarm.prototype = Object.create(Building.prototype);
+SolarFarm.prototype.constructor = SolarFarm;
+
+function PowerPlant(pos, state){
+  this.height = 60;
+  this.width = 90;  
+  this.maxHealth = 5
+  this.energyMax = 100;
+  this.energyRate = 0.5;
+  this.energy = 0;
+  this.enemy = false;
+  Structure.call(this, pos, 100, this.maxHealth, 100, state);
+
+}
+PowerPlant.prototype = Object.create(Building.prototype);
+PowerPlant.prototype.constructor = PowerPlant;

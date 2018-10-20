@@ -35,10 +35,25 @@ function makeTowers(n,t){
   }
   
 }
-function makeBuildings(n){
+function makeBuildings(n,t){
   i = 0;
-  while(i<n){
+  while(i<n/t){
     a = new Building({x:i*70+20,y:i+25},state);
+    state.world.push(a);
+    i++;
+  }
+  while(i<2*n/t){
+    a = new SolarPanel({x:i*70+20,y:i-20},state);
+    state.world.push(a);
+    i++;
+  }
+  while(i<3*n/t){
+    a = new PowerPlant({x:i*70+20,y:i+25},state);
+    state.world.push(a);
+    i++;
+  }
+  while(i<4*n/t){
+    a = new SolarFarm({x:i*70+20,y:i+25},state);
     state.world.push(a);
     i++;
   }
@@ -62,7 +77,7 @@ function makeShips(n,wave){
 // state.world.push(d);
 
 makeTowers(20, 4);//makeTowers(number of towers, number of types of towers);
-makeBuildings(20);//makeBuildings(number of buildings)
+makeBuildings(20, 4);//makeBuildings(number of buildings)
 makeShips(15,1);//makeShips(number of Ships, wave#)
 makeShips(8,2);
 makeShips(5,3);

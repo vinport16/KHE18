@@ -1,5 +1,5 @@
 
-
+//TOWER TREES
 BL2a = [
 	{cost:250, range: 800, color:"orange", tree: false}, 
 	{cost:400, projectileEnergy: 25, color:"maroon", tree: false}];
@@ -25,6 +25,9 @@ heavyTowerTree = [
 
 seekingTowerTree = [];
 multishotTowerTree = [];
+
+
+//BUILDING TREES
 
 
 /*
