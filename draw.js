@@ -49,10 +49,7 @@ function clearListeners(state){
   ctx = canvas.getContext("2d");
 
   drawEverything(state);
-}
-
-function relative(position, state){
-  return subtract(position, state.position);
+  resetDrag();
 }
 
 function drawCircle(position, r, fill, stroke){
@@ -101,25 +98,34 @@ function drawRange(o,state){
   drawCircle(rp, o.range, "rgba(0,255,0,0.06)", "rgba(255,255,255,0.0)");
 }
 
-function drawProtoTower(proto,state){ // NEEDS TO BE REDONE
+function drawProto(proto, state){
+  if(proto instanceof Tower){
+    drawProtoTower(proto, state);
+  }else{
+    drawProtoBuilding(proto, state);
+  }
+}
+
+function drawProtoTower(proto,state){
   rp = relative(proto.position, state);
-  if(checkStructureOverlap(proto,state) || proto.price > gems){
+  if(proto.price > state.money || checkStructureOverlap(proto,state)){
     drawCircle(rp,proto.radius,"rgba(0,0,0,0)","rgba(255,100,100,100)");
   }else{
     drawCircle(rp,proto.radius,"rgba(0,0,0,0)","rgba(100,255,100,100)");
   }
 
   //draw connections
-  proto.connected = [];
-  protoConnect(proto);
+  proto.disconnectAll(state);
+  proto.connectToAll(state);
 
   for(var j = 0; j < proto.connected.length; j++){
     var o = proto.connected[j];
-    drawLine(getCenter(proto),getCenter(o),"rgba(20,80,200,1)");
+    points = getClosestPoints(proto, o);
+    drawLine(relative(points[0], state),relative(points[1], state), "rgba(20,80,200,1)");
   }
 
   //draw firing radius
-  drawCircle(proto.position, proto.range, "rgba(0,0,0,0)", "rgba(255,255,255,0.6)");
+  drawCircle(rp, proto.range, "rgba(0,0,0,0)", "rgba(255,255,255,0.6)");
 }
 
 function drawBuilding(o, state){
@@ -141,8 +147,8 @@ function drawBuilding(o, state){
   drawLine(p1,p2,"rgba(150,200,150,1)");
 }
 
-function drawProtoBuilding(proto, state){ // REDO THIS
-  rp = relative(proto, state);
+function drawProtoBuilding(proto, state){
+  rp = relative(proto.position, state);
   tl = subtract(rp,{x:proto.width/2, y:proto.height/2});
   if(proto.price > state.money || checkStructureOverlap(proto, state)){
     drawRectangle(tl, proto.height, proto.width, "rgba(0,0,0,0)", "rgba(255,100,100,100)");
@@ -151,8 +157,8 @@ function drawProtoBuilding(proto, state){ // REDO THIS
   }
 
   //draw connections
-  proto.connected = [];
-  proto.connect(state);
+  proto.disconnectAll(state);
+  proto.connectToAll(state);
 
   for(var j = 0; j < proto.connected.length; j++){
     var o = proto.connected[j];

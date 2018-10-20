@@ -65,6 +65,8 @@ Tower.prototype.selectTarget = function(state){
   }
   return closest[0];
 }
+
+
 //OTHER TOWER TYPES BELOW
 function HeavyTower(pos, state){
   this.radius = 20;

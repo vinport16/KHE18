@@ -10,12 +10,7 @@ function Structure(pos, price, maxHealth, ER, state){
   this.connected = [];
   this.activeConnections = [];
 
-  for(var i = 0; i < state.world.length; i++){
-    var o2 = state.world[i];
-    if(distanceBetween(this,o2) < this.energyRange + o2.energyRange){
-      this.connect(o2);
-    }
-  }
+  this.connectToAll(state);  
 }
 
 Structure.prototype = Object.create(GameObject.prototype);
@@ -27,6 +22,23 @@ Structure.prototype.delete = function(state){
     index = this.connected[i].connected.indexOf(this);
     if (index !== -1) this.connected[i].connected.splice(index, 1);
   }
+}
+
+Structure.prototype.connectToAll = function(state){
+  for(var i = 0; i < state.world.length; i++){
+    var o2 = state.world[i];
+    if(distanceBetween(this,o2) < this.energyRange + o2.energyRange){
+      this.connect(o2);
+    }
+  }
+}
+
+Structure.prototype.disconnectAll = function(){
+  for( i in this.connected){
+    index = this.connected[i].connected.indexOf(this);
+    if (index !== -1) this.connected[i].connected.splice(index, 1);
+  }
+  this.connected = [];
 }
 
 Structure.prototype.connect = function(struct){
@@ -96,4 +108,25 @@ Structure.prototype.getEnergyFor = function(n){
     }
     return true;
   }
+}
+
+function placeStructure(s, state){
+  canvas.addEventListener("mousemove",function(event){
+    s.position = absolute(getVector(event),state);
+    
+    drawEverything(state);
+    drawProto(s, state);
+  });
+
+  canvas.addEventListener("mousedown",function(event){
+    s.position = absolute(getVector(event),state);
+    
+    if(s.price <= state.money && !checkStructureOverlap(s, state)){
+      state.world.push(s);
+      state.money -= s.price;
+    }else{
+      s.disconnectAll(state);
+    }
+    clearListeners(state);
+  })
 }
