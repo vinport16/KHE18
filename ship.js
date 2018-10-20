@@ -16,6 +16,7 @@ function Ship(pos, state) {
 	this.projectileDamage = 40;
 	this.maxHealth = 300;
   	this.enemy = true;
+  	this.destroyed = false;
 }
 Ship.prototype = Object.create(GameObject.prototype);
 Ship.prototype.constructor = Ship;

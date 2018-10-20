@@ -20,15 +20,17 @@ var Projectile = function(tar, pos, speed, damage, bad, state){
 	this.position = pos;
 	GameObject.call(this, pos);
 	this.radius = 3;
-	this.velocity = multiply(unitVector(subtract(getClosestPoints(this.target,this)[0], this.position)), speed);
+	//this.velocity = multiply(unitVector(subtract(getClosestPoints(this.target,this)[0], this.position)), speed);
+	this.velocity = multiply(unitVector(subtract(getClosestPoints(this.target,this)[0],this.position)), this.speed);
 	this.acceleration = 0.1;
+	this.speed = speed;
 	this.damage = damage;
   	this.enemy = bad;
   	var pColor = function(enemy){
   		if(enemy){
   			return "red";
   		}else{
-  			return "purple";
+  			return "yellow";
   		}
   	}
   	this.color = pColor(this.enemy);
@@ -39,8 +41,12 @@ Projectile.prototype = Object.create(GameObject.prototype);
 Projectile.prototype.constructor = Projectile;
 
 Projectile.prototype.move = function(){
-  this.velocity = add(this.velocity, multiply(unitVector(subtract(getClosestPoints(this.target,this)[0],this.position)), this.acceleration));
-	this.position = add(this.position, this.velocity);
+	if(!this.target.destroyed){
+		this.velocity = multiply(unitVector(subtract(getClosestPoints(this.target,this)[0],this.position)), this.speed);
+  	}
+  	this.position = add(this.position, this.velocity);
+  	 
+
 }
 
 Projectile.prototype.collisionCheck = function(state){

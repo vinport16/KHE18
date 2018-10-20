@@ -3,9 +3,9 @@
 
 function Tower(pos, state){
 	this.radius = 15;
-	Structure.call(this, pos, 10, 50, 100, state);
 	
-	this.health = 500; 
+	
+	this.health = 100; 
 	this.color = "blue";
 	this.range = 5000;
 	this.bufferTime = 40; //frames
@@ -14,6 +14,8 @@ function Tower(pos, state){
 	this.projectileDamage = 20;
 	this.projectileEnergy = 100;
   this.destroyed = false;
+
+  Structure.call(this, pos, 10, this.health, 100, state);
 } 
 Tower.prototype = Object.create(Structure.prototype);
 Tower.prototype.constructor = Tower;
@@ -40,7 +42,7 @@ Tower.prototype.step = function(state) {
 Tower.prototype.shipInRange = function(state){
   for(i in state.world){
     gobj = state.world[i];
-    if(gobj.enemy && distanceBetween(gobj,this) <= this.range){
+    if(gobj.enemy && distanceBetween(gobj,this) <= this.range && (gobj instanceof Ship)){
       return gobj;
     }
   }
