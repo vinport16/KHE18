@@ -26,7 +26,6 @@ heavyTowerTree = [
 seekingTowerTree = [];
 multishotTowerTree = [];
 
-
 //BUILDING TREES
 BBL2a = [
 	{cost:400, energyMax: 500, energyRate: 2, color:"orange", tree: false}];

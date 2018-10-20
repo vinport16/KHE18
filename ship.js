@@ -1,7 +1,7 @@
 //ship.js
 
 function Ship(pos, state) {
-	this.radius = 13;
+	this.radius = 10;
 	this.maxHealth = 130;
 	this.health = this.maxHealth;
 	this.color = "red";
@@ -70,6 +70,108 @@ Ship.prototype.selectMoveTarget = function(state){
   }
   return closest[0];
 }
+
+function BigShip(pos, state) {
+	this.radius = 15;
+	this.maxHealth = 250;
+	this.health = this.maxHealth;
+	this.color = "red";
+  	this.speed = 1.5;
+  	this.stopDistance = 50;
+  	this.target;
+	this.bufferTime = 25;
+	this.currentBuffer = this.bufferTime;
+  	this.range = 150;
+	this.projectileSpeed = 10; 
+	this.projectileDamage = 20;
+  	this.enemy = true;
+  	this.destroyed = false;
+  	GameObject.call(this, pos);
+}
+BigShip.prototype = Object.create(Ship.prototype);
+BigShip.prototype.constructor = BigShip;
+
+function MotherShip(pos, state) {
+	this.radius = 25;
+	this.maxHealth = 500;
+	this.health = this.maxHealth;
+	this.color = "red";
+  	this.speed = 0.8;
+  	this.stopDistance = 100;
+  	this.target;
+	this.bufferTime = 100;
+	this.currentBuffer = this.bufferTime;
+  	this.range = 1000;
+	this.projectileSpeed = 1.5; 
+	this.projectileDamage = 20;
+  	this.enemy = true;
+  	this.destroyed = false;
+  	GameObject.call(this, pos);
+}
+MotherShip.prototype = Object.create(Ship.prototype);
+MotherShip.prototype.constructor = MotherShip;
+
+MotherShip.prototype.shoot = function(state){
+	var target = this.selectTarget(state);
+	var babyShip = new Ship(this.pos, state);
+	state.world.push(babyShip);
+}
+
+function GrandmotherShip(pos, state) {
+	this.radius = 50;
+	this.maxHealth = 1000;
+	this.health = this.maxHealth;
+	this.color = "red";
+  	this.speed = 0.2;
+  	this.stopDistance = 100;
+  	this.target;
+	this.bufferTime = 100;
+	this.currentBuffer = this.bufferTime;
+  	this.range = 2000;
+	this.projectileSpeed = 0.8; 
+	this.projectileDamage = 20;
+  	this.enemy = true;
+  	this.destroyed = false;
+  	GameObject.call(this, pos);
+}
+GrandmotherShip.prototype = Object.create(Ship.prototype);
+GrandmotherShip.prototype.constructor = GrandmotherShip;
+
+GrandmotherShip.prototype.shoot = function(state){
+	var target = this.selectTarget(state);
+	var randInt = getRandomInt(0,10);
+	var babyShip;
+	if(randInt > 7){
+		var babyShip = new MotherShip(this.pos, state);
+	}else{
+		var babyShip = new BigShip(this.pos, state);
+	}
+	state.world.push(babyShip);
+}
+
+function SpeedyShip(pos, state) {
+	this.radius = 5;
+	this.maxHealth = 20;
+	this.health = this.maxHealth;
+	this.color = "red";
+  	this.speed = 20;
+  	this.stopDistance = 10;
+  	this.target;
+	this.bufferTime = 2;
+	this.currentBuffer = this.bufferTime;
+  	this.range = 15;
+	this.projectileSpeed = 10; 
+	this.projectileDamage = 5;
+  	this.enemy = true;
+  	this.destroyed = false;
+  	GameObject.call(this, pos);
+}
+SpeedyShip.prototype = Object.create(Ship.prototype);
+SpeedyShip.prototype.constructor = SpeedyShip;
+
+
+
+
 
 
 
