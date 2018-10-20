@@ -5,6 +5,7 @@ function Building(pos, state){
   Structure.call(this, pos, 100, 100, 100, state);
 
   this.height = 30;
+  console.log(this.height);
   this.width = 30;
 
   this.energyMax = 100;
