@@ -5,7 +5,7 @@ function Building(pos, state){
   this.height = 30;
   this.width = 30;
 
-  Structure.call(this, pos, 100, 100, 100, state);
+  Structure.call(this, pos, 100, 300, 100, state);
 
   this.energyMax = 100;
   this.energyRate = 5;

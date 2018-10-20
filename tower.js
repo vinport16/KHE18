@@ -5,13 +5,13 @@ function Tower(pos, state){
 	this.radius = 15;
 	Structure.call(this, pos, 10, 50, 100, state);
 	
-	this.health = 50; 
+	this.health = 500; 
 	this.color = "blue";
 	this.range = 5000;
 	this.bufferTime = 40; //frames
 	this.currentBuffer = 10;
 	this.projectileSpeed = 10;
-	this.projectileDamage = 40;
+	this.projectileDamage = 50;
 	this.projectileEnergy = 100;
 } 
 Tower.prototype = Object.create(Structure.prototype);

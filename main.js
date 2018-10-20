@@ -17,6 +17,9 @@ state.world.push(b);
 b2 = new Building({x:345,y:74}, state);
 state.world.push(b2);
 
+b4 = new Building({x:380,y:74}, state);
+state.world.push(b4);
+
 b3 = new Building({x:35,y:114}, state);
 state.world.push(b3);
 
