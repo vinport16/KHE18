@@ -12,7 +12,6 @@ GameObject.prototype.delete = function(state) {
 };
 
 GameObject.prototype.step = function(state) {
-  
 };
 
 

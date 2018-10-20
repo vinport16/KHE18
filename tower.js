@@ -12,6 +12,7 @@ function Tower(pos, state){
 	this.currentBuffer = 10;
 	this.projectileSpeed = 10;
 	this.projectileDamage = 40;
+	this.projectileEnergy = 30;
 } 
 Tower.prototype = Object.create(Structure.prototype);
 Tower.prototype.constructor = Tower;
@@ -34,8 +35,17 @@ function BigTower(pos, state){
 BigTower.prototype = Object.create(Tower.prototype);
 BigTower.prototype.constructor = BigTower;
 
-function shoot(tower){
-	var target = null;
-	var bullet = new Projectile(target, tower.position, tower.projectileSpeed, tower.projectileDamage, state);
+Tower.prototype.shoot(state){
+	var target = {x:200,y:200);
+	var bullet = new Projectile(target, this.position, this.projectileSpeed, this.projectileDamage, state);
 	drawProjectile(bullet);
+}
+
+Tower.prototype.waitToShoot = function(state){
+	if(this.currentBuffer <= 0 && findEnergyFor(30)){
+		this.prototype.shoot(state);
+		this.currentBuffer = this.bufferTime;
+	}else{
+		this.currentBuffer--;
+	}
 }

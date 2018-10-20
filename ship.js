@@ -11,12 +11,31 @@ function Ship(pos, state) {
 	this.projectileSpeed = 10; 
 	this.projectileDamage = 30;
 	this.maxHealth = 100;
+	this.acceleration = {x:5,y:2};
 }
 Ship.prototype = Object.create(GameObject.prototype);
 Ship.prototype.constructor = Ship;
 
-function shoot(ship){
-	var target = null;
-	var bullet = new Projectile(target, ship.position, ship.projectileSpeed, ship.projectileDamage, state);
+Ship.prototype.step = function(state) {
+	this.prototype.move(state);
+	this.prototype.waitToShoot(state);
+};
+
+Ship.prototype.shoot = function(state){
+	var target = {x:300,y:300};
+	var bullet = new Projectile(target, this.position, this.projectileSpeed, this.projectileDamage, state);
 	drawEnemyProjectile(bullet);
+}
+
+Ship.prototype.move = function(state){
+	this.pos += this.acceleration;
+}
+
+Ship.prototype.waitToShoot = function(state){
+	if(this.currentBuffer <= 0){
+		this.prototype.shoot(state);
+		this.currentBuffer = this.bufferTime;
+	}else{
+		this.currentBuffer--;
+	}
 }

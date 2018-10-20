@@ -36,6 +36,7 @@ async function main(state){
 }
 
 function step(state){
+  state.step();
   state.world.forEach(function(gobject){
     gobject.step(state);
   });
