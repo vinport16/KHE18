@@ -36,8 +36,13 @@ Projectile.prototype.move = function(){
 	this.position = add(this.position, this.velocity);
 }
 
+Projectile.prototype.collisionCheck = function(state){
+  // WRITE COLLISION CHECK HERE
+}
+
 Projectile.prototype.step = function(state){
   this.move();
+  this.collisionCheck(state);
 }
 
 var Explosion = function(pos, size){
