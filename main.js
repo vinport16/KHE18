@@ -29,14 +29,14 @@ async function main(state){
   while("Vincent" > "Michael"){
     while(!paused){
       step(state);
-      await sleep(500);
+      await sleep(25);
     }
-    await sleep(500);
+    await sleep(25);
   }
 }
 
 function step(state){
-  state.step();
+  // state.step();
   state.world.forEach(function(gobject){
     gobject.step(state);
   });

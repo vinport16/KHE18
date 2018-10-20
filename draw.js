@@ -14,7 +14,9 @@ function drawWorld(state){
 			drawShip(gobj);
 		}else if(gobj instanceof Tower){
 			drawTower(gobj);
-		}else{
+		}else if(gobj instanceof Projectile){
+      drawProjectile(gobj);
+    }else{
 			console.log(typeof gobj);
 		}
 
