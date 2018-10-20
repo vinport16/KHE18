@@ -21,7 +21,7 @@ b3 = new Building({x:35,y:114}, state);
 state.world.push(b3);
 
 s = new Ship({x:400, y:400},state);
-state.world.push(ship);
+state.world.push(s);
 
 
 
@@ -37,6 +37,7 @@ async function main(state){
 
 function step(state){
   state.world.forEach(function(gobject){
+    console.log(gobject);
     gobject.step(state);
   });
   drawEverything(state);
