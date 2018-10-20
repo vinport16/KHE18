@@ -10,8 +10,8 @@ function getClosestPoints(go1, go2){
 
   function getPointsCircles(c1, c2){
     unit = unitVector(subtract(c1.position, c2.position));
-    p1 = add(c1.position, multiply(unit, c1.radius));
-    p2 = add(c1.position, multiply(unit, distance(c1.position, c2.position)-c2.radius));
+    p1 = subtract(c1.position, multiply(unit, c1.radius));
+    p2 = subtract(c1.position, multiply(unit, distance(c1.position, c2.position)-c2.radius));
     return [p1,p2];
   }
 
@@ -20,17 +20,18 @@ function getClosestPoints(go1, go2){
       return Math.max(lower, Math.min(upper, x))
     }
 
-    left = rec.position.y - rec.width;
-    right = rec.position.y + rec.width;
-    top = rec.position.x - rec.height;
-    bottom = rec.position.x + rec.height;
+    left = rec.position.x - rec.width/2;
+    right = rec.position.x + rec.width/2;
+    // 'top' is reserved (?) so use 'topp' instead
+    topp = rec.position.y - rec.height/2;
+    bottom = rec.position.y + rec.height/2;
 
     x = clamp(point.x, left, right);
-    y = clamp(point.y, top, bottom);
+    y = clamp(point.y, topp, bottom);
 
     dl = Math.abs(left - x);
     dr = Math.abs(right - x);
-    dt = Math.abs(top - y);
+    dt = Math.abs(topp - y);
     db = Math.abs(bottom - y);
 
     m = Math.min(dl,dr,dt,db);
@@ -40,7 +41,7 @@ function getClosestPoints(go1, go2){
     }else if(m == dr){
       p2 = {x:right, y:y};
     }else if(m == dt){
-      p2 = {x:x, y:top};
+      p2 = {x:x, y:topp};
     }else{
       p2 = {x:x, y:bottom};
     }
@@ -52,7 +53,7 @@ function getClosestPoints(go1, go2){
     p2 = getClosestPointRec(circ.position, rec);
 
     unit = unitVector(subtract(circ.position, p2));
-    p1 = add(circ.position, multiply(unit, circ.radius));
+    p1 = subtract(circ.position, multiply(unit, circ.radius));
 
     return [p1,p2];
   }
@@ -66,11 +67,11 @@ function getClosestPoints(go1, go2){
 
     closest = [Number.MAX_VALUE,{x:0,y:0},{x:0,y:0}];
 
-    for (var corner in corners){
-      p = getClosestPointRec(corner, rec2);
-      if(distance(p,corner) < closest[0]){
-        closest[0] = distance(p,corner);
-        closest[1] = corner;
+    for (var i in corners){
+      p = getClosestPointRec(corners[i], rec2);
+      if(distance(p,corners[i]) < closest[0]){
+        closest[0] = distance(p,corners[i]);
+        closest[1] = corners[i];
         closest[2] = p;
       }
     }
