@@ -114,9 +114,8 @@ function checkOverlap(o1, o2){
 }
 
 function checkMixedOverlap(c,r){
-  rp = relative(r.position, state);
-  var topLeft = subtract(rp,{x:r.width/2,y:r.height/2});
-  var bottomRight = add(rp,{x:r.width/2,y:r.height/2});
+  var topLeft = subtract(r.position,{x:r.width/2,y:r.height/2});
+  var bottomRight = add(r.position,{x:r.width/2,y:r.height/2});
 
   var width = Math.abs(topLeft.x - bottomRight.x);
   var height = Math.abs(topLeft.y - bottomRight.y);
@@ -187,8 +186,12 @@ function getVector(e){
   return {x: e.clientX - canvas.offsetLeft, y: e.clientY - canvas.offsetTop};
 }
 
-function getAbsolute(e,state){
-  subtract(getVector(e),state.position);
+function relative(position, state){
+  return subtract(position, state.position);
+}
+
+function absolute(position, state){
+  return add(position, state.position);
 }
 
 function subtract(v1, v2){
