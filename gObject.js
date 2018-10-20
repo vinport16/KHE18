@@ -9,22 +9,31 @@ var GameObject = function(pos){
 GameObject.prototype.delete = function(state) {
   	var index = state.world.indexOf(this);
 	if (index !== -1) state.world.splice(index, 1);
-  	self.destroyed = true;
+  	this.destroyed = true;
 };
 
 GameObject.prototype.step = function(state) {
 };
 
-var Projectile = function(tar, pos, speed, damage, state){
+var Projectile = function(tar, pos, speed, damage, bad, state){
 	this.target = tar; 
 	this.position = pos;
 	GameObject.call(this, pos);
 	this.radius = 3;
 	this.velocity = multiply(unitVector(subtract(getClosestPoints(this.target,this)[0], this.position)), speed);
 	this.acceleration = 0.1;
-	this.damage = 20;
-	this.color = "orange";
-  	this.enemy = false;
+	this.damage = damage;
+  	this.enemy = bad;
+  	var pColor = function(enemy){
+  		if(enemy){
+  			return "red";
+  		}else{
+  			return "purple";
+  		}
+  	}
+  	this.color = pColor(this.enemy);
+
+  	
 }
 Projectile.prototype = Object.create(GameObject.prototype);
 Projectile.prototype.constructor = Projectile;
@@ -35,7 +44,6 @@ Projectile.prototype.move = function(){
 }
 
 Projectile.prototype.collisionCheck = function(state){
-	console.log("in projCollision");
 	for(var i in state.world){
 		gobj = state.world[i];
 		if(gobj instanceof Projectile){
