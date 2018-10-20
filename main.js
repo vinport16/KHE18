@@ -24,21 +24,7 @@ function makeTowers(n,t){
     state.world.push(a);
     i++;
   }
-  while(i<3*n/t){
-    a = new LongRangeTower({x:i*70+20,y:i+75},state);
-    state.world.push(a);
-    i++;
-  }
-  while(i<4*n/t){
-    a = new MachineGunTower({x:i*70+20,y:i+75},state);
-    state.world.push(a);
-    i++;
-  }
-  while(i<5*n/t){
-    a = new GoliathTower({x:i*70+20,y:i+75},state);
-    state.world.push(a);
-    i++;
-  }
+  
 }
 function makeBuildings(n){
   i = 0;

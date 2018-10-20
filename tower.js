@@ -3,7 +3,8 @@
 
 function Tower(pos, state){
 	this.radius = 10;
-	this.health = 100; 
+  this.maxHealth = 100;
+	this.health = this.maxHealth;
 	this.color = "blue";
 	this.range = 200;
 	this.bufferTime = 25; //frames
@@ -14,9 +15,9 @@ function Tower(pos, state){
   this.projectileSize = 3;
   this.destroyed = false;
   this.enemy = false;
-  //this.tree = basicTowerTree;
+  this.tree = basicTowerTree;
 
-  Structure.call(this, pos, 100, this.health, 100, state);
+  Structure.call(this, pos, 100, this.health, 20, state);
 } 
 Tower.prototype = Object.create(Structure.prototype);
 Tower.prototype.constructor = Tower;
@@ -66,6 +67,46 @@ Tower.prototype.selectTarget = function(state){
 }
 //OTHER TOWER TYPES BELOW
 function HeavyTower(pos, state){
+  this.radius = 20;
+  this.health = 200; 
+  this.color = "lime";
+  this.range = 150;
+  this.bufferTime = 37; //frames
+  this.currentBuffer = this.bufferTime;
+  this.projectileSpeed = 5;
+  this.projectileDamage = 100;
+  this.projectileEnergy = 50;
+  this.projectileSize = 5;
+  this.destroyed = false;
+  this.enemy = false;
+  this.tree = heavyTowerTree;
+
+  Structure.call(this, pos, 150, this.health, 40, state);
+} 
+HeavyTower.prototype = Object.create(Tower.prototype);
+HeavyTower.prototype.constructor = HeavyTower;
+
+function SeekingTower(pos, state){
+  this.radius = 14;
+  this.health = 200; 
+  this.color = "purple";
+  this.range = 300;
+  this.bufferTime = 5; //frames
+  this.currentBuffer = this.bufferTime;
+  this.projectileSpeed = 15;
+  this.projectileDamage = 10;
+  this.projectileEnergy = 40;
+  this.projectileSize = 2;
+  this.destroyed = false;
+  this.enemy = false;
+  this.tree = seekingTowerTree;
+
+  Structure.call(this, pos, 10, this.health, 30, state);
+} 
+SeekingTower.prototype = Object.create(Tower.prototype);
+SeekingTower.prototype.constructor = SeekingTower;
+
+function MultiShotTower(pos, state){
   this.radius = 15;
   this.health = 200; 
   this.color = "lime";
@@ -78,49 +119,15 @@ function HeavyTower(pos, state){
   this.projectileSize = 5;
   this.destroyed = false;
   this.enemy = false;
+  this.tree = multishotTowerTree;
 
-  Structure.call(this, pos, 150, this.health, 100, state);
+  Structure.call(this, pos, 150, this.health, 40, state);
 } 
-HeavyTower.prototype = Object.create(Tower.prototype);
-HeavyTower.prototype.constructor = HeavyTower;
+MultiShotTower.prototype = Object.create(Tower.prototype);
+MultiShotTower.prototype.constructor = MultiShotTower;
 
-function LongRangeTower(pos, state){
-  this.radius = 12;
-  this.health = 100; 
-  this.color = "green";
-  this.range = 400;
-  this.bufferTime = 25; //frames
-  this.currentBuffer = this.bufferTime;
-  this.projectileSpeed = 12;
-  this.projectileDamage = 20;
-  this.projectileEnergy = 30;
-  this.projectileSize = 3;
-  this.destroyed = false;
-  this.enemy = false;
 
-  Structure.call(this, pos, 10, this.health, 100, state);
-} 
-LongRangeTower.prototype = Object.create(Tower.prototype);
-LongRangeTower.prototype.constructor = LongRangeTower;
-
-function MachineGunTower(pos, state){
-  this.radius = 14;
-  this.health = 200; 
-  this.color = "purple";
-  this.range = 300;
-  this.bufferTime = 5; //frames
-  this.currentBuffer = this.bufferTime;
-  this.projectileSpeed = 15;
-  this.projectileDamage = 10;
-  this.projectileEnergy = 15;
-  this.projectileSize = 2;
-  this.destroyed = false;
-  this.enemy = false;
-
-  Structure.call(this, pos, 10, this.health, 100, state);
-} 
-MachineGunTower.prototype = Object.create(Tower.prototype);
-MachineGunTower.prototype.constructor = MachineGunTower;
+//NOT USING THE BELOW, WILL USE IN UPGRADES
 
 function GoliathTower(pos, state){
   this.radius = 20;
@@ -136,7 +143,7 @@ function GoliathTower(pos, state){
   this.destroyed = false;
   this.enemy = false;
 
-  Structure.call(this, pos, 10, this.health, 100, state);
+  Structure.call(this, pos, 10, this.health, 50, state);
 } 
 GoliathTower.prototype = Object.create(Tower.prototype);
 GoliathTower.prototype.constructor = GoliathTower;

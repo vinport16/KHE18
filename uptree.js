@@ -1,7 +1,39 @@
-lvl = [{cost:400, health: 250, projectileDamage: 50, tree: false}];
 
-lvl = [{cost:200, health: 170, projectileDamage: 35, tree:lvl},{cost:300, health: 140, projectileEnergy: 10, bufferTime:5, tree:false}];
 
-basicTowerTree = [{cost:50, health: 110, projectileDamage: 30, health: 120, bufferTime: 20, tree: lvl}];
+BL2a = [
+	{cost:250, range: 800, color:"orange", tree: false}, 
+	{cost:400, projectileEnergy: 25, color:"maroon", tree: false}];
+BL2b = [
+	{cost:300, maxHealth: 300, color:"gold", tree: false}, 
+	{cost:350, projectileDamage: 60, color:"lime", tree: false}];
 
+basicTowerTree = [
+	{cost:150, range: 350, color:"yellow", tree: BL2a}, 
+	{cost:100, bufferTime: 15, color:"silver", tree: BL2b}];
+
+HL2a = [
+	{cost:250, maxHealth: 300, color:"orange", tree: false}, 
+	{cost:400, projectileSize: 10, color:"maroon", tree: false}];
+HL2b = [
+	{cost:300, bufferTime: 20, color:"gold", tree: false}, 
+	{cost:350, range: 400, color:"lime", tree: false}];
+
+heavyTowerTree = [
+	{cost:150, projectileDamage: 200, color:"yellow", tree: HL2a}, 
+	{cost:100, projectileEnergy: 20, color:"silver", tree: HL2b}];
+
+
+seekingTowerTree = [];
+multishotTowerTree = [];
+
+
+/*
+	cost
+	health
+	buffertime
+	projectileDamage
+	projectileradius
+	energy per shot 
+	range
+*/
 
