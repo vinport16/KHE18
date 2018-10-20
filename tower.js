@@ -9,6 +9,7 @@ function Tower(pos, state){
 	this.color = "blue";
 	this.range = 50;
 	this.bufferTime = 10; //frames
+	this.currentBuffer = 10;
 	this.projectileSpeed = 10;
 	this.projectileDamage = 40;
 } 
@@ -26,6 +27,7 @@ function BigTower(pos, state){
 	this.energyRange = 100;
 	this.maxHealth = 100;
 	this.bufferTime = 24; //frames
+	this.currentBuffer = 24;
 	this.projectileSpeed = 8;
 	this.projectileDamage = 80;
 } 

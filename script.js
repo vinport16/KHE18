@@ -78,16 +78,13 @@ function drawProtoTower(proto){
 }
 
 function drawBuilding(o){
-  console.log("In drawbuilding");
   var topLeft = subtract(o.position,{x:o.width/2,y:o.height/2});
   var bottomRight = add(o.position,{x:o.width/2,y:o.height/2});
   drawRectangle(topLeft, o.height, o.width,"rgba(0,255,0,0.1)","rgba(100,255,255,1)");
   //draw energy level
   var p1 = subtract(topLeft,{x:0,y:3});
   var p2 = {x:bottomRight.x,y:p1.y};
-  console.log("hi1");
   drawLine(p1,p2,"rgba(100,100,100,1)");
-  console.log("hi2");
   p2.x = p1.x + (o.energy/o.energyMax)*(p2.x-p1.x);
   drawLine(p1,p2,"rgba(100,150,200,1)");
   //draw health level

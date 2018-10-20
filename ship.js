@@ -7,6 +7,7 @@ function Ship(pos, state) {
 	this.health = 100;
 	this.color = "red";
 	this.bufferTime = 10;
+	this.currentBuffer = 10;
 	this.projectileSpeed = 10; 
 	this.projectileDamage = 30;
 }
