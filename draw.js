@@ -91,10 +91,11 @@ function drawLine(v1, v2, stroke){
 }
 
 function mapDrawTower(tower,state){
-  rp = relative(tower.position, state);
+  rp = multiply({x:map.width/2, y:map.height/2}, mapscale);
+  rp = add(tower.position, subtract(rp, add(state.position, {x:canvas.width/2, y:canvas.height/2})));
   rp = divide(rp,mapscale);
-  rp = add(rp,{x:map.width/4, y:map.height/4});
   radius = tower.range/mapscale;
+
   maptx.beginPath();
   maptx.arc(rp.x, rp.y, radius, 0, 2 * Math.PI, false);
   maptx.fillStyle = "rgba(0,255,0,0.06)";
@@ -105,11 +106,34 @@ function mapDrawTower(tower,state){
 }
 
 function mapDrawBuilding(building, state){
+  rp = multiply({x:map.width/2, y:map.height/2}, mapscale);
+  rp = add(building.position, subtract(rp, add(state.position, {x:canvas.width/2, y:canvas.height/2})));
+  rp = divide(rp,mapscale);
+  width = building.width/mapscale;
+  height = building.height/mapscale;
 
+  maptx.beginPath();
+  maptx.fillStyle = "rgba(100,255,255,0.7)";
+  maptx.strokeStyle = "rgba(100,255,255,0)";
+  maptx.lineWidth = 1;
+  maptx.rect(rp.x, rp.y, width, height);
+  maptx.fill();
+  maptx.stroke();
 }
 
 function mapDrawShip(ship, state){
+  rp = multiply({x:map.width/2, y:map.height/2}, mapscale);
+  rp = add(ship.position, subtract(rp, add(state.position, {x:canvas.width/2, y:canvas.height/2})));
+  rp = divide(rp,mapscale);
+  radius = ship.radius/mapscale;
 
+  maptx.beginPath();
+  maptx.arc(rp.x, rp.y, radius, 0, 2 * Math.PI, false);
+  maptx.fillStyle = "rgba(255,0,0,1)";
+  maptx.strokeStyle = "rgba(255,255,255,0)";
+  maptx.lineWidth = 1;
+  maptx.fill();
+  maptx.stroke();
 }
 
 function drawTower(o,state){
