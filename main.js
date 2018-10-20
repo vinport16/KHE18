@@ -3,12 +3,14 @@ function sleep(ms) {
 }
 
 state = new GameState();
+state.position = {x:-canvas.width/2,y:-canvas.height/2};
 paused = false;
 
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+placeBuilding(new Building({x:0,y:0},state), state);
 
 function makeTowers(n,t){
   i = 0;

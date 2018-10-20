@@ -103,7 +103,7 @@ function drawRange(o,state){
 
 function drawProtoTower(proto,state){ // NEEDS TO BE REDONE
   rp = relative(proto.position, state);
-  if(checkCollisions(proto) || proto.price > gems){
+  if(checkStructureOverlap(proto,state) || proto.price > gems){
     drawCircle(rp,proto.radius,"rgba(0,0,0,0)","rgba(255,100,100,100)");
   }else{
     drawCircle(rp,proto.radius,"rgba(0,0,0,0)","rgba(100,255,100,100)");
@@ -142,19 +142,22 @@ function drawBuilding(o, state){
 }
 
 function drawProtoBuilding(proto, state){ // REDO THIS
-  if(checkCollisions(proto) || proto.price > gems){
-    drawRectangle(proto.topLeft,subtract(proto.bottomRight,proto.topLeft),"rgba(0,0,0,0)","rgba(255,100,100,100)");
+  rp = relative(proto, state);
+  tl = subtract(rp,{x:proto.width/2, y:proto.height/2});
+  if(proto.price > state.money || checkStructureOverlap(proto, state)){
+    drawRectangle(tl, proto.height, proto.width, "rgba(0,0,0,0)", "rgba(255,100,100,100)");
   }else{
-    drawRectangle(proto.topLeft,subtract(proto.bottomRight,proto.topLeft),"rgba(0,0,0,0)","rgba(100,255,100,100)");
+    drawRectangle(tl, proto.height, proto.width, "rgba(0,0,0,0)","rgba(100,255,100,100)");
   }
 
   //draw connections
   proto.connected = [];
-  protoConnect(proto);
+  proto.connect(state);
 
   for(var j = 0; j < proto.connected.length; j++){
     var o = proto.connected[j];
-    drawLine(getCenter(proto),getCenter(o),"rgba(20,80,200,1)");
+    points = getClosestPoints(proto, o);
+    drawLine(relative(points[0], state),relative(points[1], state), "rgba(20,80,200,1)");
   }
 }
 

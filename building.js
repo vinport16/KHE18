@@ -77,3 +77,10 @@ Building.prototype.charge = function(){
 Building.prototype.step = function(state){
   this.charge();
 }
+
+function placeBuilding(b, state){
+  canvas.addEventListener("mousemove",function(event){
+    b.position = getAbsolute(event,state);
+    drawProtoBuilding(b, state);
+  });
+}

@@ -164,6 +164,17 @@ function checkCircleOverlap(c1, c2){
     }
 }
 
+function checkStructureOverlap(s, state){
+  for(i in state.world){
+    gobj = state.world[i];
+    if(gobj instanceof Structure){
+      if(checkOverlap(s,gobj)){
+        return true;
+      }
+    }
+  }
+  return false;
+}
 
 function distanceBetween(go1, go2){
   points = getClosestPoints(go1,go2);
@@ -174,6 +185,10 @@ var zeroVector = {x:0,y:0};
 
 function getVector(e){
   return {x: e.clientX - canvas.offsetLeft, y: e.clientY - canvas.offsetTop};
+}
+
+function getAbsolute(e,state){
+  subtract(getVector(e),state.position);
 }
 
 function subtract(v1, v2){
