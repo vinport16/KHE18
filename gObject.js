@@ -11,6 +11,10 @@ GameObject.prototype.delete = function(state) {
 	if (index !== -1) state.world.splice(index, 1);
 };
 
+GameObject.prototype.step = function(state) {
+  
+};
+
 
 var Projectile = function(tar, speed, damage, state){
 	this.target = tar; 

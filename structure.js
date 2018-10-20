@@ -10,23 +10,24 @@ function Structure(pos, price, maxHealth, ER, state){
   this.connected = [];
   this.activeConnections = [];
 
-  state.world;
-
   for(var i = 0; i < state.world.length; i++){
     var o2 = state.world[i];
-    if(distanceBetween(this,o2) < o1.energyRange + o2.energyRange){
+    console.log(distanceBetween(this,o2));
+    if(distanceBetween(this,o2) < this.energyRange + o2.energyRange){
       this.connect(o2);
     }
   }
-
 }
 
-this.connect = function(struct){
+Structure.prototype = Object.create(GameObject.prototype);
+Structure.prototype.constructor = Structure;
+
+Structure.prototype.connect = function(struct){
   this.connected.push(struct);
   struct.connected.push(this);
 }
 
-this.findConnectedEnergyPath = function() {
+Structure.prototype.findConnectedEnergyPath = function() {
   var q = [[this]];
   var visited = [this];
   while(q.length != 0){
@@ -48,7 +49,7 @@ this.findConnectedEnergyPath = function() {
   return false;
 }
 
-this.getEnergyFor = function(n){
+Structure.prototype.getEnergyFor = function(n){
   var available = 0;
   var paths = [];
   var amounts = [];
@@ -89,7 +90,3 @@ this.getEnergyFor = function(n){
     return true;
   }
 }
-
-Structure.prototype = Object.create(GameObject.prototype);
-Structure.prototype.constructor = Structure;
-
