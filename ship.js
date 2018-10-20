@@ -13,3 +13,9 @@ function Ship(pos, state) {
 }
 Ship.prototype = Object.create(GameObject.prototype);
 Ship.prototype.constructor = Ship;
+
+function shoot(ship){
+	var target = null;
+	var bullet = new Projectile(target, ship.position, ship.projectileSpeed, ship.projectileDamage, state);
+	drawEnemyProjectile(bullet);
+}
