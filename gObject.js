@@ -12,17 +12,18 @@ GameObject.prototype.delete = function(state) {
 };
 
 
-var Projectile = function(tar, speed, damage, state){
+var Projectile = function(tar, pos, speed, damage, state){
 	this.target = tar; 
-	this.position = null;
+	this.position = pos;
 	this.radius = 3;
 	this.speed = 10;
-	this.damage = 
+	this.acceleration = {x:2,y:2};
+	this.damage = 20;
 	this.color = "orange";
 }
 
 var Explosion = function(pos, size){
-	
+
 	// for (var i = 5; i < size; i++) {
 	// 	drawCircle(pos, i, "rgba(255,0,0,1", "rgba(255,255,100,1)");
 	// }

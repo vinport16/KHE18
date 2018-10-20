@@ -36,6 +36,6 @@ BigTower.prototype.constructor = BigTower;
 
 function shoot(tower){
 	var target = null;
-	var bullet = new Projectile(target, tower.projectileSpeed, tower.projectileDamage, state);
-
+	var bullet = new Projectile(target, tower.position, tower.projectileSpeed, tower.projectileDamage, state);
+	drawProjectile(bullet);
 }
