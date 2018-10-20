@@ -2,8 +2,9 @@
 //wires 
 
 function Tower(pos, state){
-	Structure.call(this, pos, 10, 50, 100, state);
 	this.radius = 15;
+	Structure.call(this, pos, 10, 50, 100, state);
+	
 	this.health = 50; 
 	this.color = "blue";
 	this.range = 50;
@@ -15,8 +16,9 @@ Tower.prototype = Object.create(Structure.prototype);
 Tower.prototype.constructor = Tower;
 
 function BigTower(pos, state){
-	Tower.call(this, pos, state);
 	this.radius = 25;
+	Tower.call(this, pos, state);
+	
 	this.health = 100; 
 	this.price = 100;
 	this.color = "blue";
