@@ -180,6 +180,13 @@ function distanceBetween(go1, go2){
   return distance(points[0],points[1]);
 }
 
+// makes a point between radius1 and radius2 (random places in the ring)
+function makePointIn(point,r1,r2){
+  d = r1 + Math.random() * (r2-r1);
+  rotate = rotateVector({x:1,y:0}, Math.random()*360);
+  return(add(multiply(rotate,d),point));
+}
+
 var zeroVector = {x:0,y:0};
 
 function getVector(e){

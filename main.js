@@ -13,14 +13,13 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function makeShips(n,wave){
-  i = 0;
-  while(i<n){
-    a = new Ship({x:i*80+20,y:i+200+getRandomInt(300*wave, 500*wave)},state);
-    state.world.push(a);
-    i++;
+function makeShips(point, r1, r2, n, state){
+  for(i = 0; i < n; i++){
+    state.world.push(new Ship(makePointIn(point,r1,r2),state));
   }
 }
+
+makeShips(zeroVector,800,850,50,state);
 
 async function main(state){
   while("Vincent" > "Michael"){

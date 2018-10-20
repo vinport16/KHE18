@@ -9,6 +9,24 @@ function GameState() {
 	this.currentStep = 0;
 }; 
 
-// GameState.prototype.step = function() {
-//     this.step++;  
-// };
+GameState.prototype.getEnergyCapacity = function() {
+  energy = 0;
+  for(i in this.world){
+    gobj = this.world[i];
+    if(gobj.energyMax){
+      energy += gobj.energyMax;
+    }
+  }
+  return energy;
+}
+
+GameState.prototype.getEnergyTotal = function() {
+  energy = 0;
+  for(i in this.world){
+    gobj = this.world[i];
+    if(gobj.energyMax){
+      energy += gobj.energy;
+    }
+  }
+  return energy;
+}

@@ -4,6 +4,23 @@ function drawEverything(state){
 	clearCanvas();
   clearMap();
 	drawWorld(state);
+  displayMoney(state);
+  displayEnergy(state);
+}
+
+function displayMoney(state){
+  document.getElementById("gems").innerHTML = state.money + "G";
+}
+
+function displayEnergy(state){
+  ec = state.getEnergyCapacity();
+  et = state.getEnergyTotal();
+  if(ec>0){
+    document.getElementById("amount").style.width = ""+(100*et/ec)+"%";
+  }else{
+    document.getElementById("amount").style.width = "0%";
+  }
+  document.getElementById("amount").innerHTML ="&nbsp" + Math.round(et) + "e";
 }
 
 function drawWorld(state){
