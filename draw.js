@@ -9,13 +9,13 @@ function drawWorld(state){
 	for(var i in state.world){
     gobj = state.world[i];
 		if(gobj.width != null){
-			drawBuilding(gobj);
+			drawBuilding(gobj, state);
 		}else if(gobj instanceof Ship){
-			drawShip(gobj);
+			drawShip(gobj, state);
 		}else if(gobj instanceof Tower){
-			drawTower(gobj);
+			drawTower(gobj, state);
 		}else if(gobj instanceof Projectile){
-      drawProjectile(gobj);
+      drawProjectile(gobj, state);
     }else{
 			console.log(typeof gobj);
 		}
@@ -24,7 +24,7 @@ function drawWorld(state){
       others = gobj.connected;
       for(var j in others){
         points = getClosestPoints(gobj, others[j]);
-        drawLine(points[0],points[1],  "rgba(20,80,200,0.3)");
+        drawLine(relative(points[0],state),relative(points[1],state),  "rgba(20,80,200,0.3)");
       }
     }
 
@@ -32,7 +32,7 @@ function drawWorld(state){
       others = gobj.activeConnections;
       for(var j in others){
         points = getClosestPoints(gobj, others[j]);
-        drawLine(points[0],points[1],  "rgba(50,255,200,0.5)");
+        drawLine(relative(points[0],state),relative(points[1],state),  "rgba(50,255,200,0.5)");
       }
     }
 	}
@@ -42,13 +42,17 @@ function clearCanvas(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
 }
 
-function clearListeners(){
+function clearListeners(state){
   var clone = canvas.cloneNode(true);
   canvas.parentNode.replaceChild(clone, canvas);
   canvas = clone;
   ctx = canvas.getContext("2d");
 
-  drawEverything();
+  drawEverything(state);
+}
+
+function relative(position, state){
+  return subtract(position, state.position);
 }
 
 function drawCircle(position, r, fill, stroke){
@@ -80,26 +84,29 @@ function drawLine(v1, v2, stroke){
 	ctx.stroke();
 }
 
-function drawTower(o){
-  drawCircle(o.position,o.radius,o.color,"rgba(255,255,100,1)");
+function drawTower(o,state){
+  rp = relative(o.position, state);
+  drawCircle(rp,o.radius,o.color,"rgba(255,255,100,1)");
   //draw health level
-  var p1 = subtract(o.position,{x:10,y:(4+o.radius)});
+  var p1 = subtract(rp,{x:10,y:(4+o.radius)});
   var p2 = {x:(p1.x+20),y:(p1.y)};
   drawLine(p1,p2,"rgba(200,50,50,1)");
   p2.x = p1.x + 20*(o.health/o.maxHealth);
   drawLine(p1,p2,"rgba(150,200,150,1)");
 }
 
-function drawRange(o){
+function drawRange(o,state){
+  rp = relative(o.position, state);
   //draw range
-  drawCircle(o.position, o.range, "rgba(0,255,0,0.06)", "rgba(255,255,255,0.0)");
+  drawCircle(rp, o.range, "rgba(0,255,0,0.06)", "rgba(255,255,255,0.0)");
 }
 
-function drawProtoTower(proto){
+function drawProtoTower(proto,state){ // NEEDS TO BE REDONE
+  rp = relative(proto.position, state);
   if(checkCollisions(proto) || proto.price > gems){
-    drawCircle(proto.position,proto.radius,"rgba(0,0,0,0)","rgba(255,100,100,100)");
+    drawCircle(rp,proto.radius,"rgba(0,0,0,0)","rgba(255,100,100,100)");
   }else{
-    drawCircle(proto.position,proto.radius,"rgba(0,0,0,0)","rgba(100,255,100,100)");
+    drawCircle(rp,proto.radius,"rgba(0,0,0,0)","rgba(100,255,100,100)");
   }
 
   //draw connections
@@ -115,9 +122,10 @@ function drawProtoTower(proto){
   drawCircle(proto.position, proto.range, "rgba(0,0,0,0)", "rgba(255,255,255,0.6)");
 }
 
-function drawBuilding(o){
-  var topLeft = subtract(o.position,{x:o.width/2,y:o.height/2});
-  var bottomRight = add(o.position,{x:o.width/2,y:o.height/2});
+function drawBuilding(o, state){
+  rp = relative(o.position, state);
+  var topLeft = subtract(rp,{x:o.width/2,y:o.height/2});
+  var bottomRight = add(rp,{x:o.width/2,y:o.height/2});
   drawRectangle(topLeft, o.height, o.width,"rgba(0,255,0,0.1)","rgba(100,255,255,1)");
   //draw energy level
   var p1 = subtract(topLeft,{x:0,y:3});
@@ -133,7 +141,7 @@ function drawBuilding(o){
   drawLine(p1,p2,"rgba(150,200,150,1)");
 }
 
-function drawProtoBuilding(proto){
+function drawProtoBuilding(proto, state){ // REDO THIS
   if(checkCollisions(proto) || proto.price > gems){
     drawRectangle(proto.topLeft,subtract(proto.bottomRight,proto.topLeft),"rgba(0,0,0,0)","rgba(255,100,100,100)");
   }else{
@@ -150,20 +158,18 @@ function drawProtoBuilding(proto){
   }
 }
 
-function drawShip(o){
-  drawCircle(o.position,o.radius,"rgba(255,0,0,0.6)","rgba(255,255,255,0.3)");
+function drawShip(o, state){
+  rp = relative(o.position, state);
+  drawCircle(rp,o.radius,"rgba(255,0,0,0.6)","rgba(255,255,255,0.3)");
   //draw health level
-  var p1 = subtract(o.position,{x:10,y:(4+o.radius)});
+  var p1 = subtract(rp,{x:10,y:(4+o.radius)});
   var p2 = {x:(p1.x+20),y:(p1.y)};
   drawLine(p1,p2,"rgba(200,50,50,1)");
   p2.x = p1.x + 20*(o.health/o.maxHealth);
   drawLine(p1,p2,"rgba(150,200,150,1)");
 }
 
-function drawProjectile(p){
-  drawCircle(p.position,p.radius,p.color,"rgba(0,0,0,0)");
-}
-
-function drawEnemyProjectile(p){
-  drawCircle(p.position,p.radius,p.color,"rgba(255,0,0,0.5)");
+function drawProjectile(p, state){
+  rp = relative(p.position, state);
+  drawCircle(rp,p.radius,p.color,"rgba(0,0,0,0)");
 }
