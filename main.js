@@ -37,7 +37,6 @@ async function main(state){
 
 function step(state){
   state.world.forEach(function(gobject){
-    console.log(gobject);
     gobject.step(state);
   });
   drawEverything(state);
