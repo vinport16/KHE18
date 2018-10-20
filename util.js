@@ -6,7 +6,7 @@ function copyArray(a){
   return newa;
 }
 
-function getClosestPoints(struct1, struct2){
+function getClosestPoints(go1, go2){
 
   function getPointsCircles(c1, c2){
     unit = unitVector(subtract(c1.position, c2.position));
@@ -51,8 +51,8 @@ function getClosestPoints(struct1, struct2){
   function getPointsCircRec(circ, rec){
     p2 = getClosestPointRec(circ.position, rec);
 
-    unit = unitVector(subtract(c1.position, p2));
-    p1 = add(c1.position, multiply(unit, c1.radius));
+    unit = unitVector(subtract(circ.position, p2));
+    p1 = add(circ.position, multiply(unit, circ.radius));
 
     return [p1,p2];
   }
@@ -66,7 +66,7 @@ function getClosestPoints(struct1, struct2){
 
     closest = [Number.MAX_VALUE,{x:0,y:0},{x:0,y:0}];
 
-    for each(var corner in corners){
+    for (var corner in corners){
       p = getClosestPointRec(corner, rec2);
       if(distance(p,corner) < closest[0]){
         closest[0] = distance(p,corner);
@@ -79,15 +79,20 @@ function getClosestPoints(struct1, struct2){
   }
 
 
-  if(struct1.radius && struct2.radius){
-    return getPointsCircles(struct1, struct2);
-  }else if(struct1.radius && struct2.width){
-    return getPointsCircRec(struct1, struct2);
-  }else if(struct1.width && struct2.radius){
-    return getPointsCircRec(struct2, struct1);
+  if(go1.radius && go2.radius){
+    return getPointsCircles(go1, go2);
+  }else if(go1.radius && go2.width){
+    return getPointsCircRec(go1, go2);
+  }else if(go1.width && go2.radius){
+    return getPointsCircRec(go2, go1);
   }else{
-    return getPointsRecs(struct1, struct2);
+    return getPointsRecs(go1, go2);
   }
+}
+
+function distanceBetween(go1, go2){
+  points = getClosestPoints(go1,go2);
+  return distance(points[0],points[1]);
 }
 
 var zeroVector = {x:0,y:0};
