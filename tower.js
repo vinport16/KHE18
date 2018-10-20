@@ -29,7 +29,7 @@ Tower.prototype.upgrade = function(state){
 
 Tower.prototype.shoot = function(state){
 	var target = this.selectTarget(state);
-	var bullet = new Projectile(target, this.projectileSize, this.position, this.projectileSpeed, this.projectileDamage, false, state);
+	var bullet = new Projectile(target, this.projectileSize, this.position, this.projectileSpeed, this.projectileDamage, false, this, state);
 	state.world.push(bullet);
 }
 
