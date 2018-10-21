@@ -24,12 +24,34 @@ function displayEnergy(state){
 }
 
 function drawWorld(state){
+  // draw ranges
   for(var i in state.world){
     gobj = state.world[i];
     if(gobj instanceof Tower){
       drawRange(gobj, state);
     }
   }
+  // draw connections
+  for(var i in state.world){
+    gobj = state.world[i];
+
+    if(gobj.connected){
+      others = gobj.connected;
+      for(var j in others){
+        points = getClosestPoints(gobj, others[j]);
+        drawLine(relative(points[0],state),relative(points[1],state),  "rgba(20,80,200,0.3)");
+      }
+    }
+
+    if(gobj.activeConnections){
+      others = gobj.activeConnections;
+      for(var j in others){
+        points = getClosestPoints(gobj, others[j]);
+        drawLine(relative(points[0],state),relative(points[1],state),  "rgba(50,255,200,0.5)");
+      }
+    }
+  }
+  // draw gobjects
 	for(var i in state.world){
     gobj = state.world[i];
 		if(gobj.width != null){
@@ -47,21 +69,7 @@ function drawWorld(state){
 			console.log(typeof gobj);
 		}
 
-    if(gobj.connected){
-      others = gobj.connected;
-      for(var j in others){
-        points = getClosestPoints(gobj, others[j]);
-        drawLine(relative(points[0],state),relative(points[1],state),  "rgba(20,80,200,0.3)");
-      }
-    }
-
-    if(gobj.activeConnections){
-      others = gobj.activeConnections;
-      for(var j in others){
-        points = getClosestPoints(gobj, others[j]);
-        drawLine(relative(points[0],state),relative(points[1],state),  "rgba(50,255,200,0.5)");
-      }
-    }
+    
 	}
   if(state.selectedStructure){
     highlight(state.selectedStructure,state); 

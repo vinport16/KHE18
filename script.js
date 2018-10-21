@@ -109,6 +109,21 @@ function enableAllButtons(){
 }
 
 function updateSelectedDetails(struct){
+  document.getElementById("selectName").innerHTML = "";
+  document.getElementById("selectKills").innerHTML = "";
+  document.getElementById("selectTarget");
+
+  //remove listeners
+  document.getElementById("up1").innerHTML = "";
+  var clone = document.getElementById("up1").cloneNode(true);
+  document.getElementById("up1").parentNode.replaceChild(clone, document.getElementById("up1"));
+  document.getElementById("up1").disabled = true;
+
+  document.getElementById("up2").innerHTML = "";
+  var clone = document.getElementById("up2").cloneNode(true);
+  document.getElementById("up2").parentNode.replaceChild(clone, document.getElementById("up2"));
+  document.getElementById("up2").disabled = true;
+
   if(struct){
     document.getElementById("selectName").innerHTML = struct.name;
     if(struct.kills){
@@ -117,26 +132,25 @@ function updateSelectedDetails(struct){
     if(struct.targetType){
       document.getElementById("selectTarget").value = struct.targetType;
     }
-    names = ["up1","up2","up3","up4"];
-    for(q in struct.tree){
-      document.getElementById(names[q]).innerHTML = struct.tree[q].name;
-      document.getElementById(names[q]).addEventListener("click", function(){
-        struct.upgrade(struct.tree[q]);
+    
+    if(struct.tree[0]){
+      document.getElementById("up1").innerHTML = struct.tree[0].name;
+      document.getElementById("up1").addEventListener("click", function(){
+        struct.upgrade(struct.tree[0]);
         updateSelectedDetails(state.selectedStructure);
         drawEverything(state);
       });
+      document.getElementById("up1").disabled = false;
     }
-  }else{
-    document.getElementById("selectName").innerHTML = "";
-    document.getElementById("selectKills").innerHTML = "";
-    document.getElementById("selectTarget");
 
-    //remove listeners
-    names = ["up1","up2","up3","up4"];
-    for(i in [0,1,2,3]){
-      document.getElementById(names[i]).innerHTML = "";
-      var clone = document.getElementById(names[i]).cloneNode(true);
-      document.getElementById(names[i]).parentNode.replaceChild(clone, document.getElementById(names[i]));
+    if(struct.tree[1]){
+      document.getElementById("up2").innerHTML = struct.tree[1].name;
+      document.getElementById("up2").addEventListener("click", function(){
+        struct.upgrade(struct.tree[1]);
+        updateSelectedDetails(state.selectedStructure);
+        drawEverything(state);
+      });
+      document.getElementById("up2").disabled = false;
     }
   }
 }
