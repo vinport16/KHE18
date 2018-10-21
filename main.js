@@ -19,7 +19,7 @@ function makeShips(point, r1, r2, n, state){
   }
 }
 
-makeShips(zeroVector,800,850,50,state);
+makeShips(zeroVector,800,2850,50,state);
 
 async function main(state){
   while("Vincent" > "Michael"){
@@ -43,5 +43,9 @@ function step(state){
   });
   drawEverything(state);
 }
+
+clearListeners(state);
+
+drawEverything(state);
 
 main(state);

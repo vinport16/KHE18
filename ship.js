@@ -5,17 +5,17 @@ function Ship(pos, state) {
 	this.maxHealth = 130;
 	this.health = this.maxHealth;
 	this.color = "red";
-  	this.speed = 2;
-  	this.stopDistance = 20;
-  	this.target;
+  this.speed = 2;
+  this.stopDistance = 20;
+	this.target = null;
 	this.bufferTime = 25;
 	this.currentBuffer = this.bufferTime;
-  	this.range = 60;
+  this.range = 60;
 	this.projectileSpeed = 10; 
 	this.projectileDamage = 20;
-  	this.enemy = true;
-  	this.destroyed = false;
-  	GameObject.call(this, pos);
+  this.enemy = true;
+  this.destroyed = false;
+  GameObject.call(this, pos);
 }
 Ship.prototype = Object.create(GameObject.prototype);
 Ship.prototype.constructor = Ship;
@@ -27,7 +27,7 @@ Ship.prototype.shoot = function(state){
 }
 
 Ship.prototype.move = function(state){
-  if(distanceBetween(this,this.target) >= this.stopDistance){
+  if(this.target && distanceBetween(this,this.target) >= this.stopDistance){
     this.position = add(this.position, multiply(unitVector(subtract(getClosestPoints(this.target,this)[0], this.position)), this.speed));
   }
 }

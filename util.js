@@ -175,6 +175,18 @@ function checkStructureOverlap(s, state){
   return false;
 }
 
+function findStructureAtPoint(point, state){
+  circle = {position:point, radius:1};
+
+  for(i in state.world){
+    gobj = state.world[i];
+    if(gobj instanceof Structure && checkOverlap(circle, gobj)){
+      return gobj;
+    }
+  }
+  return null;
+}
+
 function distanceBetween(go1, go2){
   points = getClosestPoints(go1,go2);
   return distance(points[0],points[1]);
