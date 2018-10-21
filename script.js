@@ -114,15 +114,36 @@ function updateSelectedDetails(struct){
     if(struct.kills){
       document.getElementById("selectKills").innerHTML = "kills: "+ struct.kills;
     }
-    if(struct.target){
-      document.getElementById("selectTarget").selected = struct.target;
+    if(struct.targetType){
+      document.getElementById("selectTarget").value = struct.targetType;
+    }
+    names = ["up1","up2","up3","up4"];
+    for(i in struct.tree){
+      document.getElementById(names[i]).innerHTML = struct.tree[i].name;
+      document.getElementById(names[i]).addEventListener("click", function(){
+        struct.upgrade(struct.tree[i]);
+      });
     }
   }else{
     document.getElementById("selectName").innerHTML = "";
     document.getElementById("selectKills").innerHTML = "";
     document.getElementById("selectTarget");
+
+    //remove listeners
+    names = ["up1","up2","up3","up4"];
+    for(i in struct.tree){
+      document.getElementById(names[i]).innerHTML = "";
+      var clone = document.getElementById(names[i]).cloneNode(true);
+      canvas.parentNode.replaceChild(clone, document.getElementById(names[i]));
+    }
   }
 }
+
+document.getElementById("selectTarget").addEventListener("change", function(){
+  if(selectedStructure){
+    selectedStructure.targetType = this.value;
+  }
+})
 
 var paused = false;
 function pause(){
@@ -194,6 +215,7 @@ var selectedStructure = null;
 var hiddenControls = null;
 
 document.getElementById("selectMove").addEventListener("click",function(){
+  selectedStructure = null;
   movemode = !movemode;
   resetClick();
 });
