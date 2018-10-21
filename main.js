@@ -30,13 +30,63 @@ function makeShips(point, r1, r2, n, state){
   
 }
 
-makeShips(zeroVector,800,2850,50,state);
+
+function spawnLevel(level, state){
+  //var dist = getFarthestStructure(state);
+  makeShips(zeroVector,800,850,level*5,state);
+}
+
+function getFarthestStructure(state){
+  var farthest = [false, 0];
+  for(i in state.world){
+    if(state.world[i] instanceof Structure){
+      gobj = state.world[i];
+      if(distanceBetween({x:0,y:0}, gobj) > farthest[1]){
+        farthest = [gobj, distanceBetween({x:0,y:0},gobj)];
+      }
+    }
+  }
+  return farthest[1];
+}
+
+function allKilled(level, state){
+  var totalKilled = 0;
+  for(i in state.world){
+    if(state.world[i] instanceof Tower){
+      totalKilled += state.world[i].kills;
+    }
+  }
+  var totalSpawned = 0;
+  var i = 1;
+  while(i <= level){
+    totalSpawned += 5*i;
+    i++;
+  }
+  if(totalSpawned == totalKilled){
+    return true;
+  }else{
+    return false;
+  }
+
+}
+
+//makeShips(zeroVector,800,2850,50,state);
+
 
 async function main(state){
+  var level = 1;
+  spawnLevel(level, state);
   while("Vincent" > "Michael"){
     while(!paused){
       step(state);
       await sleep(25);
+
+
+      if(allKilled(level, state)){
+        level++;
+        spawnLevel(level, state);
+      }      
+
     }
     await sleep(25);
   }

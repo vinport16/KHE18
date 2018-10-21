@@ -99,7 +99,7 @@ function MotherShip(pos, state) {
   	this.speed = 0.8;
   	this.stopDistance = 100;
   	this.target;
-	this.bufferTime = 100;
+	this.bufferTime = 300;
 	this.currentBuffer = this.bufferTime;
   	this.range = 1000;
 	this.projectileSpeed = 1.5; 
@@ -125,7 +125,7 @@ function GrandmotherShip(pos, state) {
   	this.speed = 0.2;
   	this.stopDistance = 100;
   	this.target;
-	this.bufferTime = 100;
+	this.bufferTime = 400;
 	this.currentBuffer = this.bufferTime;
   	this.range = 2000;
 	this.projectileSpeed = 0.8; 

@@ -18,14 +18,19 @@ function Tower(pos, state){
   this.tree = basicTowerTree;
   this.kills = 0;
   this.targetType = "closest";
+  this.name = "Basic Tower";
 
   Structure.call(this, pos, 100, this.health, 20, state);
 } 
 Tower.prototype = Object.create(Structure.prototype);
 Tower.prototype.constructor = Tower;
 
-Tower.prototype.upgrade = function(state){
-
+Tower.prototype.upgrade = function(upgrade){
+  for (var k in upgrade) {
+    if (this.hasOwnProperty(k)) {
+       this[k] = upgrade[k];
+    }
+  }
 }
 
 Tower.prototype.shoot = function(state){
@@ -108,6 +113,7 @@ function HeavyTower(pos, state){
   this.tree = heavyTowerTree;
   this.kills = 0;
   this.targetType = "closest";
+  this.name = "Big Tower";
 
   Structure.call(this, pos, 150, this.health, 40, state);
 } 
@@ -130,6 +136,7 @@ function SeekingTower(pos, state){
   this.tree = seekingTowerTree;
   this.kills = 0;
   this.targetType = "closest";
+  this.name = "Simple Seeking Tower";
 
   Structure.call(this, pos, 10, this.health, 30, state);
 } 
@@ -152,6 +159,7 @@ function MultiShotTower(pos, state){
   this.tree = multishotTowerTree;
   this.kills = 0;
   this.targetType = "closest";
+  this.name = "Double Shot Tower";
 
   Structure.call(this, pos, 150, this.health, 40, state);
 } 
@@ -161,21 +169,21 @@ MultiShotTower.prototype.constructor = MultiShotTower;
 
 //NOT USING THE BELOW, WILL USE IN UPGRADES
 
-function GoliathTower(pos, state){
-  this.radius = 20;
-  this.health = 400; 
-  this.color = "orange";
-  this.range = 50;
-  this.bufferTime = 150; //frames
-  this.currentBuffer = this.bufferTime;
-  this.projectileSpeed = 8;
-  this.projectileDamage = 500;
-  this.projectileEnergy = 300;
-  this.projectileSize = 15;
-  this.destroyed = false;
-  this.enemy = false;
+// function GoliathTower(pos, state){
+//   this.radius = 20;
+//   this.health = 400; 
+//   this.color = "orange";
+//   this.range = 50;
+//   this.bufferTime = 150; //frames
+//   this.currentBuffer = this.bufferTime;
+//   this.projectileSpeed = 8;
+//   this.projectileDamage = 500;
+//   this.projectileEnergy = 300;
+//   this.projectileSize = 15;
+//   this.destroyed = false;
+//   this.enemy = false;
 
-  Structure.call(this, pos, 10, this.health, 50, state);
-} 
-GoliathTower.prototype = Object.create(Tower.prototype);
-GoliathTower.prototype.constructor = GoliathTower;
+//   Structure.call(this, pos, 10, this.health, 50, state);
+// } 
+// GoliathTower.prototype = Object.create(Tower.prototype);
+// GoliathTower.prototype.constructor = GoliathTower;
