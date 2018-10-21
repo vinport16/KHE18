@@ -92,6 +92,7 @@ Tower.prototype.selectTarget = function(state){
 //OTHER TOWER TYPES BELOW
 function HeavyTower(pos, state){
   this.radius = 20;
+  this.maxHealth = 260;
   this.health = 260; 
   this.color = "#ffcf9c";
   this.range = 150;
@@ -116,6 +117,7 @@ HeavyTower.prototype.constructor = HeavyTower;
 
 function SeekingTower(pos, state){
   this.radius = 14;
+  this.maxHealth = 150;
   this.health = 150; 
   this.color = "#e0e0e0";
   this.range = 300;

@@ -4,6 +4,7 @@ function Building(pos, state){
   this.height = 50;
   this.width = 30;
   this.maxHealth = 300;
+  this.health = 300;
   this.energyMax = 150;
   this.energyRate = 0.5;
   this.energy = 0;
@@ -101,6 +102,7 @@ function SolarFarm(pos, state){
   this.height = 300;
   this.width = 400;
   this.maxHealth = 80;
+  this.health = 80;
   this.energyMax = 500;
   this.energyRate = 0.9;
   this.energy = 0;
