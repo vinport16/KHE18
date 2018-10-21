@@ -33,10 +33,12 @@ Structure.prototype.sell = function(state){
 }
 
 Structure.prototype.upgrade = function(upgrade, state){
-  state.money -= upgrade.cost;
-  for (var k in upgrade) {
-    if (this.hasOwnProperty(k)) {
+  if(state.money >= upgrade.cost){
+    state.money -= upgrade.cost;
+    for (var k in upgrade) {
+      if (this.hasOwnProperty(k)) {
        this[k] = upgrade[k];
+      }
     }
   }
 }
@@ -128,6 +130,11 @@ Structure.prototype.getEnergyFor = function(n){
 }
 
 function placeStructure(s, state){
+  disableAllButtons();
+  for(var i = 0; i < controlButtons.length; i++){
+    controlButtons[i].disabled = false;
+  }
+
   canvas.addEventListener("mousemove",function(event){
     s.position = absolute(getVector(event),state);
     
@@ -145,5 +152,6 @@ function placeStructure(s, state){
       s.disconnectAll(state);
     }
     clearListeners(state);
+    enableAllButtons();
   })
 }

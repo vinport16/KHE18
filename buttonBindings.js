@@ -1,8 +1,11 @@
 // BUILDINGS
 
+fakestate = new GameState();
+
 document.getElementById("defaultBuilding").onclick = function(){
   placeStructure(new Building({x:0,y:0},state), state);
 }
+describeObject(document.getElementById("defaultBuilding"),new Building({x:0,y:0},fakestate));
 
 document.getElementById("solarPanel").onclick = function(){
   placeStructure(new SolarPanel({x:0,y:0},state), state);
@@ -22,10 +25,12 @@ document.getElementById("powerPlant").onclick = function(){
 document.getElementById("defaultTower").onclick = function(){
   placeStructure(new Tower({x:0, y:0}, state), state);
 }
+describeObject(document.getElementById("defaultTower"),new Tower({x:0,y:0},fakestate));
 
 document.getElementById("heavyTower").onclick = function(){
   placeStructure(new HeavyTower({x:0, y:0}, state), state);
 }
+describeObject(document.getElementById("heavyTower"),new HeavyTower({x:0,y:0},fakestate));
 
 document.getElementById("seekingTower").onclick = function(){
   placeStructure(new SeekingTower({x:0, y:0}, state), state);

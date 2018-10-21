@@ -20,46 +20,16 @@ function showPrices(){
     "</table>";
 }
 
-function describeBuilding(element,building){
-  var tip = "<span class=\"tooltip\">"+
-  "price: "+building.price+"G<br>"+
-  "health: "+building.maxHealth+"<br>"+
-  "energy capacity: "+building.energyMax+"e<br>"+
-  "energy production: "+(building.energyRate*20)+"e/s<br>";
-  if(building.heal){
-    tip +=
-    "heal: "+building.heal.healAmount+"<br>"+
-    "energy/heal: "+building.heal.energyReqired+"e<br>"+
-    "heals/sec: "+20/building.heal.cooldown+"/s<br>";
-  }
-  if(building.activationEnergy){
-    tip +=
-    "activation energy: "+building.activationEnergy+"e<br>";
-  }
-  tip += "</span>";
+function describeObject(element,object){
 
+  tip = "<span class=\"tooltip\">";
+  tip += "name: "+object.name;
+  tip += "<br>price: "+object.price;
+
+
+  tip += "</script>"
   element.innerHTML = element.innerHTML + tip;
 }
-
-function describeTower(element,tower){
-  var tip = "<span class=\"tooltip\">"+
-  "price: "+tower.price+"G<br>"+
-  "health: "+tower.maxHealth+"<br>"+
-  "range: "+tower.range+"<br>"+
-  "damage: "+tower.projectile.damage+"<br>"+
-  "fire rate: "+(20/tower.fireCooldown)+"/s<br>"+
-  "energy/fire: "+tower.fireEnergy+"e<br>";
-  if(tower.projectile.target){
-    tip += "seeking<br>";
-  }
-  if(tower.projectile.persist){
-    tip += "projectiles persist<br>";
-  }
-  tip += "</span>";
-
-  element.innerHTML = element.innerHTML + tip;
-}
-
 
 
 // setup
@@ -152,7 +122,7 @@ function updateSelectedDetails(struct){
     if(struct.tree[1]){
       document.getElementById("up2").innerHTML = struct.tree[1].name;
       document.getElementById("up2").addEventListener("click", function(){
-        struct.upgrade(struct.tree[1]);
+        struct.upgrade(struct.tree[1], state);
         updateSelectedDetails(state.selectedStructure);
         drawEverything(state);
       });
