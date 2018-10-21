@@ -24,6 +24,14 @@ Structure.prototype.delete = function(state){
   }
 }
 
+Structure.prototype.upgrade = function(upgrade){
+  for (var k in upgrade) {
+    if (this.hasOwnProperty(k)) {
+       this[k] = upgrade[k];
+    }
+  }
+}
+
 Structure.prototype.connectToAll = function(state){
   for(var i = 0; i < state.world.length; i++){
     var o2 = state.world[i];

@@ -25,14 +25,6 @@ function Tower(pos, state){
 Tower.prototype = Object.create(Structure.prototype);
 Tower.prototype.constructor = Tower;
 
-Tower.prototype.upgrade = function(upgrade){
-  for (var k in upgrade) {
-    if (this.hasOwnProperty(k)) {
-       this[k] = upgrade[k];
-    }
-  }
-}
-
 Tower.prototype.shoot = function(state){
 	var target = this.selectTarget(state);
 	var bullet = new Projectile(target, this.projectileSize, this.position, this.projectileSpeed, this.projectileDamage, false, this, state);

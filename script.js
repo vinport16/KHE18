@@ -118,10 +118,12 @@ function updateSelectedDetails(struct){
       document.getElementById("selectTarget").value = struct.targetType;
     }
     names = ["up1","up2","up3","up4"];
-    for(i in struct.tree){
-      document.getElementById(names[i]).innerHTML = struct.tree[i].name;
-      document.getElementById(names[i]).addEventListener("click", function(){
-        struct.upgrade(struct.tree[i]);
+    for(q in struct.tree){
+      document.getElementById(names[q]).innerHTML = struct.tree[q].name;
+      document.getElementById(names[q]).addEventListener("click", function(){
+        struct.upgrade(struct.tree[q]);
+        updateSelectedDetails(state.selectedStructure);
+        drawEverything(state);
       });
     }
   }else{
@@ -131,17 +133,17 @@ function updateSelectedDetails(struct){
 
     //remove listeners
     names = ["up1","up2","up3","up4"];
-    for(i in struct.tree){
+    for(i in [0,1,2,3]){
       document.getElementById(names[i]).innerHTML = "";
       var clone = document.getElementById(names[i]).cloneNode(true);
-      canvas.parentNode.replaceChild(clone, document.getElementById(names[i]));
+      document.getElementById(names[i]).parentNode.replaceChild(clone, document.getElementById(names[i]));
     }
   }
 }
 
 document.getElementById("selectTarget").addEventListener("change", function(){
-  if(selectedStructure){
-    selectedStructure.targetType = this.value;
+  if(state.selectedStructure){
+    state.selectedStructure.targetType = this.value;
   }
 })
 
@@ -164,12 +166,11 @@ document.getElementById("pause").addEventListener("click",pause);
 
 document.getElementById("cancel").addEventListener("click",function(){
   clearListeners(state);
-  selectedStructure = null;
+  state.selectedStructure = null;
   updateSelectedDetails();
 });
 
 function resetClick(){
-  clearListeners(state);
   console.log(movemode);
   if(movemode){
     resetDrag();
@@ -202,22 +203,23 @@ function resetSelect(){
   document.getElementById("selectMove").innerHTML = "Move on Map"
   canvas.addEventListener("click", function(event){
     clickpos = absolute(getVector(event),state);
-    selectedStructure = findStructureAtPoint(clickpos,state);
-    console.log(selectedStructure);
-    updateSelectedDetails(selectedStructure);
+    state.selectedStructure = findStructureAtPoint(clickpos,state);
+    console.log(state.selectedStructure);
+    updateSelectedDetails(state.selectedStructure);
+    drawEverything(state);
   });
 }
 
 var movemode = true;
 
-var selectedStructure = null;
+
 
 var hiddenControls = null;
 
 document.getElementById("selectMove").addEventListener("click",function(){
-  selectedStructure = null;
+  state.selectedStructure = null;
   movemode = !movemode;
-  resetClick();
+  clearListeners(state);
 });
 
 

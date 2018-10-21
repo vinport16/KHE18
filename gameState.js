@@ -7,6 +7,7 @@ function GameState() {
 	this.level = 0;
 	this.shipsKilled = 0;
 	this.currentStep = 0;
+  this.selectedStructure = null;
 }; 
 
 GameState.prototype.getEnergyCapacity = function() {
