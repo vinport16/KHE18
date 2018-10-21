@@ -10,6 +10,18 @@ canvas{
   border-radius: 10px;
 }
 
+#container {
+  position: relative;
+}
+#container canvas, #levels {
+  position: absolute;
+}
+
+#levels {
+  color:white;
+  font-size: 50px;
+}
+
 div.display{
 
   float: right;

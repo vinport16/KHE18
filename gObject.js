@@ -12,9 +12,6 @@ GameObject.prototype.delete = function(state) {
   	this.destroyed = true;
 };
 
-GameObject.prototype.step = function(state) {
-};
-
 var Projectile = function(tar, radius, pos, speed, damage, enemy, parent, state){
 	this.target = tar; 
 	this.position = pos;

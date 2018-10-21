@@ -5,7 +5,7 @@ function Tower(pos, state){
 	this.radius = 10;
   this.maxHealth = 110;
 	this.health = this.maxHealth;
-	this.color = "blue";
+	this.color = "#9c9cff";
 	this.range = 200;
 	this.bufferTime = 25; //frames
 	this.currentBuffer = this.bufferTime;
@@ -18,9 +18,10 @@ function Tower(pos, state){
   this.tree = basicTowerTree;
   this.kills = 0;
   this.targetType = "closest";
+  this.price = 100;
   this.name = "Basic Tower";
 
-  Structure.call(this, pos, 100, this.health, 20, state);
+  Structure.call(this, pos, this.price, this.health, 20, state);
 } 
 Tower.prototype = Object.create(Structure.prototype);
 Tower.prototype.constructor = Tower;
@@ -91,8 +92,9 @@ Tower.prototype.selectTarget = function(state){
 //OTHER TOWER TYPES BELOW
 function HeavyTower(pos, state){
   this.radius = 20;
+  this.maxHealth = 260;
   this.health = 260; 
-  this.color = "lime";
+  this.color = "#ffcf9c";
   this.range = 150;
   this.bufferTime = 37; //frames
   this.currentBuffer = this.bufferTime;
@@ -106,16 +108,18 @@ function HeavyTower(pos, state){
   this.kills = 0;
   this.targetType = "closest";
   this.name = "Big Tower";
+  this.price = 250;
 
-  Structure.call(this, pos, 150, this.health, 40, state);
+  Structure.call(this, pos, this.price, this.health, 40, state);
 } 
 HeavyTower.prototype = Object.create(Tower.prototype);
 HeavyTower.prototype.constructor = HeavyTower;
 
 function SeekingTower(pos, state){
   this.radius = 14;
+  this.maxHealth = 150;
   this.health = 150; 
-  this.color = "purple";
+  this.color = "#e0e0e0";
   this.range = 300;
   this.bufferTime = 100; //frames
   this.currentBuffer = this.bufferTime;
@@ -129,8 +133,9 @@ function SeekingTower(pos, state){
   this.kills = 0;
   this.targetType = "closest";
   this.name = "Simple Seeking Tower";
+  this.price = 300; 
 
-  Structure.call(this, pos, 10, this.health, 30, state);
+  Structure.call(this, pos, this.price, this.health, 30, state);
 } 
 SeekingTower.prototype = Object.create(Tower.prototype);
 SeekingTower.prototype.constructor = SeekingTower;
@@ -141,48 +146,42 @@ SeekingTower.prototype.shoot = function(state){
   state.world.push(bullet);
 }
 
-
 function MultiShotTower(pos, state){
   this.radius = 15;
   this.health = 150; 
-  this.color = "lime";
+  this.color = "#ffff9c";
   this.range = 150;
-  this.bufferTime = 37; //frames
+  this.bufferTime = 60; //frames
   this.currentBuffer = this.bufferTime;
-  this.projectileSpeed = 5;
-  this.projectileDamage = 100;
-  this.projectileEnergy = 50;
-  this.projectileSize = 5;
+  this.numberOfShots = 2;
+  this.projectileSpeed = 6;
+  this.projectileDamage = 50;
+  var pEnergy = function(numberOfShots){
+    var sum = 0;
+    for(var i = 0; i < numberOfShots; i++){
+      sum += 40+(i*20);
+    }
+    return sum;
+  }
+  this.projectileEnergy = pEnergy(this.numberOfShots);
+  this.projectileSize = 3;
   this.destroyed = false;
   this.enemy = false;
   this.tree = multishotTowerTree;
   this.kills = 0;
   this.targetType = "closest";
   this.name = "Double Shot Tower";
-
-  Structure.call(this, pos, 150, this.health, 40, state);
+  this.price = 300;
+  
+  Structure.call(this, pos, this.price, this.health, 40, state);
 } 
 MultiShotTower.prototype = Object.create(Tower.prototype);
 MultiShotTower.prototype.constructor = MultiShotTower;
 
-
-//NOT USING THE BELOW, WILL USE IN UPGRADES
-
-// function GoliathTower(pos, state){
-//   this.radius = 20;
-//   this.health = 400; 
-//   this.color = "orange";
-//   this.range = 50;
-//   this.bufferTime = 150; //frames
-//   this.currentBuffer = this.bufferTime;
-//   this.projectileSpeed = 8;
-//   this.projectileDamage = 500;
-//   this.projectileEnergy = 300;
-//   this.projectileSize = 15;
-//   this.destroyed = false;
-//   this.enemy = false;
-
-//   Structure.call(this, pos, 10, this.health, 50, state);
-// } 
-// GoliathTower.prototype = Object.create(Tower.prototype);
-// GoliathTower.prototype.constructor = GoliathTower;
+MultiShotTower.prototype.shoot = function(state){
+  var target = this.selectTarget(state);
+  for(var i = 0; i < this.numberOfShots; i++){
+    var bullet = new Projectile(target, this.projectileSize+(i*2), this.position, this.projectileSpeed-i, this.projectileDamage+(20*i), false, this, state);
+    state.world.push(bullet);
+  }
+}

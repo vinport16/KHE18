@@ -6,12 +6,16 @@
 </head>
 <body>
 
-  <canvas id="canvas"></canvas>
+  <div id="container">
+    <canvas id="canvas"></canvas>
+    <div class="levels" id="levels">Level 1</div>
+  </div>
+  <!-- <canvas id="canvas"></canvas> -->
   <div class="display" id="display">
 
     <div class="textbox">
       <canvas id="map" calss="map"></canvas>
-      <div class="message" id="message">Build towers and buildings, then press "resume" to begin</div>
+      <div class="message" id="message">Build towers and buildings, then press "resume" to play</div>
       <table class="buttons" id="buildingButtons">
         <tr><td><button class="building" id="defaultBuilding">default building</button></td>
             <td><button class="tower1" id="defaultTower">default tower</button></td></tr>
