@@ -26,12 +26,14 @@ Structure.prototype.delete = function(state){
   }
 }
 
+
 Structure.prototype.sell = function(state){
   state.money += this.price*(this.health/this.maxHealth);
   this.delete(state);
 }
 
-Structure.prototype.upgrade = function(upgrade){
+Structure.prototype.upgrade = function(upgrade, state){
+  state.money -= upgrade.cost;
   for (var k in upgrade) {
     if (this.hasOwnProperty(k)) {
        this[k] = upgrade[k];

@@ -3,7 +3,7 @@
 
 function Tower(pos, state){
 	this.radius = 10;
-  this.maxHealth = 100;
+  this.maxHealth = 110;
 	this.health = this.maxHealth;
 	this.color = "blue";
 	this.range = 200;
@@ -91,13 +91,13 @@ Tower.prototype.selectTarget = function(state){
 //OTHER TOWER TYPES BELOW
 function HeavyTower(pos, state){
   this.radius = 20;
-  this.health = 200; 
+  this.health = 260; 
   this.color = "lime";
   this.range = 150;
   this.bufferTime = 37; //frames
   this.currentBuffer = this.bufferTime;
   this.projectileSpeed = 5;
-  this.projectileDamage = 100;
+  this.projectileDamage = 150;
   this.projectileEnergy = 50;
   this.projectileSize = 5;
   this.destroyed = false;
@@ -114,14 +114,14 @@ HeavyTower.prototype.constructor = HeavyTower;
 
 function SeekingTower(pos, state){
   this.radius = 14;
-  this.health = 200; 
+  this.health = 150; 
   this.color = "purple";
   this.range = 300;
   this.bufferTime = 5; //frames
   this.currentBuffer = this.bufferTime;
   this.projectileSpeed = 15;
   this.projectileDamage = 10;
-  this.projectileEnergy = 40;
+  this.projectileEnergy = 100;
   this.projectileSize = 2;
   this.destroyed = false;
   this.enemy = false;
@@ -137,7 +137,7 @@ SeekingTower.prototype.constructor = SeekingTower;
 
 function MultiShotTower(pos, state){
   this.radius = 15;
-  this.health = 200; 
+  this.health = 150; 
   this.color = "lime";
   this.range = 150;
   this.bufferTime = 37; //frames

@@ -79,7 +79,7 @@ Ship.prototype.selectMoveTarget = function(state){
 
 function BigShip(pos, state) {
 	this.radius = 15;
-	this.maxHealth = 250;
+	this.maxHealth = 200;
 	this.health = this.maxHealth;
 	this.color = "red";
   	this.speed = 1.5;
@@ -89,7 +89,7 @@ function BigShip(pos, state) {
 	this.currentBuffer = this.bufferTime;
   	this.range = 150;
 	this.projectileSpeed = 10; 
-	this.projectileDamage = 20;
+	this.projectileDamage = 50;
   	this.enemy = true;
   	this.destroyed = false;
   	GameObject.call(this, pos);
