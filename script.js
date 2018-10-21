@@ -3,6 +3,10 @@ function writeMessage(message){
   document.getElementById("message").innerHTML = message;
 }
 
+function updateLevelDisplay(levelMessage){
+  document.getElementById("levels").innerHTML = levelMessage;
+}
+
 function describeObject(element,object){
 
   tip = "<span class=\"tooltip\">";
