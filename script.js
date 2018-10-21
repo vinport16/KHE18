@@ -3,29 +3,30 @@ function writeMessage(message){
   document.getElementById("message").innerHTML = message;
 }
 
-function showPrices(){
-  document.getElementById("text").innerHTML =
-    "<strong>Prices:</strong><br><table class=\"prices\">"+
-    "<tr><td>default building:</td><td>"+prices.defaultBuilding+"G</td></tr>"+
-    "<tr><td>battery:</td><td>"+prices.battery+"G</td></tr>"+
-    "<tr><td>solar farm:</td><td>"+prices.solarFarm+"G</td></tr>"+
-    "<tr><td>default tower:</td><td>"+prices.defaultTower+"G</td></tr>"+
-    "<tr><td>ranged tower:</td><td>"+prices.rangedTower+"G</td></tr>"+
-    "<tr><td>heavy tower:</td><td>"+prices.heavyTower+"G</td></tr>"+
-    "<tr><td>chaingun tower:</td><td>"+prices.chaingunTower+"G</td></tr>"+
-    "<tr><td>seeking tower:</td><td>"+prices.seekingTower+"G</td></tr>"+
-    "<tr><td>connection tower:</td><td>"+prices.connectionTower+"G</td></tr>"+
-    "<tr><td>repair building:</td><td>"+prices.repairBuilding+"G</td></tr>"+
-    "<tr><td>fusion generator:</td><td>"+prices.fusionGenerator+"G</td></tr>"+
-    "</table>";
-}
-
 function describeObject(element,object){
 
   tip = "<span class=\"tooltip\">";
+  
   tip += "name: "+object.name;
   tip += "<br>price: "+object.price;
 
+  if(object instanceof Tower){
+    tip += "<br>damage: "+object.projectileDamage;
+    tip += "<br>wait: "+(object.bufferTime/25).toFixed(2)+"s";
+    tip += "<br>energy: "+object.projectileEnergy;
+    tip += "<br>health: "+object.maxHealth;
+  }else if(object instanceof Building){
+    tip += "<br>energy/sec: "+(object.energyRate*25);
+    tip += "<br>energy storage: "+(object.energyMax);
+    tip += "<br>health: "+object.maxHealth;
+  }else{
+    for (var key in object) {
+      if (object.hasOwnProperty(key) && key != "name" && key != "price" && key != "tree") {
+       tip += "<br>"+key+": "+object[key];
+      }
+    }
+    console.log(object);
+  }
 
   tip += "</script>"
   element.innerHTML = element.innerHTML + tip;
@@ -116,6 +117,7 @@ function updateSelectedDetails(struct){
         updateSelectedDetails(state.selectedStructure);
         drawEverything(state);
       });
+      describeObject(document.getElementById("up1"),struct.tree[0]);
       document.getElementById("up1").disabled = false;
     }
 
@@ -126,6 +128,7 @@ function updateSelectedDetails(struct){
         updateSelectedDetails(state.selectedStructure);
         drawEverything(state);
       });
+      describeObject(document.getElementById("up2"),struct.tree[1]);
       document.getElementById("up2").disabled = false;
     }
 
@@ -136,6 +139,7 @@ function updateSelectedDetails(struct){
       resetSelect();
     });
     document.getElementById("selectSell").disabled = false;
+    document.getElementById("selectSell").innerHTML += "<span class='tooltip'>"+(struct.price/(struct.maxHealth/struct.health))+"$</span>";
 
     document.getElementById("selectTarget").disabled = false;
   }

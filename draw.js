@@ -9,7 +9,7 @@ function drawEverything(state){
 }
 
 function displayMoney(state){
-  document.getElementById("gems").innerHTML = state.money + "G";
+  document.getElementById("gems").innerHTML = state.money + "$";
 }
 
 function displayEnergy(state){
@@ -133,7 +133,11 @@ function drawLine(v1, v2, stroke){
 }
 
 function highlight(struct, state){
-  drawCircle(relative(struct.position,state),100,"rgba(255,255,255,0)","rgba(255,255,255,1)");
+  if(struct.width){
+    drawRectangle(relative(subtract(struct.position, {x:struct.width/2+20,y:struct.height/2+20}),state), struct.height+40, struct.width+40, "rgba(255,255,255,0)","rgba(255,255,255,1)" )
+  }else{
+    drawCircle(relative(struct.position,state),struct.radius+20,"rgba(255,255,255,0)","rgba(255,255,255,1)");
+  }
 }
 
 function mapDrawTower(tower,state){
