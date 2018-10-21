@@ -10,7 +10,8 @@ function Building(pos, state){
   this.enemy = false;
   this.name = "Basic Tower";
   this.tree = basicBuildingTree;
-  Structure.call(this, pos, 100, this.maxHealth, 100, state);
+  this.price = 100;
+  Structure.call(this, pos, this.price, this.maxHealth, 100, state);
 
 }
 
@@ -88,8 +89,9 @@ function SolarPanel(pos, state){
   this.energy = 0;
   this.enemy = false;
   this.name = "Solar Panel";
-  this.tree = solarPanelTree
-  Structure.call(this, pos, 100, this.maxHealth, 200, state);
+  this.tree = solarPanelTree;
+  this.price = 200;
+  Structure.call(this, pos, this.price, this.maxHealth, 200, state);
 
 }
 SolarPanel.prototype = Object.create(Building.prototype);
@@ -105,7 +107,8 @@ function SolarFarm(pos, state){
   this.enemy = false;
   this.name = "Solar Farm";
   this.tree = solarFarmTree;
-  Structure.call(this, pos, 100, this.maxHealth, 500, state);
+   this.price = 400;
+  Structure.call(this, pos, this.price, this.maxHealth, 500, state);
 
 }
 SolarFarm.prototype = Object.create(Building.prototype);
@@ -121,7 +124,8 @@ function PowerPlant(pos, state){
   this.enemy = false;
   this.name = "PowerPlant";
   this.tree = powerPlantTree;
-  Structure.call(this, pos, 100, this.maxHealth, 100, state);
+   this.price = 150;
+  Structure.call(this, pos, this.price, this.maxHealth, 100, state);
 
 }
 PowerPlant.prototype = Object.create(Building.prototype);
