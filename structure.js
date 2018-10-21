@@ -33,8 +33,8 @@ Structure.prototype.sell = function(state){
 }
 
 Structure.prototype.upgrade = function(upgrade, state){
-  if(state.money >= upgrade.cost){
-    state.money -= upgrade.cost;
+  if(state.money >= upgrade.price){
+    state.money -= upgrade.price;
     for (var k in upgrade) {
       if (this.hasOwnProperty(k)) {
        this[k] = upgrade[k];

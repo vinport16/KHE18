@@ -41,8 +41,50 @@ var Projectile = function(tar, radius, pos, speed, damage, enemy, parent, state)
 Projectile.prototype = Object.create(GameObject.prototype);
 Projectile.prototype.constructor = Projectile;
 
+var SeekingProjectile = function(tar, radius, pos, speed, damage, enemy, parent, state){
+	this.target = tar; 
+	this.position = pos;
+	GameObject.call(this, pos);
+	this.radius = radius;
+	//this.velocity = multiply(unitVector(subtract(getClosestPoints(this.target,this)[0], this.position)), speed);
+	this.velocity = multiply(unitVector(subtract(getClosestPoints(this.target,this)[0],this.position)), this.speed);
+	this.acceleration = 0.1;
+	this.speed = speed;
+	this.damage = damage;
+  	this.enemy = enemy;
+  	this.parent = parent;
+  	this.range = 2000;
+  	this.color = "yellow";
+}
+SeekingProjectile.prototype = Object.create(Projectile.prototype);
+SeekingProjectile.prototype.constructor = SeekingProjectile;
+
+SeekingProjectile.prototype.getNewTarget = function(state){
+	closest = [false, this.range];
+	for(i in state.world){
+	  gobj = state.world[i];
+	  if(gobj.enemy && gobj.maxHealth && distanceBetween(gobj,this) <= closest[1]){
+	    closest = [gobj, distanceBetween(gobj,this)];
+	  }
+	}
+	this.target = closest[0];
+	return closest[0];
+}
+
+
 Projectile.prototype.move = function(state){
-	if(!this.target.destroyed){
+	if(this instanceof SeekingProjectile){
+		if(this.target.destroyed || this.target == false){
+			var newtarget = this.getNewTarget(state);
+			if(!(newtarget == false)){
+				this.velocity = multiply(unitVector(subtract(getClosestPoints(newtarget,this)[0],this.position)), this.speed);
+			}
+		}else{
+			if(!(this.target == false)){
+				this.velocity = multiply(unitVector(subtract(getClosestPoints(this.target,this)[0],this.position)), this.speed);
+			}
+		}
+	}else if(!this.target.destroyed){
 		this.velocity = multiply(unitVector(subtract(getClosestPoints(this.target,this)[0],this.position)), this.speed);
   	}
   	this.position = add(this.position, this.velocity);

@@ -117,12 +117,12 @@ function SeekingTower(pos, state){
   this.health = 150; 
   this.color = "purple";
   this.range = 300;
-  this.bufferTime = 5; //frames
+  this.bufferTime = 100; //frames
   this.currentBuffer = this.bufferTime;
-  this.projectileSpeed = 15;
-  this.projectileDamage = 10;
+  this.projectileSpeed = 5;
+  this.projectileDamage = 100;
   this.projectileEnergy = 100;
-  this.projectileSize = 2;
+  this.projectileSize = 7;
   this.destroyed = false;
   this.enemy = false;
   this.tree = seekingTowerTree;
@@ -134,6 +134,13 @@ function SeekingTower(pos, state){
 } 
 SeekingTower.prototype = Object.create(Tower.prototype);
 SeekingTower.prototype.constructor = SeekingTower;
+
+SeekingTower.prototype.shoot = function(state){
+  var target = this.selectTarget(state);
+  var bullet = new SeekingProjectile(target, this.projectileSize, this.position, this.projectileSpeed, this.projectileDamage, false, this, state);
+  state.world.push(bullet);
+}
+
 
 function MultiShotTower(pos, state){
   this.radius = 15;
