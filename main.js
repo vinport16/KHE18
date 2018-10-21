@@ -3,7 +3,6 @@ function sleep(ms) {
 }
 
 state = new GameState();
-state.money = 1000000;
 state.position = {x:-canvas.width/2,y:-canvas.height/2};
 
 paused = false;
@@ -29,8 +28,6 @@ function makeShips(point, r1, r2, level, state){
       state.world.push(new GrandmotherShip(makePointIn(point,r1,r2),state));
     }
   }
-  state.world.push(new SpeedyShip(makePointIn(point,r1,r2),state));
-  state.world.push(new SpeedyShip(makePointIn(point,r1,r2),state));
   return state;
 }
 
