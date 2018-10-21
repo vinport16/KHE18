@@ -63,6 +63,9 @@ function drawWorld(state){
       }
     }
 	}
+  if(state.selectedStructure){
+    highlight(state.selectedStructure,state); 
+  }
 }
 
 function clearCanvas(){
@@ -80,6 +83,7 @@ function clearListeners(state){
   ctx = canvas.getContext("2d");
 
   drawEverything(state);
+  resetClick();
 }
 
 function drawCircle(position, r, fill, stroke){
@@ -109,6 +113,10 @@ function drawLine(v1, v2, stroke){
 	ctx.lineWidth = 2;
 	ctx.strokeStyle = stroke;
 	ctx.stroke();
+}
+
+function highlight(struct, state){
+  drawCircle(relative(struct.position,state),100,"rgba(255,255,255,0)","rgba(255,255,255,1)");
 }
 
 function mapDrawTower(tower,state){
