@@ -136,7 +136,7 @@ function updateSelectedDetails(struct){
     if(struct.tree[0]){
       document.getElementById("up1").innerHTML = struct.tree[0].name;
       document.getElementById("up1").addEventListener("click", function(){
-        struct.upgrade(struct.tree[0]);
+        struct.upgrade(struct.tree[0], state);
         updateSelectedDetails(state.selectedStructure);
         drawEverything(state);
       });

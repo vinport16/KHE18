@@ -4,10 +4,12 @@ function Building(pos, state){
   this.height = 50;
   this.width = 30;
   this.maxHealth = 300;
-  this.energyMax = 100;
-  this.energyRate = 20/25.0;
+  this.energyMax = 150;
+  this.energyRate = 0.5;
   this.energy = 0;
   this.enemy = false;
+  this.name = "Basic Tower";
+  this.tree = basicBuildingTree;
   Structure.call(this, pos, 100, this.maxHealth, 100, state);
 
 }
@@ -78,14 +80,15 @@ Building.prototype.step = function(state){
 
 //OTHER BUILDING TYPES 
 function SolarPanel(pos, state){
-  
   this.height = 150;
   this.width = 100;
-  this.maxHealth = 25;
+  this.maxHealth = 75;
   this.energyMax = 200;
-  this.energyRate = 1;
+  this.energyRate = 0.7;
   this.energy = 0;
   this.enemy = false;
+  this.name = "Solar Panel";
+  this.tree = solarPanelTree
   Structure.call(this, pos, 100, this.maxHealth, 200, state);
 
 }
@@ -93,14 +96,15 @@ SolarPanel.prototype = Object.create(Building.prototype);
 SolarPanel.prototype.constructor = SolarPanel;
 
 function SolarFarm(pos, state){
-  
   this.height = 300;
   this.width = 400;
   this.maxHealth = 80;
   this.energyMax = 500;
-  this.energyRate = 10;
+  this.energyRate = 0.9;
   this.energy = 0;
   this.enemy = false;
+  this.name = "Solar Farm";
+  this.tree = solarFarmTree;
   Structure.call(this, pos, 100, this.maxHealth, 500, state);
 
 }
@@ -112,9 +116,11 @@ function PowerPlant(pos, state){
   this.width = 90;  
   this.maxHealth = 5
   this.energyMax = 100;
-  this.energyRate = 0.5;
+  this.energyRate = 0.6;
   this.energy = 0;
   this.enemy = false;
+  this.name = "PowerPlant";
+  this.tree = powerPlantTree;
   Structure.call(this, pos, 100, this.maxHealth, 100, state);
 
 }
