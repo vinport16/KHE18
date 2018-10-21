@@ -237,6 +237,14 @@ function unitVector(v){
   return divide(v, distance(zeroVector,v));
 }
 
+function duplicate(v){
+  var x1 = v.x;
+  var y1 = v.y;
+
+  var v1 = {x:x1,y:y1};
+  return v1;
+}
+
 function rotateVector(vec, ang){
     ang = -ang * (Math.PI/180);
     var cos = Math.cos(ang);
