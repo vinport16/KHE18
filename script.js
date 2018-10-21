@@ -20,46 +20,16 @@ function showPrices(){
     "</table>";
 }
 
-function describeBuilding(element,building){
-  var tip = "<span class=\"tooltip\">"+
-  "price: "+building.price+"G<br>"+
-  "health: "+building.maxHealth+"<br>"+
-  "energy capacity: "+building.energyMax+"e<br>"+
-  "energy production: "+(building.energyRate*20)+"e/s<br>";
-  if(building.heal){
-    tip +=
-    "heal: "+building.heal.healAmount+"<br>"+
-    "energy/heal: "+building.heal.energyReqired+"e<br>"+
-    "heals/sec: "+20/building.heal.cooldown+"/s<br>";
-  }
-  if(building.activationEnergy){
-    tip +=
-    "activation energy: "+building.activationEnergy+"e<br>";
-  }
-  tip += "</span>";
+function describeObject(element,object){
 
+  tip = "<span class=\"tooltip\">";
+  tip += "name: "+object.name;
+  tip += "<br>price: "+object.price;
+
+
+  tip += "</script>"
   element.innerHTML = element.innerHTML + tip;
 }
-
-function describeTower(element,tower){
-  var tip = "<span class=\"tooltip\">"+
-  "price: "+tower.price+"G<br>"+
-  "health: "+tower.maxHealth+"<br>"+
-  "range: "+tower.range+"<br>"+
-  "damage: "+tower.projectile.damage+"<br>"+
-  "fire rate: "+(20/tower.fireCooldown)+"/s<br>"+
-  "energy/fire: "+tower.fireEnergy+"e<br>";
-  if(tower.projectile.target){
-    tip += "seeking<br>";
-  }
-  if(tower.projectile.persist){
-    tip += "projectiles persist<br>";
-  }
-  tip += "</span>";
-
-  element.innerHTML = element.innerHTML + tip;
-}
-
 
 
 // setup
@@ -114,15 +84,21 @@ function updateSelectedDetails(struct){
   document.getElementById("selectTarget");
 
   //remove listeners
-  document.getElementById("up1").innerHTML = "";
+  document.getElementById("up1").innerHTML = "upgrade";
   var clone = document.getElementById("up1").cloneNode(true);
   document.getElementById("up1").parentNode.replaceChild(clone, document.getElementById("up1"));
   document.getElementById("up1").disabled = true;
 
-  document.getElementById("up2").innerHTML = "";
+  document.getElementById("up2").innerHTML = "upgrade";
   var clone = document.getElementById("up2").cloneNode(true);
   document.getElementById("up2").parentNode.replaceChild(clone, document.getElementById("up2"));
   document.getElementById("up2").disabled = true;
+
+  var clone = document.getElementById("selectSell").cloneNode(true);
+  document.getElementById("selectSell").parentNode.replaceChild(clone, document.getElementById("selectSell"));
+  document.getElementById("selectSell").disabled = true;
+
+  document.getElementById("selectTarget").disabled = true;
 
   if(struct){
     document.getElementById("selectName").innerHTML = struct.name;
@@ -146,12 +122,22 @@ function updateSelectedDetails(struct){
     if(struct.tree[1]){
       document.getElementById("up2").innerHTML = struct.tree[1].name;
       document.getElementById("up2").addEventListener("click", function(){
-        struct.upgrade(struct.tree[1]);
+        struct.upgrade(struct.tree[1], state);
         updateSelectedDetails(state.selectedStructure);
         drawEverything(state);
       });
       document.getElementById("up2").disabled = false;
     }
+
+    document.getElementById("selectSell").addEventListener("click", function(){
+      struct.sell(state);
+      state.selectedStructure = null;
+      drawEverything(state);
+      resetSelect();
+    });
+    document.getElementById("selectSell").disabled = false;
+
+    document.getElementById("selectTarget").disabled = false;
   }
 }
 
@@ -201,6 +187,11 @@ function resetMapDrag(){
       clearMapListeners(state);
       resetMapDrag();
     });
+
+    map.addEventListener("mouseleave", function(event){
+      clearMapListeners(state);
+      resetMapDrag();
+    });
   });
 }
 
@@ -210,28 +201,10 @@ function resetSelect(){
   canvas.addEventListener("click", function(event){
     clickpos = absolute(getVector(event),state);
     state.selectedStructure = findStructureAtPoint(clickpos,state);
-    console.log(state.selectedStructure);
     updateSelectedDetails(state.selectedStructure);
     drawEverything(state);
   });
 }
-
-resetSelect();
-
-var movemode = true;
-
-
-
-var hiddenControls = null;
-
-document.getElementById("selectMove").addEventListener("click",function(){
-  state.selectedStructure = null;
-  movemode = !movemode;
-  clearListeners(state);
-});
-
-
-
 
 
 
