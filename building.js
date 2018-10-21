@@ -119,10 +119,84 @@ function PowerPlant(pos, state){
   this.energyRate = 0.6;
   this.energy = 0;
   this.enemy = false;
-  this.name = "PowerPlant";
+  this.name = "Power Plant";
   this.tree = powerPlantTree;
   Structure.call(this, pos, 100, this.maxHealth, 100, state);
 
 }
 PowerPlant.prototype = Object.create(Building.prototype);
 PowerPlant.prototype.constructor = PowerPlant;
+
+function RepairBuilding(pos, state){
+  this.height = 70;
+  this.width = 150;
+  this.maxHealth = 150;
+  this.energyMax = 200;
+  this.energyRate = 0;
+  this.energy = 0;
+  this.enemy = false;
+  this.name = "Repair Building";
+  this.tree = null;
+
+  this.heal = 15;
+  this.bufferTime = 30;
+  this.currentBuffer = 0;
+  this.healEnergy = 25;
+  Structure.call(this, pos, 400, this.maxHealth, 20, state);
+
+}
+RepairBuilding.prototype = Object.create(Building.prototype);
+RepairBuilding.prototype.constructor = RepairBuilding;
+
+RepairBuilding.prototype.findConnectedHealPath = function(){
+  var q = [[this]];
+  var visited = [this];
+  while(q.length != 0){
+    var b = q[0][q[0].length-1];
+    if(b.energyMax && b.health < b.maxHealth){
+      return(q[0]);
+    }else{
+      for(var i = 0; i < b.connected.length; i++){
+        if(!visited.includes(b.connected[i])){
+          var path = copyArray(q[0]);
+          path.push(b.connected[i]);
+          visited.push(b.connected[i]);
+          q.push(path);
+        }
+      }
+    }
+    q.splice(0,1);
+  }
+  return false;
+}
+
+RepairBuilding.prototype.doConnectedHeal = function(transferAmount){
+  var path = this.findConnectedHealPath();
+  if(path){
+    //active connect them [SAME AS ENERGY RN]
+    for(var i = 0; i < path.length-1; i++){
+      path[i].activeConnections.push(path[i+1]);
+    }
+    //send repairs
+    var openAmount = path[path.length-1].maxHealth - path[path.length-1].health;
+    if(transferAmount > openAmount){
+      path[path.length-1].health += openAmount;
+      return transferAmount - openAmount;
+    }else{
+      path[path.length-1].health += transferAmount;
+    }
+  }
+  return false;
+}
+
+RepairBuilding.prototype.step = function(state){
+  Building.prototype.step.call(this,state);
+  this.currentBuffer--;
+  if(heal && this.currentBuffer <= 0 && this.findConnectedHealPath() && this.getEnergyFor(this.healEnergy)){
+    amountLeft = this.heal;
+    while(amountLeft){
+      amountLeft = this.doConnectedHeal(amountLeft);
+    }
+    this.currentBuffer = this.bufferTime;
+  }
+}

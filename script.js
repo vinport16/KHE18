@@ -19,6 +19,10 @@ function describeObject(element,object){
     tip += "<br>energy/sec: "+(object.energyRate*25);
     tip += "<br>energy storage: "+(object.energyMax);
     tip += "<br>health: "+object.maxHealth;
+    if(object instanceof RepairBuilding){
+      tip += "<br>heal/sec: "+(object.heal/(object.bufferTime/25)).toFixed(2);
+      tip += "<br>energy/heal: "+(object.heal/object.healEnergy).toFixed(2);
+    }
   }else{
     for (var key in object) {
       if (object.hasOwnProperty(key) && key != "name" && key != "price" && key != "tree") {
@@ -171,6 +175,7 @@ document.getElementById("pause").addEventListener("click",pause);
 document.getElementById("cancel").addEventListener("click",function(){
   clearListeners(state);
   state.selectedStructure = null;
+  enableAllButtons();
   updateSelectedDetails();
 });
 

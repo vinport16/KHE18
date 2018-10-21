@@ -17,10 +17,15 @@ document.getElementById("solarFarm").onclick = function(){
 }
 describeObject(document.getElementById("solarFarm"),new SolarFarm({x:0,y:0},fakestate));
 
-document.getElementById("powerPlant").onclick = function(){
-  placeStructure(new PowerPlant({x:0,y:0},state), state);
+//document.getElementById("powerPlant").onclick = function(){
+//  placeStructure(new PowerPlant({x:0,y:0},state), state);
+//}
+//describeObject(document.getElementById("powerPlant"),new PowerPlant({x:0,y:0},fakestate));
+
+document.getElementById("repairBuilding").onclick = function(){
+  placeStructure(new RepairBuilding({x:0,y:0},state), state);
 }
-describeObject(document.getElementById("powerPlant"),new PowerPlant({x:0,y:0},fakestate));
+describeObject(document.getElementById("repairBuilding"),new RepairBuilding({x:0,y:0},fakestate));
 
 
 // TOWERS
