@@ -5,20 +5,26 @@ function Ship(pos, state) {
 	this.maxHealth = 130;
 	this.health = this.maxHealth;
 	this.color = "red";
-  this.speed = 2;
-  this.stopDistance = 20;
+  	this.speed = 2;
+  	this.stopDistance = 20;
 	this.target = null;
 	this.bufferTime = 25;
 	this.currentBuffer = this.bufferTime;
-  this.range = 60;
+  	this.range = 60;
 	this.projectileSpeed = 10; 
 	this.projectileDamage = 20;
-  this.enemy = true;
-  this.destroyed = false;
-  GameObject.call(this, pos);
+  	this.enemy = true;
+  	this.destroyed = false;
+  	GameObject.call(this, pos);
+  	this.bounty = 50;
 }
 Ship.prototype = Object.create(GameObject.prototype);
 Ship.prototype.constructor = Ship;
+
+Ship.prototype.delete = function(state){
+	state.money += this.bounty;
+	GameObject.prototype.delete.call(this, state);
+}
 
 Ship.prototype.shoot = function(state){
 	var target = this.selectTarget(state);
@@ -87,6 +93,7 @@ function BigShip(pos, state) {
   	this.enemy = true;
   	this.destroyed = false;
   	GameObject.call(this, pos);
+  	this.bounty = 100;
 }
 BigShip.prototype = Object.create(Ship.prototype);
 BigShip.prototype.constructor = BigShip;
@@ -107,6 +114,7 @@ function MotherShip(pos, state) {
   	this.enemy = true;
   	this.destroyed = false;
   	GameObject.call(this, pos);
+  	this.bounty = 300;
 }
 MotherShip.prototype = Object.create(Ship.prototype);
 MotherShip.prototype.constructor = MotherShip;
@@ -133,6 +141,7 @@ function GrandmotherShip(pos, state) {
   	this.enemy = true;
   	this.destroyed = false;
   	GameObject.call(this, pos);
+  	this.bounty = 500;
 }
 GrandmotherShip.prototype = Object.create(Ship.prototype);
 GrandmotherShip.prototype.constructor = GrandmotherShip;
@@ -166,6 +175,7 @@ function SpeedyShip(pos, state) {
   	this.enemy = true;
   	this.destroyed = false;
   	GameObject.call(this, pos);
+  	this.bounty = 20;
 }
 SpeedyShip.prototype = Object.create(Ship.prototype);
 SpeedyShip.prototype.constructor = SpeedyShip;
