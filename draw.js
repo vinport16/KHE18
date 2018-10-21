@@ -24,6 +24,12 @@ function displayEnergy(state){
 }
 
 function drawWorld(state){
+  for(var i in state.world){
+    gobj = state.world[i];
+    if(gobj instanceof Tower){
+      drawRange(gobj, state);
+    }
+  }
 	for(var i in state.world){
     gobj = state.world[i];
 		if(gobj.width != null){
@@ -34,7 +40,6 @@ function drawWorld(state){
       mapDrawShip(gobj, state);
 		}else if(gobj instanceof Tower){
 			drawTower(gobj, state);
-      drawRange(gobj, state);
       mapDrawTower(gobj, state);
 		}else if(gobj instanceof Projectile){
       drawProjectile(gobj, state);
@@ -75,7 +80,6 @@ function clearListeners(state){
   ctx = canvas.getContext("2d");
 
   drawEverything(state);
-  resetDrag();
 }
 
 function drawCircle(position, r, fill, stroke){

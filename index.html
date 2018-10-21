@@ -12,7 +12,7 @@
     <div class="textbox">
       <canvas id="map" calss="map"></canvas>
       <div class="message" id="message">Build towers and buildings, then press "resume" to begin</div>
-      <table class="buttons">
+      <table class="buttons" id="buildingButtons">
         <tr><td><button class="building" id="defaultBuilding">default building</button></td>
             <td><button class="tower1" id="defaultTower">default tower</button></td></tr>
         <tr><td><button class="building" id="solarPanel">solar panel</button></td>
@@ -25,12 +25,34 @@
             <td><button class="tower2" id="heavyTower">null</button></td></tr>
         <tr><td><button class="building" id="fusionGenerator">null</button></td>
             <td><button class="tower2" id="seekingTower">null</button></td></tr>
+      </table>
+
+      <table class="buttons" id="selectButtons">
+        <tr><td><div id="selectName">NAME</div></td>
+            <td><div id="selectKills">killz</div></td></tr>
+        <tr><td><button class="pause" id="up1">up1</button></td>
+            <td><button class="pause" id="up2">up2</button></td></tr>
+        <tr><td><button class="pause" id="up3">up3</button></td>
+            <td><button class="pause" id="up4">up4</button></td></tr>
+        <tr><td><button class="pause" id="selectSell">SELL</button></td>
+            <td><select id="selectTarget">
+                  <option>closest</option>
+                  <option>farthest</option>
+                  <option>strongest</option>
+                  <option>weakest</option>
+                </select>
+            </td>
+          </tr>
+        </table>
+
+      <table class="buttons">
         <tr><td><button id="selectObject">sell structures</button></td>
-            <td><button class="tower2" id="goliathTower">null</button></td></tr>
+            <td><button class="tower2" id="selectMove">toggle select move</button></td></tr>
         <tr><td><button class="pause" id="heal">pause healing</button></td>
             <td><button class="cancel" id="ships">make enemy ships</button></td></tr>
         <tr><td><button class="pause" id="pause">pause</button></td>
             <td><button class="cancel" id="cancel">cancel</button></td></tr>
+
       </table>
       <div class="text" id="text"> </div>
     </div>

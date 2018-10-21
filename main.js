@@ -30,6 +30,7 @@ function makeShips(point, r1, r2, n, state){
   
 }
 
+
 function spawnLevel(level, state){
   //var dist = getFarthestStructure(state);
   makeShips(zeroVector,800,850,level*5,state);
@@ -69,6 +70,9 @@ function allKilled(level, state){
 
 }
 
+//makeShips(zeroVector,800,2850,50,state);
+
+
 async function main(state){
   var level = 1;
   spawnLevel(level, state);
@@ -100,5 +104,9 @@ function step(state){
   });
   drawEverything(state);
 }
+
+clearListeners(state);
+
+drawEverything(state);
 
 main(state);

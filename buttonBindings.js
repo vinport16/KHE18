@@ -34,3 +34,11 @@ document.getElementById("seekingTower").onclick = function(){
 document.getElementById("multiShotTower").onclick = function(){
   placeStructure(new MultiShotTower({x:0, y:0}, state), state);
 }
+
+
+// SHIPS
+
+document.getElementById("ships").onclick = function(){
+  makeShips(zeroVector,800,2850,50,state);
+  drawEverything(state);
+}

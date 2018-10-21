@@ -108,6 +108,22 @@ function enableAllButtons(){
   }
 }
 
+function updateSelectedDetails(struct){
+  if(struct){
+    document.getElementById("selectName").innerHTML = struct.name;
+    if(struct.kills){
+      document.getElementById("selectKills").innerHTML = "kills: "+ struct.kills;
+    }
+    if(struct.target){
+      document.getElementById("selectTarget").selected = struct.target;
+    }
+  }else{
+    document.getElementById("selectName").innerHTML = "";
+    document.getElementById("selectKills").innerHTML = "";
+    document.getElementById("selectTarget");
+  }
+}
+
 var paused = false;
 function pause(){
   paused = !paused;
@@ -125,7 +141,24 @@ function pause(){
 
 document.getElementById("pause").addEventListener("click",pause);
 
+document.getElementById("cancel").addEventListener("click",function(){
+  clearListeners(state);
+  selectedStructure = null;
+  updateSelectedDetails();
+});
+
+function resetClick(){
+  clearListeners(state);
+  console.log(movemode);
+  if(movemode){
+    resetDrag();
+  }else{
+    resetSelect();
+  }
+}
+
 function resetDrag(){
+  document.getElementById("selectMove").innerHTML = "Select Structures"
   canvas.addEventListener("mousedown", function(event){
     originalpos = state.position;
     clickpos = getVector(event);
@@ -144,7 +177,40 @@ function resetDrag(){
   });
 }
 
-resetDrag();
+function resetSelect(){
+  document.getElementById("selectMove").innerHTML = "Move on Map"
+  canvas.addEventListener("click", function(event){
+    clickpos = absolute(getVector(event),state);
+    selectedStructure = findStructureAtPoint(clickpos,state);
+    console.log(selectedStructure);
+    updateSelectedDetails(selectedStructure);
+  });
+}
+
+var movemode = true;
+
+var selectedStructure = null;
+
+var hiddenControls = null;
+
+document.getElementById("selectMove").addEventListener("click",function(){
+  movemode = !movemode;
+  resetClick();
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
