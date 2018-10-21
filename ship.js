@@ -152,7 +152,7 @@ GrandmotherShip.prototype.shoot = function(state){
 
 function SpeedyShip(pos, state) {
 	this.radius = 5;
-	this.maxHealth = 20;
+	this.maxHealth = 50;
 	this.health = this.maxHealth;
 	this.color = "red";
   	this.speed = 20;
@@ -160,9 +160,9 @@ function SpeedyShip(pos, state) {
   	this.target;
 	this.bufferTime = 2;
 	this.currentBuffer = this.bufferTime;
-  	this.range = 15;
+  	this.range = 20;
 	this.projectileSpeed = 10; 
-	this.projectileDamage = 5;
+	this.projectileDamage = 10;
   	this.enemy = true;
   	this.destroyed = false;
   	GameObject.call(this, pos);

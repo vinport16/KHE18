@@ -5,7 +5,7 @@ BTL2a = [
 	{cost:400, name:"High Efficency Tower", projectileEnergy: 25, color:"maroon", tree: false}];
 BTL2b = [
 	{cost:300, name:"High Health Tower", maxHealth: 300, color:"gold", tree: false}, 
-	{cost:350, name:"High Damage Tower", projectileDamage: 60, color:"lime", tree: false}];
+	{cost:350, name:"High Damage  Tower", projectileDamage: 60, color:"lime", tree: false}];
 
 basicTowerTree = [
 	{cost:150, name:"Long Range Tower", range: 350, color:"yellow", tree: BTL2a}, 
