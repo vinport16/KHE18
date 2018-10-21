@@ -29,8 +29,8 @@ table.prices{
 
 button{
   width: 100%;
-  height: 40px;
-  font-size: 15px;
+  height: 30px;
+  font-size: 12px;
   border-radius: 7px;
   background: linear-gradient(160deg,rgba(210,180,220,0.5),rgba(200,150,250,0.5));
 }
