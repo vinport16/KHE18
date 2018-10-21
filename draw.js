@@ -83,7 +83,16 @@ function clearListeners(state){
   ctx = canvas.getContext("2d");
 
   drawEverything(state);
-  resetClick();
+  resetSelect();
+}
+
+function clearMapListeners(state){
+  var clone = map.cloneNode(true);
+  map.parentNode.replaceChild(clone, map);
+  map = clone;
+  maptx = map.getContext("2d");
+
+  drawEverything(state);
 }
 
 function drawCircle(position, r, fill, stroke){

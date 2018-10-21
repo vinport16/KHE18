@@ -170,37 +170,29 @@ document.getElementById("cancel").addEventListener("click",function(){
   updateSelectedDetails();
 });
 
-function resetClick(){
-  console.log(movemode);
-  if(movemode){
-    resetDrag();
-  }else{
-    resetSelect();
-  }
-}
-
-function resetDrag(){
-  document.getElementById("selectMove").innerHTML = "Select Structures"
-  canvas.addEventListener("mousedown", function(event){
+function resetMapDrag(){
+  
+  map.addEventListener("mousedown", function(event){
     originalpos = state.position;
     clickpos = getVector(event);
-    canvas.addEventListener("mousemove", function(event){
+    map.addEventListener("mousemove", function(event){
       dragpos = getVector(event);
 
-      state.position = add(originalpos,subtract(clickpos,dragpos));
+      state.position = add(originalpos,multiply(subtract(clickpos,dragpos),mapscale));
       drawEverything(state);
 
     });
 
-    canvas.addEventListener("mouseup", function(event){
-      clearListeners(state);
-      resetDrag();
+    map.addEventListener("mouseup", function(event){
+      clearMapListeners(state);
+      resetMapDrag();
     });
   });
 }
 
+resetMapDrag();
+
 function resetSelect(){
-  document.getElementById("selectMove").innerHTML = "Move on Map"
   canvas.addEventListener("click", function(event){
     clickpos = absolute(getVector(event),state);
     state.selectedStructure = findStructureAtPoint(clickpos,state);
@@ -209,6 +201,8 @@ function resetSelect(){
     drawEverything(state);
   });
 }
+
+resetSelect();
 
 var movemode = true;
 
