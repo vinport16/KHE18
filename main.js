@@ -43,6 +43,7 @@ function allKilled(state){
     }
   }
   level++;
+  writeMessage("Level: " + level);
   return makeShips(zeroVector,1000,1200,level,state);
 }
 
