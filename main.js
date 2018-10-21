@@ -74,6 +74,8 @@ function step(state){
 }
 
 clearListeners(state);
+updateSelectedDetails(state.selectedStructure);
+resetSelect();
 
 drawEverything(state);
 

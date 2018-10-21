@@ -2,6 +2,8 @@ function Structure(pos, price, maxHealth, ER, state){
 
   GameObject.call(this,pos);
 
+  this.name = "structure";
+
   this.maxHealth = maxHealth;
   this.health = this.maxHealth;
   this.price = price;
@@ -22,6 +24,11 @@ Structure.prototype.delete = function(state){
     index = this.connected[i].connected.indexOf(this);
     if (index !== -1) this.connected[i].connected.splice(index, 1);
   }
+}
+
+Structure.prototype.sell = function(state){
+  state.money += this.price*(this.health/this.maxHealth);
+  this.delete(state);
 }
 
 Structure.prototype.upgrade = function(upgrade){

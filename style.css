@@ -58,6 +58,10 @@ button.pause{
   font-weight: bold;
   color: blue;
 }
+button:disabled,
+button[disabled]{
+  color: gray;
+}
 button.cancel{
   font-weight: bold;
   color: red;

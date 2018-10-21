@@ -114,15 +114,21 @@ function updateSelectedDetails(struct){
   document.getElementById("selectTarget");
 
   //remove listeners
-  document.getElementById("up1").innerHTML = "";
+  document.getElementById("up1").innerHTML = "upgrade";
   var clone = document.getElementById("up1").cloneNode(true);
   document.getElementById("up1").parentNode.replaceChild(clone, document.getElementById("up1"));
   document.getElementById("up1").disabled = true;
 
-  document.getElementById("up2").innerHTML = "";
+  document.getElementById("up2").innerHTML = "upgrade";
   var clone = document.getElementById("up2").cloneNode(true);
   document.getElementById("up2").parentNode.replaceChild(clone, document.getElementById("up2"));
   document.getElementById("up2").disabled = true;
+
+  var clone = document.getElementById("selectSell").cloneNode(true);
+  document.getElementById("selectSell").parentNode.replaceChild(clone, document.getElementById("selectSell"));
+  document.getElementById("selectSell").disabled = true;
+
+  document.getElementById("selectTarget").disabled = true;
 
   if(struct){
     document.getElementById("selectName").innerHTML = struct.name;
@@ -152,6 +158,16 @@ function updateSelectedDetails(struct){
       });
       document.getElementById("up2").disabled = false;
     }
+
+    document.getElementById("selectSell").addEventListener("click", function(){
+      struct.sell(state);
+      state.selectedStructure = null;
+      drawEverything(state);
+      resetSelect();
+    });
+    document.getElementById("selectSell").disabled = false;
+
+    document.getElementById("selectTarget").disabled = false;
   }
 }
 
@@ -201,6 +217,11 @@ function resetMapDrag(){
       clearMapListeners(state);
       resetMapDrag();
     });
+
+    map.addEventListener("mouseleave", function(event){
+      clearMapListeners(state);
+      resetMapDrag();
+    });
   });
 }
 
@@ -210,28 +231,10 @@ function resetSelect(){
   canvas.addEventListener("click", function(event){
     clickpos = absolute(getVector(event),state);
     state.selectedStructure = findStructureAtPoint(clickpos,state);
-    console.log(state.selectedStructure);
     updateSelectedDetails(state.selectedStructure);
     drawEverything(state);
   });
 }
-
-resetSelect();
-
-var movemode = true;
-
-
-
-var hiddenControls = null;
-
-document.getElementById("selectMove").addEventListener("click",function(){
-  state.selectedStructure = null;
-  movemode = !movemode;
-  clearListeners(state);
-});
-
-
-
 
 
 
