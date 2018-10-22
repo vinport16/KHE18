@@ -7,7 +7,7 @@ function Tower(pos, state){
 	this.health = this.maxHealth;
 	this.color = "#9c9cff";
 	this.range = 200;
-	this.bufferTime = 25; //frames
+	this.bufferTime = 15; //frames
 	this.currentBuffer = this.bufferTime;
 	this.projectileSpeed = 10;
 	this.projectileDamage = 30;
@@ -100,15 +100,15 @@ function HeavyTower(pos, state){
   this.currentBuffer = this.bufferTime;
   this.projectileSpeed = 5;
   this.projectileDamage = 150;
-  this.projectileEnergy = 50;
+  this.projectileEnergy = 110;
   this.projectileSize = 5;
   this.destroyed = false;
   this.enemy = false;
   this.tree = heavyTowerTree;
   this.kills = 0;
   this.targetType = "closest";
-  this.name = "Big Tower";
-  this.price = 250;
+  this.name = "Heavy Tower";
+  this.price = 200;
 
   Structure.call(this, pos, this.price, this.health, 40, state);
 } 
@@ -124,7 +124,7 @@ function SeekingTower(pos, state){
   this.bufferTime = 100; //frames
   this.currentBuffer = this.bufferTime;
   this.projectileSpeed = 5;
-  this.projectileDamage = 100;
+  this.projectileDamage = 200;
   this.projectileEnergy = 100;
   this.projectileSize = 7;
   this.destroyed = false;

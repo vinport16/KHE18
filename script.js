@@ -15,9 +15,13 @@ function describeObject(element,object){
   tip += "<br>price: "+object.price;
 
   if(object instanceof Tower){
-    tip += "<br>damage: "+object.projectileDamage;
-    tip += "<br>wait: "+(object.bufferTime/25).toFixed(2)+"s";
-    tip += "<br>energy: "+object.projectileEnergy;
+    if(object instanceof MultiShotTower){
+      tip += "<br>damage/sec: "+((object.projectileDamage*object.numberOfShots)/(object.bufferTime/25)).toFixed(2);
+      tip += "<br>energy/damage: "+(object.projectileEnergy/(object.projectileDamage*object.numberOfShots)).toFixed(2);
+    }else{
+      tip += "<br>damage/sec: "+(object.projectileDamage/(object.bufferTime/25)).toFixed(2);
+      tip += "<br>energy/damage: "+(object.projectileEnergy/object.projectileDamage).toFixed(2);
+    }
     tip += "<br>health: "+object.maxHealth;
   }else if(object instanceof Building){
     tip += "<br>energy/sec: "+(object.energyRate*25);

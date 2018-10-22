@@ -148,7 +148,7 @@ function RepairBuilding(pos, state){
   this.bufferTime = 30;
   this.currentBuffer = 0;
   this.healEnergy = 25;
-  Structure.call(this, pos, 400, this.maxHealth, 20, state);
+  Structure.call(this, pos, 200, this.maxHealth, 20, state);
 
 }
 RepairBuilding.prototype = Object.create(Building.prototype);
