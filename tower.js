@@ -181,7 +181,7 @@ MultiShotTower.prototype.constructor = MultiShotTower;
 MultiShotTower.prototype.shoot = function(state){
   var target = this.selectTarget(state);
   for(var i = 0; i < this.numberOfShots; i++){
-    var bullet = new Projectile(target, this.projectileSize+(i*2), this.position, this.projectileSpeed-i, this.projectileDamage+(20*i), false, this, state);
+    var bullet = new Projectile(target, this.projectileSize, this.position, this.projectileSpeed-(i/this.numberOfShots), this.projectileDamage+(20*i), false, this, state);
     state.world.push(bullet);
   }
 }
