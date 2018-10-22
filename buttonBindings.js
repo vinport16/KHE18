@@ -3,7 +3,7 @@
 fakestate = new GameState();
 
 document.getElementById("defaultBuilding").onclick = function(){
-  placeStructure(new Building({x:0,y:0},state), state);
+  placeStructure(new Building({x:null,y:null},state), state);
 }
 describeObject(document.getElementById("defaultBuilding"),new Building({x:0,y:0},fakestate));
 

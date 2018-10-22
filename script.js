@@ -176,12 +176,20 @@ function pause(){
 
 document.getElementById("pause").addEventListener("click",pause);
 
-document.getElementById("cancel").addEventListener("click",function(){
-  clearListeners(state);
-  state.selectedStructure = null;
-  enableAllButtons();
-  updateSelectedDetails();
-});
+function resetCancel(){
+  cancel = document.getElementById("cancel");
+
+  clone = cancel.cloneNode(true);
+  cancel.parentNode.replaceChild(clone, cancel);
+
+  cancel.addEventListener("click",function(){
+    clearListeners(state);
+    state.selectedStructure = null;
+    enableAllButtons();
+    updateSelectedDetails();
+  });
+}
+resetCancel();
 
 function resetMapDrag(){
   

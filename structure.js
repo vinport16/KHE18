@@ -131,6 +131,8 @@ Structure.prototype.getEnergyFor = function(n){
 
 function placeStructure(s, state){
   disableAllButtons();
+  document.getElementById("cancel").disabled = false;
+
   for(var i = 0; i < controlButtons.length; i++){
     controlButtons[i].disabled = false;
   }
@@ -152,6 +154,14 @@ function placeStructure(s, state){
       s.disconnectAll(state);
     }
     clearListeners(state);
+    resetCancel();
     enableAllButtons();
-  })
+  });
+
+  document.getElementById("cancel").addEventListener("mousedown",function(event){
+    s.disconnectAll(state);
+    clearListeners(state);
+    resetCancel();
+    enableAllButtons();
+  });
 }
