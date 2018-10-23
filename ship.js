@@ -108,7 +108,7 @@ function MotherShip(pos, state) {
   	this.target;
 	this.bufferTime = 300;
 	this.currentBuffer = this.bufferTime;
-  	this.range = 1000;
+  	this.range = 650;
 	this.projectileSpeed = 1.5; 
 	this.projectileDamage = 20;
   	this.enemy = true;
@@ -125,6 +125,16 @@ MotherShip.prototype.shoot = function(state){
 	state.world.push(babyShip);
 }
 
+MotherShip.prototype.move = function(state){
+  if(this.target && distanceBetween(this,this.target) >= this.stopDistance){
+    if(distanceBetween(this,this.target) > this.range){
+      this.position = add(this.position, multiply(unitVector(subtract(getClosestPoints(this.target,this)[0], this.position)), this.speed) );
+    }else{
+      this.position = add(this.position, rotateVector(multiply(unitVector(subtract(getClosestPoints(this.target,this)[0], this.position)), this.speed), 70) );
+    }
+  }
+}
+
 function GrandmotherShip(pos, state) {
 	this.radius = 50;
 	this.maxHealth = 1000;
@@ -135,7 +145,7 @@ function GrandmotherShip(pos, state) {
   	this.target;
 	this.bufferTime = 400;
 	this.currentBuffer = this.bufferTime;
-  	this.range = 2000;
+  	this.range = 800;
 	this.projectileSpeed = 0.8; 
 	this.projectileDamage = 20;
   	this.enemy = true;
@@ -157,6 +167,16 @@ GrandmotherShip.prototype.shoot = function(state){
 		var babyShip = new BigShip(duplicate(this.position), state);
 		state.world.push(babyShip);
 	}
+}
+
+GrandmotherShip.prototype.move = function(state){
+  if(this.target && distanceBetween(this,this.target) >= this.stopDistance){
+    if(distanceBetween(this,this.target) > this.range){
+      this.position = add(this.position, multiply(unitVector(subtract(getClosestPoints(this.target,this)[0], this.position)), this.speed) );
+    }else{
+      this.position = add(this.position, rotateVector(multiply(unitVector(subtract(getClosestPoints(this.target,this)[0], this.position)), this.speed), 75) );
+    }
+  }
 }
 
 function SpeedyShip(pos, state) {

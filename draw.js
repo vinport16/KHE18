@@ -144,7 +144,7 @@ function mapDrawTower(tower,state){
   rp = multiply({x:map.width/2, y:map.height/2}, mapscale);
   rp = add(tower.position, subtract(rp, add(state.position, {x:canvas.width/2, y:canvas.height/2})));
   rp = divide(rp,mapscale);
-  radius = tower.range/mapscale;
+  radius = (tower.range+tower.radius)/mapscale;
 
   maptx.beginPath();
   maptx.arc(rp.x, rp.y, radius, 0, 2 * Math.PI, false);
@@ -175,7 +175,9 @@ function mapDrawShip(ship, state){
   rp = multiply({x:map.width/2, y:map.height/2}, mapscale);
   rp = add(ship.position, subtract(rp, add(state.position, {x:canvas.width/2, y:canvas.height/2})));
   rp = divide(rp,mapscale);
-  radius = (ship.radius*2)/mapscale;
+
+  radius = (ship.radius)/mapscale;
+  if(radius < 2){ radius = 2; }
 
   maptx.beginPath();
   maptx.arc(rp.x, rp.y, radius, 0, 2 * Math.PI, false);
@@ -200,7 +202,7 @@ function drawTower(o,state){
 function drawRange(o,state){
   rp = relative(o.position, state);
   //draw range
-  drawCircle(rp, o.range, "rgba(0,255,0,0.06)", "rgba(255,255,255,0.0)");
+  drawCircle(rp, o.range+o.radius, "rgba(0,255,0,0.06)", "rgba(255,255,255,0.0)");
 }
 
 function drawProto(proto, state){
