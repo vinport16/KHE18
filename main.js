@@ -14,14 +14,20 @@ function getRandomInt(min, max) {
 
 function makeShips(point, r1, r2, level, state){
   n = level*5;
+  if (level % 5 == 0){
+    for(i = 0; i < n; i++){
+      state.world.push(new Ship(makePointIn(point,r1,r2,state)));
+    }
+  }
+
   for(i = 0; i < n; i++){
     var type = getRandomInt(0,level);
     if(type <= 4){
-      state.world.push(new Ship(makePointIn(point,r1,r2),state));
+      state.world.push(new Ship(makePointIn(point,r1,r2,state)));
     }else if(type <= 5){
-      state.world.push(new SpeedyShip(makePointIn(point,r1,r2),state));
-    }else if(type <= 10){
       state.world.push(new BigShip(makePointIn(point,r1,r2),state));
+    }else if(type <= 10){
+      state.world.push(new SpeedyShip(makePointIn(point,r1,r2),state));
     }else if(type <= 15){
       state.world.push(new MotherShip(makePointIn(point,r1,r2),state));
     }else if(type <= 20){
@@ -33,18 +39,27 @@ function makeShips(point, r1, r2, level, state){
 
 
 
-var level = 1;
-makeShips(zeroVector,1000,1200,level,state);
 
+makeShips(zeroVector,1000,2000,state.level,state);
+var delay = 0;
 function allKilled(state){
   for(i in state.world){
     if(state.world[i] instanceof Ship){
       return state;
     }
   }
-  level++;
-  updateLevelDisplay("Level " + level);
-  return makeShips(zeroVector,1000,1200,level,state);
+  if(delay == 250){
+    state.level++;
+    updateLevelDisplay("Level " + state.level);
+    writeMessage("Level " + state.level + " in progress.");
+    delay = 0;
+    return makeShips(zeroVector,1000,1200,state.level,state);
+  }else{
+    delay ++;
+    var nextLevel = state.level + 1
+    writeMessage("Level " + state.level + " complete. Level " + nextLevel + " starting soon.");
+    return state;
+  }
 }
 
 
