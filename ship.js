@@ -48,7 +48,7 @@ Ship.prototype.waitToShoot = function(state){
 }
 
 Ship.prototype.step = function(state) {
-  if(!this.target || this.target.destroyed){
+  if(!this.target || this.target.destroyed || Math.random() < 0.05){
     this.target = this.selectMoveTarget(state);
   }
 	this.move(state);
