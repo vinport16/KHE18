@@ -46,7 +46,7 @@ Structure.prototype.upgrade = function(upgrade, state){
 Structure.prototype.connectToAll = function(state){
   for(var i = 0; i < state.world.length; i++){
     var o2 = state.world[i];
-    if(distanceBetween(this,o2) < this.energyRange + o2.energyRange){
+    if(o2 instanceof Structure && distanceBetween(this,o2) < this.energyRange + o2.energyRange){
       this.connect(o2);
     }
   }

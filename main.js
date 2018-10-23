@@ -77,7 +77,6 @@ async function main(state){
 }
   
 function step(state){
-  // state.step();
   state.world.forEach(function(gobject){
     if(gobject.activeConnections){
       gobject.activeConnections = [];

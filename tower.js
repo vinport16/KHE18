@@ -185,3 +185,34 @@ MultiShotTower.prototype.shoot = function(state){
     state.world.push(bullet);
   }
 }
+
+function LaserTower(pos, state){
+  this.radius = 9;
+  this.maxHealth = 130;
+  this.health = this.maxHealth;
+  this.color = "#AABB99";
+  this.range = 200;
+  this.bufferTime = 20; //frames
+  this.currentBuffer = this.bufferTime;
+  this.projectileSpeed = 2;
+  this.projectileDamage = 40;
+  this.projectileEnergy = 20;
+  this.projectileSize = 3;
+  this.destroyed = false;
+  this.enemy = false;
+  this.tree = null;
+  this.kills = 0;
+  this.targetType = "closest";
+  this.price = 150;
+  this.name = "Basic Tower";
+
+  Structure.call(this, pos, this.price, this.health, 20, state);
+} 
+LaserTower.prototype = Object.create(Tower.prototype);
+LaserTower.prototype.constructor = LaserTower;
+
+LaserTower.prototype.shoot = function(state){
+  var target = this.selectTarget(state);
+  laser = new Laser(this, target, this.projectileDamage, this.bufferTime/2, /*healRate,*/ this.projectileSize, "rgba(150,215,200,0.8)", state);
+  state.world.push(laser);
+}
