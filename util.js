@@ -87,7 +87,21 @@ function getClosestPoints(go1, go2){
   }else if(go1.width && go2.radius){
     return getPointsCircRec(go2, go1).reverse();
   }else{
-    return getPointsRecs(go1, go2);
+    p1s = getPointsRecs(go1, go2);
+    p2s = getPointsRecs(go2, go1);
+    // if one of the lines is shorter, choose that one
+    if(distance(p1s[0],p1s[1]) > distance(p2s[0],p2s[1])){
+      return p2s;
+    }else if(distance(p1s[0],p1s[1]) < distance(p2s[0],p2s[1])){
+      return p1s;
+    }
+    // if they are the same length but different points,
+    // choose the one furthest from the origin (arbitrary but consistent)
+    if(p1s[0].x + p1s[1].x + p1s[0].y + p1s[1].y > p2s[0].x + p2s[1].x + p2s[0].y + p2s[1].y){
+      return p1s;
+    }else{
+      return p2s;
+    }
   }
 }
 
@@ -202,7 +216,7 @@ function makePointIn(point,r1,r2){
 var zeroVector = {x:0,y:0};
 
 function getVector(e){
-  return {x: e.clientX - canvas.offsetLeft, y: e.clientY - canvas.offsetTop};
+  return {x: e.clientX - canvas.parentElement.offsetLeft, y: e.clientY - canvas.parentElement.offsetTop};
 }
 
 function relative(position, state){

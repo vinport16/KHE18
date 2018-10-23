@@ -37,7 +37,6 @@ function describeObject(element,object){
        tip += "<br>"+key+": "+object[key];
       }
     }
-    //console.log(object);
   }
 
   tip += "</script>"

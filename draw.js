@@ -175,7 +175,7 @@ function mapDrawShip(ship, state){
   rp = multiply({x:map.width/2, y:map.height/2}, mapscale);
   rp = add(ship.position, subtract(rp, add(state.position, {x:canvas.width/2, y:canvas.height/2})));
   rp = divide(rp,mapscale);
-  radius = ship.radius/mapscale;
+  radius = (ship.radius*2)/mapscale;
 
   maptx.beginPath();
   maptx.arc(rp.x, rp.y, radius, 0, 2 * Math.PI, false);
