@@ -48,6 +48,8 @@ solarPanelTree = [{price:300, name:"Efficent Solar Panel", energyMax: 300, energ
 SFL2a = [{price:1500, name:"Solar for a Country", energyMax: 1500, energyRate: 20, color:"orange", tree: false}];
 solarFarmTree = [{price:900, name:"Solar for a City", energyMax: 900, energyRate: 15, color:"yellow", tree: SFL2a}];
 
-PPL2a = [{price:500, name:"Martian Space Energy", energyMax: 500, energyRate: 1, color:"orange", tree: false}];
-powerPlantTree = [{price:250, name:"Nuclear Power Plant", energyMax: 200, energyRate: 0.75, color:"yellow", tree: PPL2a}];
+RBL3a = [{price:500, name:"Hospital", energyMax: 500, healEnergy: 10, bufferTime: 20, healEnergy: 10, energyRate: 1, color:"orange", tree: false}];
+RBL2a = [{price:500, name:"Doctor's Office", healEnergy: 15, energyMax: 300, bufferTime: 25, color:"orange", tree: RBL3a}];
+repairBuildingTree = [{price:250, name:"WebMD", maxHealth: 300, heal: 20, healEnergy: 20, color:"yellow", tree: RBL2a}];
+
 

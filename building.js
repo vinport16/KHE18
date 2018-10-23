@@ -142,7 +142,7 @@ function RepairBuilding(pos, state){
   this.energy = 0;
   this.enemy = false;
   this.name = "Repair Building";
-  this.tree = null;
+  this.tree = repairBuildingTree;
 
   this.heal = 15;
   this.bufferTime = 30;
