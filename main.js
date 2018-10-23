@@ -73,6 +73,7 @@ async function main(state){
       state = allKilled(state);
     }
     await sleep(25);
+    scaleCanvasses();
   }
 }
   
