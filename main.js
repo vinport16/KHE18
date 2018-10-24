@@ -73,11 +73,11 @@ async function main(state){
       state = allKilled(state);
     }
     await sleep(25);
+    scaleCanvasses();
   }
 }
   
 function step(state){
-  // state.step();
   state.world.forEach(function(gobject){
     if(gobject.activeConnections){
       gobject.activeConnections = [];

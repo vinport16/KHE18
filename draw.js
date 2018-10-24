@@ -54,7 +54,7 @@ function drawWorld(state){
   // draw gobjects
 	for(var i in state.world){
     gobj = state.world[i];
-		if(gobj.width != null){
+		if(gobj instanceof Building){
 			drawBuilding(gobj, state);
       mapDrawBuilding(gobj, state);
 		}else if(gobj instanceof Ship){
@@ -65,6 +65,8 @@ function drawWorld(state){
       mapDrawTower(gobj, state);
 		}else if(gobj instanceof Projectile){
       drawProjectile(gobj, state);
+    }else if(gobj instanceof Laser){
+      drawLaser(gobj, state);
     }else{
 			console.log(typeof gobj);
 		}
@@ -124,12 +126,16 @@ function drawRectangle(tl, h, w, fill, stroke){
 }
 
 function drawLine(v1, v2, stroke){
-	ctx.beginPath();
-	ctx.moveTo(v1.x,v1.y);
-	ctx.lineTo(v2.x,v2.y);
-	ctx.lineWidth = 2;
-	ctx.strokeStyle = stroke;
-	ctx.stroke();
+	drawLineWidth(v1, v2, stroke, 2);
+}
+
+function drawLineWidth(v1, v2, stroke, width){
+  ctx.beginPath();
+  ctx.moveTo(v1.x,v1.y);
+  ctx.lineTo(v2.x,v2.y);
+  ctx.lineWidth = width;
+  ctx.strokeStyle = stroke;
+  ctx.stroke();
 }
 
 function highlight(struct, state){
@@ -144,7 +150,7 @@ function mapDrawTower(tower,state){
   rp = multiply({x:map.width/2, y:map.height/2}, mapscale);
   rp = add(tower.position, subtract(rp, add(state.position, {x:canvas.width/2, y:canvas.height/2})));
   rp = divide(rp,mapscale);
-  radius = tower.range/mapscale;
+  radius = (tower.range+tower.radius)/mapscale;
 
   maptx.beginPath();
   maptx.arc(rp.x, rp.y, radius, 0, 2 * Math.PI, false);
@@ -175,7 +181,9 @@ function mapDrawShip(ship, state){
   rp = multiply({x:map.width/2, y:map.height/2}, mapscale);
   rp = add(ship.position, subtract(rp, add(state.position, {x:canvas.width/2, y:canvas.height/2})));
   rp = divide(rp,mapscale);
-  radius = (ship.radius*2)/mapscale;
+
+  radius = (ship.radius)/mapscale;
+  if(radius < 2){ radius = 2; }
 
   maptx.beginPath();
   maptx.arc(rp.x, rp.y, radius, 0, 2 * Math.PI, false);
@@ -200,7 +208,7 @@ function drawTower(o,state){
 function drawRange(o,state){
   rp = relative(o.position, state);
   //draw range
-  drawCircle(rp, o.range, "rgba(0,255,0,0.06)", "rgba(255,255,255,0.0)");
+  drawCircle(rp, o.range+o.radius, "rgba(0,255,0,0.06)", "rgba(255,255,255,0.0)");
 }
 
 function drawProto(proto, state){
@@ -287,3 +295,19 @@ function drawProjectile(p, state){
   rp = relative(p.position, state);
   drawCircle(rp,p.radius,p.color,"rgba(0,0,0,0)");
 }
+
+function drawLaser(laser, state){
+  rp1 = relative(laser.parent.position, state);
+  rp2 = relative(laser.target.position, state);
+  drawLineWidth(rp1, rp2, laser.color, laser.width);
+}
+
+
+
+
+
+
+
+
+
+

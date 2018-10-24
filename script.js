@@ -58,6 +58,16 @@ map.height = map.width/1.3 ;
 var maptx = map.getContext("2d");
 var mapscale = 10;
 
+function scaleCanvasses(){
+  if(canvas.width != (document.body.clientWidth-10) * 0.70 || canvas.height != document.body.clientHeight - 10){
+    canvas.width = (document.body.clientWidth-10) * 0.70 ;
+    canvas.height = document.body.clientHeight - 10 ;
+    map.width = (document.body.clientWidth-10) * 0.28 ;
+    map.height = map.width/1.3 ;
+    drawEverything(state);
+  }
+}
+
 function toggleHeal(){
   heal = !heal;
   if(heal){

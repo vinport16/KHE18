@@ -12,7 +12,7 @@ Next:
   - Multi directional fire 
   - Mother ships rotate our stuff 
   - Ships with lasers
-  - Ship that adds health to the network by killing bad ships 
+  - Laser tower that adds health to the network by killing bad ships 
   - Tutorial
   - Fix how mutishot fires 
 

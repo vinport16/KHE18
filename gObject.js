@@ -94,7 +94,7 @@ Projectile.prototype.move = function(state){
 Projectile.prototype.collisionCheck = function(state){
 	for(var i in state.world){
 		gobj = state.world[i];
-		if(gobj instanceof Projectile){
+		if(gobj instanceof Projectile || gobj instanceof Laser){
 		}else{
 			if(checkOverlap(this,gobj) && !(sameTeam(this, gobj))){
 				if(this.damage > gobj.health){
@@ -113,6 +113,40 @@ Projectile.prototype.collisionCheck = function(state){
 Projectile.prototype.step = function(state){
   this.move(state);
   this.collisionCheck(state);
+}
+
+var Laser = function(parent, target, damage, duration, /*healRate,*/ width, color, state){
+  this.target = target;
+  this.position = parent.position;
+  GameObject.call(this, this.position);
+  this.duration = duration;
+  this.clock = duration;
+  this.width = width;
+  this.damage = damage;
+  //this.healRate = healRate;
+  this.enemy = parent.enemy;
+  this.parent = parent;
+  this.color = color;
+}
+Laser.prototype = Object.create(GameObject.prototype);
+Laser.prototype.constructor = Laser;
+
+Laser.prototype.step = function(state){
+  if(this.parent.destoryed || this.target.destroyed){
+    this.delete(state);
+  }else{
+    this.position = parent.position; // in case parent moved
+    this.target.health -= this.damage/this.duration;
+    //this.parent.heal(this.damage*this.healRate);
+    if(this.clock <= 0){
+      this.delete(state);
+    }else{
+      this.clock -= 1;
+    }
+    if(this.target.health <= 0){
+      this.target.delete(state);
+    }
+  }
 }
 
 var Explosion = function(pos, size){
