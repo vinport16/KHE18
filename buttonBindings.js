@@ -35,10 +35,10 @@ document.getElementById("defaultTower").onclick = function(){
 }
 describeObject(document.getElementById("defaultTower"),new Tower({x:0,y:0},fakestate));
 
-document.getElementById("heavyTower").onclick = function(){
-  placeStructure(new HeavyTower({x:0, y:0}, state), state);
+document.getElementById("laserTower").onclick = function(){
+  placeStructure(new LaserTower({x:0, y:0}, state), state);
 }
-describeObject(document.getElementById("heavyTower"),new HeavyTower({x:0,y:0},fakestate));
+describeObject(document.getElementById("laserTower"),new LaserTower({x:0,y:0},fakestate));
 
 document.getElementById("seekingTower").onclick = function(){
   placeStructure(new SeekingTower({x:0, y:0}, state), state);
