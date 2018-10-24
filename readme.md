@@ -14,6 +14,7 @@ Next:
   - Ships with lasers
   - Ship that adds health to the network by killing bad ships 
   - Tutorial
+  - Fix how mutishot fires 
 
 
 Mini-games(?): 

@@ -31,9 +31,7 @@ seekingTowerTree = [
 	{price:450, name:"Higher Damage", projectileDamage: 200, color:"#929292", tree: STL2b}];
 
 
-MTL4a = [{price:1500, name:"20 Shot Tower", numberOfShots: 20, color:"#4b4b00", tree: false}];
-MTL3a = [{price:1000, name:"10 Shot Tower", numberOfShots: 10, color:"#878700", tree: MTL4a}];
-MTL2a = [{price:700, name:"5 Shot Tower", numberOfShots: 5, color:"#dbdb00", tree: MTL3a}];
+MTL2a = [{price:700, name:"5 Shot Tower", numberOfShots: 5, color:"#dbdb00", tree: false}];
 multishotTowerTree = [{price:500, name:"3 Shot Tower", numberOfShots: 3, color:"#ffff0d", tree: MTL2a}];
 
 //BUILDING TREES
@@ -45,7 +43,7 @@ basicBuildingTree = [{price:150, name:"Battery", energyMax: 300, color:"yellow",
 SPL2a = [{price:600, name:"Super Efficent Solar Panel", energyMax: 600, energyRate: 5, color:"orange", tree: false}];
 solarPanelTree = [{price:300, name:"Efficent Solar Panel", energyMax: 300, energyRate: 2, color:"yellow", tree: SPL2a}];
 
-SFL2a = [{price:1500, name:"Solar for a Country", energyMax: 1500, energyRate: 20, color:"orange", tree: false}];
+SFL2a = [{price:1500, name:"Solar for a Country", energyMax: 3000, energyRate: 25, color:"orange", tree: false}];
 solarFarmTree = [{price:900, name:"Solar for a City", energyMax: 900, energyRate: 15, color:"yellow", tree: SFL2a}];
 
 RBL3a = [{price:500, name:"Hospital", energyMax: 500, healEnergy: 10, bufferTime: 20, healEnergy: 10, energyRate: 1, color:"orange", tree: false}];

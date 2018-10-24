@@ -18,20 +18,20 @@ function makeShips(point, r1, r2, level, state){
     for(i = 0; i < n; i++){
       state.world.push(new Ship(makePointIn(point,r1,r2,state)));
     }
-  }
-
-  for(i = 0; i < n; i++){
-    var type = getRandomInt(0,level);
-    if(type <= 4){
-      state.world.push(new Ship(makePointIn(point,r1,r2,state)));
-    }else if(type <= 5){
-      state.world.push(new BigShip(makePointIn(point,r1,r2),state));
-    }else if(type <= 10){
-      state.world.push(new SpeedyShip(makePointIn(point,r1,r2),state));
-    }else if(type <= 15){
-      state.world.push(new MotherShip(makePointIn(point,r1,r2),state));
-    }else if(type <= 20){
-      state.world.push(new GrandmotherShip(makePointIn(point,r1,r2),state));
+  }else{
+    for(i = 0; i < n; i++){
+      var type = getRandomInt(0,level);
+      if(type <= 4){
+        state.world.push(new Ship(makePointIn(point,r1,r2,state)));
+      }else if(type <= 5){
+        state.world.push(new BigShip(makePointIn(point,r1,r2),state));
+      }else if(type <= 10){
+        state.world.push(new SpeedyShip(makePointIn(point,r1,r2),state));
+      }else if(type <= 15){
+        state.world.push(new MotherShip(makePointIn(point,r1,r2),state));
+      }else if(type <= 20){
+        state.world.push(new GrandmotherShip(makePointIn(point,r1,r2),state));
+      }
     }
   }
   return state;
