@@ -1,24 +1,24 @@
 
 //TOWER TREES
 BTL2a = [
-	{price:300, name:"Extremely Long Range Tower", range: 800, color:"#0000c3", tree: false}, 
+	{price:300, name:"Extremely Long Range Tower", range: 900, color:"#0000c3", tree: false}, 
 	{price:300, name:"High Efficency Long Range Tower", projectileEnergy: 25, color:"#0000c3", tree: false}];
 BTL2b = [
-	{price:300, name:"High Frequency Healthy Tower", maxHealth: 300, health:300, color:"#0000c3", tree: false}, 
-	{price:300, name:"High Frequency and Damage Tower", projectileDamage: 60, color:"#0000c3", tree: false}];
+	{price:300, name:"High Health and Damage Heavy Tower", maxHealth: 300, health:300, color:"#874400", tree: false}, 
+	{price:300, name:"HUGE Bullet and High Damage Heavy Tower", projectileSize: 20, color:"#874400", tree: false}];
 basicTowerTree = [
 	{price:150, name:"Long Range Tower", range: 350, color:"#4e4eff", tree: BTL2a}, 
-	{price:150, name:"High Frequency Tower", bufferTime: 15, color:"#4e4eff", tree: BTL2b}];
+	{price:150, name:"Heavy Tower", maxHealth: 260, health: 260, bufferTime: 35, projectileDamage: 110, projectileSpeed:5, bufferTime: 15, color:"#4e4eff", tree: BTL2b}];
 
-HTL2a = [
-	{price:600, name:"High Health and Damage Heavy Tower", maxHealth: 300, health:300, color:"#874400", tree: false}, 
-	{price:600, name:"HUGE Bullet and High Damage Heavy Tower", projectileSize: 20, color:"#874400", tree: false}];
-HTL2b = [
-	{price:600, name:"High Frequency Efficent Heavy Tower", bufferTime: 20, color:"#874400", tree: false}, 
-	{price:600, name:"Long Range Efficent Heavy Tower", range: 400, color:"#874400", tree: false}];
-heavyTowerTree = [
-	{price:400, name:"High Damage Heavy Tower", projectileDamage: 200, color:"#f37a00", tree: HTL2a}, 
-	{price:400, name:"High Efficency Heavy Tower", projectileEnergy: 20, color:"#f37a00", tree: HTL2b}];
+// HTL2a = [
+// 	{price:600, name:"High Health and Damage Heavy Tower", maxHealth: 300, health:300, color:"#874400", tree: false}, 
+// 	{price:600, name:"HUGE Bullet and High Damage Heavy Tower", projectileSize: 20, color:"#874400", tree: false}];
+// HTL2b = [
+// 	{price:600, name:"High Frequency Efficent Heavy Tower", bufferTime: 20, color:"#874400", tree: false}, 
+// 	{price:600, name:"Long Range Efficent Heavy Tower", range: 400, color:"#874400", tree: false}];
+// heavyTowerTree = [
+// 	{price:400, name:"High Damage Heavy Tower", projectileDamage: 200, color:"#f37a00", tree: HTL2a}, 
+// 	{price:400, name:"High Efficency Heavy Tower", projectileEnergy: 20, color:"#f37a00", tree: HTL2b}];
 
 STL2a = [
 	{price:700, name:"Bigger Range ", range: 500, color:"#565656", tree: false},

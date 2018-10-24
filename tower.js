@@ -114,7 +114,7 @@ function HeavyTower(pos, state){
   this.projectileSize = 5;
   this.destroyed = false;
   this.enemy = false;
-  this.tree = heavyTowerTree;
+  //this.tree = heavyTowerTree;
   this.kills = 0;
   this.targetType = "closest";
   this.name = "Heavy Tower";
