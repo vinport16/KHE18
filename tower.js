@@ -221,7 +221,7 @@ function LaserTower(pos, state){
   this.projectileSize = 3;
   this.destroyed = false;
   this.enemy = false;
-  this.tree = null;
+  this.tree = [];
   this.kills = 0;
   this.targetType = "closest";
   this.price = 150;
