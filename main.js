@@ -69,6 +69,7 @@ async function main(state){
     while(!paused){
       step(state);
       await sleep(25);
+      scaleCanvasses();
 
       state = allKilled(state);
     }

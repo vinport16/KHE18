@@ -59,12 +59,13 @@ var maptx = map.getContext("2d");
 var mapscale = 10;
 
 function scaleCanvasses(){
-  if(canvas.width != (document.body.clientWidth-10) * 0.70 || canvas.height != document.body.clientHeight - 10){
+  if(canvas.width < ((document.body.clientWidth-10) * 0.70) - 2 || canvas.width > ((document.body.clientWidth-10) * 0.70) + 2 || canvas.height < document.body.clientHeight - 12 || canvas.height > document.body.clientHeight - 8){
     canvas.width = (document.body.clientWidth-10) * 0.70 ;
     canvas.height = document.body.clientHeight - 10 ;
     map.width = (document.body.clientWidth-10) * 0.28 ;
     map.height = map.width/1.3 ;
     drawEverything(state);
+    console.log("hi");
   }
 }
 
