@@ -306,7 +306,12 @@ function drawLaser(laser, state){
 
 function drawExplosion(exp, state){
   rp = relative(exp.position, state);
-  drawCircle(rp,exp.radius,exp.color,"rgba(0,0,0,0)");
+  if(exp.radius < 5){
+    drawCircle(rp,50,exp.color,"rgba(255,255,255,0)");
+  }else{
+    drawCircle(rp,exp.radius,exp.color,"rgba(255,255,255,0)");
+  }
+  
 }
 
 

@@ -153,18 +153,16 @@ Laser.prototype.step = function(state){
 }
 
 var pColor = function(radius, maxRadius){
-	var redvalue = Math.floor(255-(radius*(255/maxRadius)));
-	var redStr = "rgba(" + redvalue + ",50,50,0.3)";
-	return redStr;
-	// if(radius < 5){
-	// 	return "red";
-	// }else if(radius < 15){
-	// 	return "yellow";
-	// }else if(radius < 25){
-	// 	return "green";
-	// }else{
-	// 	return "white";
-	// }
+	var colorStr = "";
+	if(radius < 5){
+		colorStr = "rgba(255,255,255,0.3)";
+	}else{
+		var redValue = Math.floor(255-(radius*(255/maxRadius)));
+		var greenValue = Math.floor(255-(radius*255/maxRadius));
+		var blueValue = Math.floor(255-(radius*255/maxRadius));
+		colorStr = "rgba(" + redValue + ","+greenValue+"," + blueValue+",0.3)";
+	}
+	return colorStr;
 }
 
 var Explosion = function(pos, maxRadius){
