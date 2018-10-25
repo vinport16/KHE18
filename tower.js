@@ -237,3 +237,32 @@ LaserTower.prototype.shoot = function(state){
   laser = new Laser(this, target, this.projectileDamage, this.bufferTime/2, /*healRate,*/ this.projectileSize, "rgba(150,215,200,0.8)", state);
   state.world.push(laser);
 }
+
+function ShipTower(pos, state){
+  this.radius = 15;
+  this.maxHealth = 110;
+  this.health = this.maxHealth;
+  this.color = "white";
+  this.range = 400;
+  this.bufferTime = 100; //frames
+  this.currentBuffer = this.bufferTime;
+  this.destroyed = false;
+  this.enemy = false;
+  this.tree = basicTowerTree;
+  this.kills = 0;
+  this.targetType = "closest";
+  this.price = 100;
+  this.name = "Ship Tower";
+
+  Structure.call(this, pos, this.price, this.health, 20, state);
+}
+
+ShipTower.prototype = Object.create(Tower.prototype);
+ShipTower.prototype.constructor = ShipTower;
+
+
+ShipTower.prototype.shoot = function(state){
+  var target = this.selectTarget(state);
+  var FShip = new FriendlyShip(duplicate(this.position), this, state);
+  state.world.push(FShip);
+}

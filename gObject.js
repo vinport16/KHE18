@@ -17,7 +17,6 @@ var Projectile = function(tar, radius, pos, speed, damage, enemy, parent, state)
 	this.position = pos;
 	GameObject.call(this, pos);
 	this.radius = radius;
-	//this.velocity = multiply(unitVector(subtract(getClosestPoints(this.target,this)[0], this.position)), speed);
 	this.velocity = multiply(unitVector(subtract(getClosestPoints(this.target,this)[0],this.position)), this.speed);
 	this.acceleration = 0.1;
 	this.speed = speed;
@@ -99,7 +98,11 @@ Projectile.prototype.collisionCheck = function(state){
 			if(checkOverlap(this,gobj) && !(sameTeam(this, gobj))){
 				if(this.damage > gobj.health){
 					this.damage -= gobj.health;
-					this.parent.kills++;
+					if(this.parent instanceof FriendlyShip){
+						this.parent.parent.kills++;
+					}else{
+						this.parent.kills++;
+					}
 					gobj.delete(state);
 				}else{
 					gobj.health -= this.damage;

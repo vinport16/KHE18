@@ -5,21 +5,22 @@ function Ship(pos, state) {
 	this.maxHealth = 130;
 	this.health = this.maxHealth;
 	this.color = "red";
-  	this.speed = 2;
-  	this.stopDistance = 20;
+  this.speed = 2;
+  this.stopDistance = 20;
 	this.target = null;
 	this.bufferTime = 25;
 	this.currentBuffer = this.bufferTime;
-  	this.range = 60;
+  this.range = 60;
 	this.projectileSpeed = 10; 
 	this.projectileDamage = 20;
-  	this.enemy = true;
-  	this.destroyed = false;
-  	GameObject.call(this, pos);
-  	this.bounty = 50;
+  this.enemy = true;
+  this.destroyed = false;
+  GameObject.call(this, pos);
+  this.bounty = 50;
 }
 Ship.prototype = Object.create(GameObject.prototype);
 Ship.prototype.constructor = Ship;
+
 
 Ship.prototype.delete = function(state){
 	state.money += this.bounty;
@@ -59,7 +60,7 @@ Ship.prototype.selectTarget = function(state){
   closest = [false, this.range];
   for(i in state.world){
     gobj = state.world[i];
-    if(!gobj.enemy && gobj.maxHealth && distanceBetween(gobj,this) <= closest[1]){
+    if(gobj.enemy != this.enemy && gobj.maxHealth && distanceBetween(gobj,this) <= closest[1]){
       closest = [gobj, distanceBetween(gobj,this)];
     }
   }
@@ -70,8 +71,13 @@ Ship.prototype.selectMoveTarget = function(state){
   closest = [false, Number.MAX_VALUE];
   for(i in state.world){
     gobj = state.world[i];
-    if(!gobj.enemy && gobj.maxHealth && distanceBetween(gobj,this) <= closest[1]){
+    if(gobj.enemy != this.enemy && gobj.maxHealth && distanceBetween(gobj,this) <= closest[1]){
       closest = [gobj, distanceBetween(gobj,this)];
+    }
+  }
+  if(this instanceof FriendlyShip){
+    if(closest[0] == false){
+      return this.parent;
     }
   }
   return closest[0];
@@ -201,8 +207,36 @@ SpeedyShip.prototype = Object.create(Ship.prototype);
 SpeedyShip.prototype.constructor = SpeedyShip;
 
 
+function FriendlyShip(pos, parent, state) {
+  this.radius = 10;
+  this.maxHealth = 150;
+  this.health = this.maxHealth;
+  this.color = "yellow";
+  this.speed = 1.5;
+  this.stopDistance = 10;
+  this.target;
+  this.bufferTime = 25;
+  this.currentBuffer = this.bufferTime;
+  this.range = 150;
+  this.projectileSpeed = 10; 
+  this.projectileDamage = 30;
+  this.enemy = false;
+  this.destroyed = false;
+  this.targetType = "closest";
+  GameObject.call(this, pos);
+  this.bounty = 0;
+  this.parent = parent;
+}
+FriendlyShip.prototype = Object.create(Ship.prototype);
+FriendlyShip.prototype.constructor = FriendlyShip;
 
 
+
+FriendlyShip.prototype.shoot = function(state){
+  var target = this.selectTarget(state);
+  var bullet = new Projectile(target, 3, this.position, this.projectileSpeed, this.projectileDamage, false, this, state);
+  state.world.push(bullet);
+}
 
 
 
