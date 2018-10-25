@@ -54,7 +54,9 @@ function drawWorld(state){
   // draw gobjects
 	for(var i in state.world){
     gobj = state.world[i];
-		if(gobj instanceof Building){
+    if(gobj instanceof Explosion){
+      drawExplosion(gobj, state);
+		}else if(gobj instanceof Building){
 			drawBuilding(gobj, state);
       mapDrawBuilding(gobj, state);
 		}else if(gobj instanceof Ship){
@@ -302,6 +304,10 @@ function drawLaser(laser, state){
   drawLineWidth(rp1, rp2, laser.color, laser.width);
 }
 
+function drawExplosion(exp, state){
+  rp = relative(exp.position, state);
+  drawCircle(rp,exp.radius,exp.color,"rgba(0,0,0,0)");
+}
 
 
 

@@ -19,6 +19,8 @@ Structure.prototype = Object.create(GameObject.prototype);
 Structure.prototype.constructor = Structure;
 
 Structure.prototype.delete = function(state){
+  var E1 = new Explosion(duplicate(this.position), 60);
+  state.world.push(E1);
   GameObject.prototype.delete.call(this, state);
   for( i in this.connected){
     index = this.connected[i].connected.indexOf(this);

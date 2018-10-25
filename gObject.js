@@ -93,7 +93,7 @@ Projectile.prototype.move = function(state){
 Projectile.prototype.collisionCheck = function(state){
 	for(var i in state.world){
 		gobj = state.world[i];
-		if(gobj instanceof Projectile || gobj instanceof Laser){
+		if(gobj instanceof Projectile || gobj instanceof Laser || gobj instanceof Explosion){
 		}else{
 			if(checkOverlap(this,gobj) && !(sameTeam(this, gobj))){
 				if(this.damage > gobj.health){
@@ -152,15 +152,59 @@ Laser.prototype.step = function(state){
   }
 }
 
-var Explosion = function(pos, size){
-
-	// for (var i = 5; i < size; i++) {
-	// 	drawCircle(pos, i, "rgba(255,0,0,1", "rgba(255,255,100,1)");
-	// }
-	// for(var i = size; i > size/2; i--){
-	// 	drawCircle(pos, i, "rgba(255,255,255,1", "rgba(255,255,100,1)");
-	// }
-	// for(var i = size/2; i > 0; i--){
-	// 	drawCircle(pos, i, "rgba(0,0,0,1", "rgba(255,255,100,1)");
+var pColor = function(radius, maxRadius){
+	var redvalue = Math.floor(255-(radius*(255/maxRadius)));
+	var redStr = "rgba(" + redvalue + ",50,50,0.3)";
+	return redStr;
+	// if(radius < 5){
+	// 	return "red";
+	// }else if(radius < 15){
+	// 	return "yellow";
+	// }else if(radius < 25){
+	// 	return "green";
+	// }else{
+	// 	return "white";
 	// }
 }
+
+var Explosion = function(pos, maxRadius){
+	this.maxRadius = maxRadius;
+	this.position = pos;
+	GameObject.call(this, pos);
+	this.radius = 1;
+	this.inProgress = true;
+  	this.color = "red";
+  	this.damage = 1;
+}
+Explosion.prototype = Object.create(GameObject.prototype);
+Explosion.prototype.constructor = Explosion;
+
+Explosion.prototype.step = function(state){
+	this.collisionCheck(state);
+	if(this.inProgress){
+		if(this.radius < this.maxRadius){
+			this.color = pColor(this.radius, this.maxRadius);
+			this.radius++;
+		}else{
+			this.radius = 0;
+			this.inProgress = false;
+			this.delete(state);
+		}
+	}
+}
+
+Explosion.prototype.collisionCheck = function(state){
+	for(var i in state.world){
+		gobj = state.world[i];
+		if(gobj instanceof Projectile || gobj instanceof Laser || gobj instanceof Explosion){
+		}else{
+			if(checkOverlap(this,gobj)){
+				gobj.health -= this.damage;
+				if(gobj.health < 0){
+					gobj.delete(state);
+				}
+			}
+		}
+	}
+}
+
