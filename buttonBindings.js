@@ -50,6 +50,10 @@ document.getElementById("multiShotTower").onclick = function(){
 }
 describeObject(document.getElementById("multiShotTower"),new MultiShotTower({x:0,y:0},fakestate));
 
+document.getElementById("ShipTower").onclick = function(){
+  placeStructure(new ShipTower({x:0, y:0}, state), state);
+}
+describeObject(document.getElementById("ShipTower"),new ShipTower({x:0,y:0},fakestate));
 
 // SHIPS
 

@@ -244,14 +244,14 @@ function ShipTower(pos, state){
   this.health = this.maxHealth;
   this.color = "white";
   this.range = 400;
-  this.bufferTime = 100; //frames
+  this.bufferTime = 150; //frames
   this.currentBuffer = this.bufferTime;
   this.destroyed = false;
   this.enemy = false;
   this.tree = basicTowerTree;
   this.kills = 0;
   this.targetType = "closest";
-  this.price = 100;
+  this.price = 400;
   this.name = "Ship Tower";
 
   Structure.call(this, pos, this.price, this.health, 20, state);

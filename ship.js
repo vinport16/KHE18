@@ -226,6 +226,8 @@ function FriendlyShip(pos, parent, state) {
   GameObject.call(this, pos);
   this.bounty = 0;
   this.parent = parent;
+  this.shotsLimit = 10;
+  this.shots = 0;
 }
 FriendlyShip.prototype = Object.create(Ship.prototype);
 FriendlyShip.prototype.constructor = FriendlyShip;
@@ -236,6 +238,10 @@ FriendlyShip.prototype.shoot = function(state){
   var target = this.selectTarget(state);
   var bullet = new Projectile(target, 3, this.position, this.projectileSpeed, this.projectileDamage, false, this, state);
   state.world.push(bullet);
+  this.shots++;
+  if(this.shots >= this.shotsLimit){
+    this.delete(state);
+  }
 }
 
 
