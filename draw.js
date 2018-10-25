@@ -187,7 +187,7 @@ function mapDrawShip(ship, state){
 
   maptx.beginPath();
   maptx.arc(rp.x, rp.y, radius, 0, 2 * Math.PI, false);
-  maptx.fillStyle = "rgba(255,0,0,1)";
+  maptx.fillStyle = ship.color;
   maptx.strokeStyle = "rgba(255,255,255,0)";
   maptx.lineWidth = 1;
   maptx.fill();
@@ -282,7 +282,7 @@ function drawProtoBuilding(proto, state){
 
 function drawShip(o, state){
   rp = relative(o.position, state);
-  drawCircle(rp,o.radius,"rgba(255,0,0,0.6)","rgba(255,255,255,0.3)");
+  drawCircle(rp,o.radius,o.color,"rgba(255,255,255,0.3)");
   //draw health level
   var p1 = subtract(rp,{x:10,y:(4+o.radius)});
   var p2 = {x:(p1.x+20),y:(p1.y)};

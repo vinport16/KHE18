@@ -37,14 +37,11 @@ function makeShips(point, r1, r2, level, state){
   return state;
 }
 
-
-
-
 makeShips(zeroVector,1000,2000,state.level,state);
 var delay = 0;
 function allKilled(state){
   for(i in state.world){
-    if(state.world[i] instanceof Ship){
+    if(state.world[i] instanceof Ship && !(state.world[i] instanceof FriendlyShip)){
       return state;
     }
   }
@@ -61,6 +58,9 @@ function allKilled(state){
     return state;
   }
 }
+
+//var NT = new ShipTower({x:0,y:0}, state);
+//state.world.push(NT);
 
 
 
