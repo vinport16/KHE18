@@ -80,11 +80,20 @@ Tower.prototype.selectTarget = function(state){
     strongest = [false, 0];
     for(i in state.world){
       gobj = state.world[i];
-      if(gobj.enemy && gobj.maxHealth && (gobj.maxHealth > strongest[1]) && distanceBetween(gobj,this) <= this.range){
-        strongest = [gobj, gobj.maxHealth];
+      if(gobj.enemy && gobj.maxHealth && (gobj.health > strongest[1]) && distanceBetween(gobj,this) <= this.range){
+        strongest = [gobj, gobj.health];
       }
     }
     target = strongest;
+  }else if(this.targetType == "weakest"){
+    weakest = [false, 0];
+    for(i in state.world){
+      gobj = state.world[i];
+      if(gobj.enemy && gobj.maxHealth && (gobj.health < weakest[1]) && distanceBetween(gobj,this) <= this.range){
+        weakest = [gobj, gobj.health];
+      }
+    }
+    target = weakest;
   }else if(this.targetType == "farthest"){
     farthest = [false, 0];
     for(i in state.world){
