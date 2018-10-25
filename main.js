@@ -23,11 +23,11 @@ function makeShips(point, r1, r2, level, state){
       var type = getRandomInt(0,level);
       if(type <= 4){
         state.world.push(new Ship(makePointIn(point,r1,r2,state)));
-      }else if(type <= 5){
+      }else if(type <= 8){
         state.world.push(new BigShip(makePointIn(point,r1,r2),state));
-      }else if(type <= 10){
+      }else if(type <= 12){
         state.world.push(new SpeedyShip(makePointIn(point,r1,r2),state));
-      }else if(type <= 15){
+      }else if(type <= 16){
         state.world.push(new MotherShip(makePointIn(point,r1,r2),state));
       }else if(type <= 20){
         state.world.push(new GrandmotherShip(makePointIn(point,r1,r2),state));
