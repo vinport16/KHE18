@@ -65,7 +65,6 @@ function scaleCanvasses(){
     map.width = (document.body.clientWidth-10) * 0.28 ;
     map.height = map.width/1.3 ;
     drawEverything(state);
-    console.log("hi");
   }
 }
 
