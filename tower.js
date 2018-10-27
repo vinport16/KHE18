@@ -42,17 +42,7 @@ Tower.prototype.waitToShoot = function(state){
 }
 
 Tower.prototype.step = function(state) {
-  if(this instanceof MultiShotTower && this.inProgress == true){
-    if(this.currentShotDelay < this.eachShotDelay){
-      this.currentShotDelay++;
-    }else{
-      this.currentShotDelay = 0;
-      this.shoot(state);
-    }
-    
-  }
 	this.waitToShoot(state);
-
 }
 
 Tower.prototype.shipInRange = function(state){
@@ -201,12 +191,9 @@ function MultiShotTower(pos, state){
 MultiShotTower.prototype = Object.create(Tower.prototype);
 MultiShotTower.prototype.constructor = MultiShotTower;
 
-Tower.prototype.shoot = function(state){
+MultiShotTower.prototype.shoot = function(state){
   this.inProgress = true;
   var target = this.selectTarget(state);
-  if(target == false){
-    this.shotsShot = this.numberOfShots;
-  }
   var bullet = new Projectile(target, this.projectileSize, this.position, this.projectileSpeed, this.projectileDamage, false, this, state);
   state.world.push(bullet);
   this.shotsShot++;
@@ -214,6 +201,18 @@ Tower.prototype.shoot = function(state){
     this.shotsShot = 0;
     this.inProgress = false;
   }
+}
+
+Tower.prototype.step = function(state) {
+  if(this.inProgress == true){
+    if(this.currentShotDelay < this.eachShotDelay){
+      this.currentShotDelay++;
+    }else if(this.shipInRange(state)){
+      this.currentShotDelay = 0;
+      this.shoot(state);
+    }
+  }
+  this.waitToShoot(state);
 }
 
 function LaserTower(pos, state){

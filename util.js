@@ -80,11 +80,11 @@ function getClosestPoints(go1, go2){
   }
 
 
-  if(go1.radius && go2.radius){
+  if(!(go1 instanceof Building) && !(go2 instanceof Building)){
     return getPointsCircles(go1, go2);
-  }else if(go1.radius && go2.width){
+  }else if(!(go1 instanceof Building) && go2 instanceof Building){
     return getPointsCircRec(go1, go2);
-  }else if(go1.width && go2.radius){
+  }else if(go1 instanceof Building && !(go2 instanceof Building)){
     return getPointsCircRec(go2, go1).reverse();
   }else{
     p1s = getPointsRecs(go1, go2);
