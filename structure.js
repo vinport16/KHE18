@@ -150,12 +150,17 @@ function placeStructure(s, state){
     if(s.price <= state.money && !checkStructureOverlap(s, state)){
       state.world.push(s);
       state.money -= s.price;
+      state.selectedStructure = s;
+      updateSelectedDetails(state.selectedStructure);
+      drawEverything(state);
     }else{
       s.disconnectAll(state);
     }
+
     clearListeners(state);
     resetCancel();
     enableAllButtons();
+
   });
 
   document.getElementById("cancel").addEventListener("mousedown",function(event){
