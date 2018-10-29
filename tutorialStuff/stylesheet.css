@@ -1,0 +1,27 @@
+img{
+	height: 100px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+td{
+	border: 1px solid black;
+	width: 200px;
+}
+
+body{
+  padding: 0px;
+  margin: 5px;
+  background: linear-gradient(-10deg,rgb(0,150,255),rgb(250,250,255));
+  font-family: sans-serif;
+}
+
+button{
+  width: 20%;
+  height: 30px;
+  font-size: 12px;
+  border-radius: 7px;
+  background: linear-gradient(160deg,rgba(210,180,220,0.5),rgba(200,150,250,0.5));
+}
+
