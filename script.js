@@ -242,15 +242,4 @@ function resetSelect(){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 // ok

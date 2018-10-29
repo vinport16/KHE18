@@ -50,10 +50,15 @@ document.getElementById("multiShotTower").onclick = function(){
 }
 describeObject(document.getElementById("multiShotTower"),new MultiShotTower({x:0,y:0},fakestate));
 
-document.getElementById("ShipTower").onclick = function(){
+document.getElementById("shipTower").onclick = function(){
   placeStructure(new ShipTower({x:0, y:0}, state), state);
 }
-describeObject(document.getElementById("ShipTower"),new ShipTower({x:0,y:0},fakestate));
+describeObject(document.getElementById("shipTower"),new ShipTower({x:0,y:0},fakestate));
+
+document.getElementById("bombTower").onclick = function(){
+  placeStructure(new BombTower({x:0, y:0}, state), state);
+}
+describeObject(document.getElementById("bombTower"),new BombTower({x:0,y:0},fakestate));
 
 // SHIPS
 

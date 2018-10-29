@@ -275,7 +275,33 @@ ShipTower.prototype.shoot = function(state){
   state.world.push(FShip);
 }
 
+function BombTower(pos, state){
+  this.radius = 10;
+  this.maxHealth = 1;
+  this.health = this.maxHealth;
+  this.color = "#AABB99";
+  this.range = 2;
+  this.destroyed = false;
+  this.enemy = false;
+  this.tree = [];
+  this.kills = 0;
+  this.targetType = "closest";
+  this.price = 200;
+  this.name = "Bomb Tower";
 
+
+  Structure.call(this, pos, this.price, this.health, 20, state);
+}
+
+BombTower.prototype = Object.create(Tower.prototype);
+BombTower.prototype.constructor = BombTower;
+
+BombTower.prototype.step = function(state){
+  //The bomb tower doesn't shoot, it just dies on the first step. 
+  var E1 = new Explosion(duplicate(this.position), 300);
+  state.world.push(E1);
+  this.delete(state);
+}
 
 
 
