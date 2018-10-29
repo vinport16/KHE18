@@ -159,7 +159,7 @@ RepairBuilding.prototype.findConnectedHealPath = function(){
   var visited = [this];
   while(q.length != 0){
     var b = q[0][q[0].length-1];
-    if(b.energyMax && b.health < b.maxHealth){
+    if(b.health < b.maxHealth){
       return(q[0]);
     }else{
       for(var i = 0; i < b.connected.length; i++){
