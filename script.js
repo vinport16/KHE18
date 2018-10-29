@@ -176,7 +176,6 @@ var paused = false;
 function pause(){
   paused = !paused;
   if(!paused){
-    disableAllButtons();
     for(var i = 0; i < controlButtons.length; i++){
       controlButtons[i].disabled = false;
     } 
