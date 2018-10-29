@@ -55,10 +55,10 @@ document.getElementById("shipTower").onclick = function(){
 }
 describeObject(document.getElementById("shipTower"),new ShipTower({x:0,y:0},fakestate));
 
-document.getElementById("bombTower").onclick = function(){
+document.getElementById("bomb").onclick = function(){
   placeStructure(new BombTower({x:0, y:0}, state), state);
 }
-describeObject(document.getElementById("bombTower"),new BombTower({x:0,y:0},fakestate));
+describeObject(document.getElementById("bomb"),new BombTower({x:0,y:0},fakestate));
 
 // SHIPS
 
