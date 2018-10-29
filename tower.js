@@ -275,3 +275,8 @@ ShipTower.prototype.shoot = function(state){
   var FShip = new FriendlyShip(duplicate(this.position), this, state);
   state.world.push(FShip);
 }
+
+
+
+
+

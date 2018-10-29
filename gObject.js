@@ -67,7 +67,6 @@ SeekingProjectile.prototype.getNewTarget = function(state){
 	return closest[0];
 }
 
-
 Projectile.prototype.move = function(state){
 	if(this instanceof SeekingProjectile){
 		if(this.target.destroyed || this.target == false){
