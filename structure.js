@@ -19,13 +19,6 @@ Structure.prototype = Object.create(GameObject.prototype);
 Structure.prototype.constructor = Structure;
 
 Structure.prototype.delete = function(state){
-  if(this instanceof Building){
-    var E1 = new Explosion(duplicate(this.position), (this.energyMax/10));
-    state.world.push(E1);
-  }else if(this instanceof Tower){
-    var E1 = new Explosion(duplicate(this.position), (this.projectileDamage/this.bufferTime * (this.range/10)));
-    state.world.push(E1);
-  }
   GameObject.prototype.delete.call(this, state);
   for( i in this.connected){
     index = this.connected[i].connected.indexOf(this);

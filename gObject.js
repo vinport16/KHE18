@@ -102,6 +102,13 @@ Projectile.prototype.collisionCheck = function(state){
 					}else{
 						this.parent.kills++;
 					}
+					if(gobj instanceof Building){
+					  var E1 = new Explosion(duplicate(gobj.position), (gobj.energyMax/10));
+					  state.world.push(E1);
+					}else if(gobj instanceof Tower){
+					  var E1 = new Explosion(duplicate(gobj.position), (gobj.projectileDamage/gobj.bufferTime * (gobj.range/10)));
+					  state.world.push(E1);
+					}
 					gobj.delete(state);
 				}else{
 					gobj.health -= this.damage;
