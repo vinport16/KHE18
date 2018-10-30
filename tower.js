@@ -231,9 +231,11 @@ function ShipTower(pos, state){
   this.enemy = false;
   this.tree = basicTowerTree;
   this.kills = 0;
-  this.targetType = "closest";
+  this.targetType = "farthest";
   this.price = 1000;
   this.name = "Ship Tower";
+  this.shipShoots = false;
+  this.tree = shipTowerTree;
 
   Structure.call(this, pos, this.price, this.health, 20, state);
 }
@@ -244,7 +246,7 @@ ShipTower.prototype.constructor = ShipTower;
 
 ShipTower.prototype.shoot = function(state){
   var target = this.selectTarget(state);
-  var FShip = new FriendlyShip(duplicate(this.position), this, state);
+  var FShip = new FriendlyShip(duplicate(this.position), this, this.shipShoots, state);
   state.world.push(FShip);
 }
 

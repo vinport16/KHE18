@@ -52,4 +52,7 @@ seekingTowerTree = [
 
 
 
+shipTowerTree = [
+	{price:1000, name:"Ships can Shoot", shipShoots: true, color:"#929292", tree: false}];
+
 

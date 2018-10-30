@@ -207,12 +207,11 @@ SpeedyShip.prototype = Object.create(Ship.prototype);
 SpeedyShip.prototype.constructor = SpeedyShip;
 
 
-function FriendlyShip(pos, parent, state) {
+function FriendlyShip(pos, parent, shoots, state) {
   this.radius = 10;
-  this.maxHealth = 150;
-  this.health = this.maxHealth;
+  
   this.color = "yellow";
-  this.speed = 1.5;
+  
   this.stopDistance = 10;
   this.target;
   this.bufferTime = 25;
@@ -228,6 +227,37 @@ function FriendlyShip(pos, parent, state) {
   this.parent = parent;
   this.shotsLimit = 10;
   this.shots = 0;
+  this.shoots = shoots;
+
+  var eSize = function(shoots){
+    if(shoots){
+      return 20;
+    }else{
+      return 100;
+    }
+  }
+  this.explosionSize = eSize(this.shoots);
+
+  var sSpeed = function(shoots){
+    if(shoots){
+      return 1.5;
+    }else{
+      return 6;
+    }
+  }
+  this.speed = sSpeed(this.shoots);
+
+  var sMaxHealth = function(shoots){
+    if(shoots){
+      return 150;
+    }else{
+      return 1;
+    }
+  }
+
+  this.maxHealth = sMaxHealth(this.shoots);
+  this.health = this.maxHealth;
+
 }
 FriendlyShip.prototype = Object.create(Ship.prototype);
 FriendlyShip.prototype.constructor = FriendlyShip;
@@ -235,17 +265,19 @@ FriendlyShip.prototype.constructor = FriendlyShip;
 
 
 FriendlyShip.prototype.shoot = function(state){
-  var target = this.selectTarget(state);
-  var bullet = new Projectile(target, 3, this.position, this.projectileSpeed, this.projectileDamage, false, this, state);
-  state.world.push(bullet);
-  this.shots++;
-  if(this.shots >= this.shotsLimit){
-    this.delete(state);
+  if(this.shoots){
+    var target = this.selectTarget(state);
+    var bullet = new Projectile(target, 3, this.position, this.projectileSpeed, this.projectileDamage, false, this, state);
+    state.world.push(bullet);
+    this.shots++;
+    if(this.shots >= this.shotsLimit){
+      this.delete(state);
+    }
   }
 }
 
 FriendlyShip.prototype.delete = function(state){
-  var E1 = new Explosion(duplicate(this.position), 30);
+  var E1 = new Explosion(duplicate(this.position), this.explosionSize);
   state.world.push(E1);
   GameObject.prototype.delete.call(this, state);
 }
