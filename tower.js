@@ -97,33 +97,6 @@ Tower.prototype.selectTarget = function(state){
   return target[0];
 }
 
-
-//OTHER TOWER TYPES BELOW
-function HeavyTower(pos, state){
-  this.radius = 20;
-  this.maxHealth = 260;
-  this.health = 260; 
-  this.color = "#ffcf9c";
-  this.range = 150;
-  this.bufferTime = 37; //frames
-  this.currentBuffer = this.bufferTime;
-  this.projectileSpeed = 5;
-  this.projectileDamage = 150;
-  this.projectileEnergy = 110;
-  this.projectileSize = 5;
-  this.destroyed = false;
-  this.enemy = false;
-  //this.tree = heavyTowerTree;
-  this.kills = 0;
-  this.targetType = "closest";
-  this.name = "Heavy Tower";
-  this.price = 200;
-
-  Structure.call(this, pos, this.price, this.health, 40, state);
-} 
-HeavyTower.prototype = Object.create(Tower.prototype);
-HeavyTower.prototype.constructor = HeavyTower;
-
 function SeekingTower(pos, state){
   this.radius = 14;
   this.maxHealth = 150;
@@ -142,7 +115,7 @@ function SeekingTower(pos, state){
   this.kills = 0;
   this.targetType = "closest";
   this.name = "Simple Seeking Tower";
-  this.price = 300; 
+  this.price = 500; 
 
   Structure.call(this, pos, this.price, this.health, 30, state);
 } 
@@ -229,11 +202,11 @@ function LaserTower(pos, state){
   this.projectileSize = 3;
   this.destroyed = false;
   this.enemy = false;
-  this.tree = [];
+  this.tree = laserTowerTree;
   this.kills = 0;
   this.targetType = "closest";
-  this.price = 150;
-  this.name = "Basic Tower";
+  this.price = 300;
+  this.name = "Laser Tower";
 
   Structure.call(this, pos, this.price, this.health, 20, state);
 } 
@@ -259,7 +232,7 @@ function ShipTower(pos, state){
   this.tree = basicTowerTree;
   this.kills = 0;
   this.targetType = "closest";
-  this.price = 400;
+  this.price = 1000;
   this.name = "Ship Tower";
 
   Structure.call(this, pos, this.price, this.health, 20, state);
@@ -286,7 +259,7 @@ function BombTower(pos, state){
   this.tree = [];
   this.kills = 0;
   this.targetType = "closest";
-  this.price = 200;
+  this.price = 800;
   this.name = "Bomb Tower";
 
 

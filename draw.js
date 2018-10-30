@@ -148,7 +148,7 @@ function highlight(struct, state){
   }
 }
 
-function mapDrawTower(tower,state){
+function mapDrawTower(tower, state){
   rp = multiply({x:map.width/2, y:map.height/2}, mapscale);
   rp = add(tower.position, subtract(rp, add(state.position, {x:canvas.width/2, y:canvas.height/2})));
   rp = divide(rp,mapscale);

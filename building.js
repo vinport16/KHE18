@@ -91,7 +91,7 @@ function SolarPanel(pos, state){
   this.enemy = false;
   this.name = "Solar Panel";
   this.tree = solarPanelTree;
-  this.price = 200;
+  this.price = 500;
   Structure.call(this, pos, this.price, this.maxHealth, 200, state);
 
 }
@@ -109,29 +109,12 @@ function SolarFarm(pos, state){
   this.enemy = false;
   this.name = "Solar Farm";
   this.tree = solarFarmTree;
-   this.price = 400;
+   this.price = 2000;
   Structure.call(this, pos, this.price, this.maxHealth, 500, state);
 
 }
 SolarFarm.prototype = Object.create(Building.prototype);
 SolarFarm.prototype.constructor = SolarFarm;
-
-function PowerPlant(pos, state){
-  this.height = 60;
-  this.width = 90;  
-  this.maxHealth = 5
-  this.energyMax = 100;
-  this.energyRate = 0.6;
-  this.energy = 0;
-  this.enemy = false;
-  this.name = "Power Plant";
-  this.tree = powerPlantTree;
-   this.price = 150;
-  Structure.call(this, pos, this.price, this.maxHealth, 100, state);
-
-}
-PowerPlant.prototype = Object.create(Building.prototype);
-PowerPlant.prototype.constructor = PowerPlant;
 
 function RepairBuilding(pos, state){
   this.height = 70;
@@ -143,12 +126,12 @@ function RepairBuilding(pos, state){
   this.enemy = false;
   this.name = "Repair Building";
   this.tree = repairBuildingTree;
-
+  this.price = 300;
   this.heal = 15;
   this.bufferTime = 30;
   this.currentBuffer = 0;
   this.healEnergy = 25;
-  Structure.call(this, pos, 200, this.maxHealth, 20, state);
+  Structure.call(this, pos, this.price, this.maxHealth, 20, state);
 
 }
 RepairBuilding.prototype = Object.create(Building.prototype);

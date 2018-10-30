@@ -1,24 +1,44 @@
 
+//BUILDING TREES
+BBL2a = [{price:450, name:"Huge Battery", energyMax: 500, energyRate: 2, color:"orange", tree: false}];
+BBL2b = [{price:350, name:"Thicc Gaurd", maxHealth: 700, health:700, color:"gold", tree: false}];
+basicBuildingTree = [{price:150, name:"Battery", energyMax: 300, color:"yellow", tree: BBL2a},
+					 {price:150, name:"Wall of Security", maxHealth: 500, health: 500, color:"silver", tree: BBL2b}];
+
+SPL2a = [{price:1000, name:"Super Efficent Solar Panel", energyMax: 600, energyRate: 5, color:"orange", tree: false}];
+solarPanelTree = [{price:600, name:"Efficent Solar Panel", energyMax: 300, energyRate: 2, color:"yellow", tree: SPL2a}];
+
+SFL2a = [{price:5000, name:"Enough Solar for a Country", energyMax: 3000, energyRate: 20, color:"orange", tree: false}];
+solarFarmTree = [{price:2000, name:"Enough Solar for a City", energyMax: 900, energyRate: 15, color:"yellow", tree: SFL2a}];
+
+RBL3a = [{price:2000, name:"Hospital", energyMax: 500, healEnergy: 10, bufferTime: 20, healEnergy: 10, energyRate: 1, color:"orange", tree: false}];
+RBL2a = [{price:1000, name:"Doctor's Office", healEnergy: 15, energyMax: 300, bufferTime: 25, color:"orange", tree: RBL3a}];
+repairBuildingTree = [{price:500, name:"WebMD", maxHealth: 300, heal: 20, healEnergy: 20, color:"yellow", tree: RBL2a}];
+
+
 //TOWER TREES
 BTL2a = [
-	{price:300, name:"Extremely Long Range Tower", range: 900, color:"#0000c3", tree: false}, 
-	{price:300, name:"High Efficency Long Range Tower", projectileEnergy: 25, color:"#0000c3", tree: false}];
+	{price:500, name:"Extremely Long Range Tower", range: 900, color:"#0000c3", tree: false}, 
+	{price:500, name:"High Efficency Long Range Tower", projectileEnergy: 25, color:"#0000c3", tree: false}];
 BTL2b = [
-	{price:300, name:"High Health and Damage Heavy Tower", maxHealth: 300, health:300, color:"#874400", tree: false}, 
-	{price:300, name:"HUGE Bullet and High Damage Heavy Tower", projectileSize: 20, color:"#874400", tree: false}];
+	{price:500, name:"High Health and Damage Heavy Tower", maxHealth: 300, health:300, color:"#874400", tree: false}, 
+	{price:500, name:"HUGE Bullet and High Damage Heavy Tower", projectileSize: 15, color:"#874400", tree: false}];
 basicTowerTree = [
 	{price:150, name:"Long Range Tower", range: 350, color:"#4e4eff", tree: BTL2a}, 
 	{price:150, name:"Heavy Tower", maxHealth: 260, health: 260, bufferTime: 35, projectileDamage: 110, projectileSpeed:5, bufferTime: 15, color:"#4e4eff", tree: BTL2b}];
 
-// HTL2a = [
-// 	{price:600, name:"High Health and Damage Heavy Tower", maxHealth: 300, health:300, color:"#874400", tree: false}, 
-// 	{price:600, name:"HUGE Bullet and High Damage Heavy Tower", projectileSize: 20, color:"#874400", tree: false}];
-// HTL2b = [
-// 	{price:600, name:"High Frequency Efficent Heavy Tower", bufferTime: 20, color:"#874400", tree: false}, 
-// 	{price:600, name:"Long Range Efficent Heavy Tower", range: 400, color:"#874400", tree: false}];
-// heavyTowerTree = [
-// 	{price:400, name:"High Damage Heavy Tower", projectileDamage: 200, color:"#f37a00", tree: HTL2a}, 
-// 	{price:400, name:"High Efficency Heavy Tower", projectileEnergy: 20, color:"#f37a00", tree: HTL2b}];
+LTL2a = [//longer laser
+	{price:600, name:"More Efficent Laser", projectileEnergy: 15, color:"#874400", tree: false}, 
+	{price:600, name:"Really Long Laser Time", bufferTime: 80, color:"#874400", tree: false}];
+LTL2b = [//higher damage 
+	{price:600, name:"Longer Range", range: 400, color:"#874400", tree: false}, 
+	{price:600, name:"Super High Damage", projectileDamage: 100, color:"#874400", tree: false}];
+laserTowerTree = [
+	{price:400, name:"Longer Laser Time", bufferTime: 40, color:"#f37a00", tree: LTL2a}, 
+ 	{price:400, name:"Higher Damage", projectileDamage: 60, color:"#f37a00", tree: LTL2b}];
+
+MTL2a = [{price:700, name:"5 Shot Tower", numberOfShots: 5, color:"#dbdb00", tree: false}];
+multishotTowerTree = [{price:500, name:"3 Shot Tower", numberOfShots: 3, color:"#ffff0d", tree: MTL2a}];
 
 STL2a = [
 	{price:700, name:"Bigger Range ", range: 500, color:"#565656", tree: false},
@@ -31,23 +51,5 @@ seekingTowerTree = [
 	{price:450, name:"Higher Damage", projectileDamage: 200, color:"#929292", tree: STL2b}];
 
 
-MTL2a = [{price:700, name:"5 Shot Tower", numberOfShots: 5, color:"#dbdb00", tree: false}];
-multishotTowerTree = [{price:500, name:"3 Shot Tower", numberOfShots: 3, color:"#ffff0d", tree: MTL2a}];
-
-//BUILDING TREES
-BBL2a = [{price:450, name:"Huge Battery", energyMax: 500, energyRate: 2, color:"orange", tree: false}];
-BBL2b = [{price:350, name:"Thicc Gaurd", maxHealth: 700, health:700, color:"gold", tree: false}];
-basicBuildingTree = [{price:150, name:"Battery", energyMax: 300, color:"yellow", tree: BBL2a},
-					 {price:150, name:"Wall of Security", maxHealth: 500, health: 500, color:"silver", tree: BBL2b}];
-
-SPL2a = [{price:600, name:"Super Efficent Solar Panel", energyMax: 600, energyRate: 5, color:"orange", tree: false}];
-solarPanelTree = [{price:300, name:"Efficent Solar Panel", energyMax: 300, energyRate: 2, color:"yellow", tree: SPL2a}];
-
-SFL2a = [{price:1500, name:"Solar for a Country", energyMax: 3000, energyRate: 25, color:"orange", tree: false}];
-solarFarmTree = [{price:900, name:"Solar for a City", energyMax: 900, energyRate: 15, color:"yellow", tree: SFL2a}];
-
-RBL3a = [{price:500, name:"Hospital", energyMax: 500, healEnergy: 10, bufferTime: 20, healEnergy: 10, energyRate: 1, color:"orange", tree: false}];
-RBL2a = [{price:500, name:"Doctor's Office", healEnergy: 15, energyMax: 300, bufferTime: 25, color:"orange", tree: RBL3a}];
-repairBuildingTree = [{price:250, name:"WebMD", maxHealth: 300, heal: 20, healEnergy: 20, color:"yellow", tree: RBL2a}];
 
 

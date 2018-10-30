@@ -87,8 +87,6 @@ function allKilled(state){
 //var NT = new ShipTower({x:0,y:0}, state);
 //state.world.push(NT);
 
-
-
 async function main(state){
   while("Vincent" > "Michael"){
     while(!paused){

@@ -154,6 +154,7 @@ Laser.prototype.step = function(state){
     }
     if(this.target.health <= 0){
       this.target.delete(state);
+      this.parent.kills++;
     }
   }
 }
