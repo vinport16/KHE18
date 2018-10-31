@@ -13,13 +13,20 @@ canvas{
 #container {
   position: relative;
 }
-#container canvas, #levels {
+#container canvas, #levelBox {
   position: absolute;
 }
 
 #levels {
   color:white;
-  font-size: 50px;
+  font-size: 30px;
+  position: block;
+}
+
+#highestLevel {
+  color:white;
+  font-size: 15px;
+  position: block;
 }
 
 div.display{

@@ -62,8 +62,13 @@ function makeShips(point, r1, r2, level, state){
   return state;
 }
 
+//make the master tower
+var masterBuilding = new MasterBuilding({x:0,y:0}, state);
+state.world.push(masterBuilding);
+//start the first level. 
 makeShips(zeroVector,1000,2000,state.level,state);
 var delay = 0;
+
 function allKilled(state){
   for(i in state.world){
     if(state.world[i] instanceof Ship && !(state.world[i] instanceof FriendlyShip)){
@@ -73,6 +78,10 @@ function allKilled(state){
   if(delay == 250){
     state.level++;
     updateLevelDisplay("Level " + state.level);
+    if(state.level > state.highestLevel){
+      state.highestLevel = state.level;
+      updateHighestLevelDisplay("Highest Level: " + state.highestLevel);
+    }
     writeMessage("Level " + state.level + " in progress.");
     delay = 0;
     return makeShips(zeroVector,1000,1200,state.level,state);
@@ -107,9 +116,39 @@ function step(state){
       gobject.activeConnections = [];
     }
   });
+  var masterBuildingAlive = false;
   state.world.forEach(function(gobject){
+    if(gobject instanceof MasterBuilding){
+      masterBuildingAlive = true;
+    }
     gobject.step(state);
   });
+  if(!masterBuildingAlive){
+    paused = true;
+    alert("Game over, you lost on level " + state.level + "! Would you like to restart?");
+    //Restart the game
+    state.level = 1;
+    state.world = []; //list of every game object
+    state.position = {x:0,y:0};
+    state.money = 1000;
+    state.level = 1;
+    state.shipsKilled = 0;
+    state.currentStep = 0;
+    state.selectedStructure = null;
+    writeMessage("Game Restarted. Level " + state.level + " starting soon.");
+    updateLevelDisplay("Level " + state.level);
+    state.position = {x:-canvas.width/2,y:-canvas.height/2};
+    paused = false;
+    pause();
+
+    //make the master tower
+    var masterBuilding = new MasterBuilding({x:0,y:0}, state);
+    state.world.push(masterBuilding);
+    //start the first level. 
+    makeShips(zeroVector,1000,2000,state.level,state);
+    var delay = 0;
+
+  }
   drawEverything(state);
 }
 

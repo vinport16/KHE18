@@ -7,6 +7,10 @@ function updateLevelDisplay(levelMessage){
   document.getElementById("levels").innerHTML = levelMessage;
 }
 
+function updateHighestLevelDisplay(levelMessage){
+  document.getElementById("highestLevel").innerHTML = levelMessage;
+}
+
 function describeObject(element,object){
 
   tip = "<span class=\"tooltip\">";

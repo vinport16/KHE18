@@ -12,6 +12,10 @@ function Building(pos, state){
   this.name = "Basic Tower";
   this.tree = basicBuildingTree;
   this.price = 100;
+  this.heal = 0;
+  this.bufferTime = 30;
+  this.currentBuffer = 0;
+  this.healEnergy = 0;
   Structure.call(this, pos, this.price, this.maxHealth, 100, state);
 
 }
@@ -78,6 +82,55 @@ Building.prototype.charge = function(){
 
 Building.prototype.step = function(state){
   this.charge();
+  this.currentBuffer--;
+  if(heal && this.currentBuffer <= 0 && this.findConnectedHealPath() && this.getEnergyFor(this.healEnergy)){
+    amountLeft = this.heal;
+    while(amountLeft){
+      amountLeft = this.doConnectedHeal(amountLeft);
+    }
+    this.currentBuffer = this.bufferTime;
+  }
+}
+
+Building.prototype.findConnectedHealPath = function(){
+  var q = [[this]];
+  var visited = [this];
+  while(q.length != 0){
+    var b = q[0][q[0].length-1];
+    if(b.health < b.maxHealth){
+      return(q[0]);
+    }else{
+      for(var i = 0; i < b.connected.length; i++){
+        if(!visited.includes(b.connected[i])){
+          var path = copyArray(q[0]);
+          path.push(b.connected[i]);
+          visited.push(b.connected[i]);
+          q.push(path);
+        }
+      }
+    }
+    q.splice(0,1);
+  }
+  return false;
+}
+
+Building.prototype.doConnectedHeal = function(transferAmount){
+  var path = this.findConnectedHealPath();
+  if(path){
+    //active connect them [SAME AS ENERGY RN]
+    for(var i = 0; i < path.length-1; i++){
+      path[i].activeConnections.push(path[i+1]);
+    }
+    //send repairs
+    var openAmount = path[path.length-1].maxHealth - path[path.length-1].health;
+    if(transferAmount > openAmount){
+      path[path.length-1].health += openAmount;
+      return transferAmount - openAmount;
+    }else{
+      path[path.length-1].health += transferAmount;
+    }
+  }
+  return false;
 }
 
 //OTHER BUILDING TYPES 
@@ -137,55 +190,24 @@ function RepairBuilding(pos, state){
 RepairBuilding.prototype = Object.create(Building.prototype);
 RepairBuilding.prototype.constructor = RepairBuilding;
 
-RepairBuilding.prototype.findConnectedHealPath = function(){
-  var q = [[this]];
-  var visited = [this];
-  while(q.length != 0){
-    var b = q[0][q[0].length-1];
-    if(b.health < b.maxHealth){
-      return(q[0]);
-    }else{
-      for(var i = 0; i < b.connected.length; i++){
-        if(!visited.includes(b.connected[i])){
-          var path = copyArray(q[0]);
-          path.push(b.connected[i]);
-          visited.push(b.connected[i]);
-          q.push(path);
-        }
-      }
-    }
-    q.splice(0,1);
-  }
-  return false;
-}
+function MasterBuilding(pos, state){
+  this.height = 100;
+  this.width = 100;
+  this.maxHealth = 500;
+  this.energyMax = 150;
+  this.energyRate = 0.1;
+  this.energy = 0;
+  this.enemy = false;
+  this.name = "Master Building";
+  this.tree = false;
+  this.price = 0;
+  this.heal = 15;
+  this.bufferTime = 50;
+  this.currentBuffer = 0;
+  this.healEnergy = 30;
+  Structure.call(this, pos, this.price, this.maxHealth, 20, state);
 
-RepairBuilding.prototype.doConnectedHeal = function(transferAmount){
-  var path = this.findConnectedHealPath();
-  if(path){
-    //active connect them [SAME AS ENERGY RN]
-    for(var i = 0; i < path.length-1; i++){
-      path[i].activeConnections.push(path[i+1]);
-    }
-    //send repairs
-    var openAmount = path[path.length-1].maxHealth - path[path.length-1].health;
-    if(transferAmount > openAmount){
-      path[path.length-1].health += openAmount;
-      return transferAmount - openAmount;
-    }else{
-      path[path.length-1].health += transferAmount;
-    }
-  }
-  return false;
 }
+MasterBuilding.prototype = Object.create(Building.prototype);
+MasterBuilding.prototype.constructor = MasterBuilding;
 
-RepairBuilding.prototype.step = function(state){
-  Building.prototype.step.call(this,state);
-  this.currentBuffer--;
-  if(heal && this.currentBuffer <= 0 && this.findConnectedHealPath() && this.getEnergyFor(this.healEnergy)){
-    amountLeft = this.heal;
-    while(amountLeft){
-      amountLeft = this.doConnectedHeal(amountLeft);
-    }
-    this.currentBuffer = this.bufferTime;
-  }
-}
