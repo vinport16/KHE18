@@ -20,3 +20,4 @@ function openSection(evt, cityName) {
 } 
 
 document.getElementById("defaultOpen").click();
+ 
