@@ -206,6 +206,33 @@ function SpeedyShip(pos, state) {
 SpeedyShip.prototype = Object.create(Ship.prototype);
 SpeedyShip.prototype.constructor = SpeedyShip;
 
+function LaserShip(pos, state) {
+  this.radius = 15;
+  this.maxHealth = 200;
+  this.health = this.maxHealth;
+  this.color = "red";
+  this.speed = 1;
+  this.stopDistance = 50;
+  this.target;
+  this.bufferTime = 25;
+  this.currentBuffer = this.bufferTime;
+  this.range = 150;
+  this.projectileSpeed = 10; 
+  this.projectileDamage = 50;
+  this.projectileSize = 3;
+  this.enemy = true;
+  this.destroyed = false;
+  GameObject.call(this, pos);
+  this.bounty = 150;
+}
+LaserShip.prototype = Object.create(Ship.prototype);
+LaserShip.prototype.constructor = LaserShip;
+
+LaserShip.prototype.shoot = function(state){
+  var target = this.selectTarget(state);
+  laser = new Laser(this, target, this.projectileDamage, this.bufferTime/2, /*healRate,*/ this.projectileSize, "rgba(150,215,200,0.8)", state);
+  state.world.push(laser);
+}
 
 function FriendlyShip(pos, parent, shoots, state) {
   this.radius = 10;

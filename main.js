@@ -16,7 +16,9 @@ function makeShips(point, r1, r2, level, state){
   n = level*5;
   if (level % 5 == 0){
     for(i = 0; i < n; i++){
-      state.world.push(new Ship(makePointIn(point,r1,r2,state)));
+      var s1 = new Ship(makePointIn(point,r1,r2,state));
+        s1.bounty = 20;
+        state.world.push(s1);
     }
   }else{
     for(i = 0; i < n; i++){
@@ -61,6 +63,10 @@ function makeShips(point, r1, r2, level, state){
   }
   return state;
 }
+
+//Test laser ship
+//state.world.push(new LaserShip({x:300,y:300}, state));
+
 
 //make the master tower
 var masterBuilding = new MasterBuilding({x:0,y:0}, state);
