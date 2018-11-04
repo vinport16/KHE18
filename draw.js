@@ -29,6 +29,7 @@ function drawWorld(state){
     gobj = state.world[i];
     if(gobj instanceof Tower){
       drawRange(gobj, state);
+      mapDrawTowerRange(gobj, state)
     }
   }
   // draw connections
@@ -148,17 +149,33 @@ function highlight(struct, state){
   }
 }
 
-function mapDrawTower(tower, state){
+function mapDrawTowerRange(tower, state){
   rp = multiply({x:map.width/2, y:map.height/2}, mapscale);
   rp = add(tower.position, subtract(rp, add(state.position, {x:canvas.width/2, y:canvas.height/2})));
   rp = divide(rp,mapscale);
-  radius = (tower.range+tower.radius)/mapscale;
+  radius = (tower.radius+tower.range)/mapscale;
 
   maptx.beginPath();
   maptx.arc(rp.x, rp.y, radius, 0, 2 * Math.PI, false);
   maptx.fillStyle = "rgba(0,255,0,0.06)";
   maptx.strokeStyle = "rgba(255,255,255,0.0)";
   maptx.lineWidth = 1;
+  maptx.fill();
+  maptx.stroke();
+
+}
+
+function mapDrawTower(tower, state){
+  rp = multiply({x:map.width/2, y:map.height/2}, mapscale);
+  rp = add(tower.position, subtract(rp, add(state.position, {x:canvas.width/2, y:canvas.height/2})));
+  rp = divide(rp,mapscale);
+  radius = (tower.radius*2)/mapscale;
+
+  maptx.beginPath();
+  maptx.fillStyle = tower.color;
+  maptx.strokeStyle = "rgba(255,255,255,0.0)";
+  maptx.lineWidth = 1;
+  maptx.arc(rp.x, rp.y, radius, 0, 2 * Math.PI, false);
   maptx.fill();
   maptx.stroke();
 }
