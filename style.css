@@ -3,17 +3,22 @@ body{
   margin: 5px;
   background: linear-gradient(-10deg,rgb(0,150,255),rgb(250,250,255));
   font-family: sans-serif;
+  height: 100%;
 }
 
 canvas{
   background: linear-gradient(10deg,rgb(0,10,20),rgb(0,30,50));
   border-radius: 10px;
+
 }
 
-#container {
-  position: relative;
+
+#canvasArea {
+   position: relative;
+   padding-bottom:60px;
 }
-#container canvas, #levelBox {
+
+#canvasArea canvas, #levelInfo {
   position: absolute;
 }
 
@@ -29,9 +34,36 @@ canvas{
   position: block;
 }
 
+
+#left{
+  width: 70%;
+  min-height:100%;
+  position:relative;
+}
+
+#interface{
+  position: block;
+}
+
+#right{
+  width: 29%;
+  float: right;
+  height: 100%;
+  position: relative;
+}
+
+#bottomButtons{
+  position:absolute;
+   bottom:0;
+   width:100%;
+   height:100px;
+  background: lightblue;
+
+}
+
 div.display{
   float: right;
-  width: 29%;
+  /*//width: 29%;*/
   height: 100%;
 }
 
