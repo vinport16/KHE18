@@ -16,7 +16,7 @@ function Building(pos, state){
   this.bufferTime = 30;
   this.currentBuffer = 0;
   this.healEnergy = 0;
-  Structure.call(this, pos, this.price, this.maxHealth, 100, state);
+  Structure.call(this, pos, this.price, this.maxHealth, 100, this.name, state);
 
 }
 
@@ -145,7 +145,7 @@ function SolarPanel(pos, state){
   this.name = "Solar Panel";
   this.tree = solarPanelTree;
   this.price = 500;
-  Structure.call(this, pos, this.price, this.maxHealth, 200, state);
+  Structure.call(this, pos, this.price, this.maxHealth, 200, this.name, state);
 
 }
 SolarPanel.prototype = Object.create(Building.prototype);
@@ -163,7 +163,7 @@ function SolarFarm(pos, state){
   this.name = "Solar Farm";
   this.tree = solarFarmTree;
    this.price = 2000;
-  Structure.call(this, pos, this.price, this.maxHealth, 500, state);
+  Structure.call(this, pos, this.price, this.maxHealth, 500, this.name, state);
 
 }
 SolarFarm.prototype = Object.create(Building.prototype);
@@ -184,11 +184,32 @@ function RepairBuilding(pos, state){
   this.bufferTime = 30;
   this.currentBuffer = 0;
   this.healEnergy = 25;
-  Structure.call(this, pos, this.price, this.maxHealth, 20, state);
+  Structure.call(this, pos, this.price, this.maxHealth, 20, this.name, state);
 
 }
 RepairBuilding.prototype = Object.create(Building.prototype);
 RepairBuilding.prototype.constructor = RepairBuilding;
+
+function SheildBuilding(pos, state){
+  this.height = 30;
+  this.width = 40;
+  this.maxHealth = 1500;
+  this.energyMax = 20;
+  this.energyRate = 0;
+  this.energy = 0;
+  this.enemy = false;
+  this.name = "Sheild Building";
+  this.tree = false;
+  this.price = 500;
+  this.heal = 1;
+  this.bufferTime = 30;
+  this.currentBuffer = 0;
+  this.healEnergy = 1;
+  Structure.call(this, pos, this.price, this.maxHealth, 20, this.name, state);
+
+}
+SheildBuilding.prototype = Object.create(Building.prototype);
+SheildBuilding.prototype.constructor = SheildBuilding;
 
 function MasterBuilding(pos, state){
   this.height = 100;
@@ -205,7 +226,7 @@ function MasterBuilding(pos, state){
   this.bufferTime = 50;
   this.currentBuffer = 0;
   this.healEnergy = 30;
-  Structure.call(this, pos, this.price, this.maxHealth, 20, state);
+  Structure.call(this, pos, this.price, this.maxHealth, 20, this.name, state);
 
 }
 MasterBuilding.prototype = Object.create(Building.prototype);

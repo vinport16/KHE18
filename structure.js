@@ -1,8 +1,8 @@
-function Structure(pos, price, maxHealth, ER, state){
+function Structure(pos, price, maxHealth, ER, name, state){
 
   GameObject.call(this,pos);
 
-  this.name = "structure";
+  this.name = name;
 
   this.maxHealth = maxHealth;
   this.health = this.maxHealth;

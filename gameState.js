@@ -3,7 +3,7 @@
 function GameState() {
 	this.world = []; //list of every game object
 	this.position = {x:0,y:0};
-	this.money = 500;
+	this.money = 2000;
 	this.level = 1;
   this.highestLevel = 1;
 	this.shipsKilled = 0;

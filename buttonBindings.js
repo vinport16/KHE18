@@ -12,6 +12,11 @@ document.getElementById("solarPanel").onclick = function(){
 }
 describeObject(document.getElementById("solarPanel"),new SolarPanel({x:0,y:0},fakestate));
 
+document.getElementById("sheildBuilding").onclick = function(){
+  placeStructure(new SheildBuilding({x:0,y:0},state), state);
+}
+describeObject(document.getElementById("sheildBuilding"),new SheildBuilding({x:0,y:0},fakestate));
+
 document.getElementById("solarFarm").onclick = function(){
   placeStructure(new SolarFarm({x:0,y:0},state), state);
 }

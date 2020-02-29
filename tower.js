@@ -21,7 +21,7 @@ function Tower(pos, state){
   this.price = 100;
   this.name = "Basic Tower";
 
-  Structure.call(this, pos, this.price, this.health, 20, state);
+  Structure.call(this, pos, this.price, this.health, 20, this.name, state);
 } 
 Tower.prototype = Object.create(Structure.prototype);
 Tower.prototype.constructor = Tower;
@@ -117,7 +117,7 @@ function SeekingTower(pos, state){
   this.name = "Simple Seeking Tower";
   this.price = 500; 
 
-  Structure.call(this, pos, this.price, this.health, 30, state);
+  Structure.call(this, pos, this.price, this.health, 30, this.name, state);
 } 
 SeekingTower.prototype = Object.create(Tower.prototype);
 SeekingTower.prototype.constructor = SeekingTower;
@@ -159,7 +159,7 @@ function MultiShotTower(pos, state){
   this.currentShotDelay = 0;
   this.shotsShot = 0;
   
-  Structure.call(this, pos, this.price, this.health, 40, state);
+  Structure.call(this, pos, this.price, this.health, 40, this.name, state);
 } 
 MultiShotTower.prototype = Object.create(Tower.prototype);
 MultiShotTower.prototype.constructor = MultiShotTower;
@@ -208,7 +208,7 @@ function LaserTower(pos, state){
   this.price = 300;
   this.name = "Laser Tower";
 
-  Structure.call(this, pos, this.price, this.health, 20, state);
+  Structure.call(this, pos, this.price, this.health, 20, this.name, state);
 } 
 LaserTower.prototype = Object.create(Tower.prototype);
 LaserTower.prototype.constructor = LaserTower;
@@ -237,7 +237,7 @@ function ShipTower(pos, state){
   this.shipShoots = false;
   this.tree = shipTowerTree;
 
-  Structure.call(this, pos, this.price, this.health, 20, state);
+  Structure.call(this, pos, this.price, this.health, 20, this.name, state);
 }
 
 ShipTower.prototype = Object.create(Tower.prototype);
@@ -265,7 +265,7 @@ function BombTower(pos, state){
   this.name = "Bomb Tower";
 
 
-  Structure.call(this, pos, this.price, this.health, 20, state);
+  Structure.call(this, pos, this.price, this.health, 20, this.name, state);
 }
 
 BombTower.prototype = Object.create(Tower.prototype);
