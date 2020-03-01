@@ -304,4 +304,10 @@ function Golaith(pos, state){
 Golaith.prototype = Object.create(Tower.prototype);
 Golaith.prototype.constructor = Golaith;
 
+Golaith.prototype.shoot = function(state){
+  var target = this.selectTarget(state);
+  var bullet = new SeekingProjectile(target, this.projectileSize, this.position, this.projectileSpeed, this.projectileDamage, false, this, state);
+  state.world.push(bullet);
+}
+
 
