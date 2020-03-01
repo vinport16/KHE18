@@ -24,6 +24,12 @@ function displayEnergy(state){
 }
 
 function drawWorld(state){
+  for(var i in state.world){
+    gobj = state.world[i];
+    if(gobj instanceof Resource){
+      drawResource(gobj, state);
+    }
+  }
   // draw ranges
   for(var i in state.world){
     gobj = state.world[i];
@@ -70,6 +76,8 @@ function drawWorld(state){
       drawProjectile(gobj, state);
     }else if(gobj instanceof Laser){
       drawLaser(gobj, state);
+    }else if(gobj instanceof Resource){
+      
     }else{
 			console.log(typeof gobj);
 		}
@@ -328,7 +336,11 @@ function drawExplosion(exp, state){
   }else{
     drawCircle(rp,exp.radius,exp.color,"rgba(255,255,255,0)");
   }
-  
+}
+
+function drawResource(res, state){
+  rp = relative(res.position, state);
+  drawCircle(rp, res.radius, res.color, "rgba(0,0,0,0)");
 }
 
 

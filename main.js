@@ -71,6 +71,11 @@ function makeShips(point, r1, r2, level, state){
 //make the master tower
 var masterBuilding = new MasterBuilding({x:0,y:0}, state);
 state.world.push(masterBuilding);
+
+//Add Resources to the map: 
+var res1 = new Resource({x:200, y: 50}, 100000, state);
+state.world.push(res1);
+
 //start the first level. 
 makeShips(zeroVector,1000,2000,state.level,state);
 var delay = 0;

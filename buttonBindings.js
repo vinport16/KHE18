@@ -75,6 +75,11 @@ document.getElementById("golaith").onclick = function(){
 }
 describeObject(document.getElementById("golaith"),new Golaith({x:0,y:0},fakestate));
 
+document.getElementById("collectorTower").onclick = function(){
+  placeStructure(new CollectorTower({x:0, y:0}, state), state);
+}
+describeObject(document.getElementById("collectorTower"),new CollectorTower({x:0,y:0},fakestate));
+
 // SHIPS
 
 document.getElementById("ships").onclick = function(){

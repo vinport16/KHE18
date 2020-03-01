@@ -20,6 +20,7 @@ function Tower(pos, state){
   this.targetType = "closest";
   this.price = 100;
   this.name = "Basic Tower";
+  this.extractRate = 0;
 
   Structure.call(this, pos, this.price, this.health, 20, this.name, state);
 } 
@@ -42,7 +43,21 @@ Tower.prototype.waitToShoot = function(state){
 }
 
 Tower.prototype.step = function(state) {
-	this.waitToShoot(state);
+  if(this instanceof CollectorTower){
+    if(this.currentBuffer <= 0){
+      currentResource = this.onAResource(state);
+      console.log("CR: " + currentResource);
+      if(currentResource != -1){
+        console.log("tower: 51");
+        this.extractResource(currentResource, state);
+      }
+    this.currentBuffer = this.bufferTime;
+    }else{
+      this.currentBuffer--;
+    }
+  }else{
+    this.waitToShoot(state);
+  }
 }
 
 Tower.prototype.shipInRange = function(state){
@@ -107,7 +122,7 @@ function SeekingTower(pos, state){
   this.currentBuffer = this.bufferTime;
   this.projectileSpeed = 5;
   this.projectileDamage = 200;
-  this.projectileEnergy = 100;
+  this.projectileEnergy = 150;
   this.projectileSize = 7;
   this.destroyed = false;
   this.enemy = false;
@@ -176,7 +191,8 @@ MultiShotTower.prototype.shoot = function(state){
   }
 }
 
-Tower.prototype.step = function(state) {
+MultiShotTower.prototype.step = function(state) {
+  console.log("Hello");
   if(this.inProgress == true){
     if(this.currentShotDelay < this.eachShotDelay){
       this.currentShotDelay++;
@@ -228,6 +244,7 @@ function ShipTower(pos, state){
   this.bufferTime = 150; //frames
   this.currentBuffer = this.bufferTime;
   this.destroyed = false;
+  this.projectileEnergy = 40;
   this.enemy = false;
   this.tree = basicTowerTree;
   this.kills = 0;
@@ -289,14 +306,14 @@ function Golaith(pos, state){
   this.tree = false;
   this.kills = 0;
   this.targetType = "closest";
-  this.price = 800;
+  this.price = 20000;
   this.name = "Golaith";
   this.bufferTime = 300; //frames
   this.currentBuffer = this.bufferTime;
   this.projectileSpeed = 8;
   this.projectileDamage = 1000;
   this.projectileEnergy = 150;
-  this.projectileSize = 30;
+  this.projectileSize = 60;
 
   Structure.call(this, pos, this.price, this.health, 20, this.name, state);
 }
@@ -304,10 +321,57 @@ function Golaith(pos, state){
 Golaith.prototype = Object.create(Tower.prototype);
 Golaith.prototype.constructor = Golaith;
 
-Golaith.prototype.shoot = function(state){
-  var target = this.selectTarget(state);
-  var bullet = new SeekingProjectile(target, this.projectileSize, this.position, this.projectileSpeed, this.projectileDamage, false, this, state);
-  state.world.push(bullet);
+// Golaith.prototype.shoot = function(state){
+//   var target = this.selectTarget(state);
+//   var bullet = new SeekingProjectile(target, this.projectileSize, this.position, this.projectileSpeed, this.projectileDamage, false, this, state);
+//   state.world.push(bullet);
+// }
+
+
+//Collector Towers: 
+function CollectorTower(pos, state){
+  this.radius = 10;
+  this.range = 30;
+  this.color = "#551A8B";
+  this.destroyed = false;
+  this.maxHealth = 300;
+  this.health = this.maxHealth;
+  this.enemy = false;
+  this.tree = false;
+  this.enemy = false;
+  this.name = "Resource Collector";
+  this.tree = false;
+  this.price = 200;
+  this.bufferTime = 30;
+  this.currentBuffer = 0;
+  this.extractRate = 2;
+  Structure.call(this, pos, this.price, this.health, 20, this.name, state);
 }
 
+CollectorTower.prototype = Object.create(Tower.prototype);
+CollectorTower.prototype.constructor = CollectorTower;
 
+CollectorTower.prototype.onAResource = function(state){
+  for(var i in state.world){
+    if(state.world[i] instanceof Resource){
+      if(checkOverlap(state.world[i], this)){
+        return state.world[i]
+      }
+    }
+  }
+  return -1;
+}
+
+CollectorTower.prototype.extractResource = function(resource, state){
+  if(resource instanceof Ore){
+    state.Ore += this.extractRate;
+  }else if(resource instanceof Ice){
+    state.Ice += this.extractRate;
+  }else if(resource instanceof Iron){
+    state.Iron += this.extractRate;
+  }else if(resource instanceof Uranium){
+    state.Uranium += this.extractRate;
+  }
+  resource.extract(this.extractRate);
+  console.log("Extracted " + this.extractRate + " resource!");
+}

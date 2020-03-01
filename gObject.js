@@ -92,7 +92,7 @@ Projectile.prototype.move = function(state){
 Projectile.prototype.collisionCheck = function(state){
 	for(var i in state.world){
 		gobj = state.world[i];
-		if(gobj instanceof Projectile || gobj instanceof Laser || gobj instanceof Explosion){
+		if(gobj instanceof Projectile || gobj instanceof Laser || gobj instanceof Explosion || gobj instanceof Resource){
 		}else{
 			if(checkOverlap(this,gobj) && !(sameTeam(this, gobj))){
 				if(this.damage > gobj.health){
