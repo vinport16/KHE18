@@ -46,9 +46,7 @@ Tower.prototype.step = function(state) {
   if(this instanceof CollectorTower){
     if(this.currentBuffer <= 0){
       currentResource = this.onAResource(state);
-      console.log("CR: " + currentResource);
       if(currentResource != -1){
-        console.log("tower: 51");
         this.extractResource(currentResource, state);
       }
     this.currentBuffer = this.bufferTime;
@@ -192,7 +190,6 @@ MultiShotTower.prototype.shoot = function(state){
 }
 
 MultiShotTower.prototype.step = function(state) {
-  console.log("Hello");
   if(this.inProgress == true){
     if(this.currentShotDelay < this.eachShotDelay){
       this.currentShotDelay++;
@@ -364,14 +361,14 @@ CollectorTower.prototype.onAResource = function(state){
 
 CollectorTower.prototype.extractResource = function(resource, state){
   if(resource instanceof Ore){
-    state.Ore += this.extractRate;
+    state.ore += this.extractRate;
   }else if(resource instanceof Ice){
-    state.Ice += this.extractRate;
+    state.ice += this.extractRate;
   }else if(resource instanceof Iron){
-    state.Iron += this.extractRate;
+    state.iron += this.extractRate;
   }else if(resource instanceof Uranium){
-    state.Uranium += this.extractRate;
+    state.uranium += this.extractRate;
   }
   resource.extract(this.extractRate);
-  console.log("Extracted " + this.extractRate + " resource!");
+  //console.log("Extracted " + this.extractRate + " resource : " + resource.name);
 }

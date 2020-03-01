@@ -21,25 +21,45 @@ Resource.prototype.extract = function(amt){
 
 
 function Ore(pos, initialAmt, state){
-
+  this.color = "#545e60";
+  this.name = "Ore";
+  this.amount = initialAmt;
+  this.density = 1000;
+  this.radius = this.amount/this.density;
+  this.position = pos;
 }
-Ore.prototype = Object.create(GameObject.prototype);
+Ore.prototype = Object.create(Resource.prototype);
 Ore.prototype.constructor = Ore;
 
 function Ice(pos, initialAmt, state){
-
+  this.color = "#add8e6";
+  this.name = "Ice";
+  this.amount = initialAmt;
+  this.density = 1000;
+  this.radius = this.amount/this.density;
+  this.position = pos;
 }
-Ice.prototype = Object.create(GameObject.prototype);
+Ice.prototype = Object.create(Resource.prototype);
 Ice.prototype.constructor = Ice;
 
 function Iron(pos, initialAmt, state){
-
+  this.color = "#804000";
+  this.name = "Iron";
+  this.amount = initialAmt;
+  this.density = 1000;
+  this.radius = this.amount/this.density;
+  this.position = pos;
 }
-Iron.prototype = Object.create(GameObject.prototype);
+Iron.prototype = Object.create(Resource.prototype);
 Iron.prototype.constructor = Iron;
 
 function Uranium(pos, initialAmt, state){
-
+  this.color = "#a5a500";
+  this.name = "Uranium";
+  this.amount = initialAmt;
+  this.density = 1000;
+  this.radius = this.amount/this.density;
+  this.position = pos;
 }
-Uranium.prototype = Object.create(GameObject.prototype);
+Uranium.prototype = Object.create(Resource.prototype);
 Uranium.prototype.constructor = Uranium;
