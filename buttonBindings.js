@@ -17,10 +17,10 @@ document.getElementById("sheildBuilding").onclick = function(){
 }
 describeObject(document.getElementById("sheildBuilding"),new SheildBuilding({x:0,y:0},fakestate));
 
-document.getElementById("solarFarm").onclick = function(){
-  placeStructure(new SolarFarm({x:0,y:0},state), state);
+document.getElementById("battery").onclick = function(){
+  placeStructure(new Battery({x:0,y:0},state), state);
 }
-describeObject(document.getElementById("solarFarm"),new SolarFarm({x:0,y:0},fakestate));
+describeObject(document.getElementById("battery"),new Battery({x:0,y:0},fakestate));
 
 //document.getElementById("powerPlant").onclick = function(){
 //  placeStructure(new PowerPlant({x:0,y:0},state), state);
@@ -31,6 +31,11 @@ document.getElementById("repairBuilding").onclick = function(){
   placeStructure(new RepairBuilding({x:0,y:0},state), state);
 }
 describeObject(document.getElementById("repairBuilding"),new RepairBuilding({x:0,y:0},fakestate));
+
+document.getElementById("megaBuilding").onclick = function(){
+  placeStructure(new MegaBuilding({x:0,y:0},state), state);
+}
+describeObject(document.getElementById("megaBuilding"),new MegaBuilding({x:0,y:0},fakestate));
 
 
 // TOWERS
@@ -64,6 +69,11 @@ document.getElementById("bomb").onclick = function(){
   placeStructure(new BombTower({x:0, y:0}, state), state);
 }
 describeObject(document.getElementById("bomb"),new BombTower({x:0,y:0},fakestate));
+
+document.getElementById("golaith").onclick = function(){
+  placeStructure(new Golaith({x:0, y:0}, state), state);
+}
+describeObject(document.getElementById("golaith"),new Golaith({x:0,y:0},fakestate));
 
 // SHIPS
 

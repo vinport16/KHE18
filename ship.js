@@ -252,7 +252,7 @@ function FriendlyShip(pos, parent, shoots, state) {
   GameObject.call(this, pos);
   this.bounty = 0;
   this.parent = parent;
-  this.shotsLimit = 10;
+  this.shotsLimit = 20;
   this.shots = 0;
   this.shoots = shoots;
 
@@ -304,8 +304,8 @@ FriendlyShip.prototype.shoot = function(state){
 }
 
 FriendlyShip.prototype.delete = function(state){
-  var E1 = new Explosion(duplicate(this.position), this.explosionSize);
-  state.world.push(E1);
+  //var E1 = new Explosion(duplicate(this.position), this.explosionSize);
+  //state.world.push(E1);
   GameObject.prototype.delete.call(this, state);
 }
 

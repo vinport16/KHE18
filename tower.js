@@ -278,6 +278,30 @@ BombTower.prototype.step = function(state){
   this.delete(state);
 }
 
+function Golaith(pos, state){
+  this.radius = 30;
+  this.maxHealth = 200;
+  this.health = this.maxHealth;
+  this.color = "#BBBB99";
+  this.range = 500;
+  this.destroyed = false;
+  this.enemy = false;
+  this.tree = false;
+  this.kills = 0;
+  this.targetType = "closest";
+  this.price = 800;
+  this.name = "Golaith";
+  this.bufferTime = 300; //frames
+  this.currentBuffer = this.bufferTime;
+  this.projectileSpeed = 8;
+  this.projectileDamage = 1000;
+  this.projectileEnergy = 150;
+  this.projectileSize = 30;
 
+  Structure.call(this, pos, this.price, this.health, 20, this.name, state);
+}
+
+Golaith.prototype = Object.create(Tower.prototype);
+Golaith.prototype.constructor = Golaith;
 
 

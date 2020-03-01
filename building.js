@@ -151,23 +151,23 @@ function SolarPanel(pos, state){
 SolarPanel.prototype = Object.create(Building.prototype);
 SolarPanel.prototype.constructor = SolarPanel;
 
-function SolarFarm(pos, state){
-  this.height = 300;
-  this.width = 400;
-  this.maxHealth = 80;
-  this.health = 80;
-  this.energyMax = 500;
-  this.energyRate = 0.9;
+function Battery(pos, state){
+  this.height = 60;
+  this.width = 80;
+  this.maxHealth = 100;
+  this.health = 0;
+  this.energyMax = 2000;
+  this.energyRate = 0.1;
   this.energy = 0;
   this.enemy = false;
-  this.name = "Solar Farm";
-  this.tree = solarFarmTree;
-   this.price = 2000;
+  this.name = "Battery";
+  this.tree = false;
+  this.price = 500;
   Structure.call(this, pos, this.price, this.maxHealth, 500, this.name, state);
 
 }
-SolarFarm.prototype = Object.create(Building.prototype);
-SolarFarm.prototype.constructor = SolarFarm;
+Battery.prototype = Object.create(Building.prototype);
+Battery.prototype.constructor = Battery;
 
 function RepairBuilding(pos, state){
   this.height = 70;
@@ -210,6 +210,27 @@ function SheildBuilding(pos, state){
 }
 SheildBuilding.prototype = Object.create(Building.prototype);
 SheildBuilding.prototype.constructor = SheildBuilding;
+
+function MegaBuilding(pos, state){
+  this.height = 400;
+  this.width = 500;
+  this.maxHealth = 3000;
+  this.energyMax = 10000;
+  this.energyRate = 2;
+  this.energy = 0;
+  this.enemy = false;
+  this.name = "Mega Building";
+  this.tree = false;
+  this.price = 50000;
+  this.heal = 40;
+  this.bufferTime = 30;
+  this.currentBuffer = 0;
+  this.healEnergy = 40;
+  Structure.call(this, pos, this.price, this.maxHealth, 20, this.name, state);
+}
+
+MegaBuilding.prototype = Object.create(Building.prototype);
+MegaBuilding.prototype.constructor = MegaBuilding;
 
 function MasterBuilding(pos, state){
   this.height = 100;
