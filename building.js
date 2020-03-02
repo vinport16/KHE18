@@ -150,6 +150,9 @@ function SolarPanel(pos, state){
   this.tree = solarPanelTree;
   this.price = 500;
   this.uraniumPrice = 50;
+  this.orePrice = 0;
+  this.icePrice = 0;
+  this.ironPrice = 0;
   Structure.call(this, pos, this.price, this.maxHealth, 200, this.name, state);
 
 }
@@ -169,6 +172,9 @@ function Battery(pos, state){
   this.tree = false;
   this.price = 500;
   this.orePrice = 50;
+  this.icePrice = 0;
+  this.ironPrice = 0;
+  this.uraniumPrice = 0;
   Structure.call(this, pos, this.price, this.maxHealth, 500, this.name, state);
 
 }
@@ -187,6 +193,9 @@ function RepairBuilding(pos, state){
   this.tree = repairBuildingTree;
   this.price = 300;
   this.icePrice = 30;
+  this.orePrice = 0;
+  this.ironPrice = 0;
+  this.uraniumPrice = 0;
   this.heal = 15;
   this.bufferTime = 30;
   this.currentBuffer = 0;
@@ -209,6 +218,9 @@ function SheildBuilding(pos, state){
   this.tree = false;
   this.price = 500;
   this.ironPrice = 50;
+  this.orePrice = 0;
+  this.icePrice = 0;
+  this.uraniumPrice = 0;
   this.heal = 1;
   this.bufferTime = 30;
   this.currentBuffer = 0;

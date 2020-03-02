@@ -19,6 +19,10 @@ function Tower(pos, state){
   this.kills = 0;
   this.targetType = "closest";
   this.price = 100;
+  this.orePrice = 0;
+  this.icePrice = 0;
+  this.ironPrice = 0;
+  this.uraniumPrice = 0;
   this.name = "Basic Tower";
   this.extractRate = 0;
 
@@ -129,6 +133,10 @@ function SeekingTower(pos, state){
   this.targetType = "closest";
   this.name = "Simple Seeking Tower";
   this.price = 500; 
+  this.orePrice = 0;
+  this.icePrice = 0;
+  this.ironPrice = 0;
+  this.uraniumPrice = 0;
 
   Structure.call(this, pos, this.price, this.health, 30, this.name, state);
 } 
@@ -167,6 +175,10 @@ function MultiShotTower(pos, state){
   this.targetType = "closest";
   this.name = "Double Shot Tower";
   this.price = 300;
+  this.orePrice = 0;
+  this.icePrice = 0;
+  this.ironPrice = 0;
+  this.uraniumPrice = 0;
   this.inProgress = false;
   this.eachShotDelay = 5;
   this.currentShotDelay = 0;
@@ -219,6 +231,10 @@ function LaserTower(pos, state){
   this.kills = 0;
   this.targetType = "closest";
   this.price = 300;
+  this.orePrice = 0;
+  this.icePrice = 0;
+  this.ironPrice = 0;
+  this.uraniumPrice = 50;
   this.name = "Laser Tower";
 
   Structure.call(this, pos, this.price, this.health, 20, this.name, state);
@@ -247,6 +263,10 @@ function ShipTower(pos, state){
   this.kills = 0;
   this.targetType = "farthest";
   this.price = 1000;
+  this.orePrice = 0;
+  this.icePrice = 0;
+  this.ironPrice = 0;
+  this.uraniumPrice = 0;
   this.name = "Ship Tower";
   this.shipShoots = false;
   this.tree = shipTowerTree;
@@ -276,6 +296,10 @@ function BombTower(pos, state){
   this.kills = 0;
   this.targetType = "closest";
   this.price = 800;
+  this.orePrice = 0;
+  this.icePrice = 0;
+  this.ironPrice = 0;
+  this.uraniumPrice = 0;
   this.name = "Bomb Tower";
 
 
@@ -304,6 +328,10 @@ function Golaith(pos, state){
   this.kills = 0;
   this.targetType = "closest";
   this.price = 20000;
+  this.orePrice = 0;
+  this.icePrice = 0;
+  this.ironPrice = 0;
+  this.uraniumPrice = 0;
   this.name = "Golaith";
   this.bufferTime = 300; //frames
   this.currentBuffer = this.bufferTime;
@@ -339,7 +367,11 @@ function CollectorTower(pos, state){
   this.name = "Resource Collector";
   this.tree = false;
   this.price = 200;
-  this.bufferTime = 15;
+  this.orePrice = 0;
+  this.icePrice = 0;
+  this.ironPrice = 0;
+  this.uraniumPrice = 0;
+  this.bufferTime = 30;
   this.currentBuffer = 0;
   this.extractRate = 1;
   Structure.call(this, pos, this.price, this.health, 20, this.name, state);

@@ -249,7 +249,7 @@ function drawProto(proto, state){
 
 function drawProtoTower(proto,state){
   rp = relative(proto.position, state);
-  if(proto.price > state.money || checkStructureOverlap(proto,state)){
+  if(proto.price > state.money || proto.orePrice > state.ore || proto.icePrice > state.ice || proto.ironPrice > state.iron || proto.uraniumPrice > state.uranium || checkStructureOverlap(proto,state)){
     drawCircle(rp,proto.radius,"rgba(0,0,0,0)","rgba(255,100,100,100)");
   }else{
     drawCircle(rp,proto.radius,"rgba(0,0,0,0)","rgba(100,255,100,100)");
@@ -291,7 +291,7 @@ function drawBuilding(o, state){
 function drawProtoBuilding(proto, state){
   rp = relative(proto.position, state);
   tl = subtract(rp,{x:proto.width/2, y:proto.height/2});
-  if(proto.price > state.money || checkStructureOverlap(proto, state)){
+  if(proto.price > state.money || proto.orePrice > state.ore || proto.icePrice > state.ice || proto.ironPrice > state.iron || proto.uraniumPrice > state.uranium || checkStructureOverlap(proto, state)){
     drawRectangle(tl, proto.height, proto.width, "rgba(0,0,0,0)", "rgba(255,100,100,100)");
   }else{
     drawRectangle(tl, proto.height, proto.width, "rgba(0,0,0,0)","rgba(100,255,100,100)");
