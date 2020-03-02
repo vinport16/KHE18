@@ -72,16 +72,16 @@ function addResources(){
         type = getRandomInt(1, 5);
         switch(type){
           case 1:
-            state.world.push(new Ore({x:getRandomInt(x*200,x*300), y: getRandomInt(y*200,y*300)}, Math.max(getRandomInt(Math.abs(x - y) * 8000,10000), Math.min(Math.abs(x + y) * 8000, 100000)), state));
+            state.world.push(new Ore({x:getRandomInt(x*200,x*300), y: getRandomInt(y*200,y*300)}, Math.max(getRandomInt(Math.abs(x - y) * 80,100), Math.min(Math.abs(x + y) * 80, 100)), state));
             break;
           case 2:
-            state.world.push(new Ice({x:getRandomInt(x*200,x*300), y: getRandomInt(y*200,y*300)}, Math.max(getRandomInt(Math.abs(x - y) * 8000, 10000), Math.min(Math.abs(x + y) * 8000, 100000)), state));
+            state.world.push(new Ice({x:getRandomInt(x*200,x*300), y: getRandomInt(y*200,y*300)}, Math.max(getRandomInt(Math.abs(x - y) * 80, 100), Math.min(Math.abs(x + y) * 80, 100)), state));
             break;
           case 3:
-            state.world.push(new Iron({x:getRandomInt(x*200,x*300), y: getRandomInt(y*200,y*300)}, Math.max(getRandomInt(Math.abs(x - y) * 8000,10000), Math.min(Math.abs(x + y) * 8000, 100000)), state));
+            state.world.push(new Iron({x:getRandomInt(x*200,x*300), y: getRandomInt(y*200,y*300)}, Math.max(getRandomInt(Math.abs(x - y) * 80,100), Math.min(Math.abs(x + y) * 80, 100)), state));
             break;
           case 4:
-            state.world.push(new Uranium({x:getRandomInt(x*200,x*300), y: getRandomInt(y*200,y*300)}, Math.max(getRandomInt(Math.abs(x - y) * 8000,10000), Math.min(Math.abs(x + y) * 8000, 100000)), state));
+            state.world.push(new Uranium({x:getRandomInt(x*200,x*300), y: getRandomInt(y*200,y*300)}, Math.max(getRandomInt(Math.abs(x - y) * 80,100), Math.min(Math.abs(x + y) * 80, 100)), state));
             break;
           default:
             break;

@@ -4,7 +4,7 @@ function Resource(pos, initialAmt, state){
   this.color = "#FFA500";
   this.name = "space resource";
   this.amount = initialAmt;
-  this.density = 1000;
+  this.density = 10;
   this.radius = this.amount/this.density;
   this.position = pos;
 }
@@ -28,7 +28,7 @@ function Ore(pos, initialAmt, state){
   this.color = "#545e60";
   this.name = "Ore";
   this.amount = initialAmt;
-  this.density = 1000;
+  this.density = 10;
   this.radius = this.amount/this.density;
   this.position = pos;
 }
@@ -39,7 +39,7 @@ function Ice(pos, initialAmt, state){
   this.color = "#add8e6";
   this.name = "Ice";
   this.amount = initialAmt;
-  this.density = 1000;
+  this.density = 10;
   this.radius = this.amount/this.density;
   this.position = pos;
 }
@@ -50,7 +50,7 @@ function Iron(pos, initialAmt, state){
   this.color = "#804000";
   this.name = "Iron";
   this.amount = initialAmt;
-  this.density = 1000;
+  this.density = 10;
   this.radius = this.amount/this.density;
   this.position = pos;
 }
@@ -61,7 +61,7 @@ function Uranium(pos, initialAmt, state){
   this.color = "#a5a500";
   this.name = "Uranium";
   this.amount = initialAmt;
-  this.density = 1000;
+  this.density = 10;
   this.radius = this.amount/this.density;
   this.position = pos;
 }
