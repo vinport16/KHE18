@@ -66,29 +66,96 @@ function makeShips(point, r1, r2, level, state){
 
 //Add Resources to the map, have one every 800 px 
 function addResources(){
-  for(var x = -5; x < 5; x++){
-    for(var y = -5; y < 5; y++){
-      if(x != 0 && y != 0){
-        type = getRandomInt(1, 5);
-        switch(type){
-          case 1:
-            state.world.push(new Ore({x:getRandomInt(x*200,x*300), y: getRandomInt(y*200,y*300)}, getRandomInt(100, Math.abs(x) + Math.abs(y) * 100), state));
-            break; //Math.max(getRandomInt(Math.abs(x - y) * 80,100), Math.min(Math.abs(x + y) * 80, 100)
-          case 2:
-            state.world.push(new Ice({x:getRandomInt(x*200,x*300), y: getRandomInt(y*200,y*300)}, getRandomInt(100, Math.abs(x) + Math.abs(y) * 100), state));
-            break;
-          case 3:
-            state.world.push(new Iron({x:getRandomInt(x*200,x*300), y: getRandomInt(y*200,y*300)}, getRandomInt(100, Math.abs(x) + Math.abs(y) * 100), state));
-            break;
-          case 4:
-            state.world.push(new Uranium({x:getRandomInt(x*200,x*300), y: getRandomInt(y*200,y*300)}, getRandomInt(100, Math.abs(x) + Math.abs(y) * 100), state));
-            break;
-          default:
-            break;
-        }
-      }
+  var resources = []
+  var totalAmountLeft = 10000;
+  var oreAmountLeft = totalAmountLeft;
+  var iceAmountLeft = totalAmountLeft;
+  var ironAmountLeft = totalAmountLeft;
+  var uraniumAmountLeft = totalAmountLeft;
+  for(var i = 0; i < 40; i++){
+    var location = {x:0,y:0};
+    var amount = 0;
+    if(i < 10){
+      var location = makePointIn(zeroVector, 200, 600, state)
+      var amount = getRandomInt(50, Math.max(Math.abs(location.x) + Math.abs(location.y), 100));
+    }else if (i < 30){
+      var location = makePointIn(zeroVector, 500, 1500, state)
+      var amount = getRandomInt(100, Math.abs(location.x) + Math.abs(location.y)/1.5);
+    }else{
+      var location = makePointIn(zeroVector, 1200, 2000, state)
+      var amount = getRandomInt(150, (Math.abs(location.x) + Math.abs(location.y)) /2);
     }
-      
+    
+    type = getRandomInt(1, 4);
+    switch(type){
+      case 1:
+        if(oreAmountLeft == 0){
+          i--; //don't add an item to this index this turn
+          console.log("Out of ore");
+          break;
+        }else if(amount <= oreAmountLeft){
+          resources[i] = new Ore(location, amount, state);
+          oreAmountLeft -= amount;
+          console.log(oreAmountLeft + " ore left");
+        }else{
+          amount = oreAmountLeft;
+          resources[i] = new Ore(location, amount, state);
+          oreAmountLeft -= amount;
+        }
+        break;
+      case 2:
+        if(iceAmountLeft == 0){
+          i--; //don't add an item to this index this turn
+          console.log("Out of ice");
+          break;
+        }else if(amount <= iceAmountLeft){
+          resources[i] = new Ice(location, amount, state);
+          iceAmountLeft -= amount;
+          console.log(iceAmountLeft + " ice left");
+        }else{
+          amount = iceAmountLeft;
+          resources[i] = new Ice(location, amount, state);
+          iceAmountLeft -= amount;
+        }
+        break;
+      case 3:
+        if(ironAmountLeft == 0){
+          i--; //don't add an item to this index this turn
+          console.log("Out of iron");
+          break;
+        }else if(amount <= ironAmountLeft){
+          resources[i] = new Iron(location, amount, state);
+          ironAmountLeft -= amount;
+          console.log(ironAmountLeft + " iron left");
+        }else{
+          amount = ironAmountLeft;
+          resources[i] = new Iron(location, amount, state);
+          ironAmountLeft -= amount;
+        }        
+        break;
+      case 4:
+        if(uraniumAmountLeft == 0){
+          i--; //don't add an item to this index this turn
+          console.log("Out of uranium");
+          break;
+        }else if(amount <= uraniumAmountLeft){
+          resources[i] = new Uranium(location, amount, state);
+          uraniumAmountLeft -= amount;
+          console.log(uraniumAmountLeft + " iron uranium");
+        }else{
+          amount = uraniumAmountLeft;
+          resources[i] = new Uranium(location, amount, state);
+          uraniumAmountLeft -= amount;
+        }        
+        break;
+    }  
+    if(oreAmountLeft == 0 && iceAmountLeft == 0 && ironAmountLeft == 0 && uraniumAmountLeft == 0){
+      i = 50;
+    }  
+  }
+
+  for(var i = 0; i < resources.length; i++){
+    state.world.push(resources[i]);
   }
 }
 
