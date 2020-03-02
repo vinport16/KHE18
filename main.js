@@ -64,17 +64,40 @@ function makeShips(point, r1, r2, level, state){
   return state;
 }
 
-//Test laser ship
-//state.world.push(new LaserShip({x:300,y:300}, state));
+//Add Resources to the map, have one every 800 px 
+function addResources(){
+  for(var x = -4; x < 4; x++){
+    for(var y = -4; y < 4; y++){
+      if(x != 0 && y != 0){
+        type = getRandomInt(1, 5);
+        switch(type){
+          case 1:
+            state.world.push(new Ore({x:getRandomInt(x*200,x*300), y: getRandomInt(y*200,y*300)}, Math.max(getRandomInt(Math.abs(x - y) * 8000,10000), Math.abs(x + y) * 8000), state));
+            break;
+          case 2:
+            state.world.push(new Ice({x:getRandomInt(x*200,x*300), y: getRandomInt(y*200,y*300)}, Math.max(getRandomInt(Math.abs(x - y) * 8000, 10000), Math.abs(x + y) * 8000), state));
+            break;
+          case 3:
+            state.world.push(new Iron({x:getRandomInt(x*200,x*300), y: getRandomInt(y*200,y*300)}, Math.max(getRandomInt(Math.abs(x - y) * 8000,10000), Math.abs(x + y) * 8000), state));
+            break;
+          case 4:
+            state.world.push(new Uranium({x:getRandomInt(x*200,x*300), y: getRandomInt(y*200,y*300)}, Math.max(getRandomInt(Math.abs(x - y) * 8000,10000), Math.abs(x + y) * 8000), state));
+            break;
+          default:
+            break;
+        }
+      }
+    }
+      
+  }
+}
 
 
 //make the master tower
 var masterBuilding = new MasterBuilding({x:0,y:0}, state);
 state.world.push(masterBuilding);
 
-//Add Resources to the map: 
-var res1 = new Ice({x:200, y: 50}, 100000, state);
-state.world.push(res1);
+addResources();
 
 //start the first level. 
 makeShips(zeroVector,1000,2000,state.level,state);
@@ -155,6 +178,7 @@ function step(state){
     //make the master tower
     var masterBuilding = new MasterBuilding({x:0,y:0}, state);
     state.world.push(masterBuilding);
+    addResources();
     //start the first level. 
     makeShips(zeroVector,1000,2000,state.level,state);
     var delay = 0;

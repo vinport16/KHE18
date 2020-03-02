@@ -341,7 +341,7 @@ function CollectorTower(pos, state){
   this.price = 200;
   this.bufferTime = 30;
   this.currentBuffer = 0;
-  this.extractRate = 2;
+  this.extractRate = 3;
   Structure.call(this, pos, this.price, this.health, 20, this.name, state);
 }
 
@@ -351,7 +351,8 @@ CollectorTower.prototype.constructor = CollectorTower;
 CollectorTower.prototype.onAResource = function(state){
   for(var i in state.world){
     if(state.world[i] instanceof Resource){
-      if(checkOverlap(state.world[i], this)){
+      rangeCircle = {position: this.position, radius: this.range}
+      if(checkOverlap(state.world[i], rangeCircle)){
         return state.world[i]
       }
     }

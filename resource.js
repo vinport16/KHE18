@@ -16,7 +16,11 @@ Resource.prototype.step = function(state){
 
 Resource.prototype.extract = function(amt){
   this.amount -= amt;
-  this.radius = this.amount/this.density;
+  if(this.amount <= 0){
+    this.delete(state);
+  }else{
+    this.radius = this.amount/this.density;
+  }
 }
 
 

@@ -77,7 +77,7 @@ function drawWorld(state){
     }else if(gobj instanceof Laser){
       drawLaser(gobj, state);
     }else if(gobj instanceof Resource){
-      
+      mapDrawTower(gobj, state);
     }else{
 			console.log(typeof gobj);
 		}
