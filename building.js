@@ -12,6 +12,10 @@ function Building(pos, state){
   this.name = "Basic Tower";
   this.tree = basicBuildingTree;
   this.price = 100;
+  this.orePrice = 0;
+  this.icePrice = 0;
+  this.ironPrice = 0;
+  this.uraniumPrice = 0;
   this.heal = 0;
   this.bufferTime = 30;
   this.currentBuffer = 0;
@@ -145,6 +149,7 @@ function SolarPanel(pos, state){
   this.name = "Solar Panel";
   this.tree = solarPanelTree;
   this.price = 500;
+  this.uraniumPrice = 50;
   Structure.call(this, pos, this.price, this.maxHealth, 200, this.name, state);
 
 }
@@ -163,6 +168,7 @@ function Battery(pos, state){
   this.name = "Battery";
   this.tree = false;
   this.price = 500;
+  this.orePrice = 50;
   Structure.call(this, pos, this.price, this.maxHealth, 500, this.name, state);
 
 }
@@ -180,6 +186,7 @@ function RepairBuilding(pos, state){
   this.name = "Repair Building";
   this.tree = repairBuildingTree;
   this.price = 300;
+  this.icePrice = 30;
   this.heal = 15;
   this.bufferTime = 30;
   this.currentBuffer = 0;
@@ -201,6 +208,7 @@ function SheildBuilding(pos, state){
   this.name = "Sheild Building";
   this.tree = false;
   this.price = 500;
+  this.ironPrice = 50;
   this.heal = 1;
   this.bufferTime = 30;
   this.currentBuffer = 0;
@@ -222,6 +230,10 @@ function MegaBuilding(pos, state){
   this.name = "Mega Building";
   this.tree = false;
   this.price = 50000;
+  this.orePrice = 500;
+  this.icePrice = 500;
+  this.ironPrice = 500;
+  this.uraniumPrice = 500;
   this.heal = 40;
   this.bufferTime = 30;
   this.currentBuffer = 0;

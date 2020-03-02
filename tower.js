@@ -339,9 +339,9 @@ function CollectorTower(pos, state){
   this.name = "Resource Collector";
   this.tree = false;
   this.price = 200;
-  this.bufferTime = 30;
+  this.bufferTime = 15;
   this.currentBuffer = 0;
-  this.extractRate = 3;
+  this.extractRate = 1;
   Structure.call(this, pos, this.price, this.health, 20, this.name, state);
 }
 

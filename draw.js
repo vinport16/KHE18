@@ -9,7 +9,8 @@ function drawEverything(state){
 }
 
 function displayMoney(state){
-  document.getElementById("gems").innerHTML = "$" + state.money;
+  document.getElementById("gemsOreIce").innerHTML = "$" + state.money + "; " + state.ore + " ore; " + state.ice + " ice"
+  document.getElementById("ironUranium").innerHTML = state.iron + " iron; " + state.uranium +" uranium " 
 }
 
 function displayEnergy(state){

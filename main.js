@@ -165,6 +165,10 @@ function step(state){
     state.world = []; //list of every game object
     state.position = {x:0,y:0};
     state.money = 2000;
+    state.iron = 0;
+    state.ore = 0;
+    state.ice = 0;
+    state.uranium = 0;
     state.level = 1;
     state.shipsKilled = 0;
     state.currentStep = 0;
