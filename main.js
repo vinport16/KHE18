@@ -66,22 +66,22 @@ function makeShips(point, r1, r2, level, state){
 
 //Add Resources to the map, have one every 800 px 
 function addResources(){
-  for(var x = -4; x < 4; x++){
-    for(var y = -4; y < 4; y++){
+  for(var x = -5; x < 5; x++){
+    for(var y = -5; y < 5; y++){
       if(x != 0 && y != 0){
         type = getRandomInt(1, 5);
         switch(type){
           case 1:
-            state.world.push(new Ore({x:getRandomInt(x*200,x*300), y: getRandomInt(y*200,y*300)}, Math.max(getRandomInt(Math.abs(x - y) * 8000,10000), Math.abs(x + y) * 8000), state));
+            state.world.push(new Ore({x:getRandomInt(x*200,x*300), y: getRandomInt(y*200,y*300)}, Math.max(getRandomInt(Math.abs(x - y) * 8000,10000), Math.min(Math.abs(x + y) * 8000, 100000)), state));
             break;
           case 2:
-            state.world.push(new Ice({x:getRandomInt(x*200,x*300), y: getRandomInt(y*200,y*300)}, Math.max(getRandomInt(Math.abs(x - y) * 8000, 10000), Math.abs(x + y) * 8000), state));
+            state.world.push(new Ice({x:getRandomInt(x*200,x*300), y: getRandomInt(y*200,y*300)}, Math.max(getRandomInt(Math.abs(x - y) * 8000, 10000), Math.min(Math.abs(x + y) * 8000, 100000)), state));
             break;
           case 3:
-            state.world.push(new Iron({x:getRandomInt(x*200,x*300), y: getRandomInt(y*200,y*300)}, Math.max(getRandomInt(Math.abs(x - y) * 8000,10000), Math.abs(x + y) * 8000), state));
+            state.world.push(new Iron({x:getRandomInt(x*200,x*300), y: getRandomInt(y*200,y*300)}, Math.max(getRandomInt(Math.abs(x - y) * 8000,10000), Math.min(Math.abs(x + y) * 8000, 100000)), state));
             break;
           case 4:
-            state.world.push(new Uranium({x:getRandomInt(x*200,x*300), y: getRandomInt(y*200,y*300)}, Math.max(getRandomInt(Math.abs(x - y) * 8000,10000), Math.abs(x + y) * 8000), state));
+            state.world.push(new Uranium({x:getRandomInt(x*200,x*300), y: getRandomInt(y*200,y*300)}, Math.max(getRandomInt(Math.abs(x - y) * 8000,10000), Math.min(Math.abs(x + y) * 8000, 100000)), state));
             break;
           default:
             break;
