@@ -199,18 +199,11 @@ function allKilled(state){
 
 async function main(state){
   while("Vincent" > "Michael"){
-    let date = new Date();
     while(!paused){
-      let start_time = date.getTime();
       
       step(state);
 
-      let end_time = date.getTime();
-
-      // keep each frame .025 seconds apart if possible
-      if(start_time - end_time < 25){
-        await sleep(25 - (start_time - end_time));
-      }
+      await sleep(25)
 
       scaleCanvasses();
 
