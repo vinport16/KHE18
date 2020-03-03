@@ -78,7 +78,7 @@ function drawWorld(state){
     }else if(gobj instanceof Laser){
       drawLaser(gobj, state);
     }else if(gobj instanceof Resource){
-      mapDrawTower(gobj, state);
+      mapDrawResource(gobj, state);
     }else{
 			console.log(typeof gobj);
 		}
@@ -182,6 +182,21 @@ function mapDrawTower(tower, state){
 
   maptx.beginPath();
   maptx.fillStyle = tower.color;
+  maptx.strokeStyle = "rgba(255,255,255,0.0)";
+  maptx.lineWidth = 1;
+  maptx.arc(rp.x, rp.y, radius, 0, 2 * Math.PI, false);
+  maptx.fill();
+  maptx.stroke();
+}
+
+function mapDrawResource(resource, state){
+  rp = multiply({x:map.width/2, y:map.height/2}, mapscale);
+  rp = add(resource.position, subtract(rp, add(state.position, {x:canvas.width/2, y:canvas.height/2})));
+  rp = divide(rp,mapscale);
+  radius = resource.radius/mapscale;
+
+  maptx.beginPath();
+  maptx.fillStyle = resource.color;
   maptx.strokeStyle = "rgba(255,255,255,0.0)";
   maptx.lineWidth = 1;
   maptx.arc(rp.x, rp.y, radius, 0, 2 * Math.PI, false);
