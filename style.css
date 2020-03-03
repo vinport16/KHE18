@@ -104,7 +104,7 @@ div.text{
 
 div.gems{
   height: 4%;
-  background-color: rgba(50,50,50,1);
+  background-color: rgb(24, 24, 24);
   font-size: 18pt;
   padding-top: 2.5%;
   text-align: center;
