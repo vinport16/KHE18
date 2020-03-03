@@ -39,7 +39,7 @@ function Ice(pos, initialAmt, state){
   this.color = "#add8e6";
   this.name = "Ice";
   this.amount = initialAmt;
-  this.density = 10;
+  this.density = 7;
   this.radius = this.amount/this.density;
   this.position = pos;
 }
@@ -61,7 +61,7 @@ function Uranium(pos, initialAmt, state){
   this.color = "#a5a500";
   this.name = "Uranium";
   this.amount = initialAmt;
-  this.density = 10;
+  this.density = 15;
   this.radius = this.amount/this.density;
   this.position = pos;
 }

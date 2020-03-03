@@ -17,6 +17,18 @@ function describeObject(element,object){
   
   tip += "name: "+object.name;
   tip += "<br>price: "+object.price;
+  if(object.orePrice != 0){
+    tip += "<br>ore price: " + object.orePrice;
+  }
+  if(object.icePrice != 0){
+    tip += "<br>ice price: " + object.icePrice;
+  }
+  if(object.ironPrice != 0){
+    tip += "<br>iron price: " + object.ironPrice;
+  }
+  if(object.uraniumPrice != 0){
+    tip += "<br>uranium price: " + object.uraniumPrice;
+  }
 
   if(object instanceof Tower){
     if(object instanceof MultiShotTower){
