@@ -87,7 +87,7 @@ Building.prototype.charge = function(){
 Building.prototype.step = function(state){
   this.charge();
   this.currentBuffer--;
-  if(heal && this.currentBuffer <= 0 && this.findConnectedHealPath() && this.getEnergyFor(this.healEnergy)){
+  if(heal && this.currentBuffer <= 0 && this.findConnectedHealPath() && this.getEnergyFor(this.healEnergy, state)){
     amountLeft = this.heal;
     while(amountLeft){
       amountLeft = this.doConnectedHeal(amountLeft);

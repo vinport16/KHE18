@@ -38,7 +38,7 @@ Tower.prototype.shoot = function(state){
 }
 
 Tower.prototype.waitToShoot = function(state){
-	if(this.currentBuffer <= 0 && this.shipInRange(state) && this.getEnergyFor(this.projectileEnergy)){
+	if(this.currentBuffer <= 0 && this.shipInRange(state) && this.getEnergyFor(this.projectileEnergy, state)){
 		this.shoot(state);
 		this.currentBuffer = this.bufferTime;
 	}else{

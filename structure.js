@@ -87,8 +87,8 @@ Structure.prototype.findConnectedEnergyPath = function() {
   return false;
 }
 
-Structure.prototype.getEnergyFor = function(n){
-  if(State.energy < n){
+Structure.prototype.getEnergyFor = function(n, state){
+  if(state.energy < n){
     // if there is not enough energy available, abort
     return false;
   }
