@@ -86,6 +86,7 @@ function addResources(){
       var amount = getRandomInt(150, (Math.abs(location.x) + Math.abs(location.y)) /2);
     }
     
+    
     type = getRandomInt(1, 4);
     switch(type){
       case 1:

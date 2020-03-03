@@ -133,10 +133,10 @@ function SeekingTower(pos, state){
   this.targetType = "closest";
   this.name = "Simple Seeking Tower";
   this.price = 500; 
-  this.orePrice = 0;
+  this.orePrice = 5;
   this.icePrice = 0;
   this.ironPrice = 0;
-  this.uraniumPrice = 0;
+  this.uraniumPrice = 10;
 
   Structure.call(this, pos, this.price, this.health, 30, this.name, state);
 } 
@@ -177,7 +177,7 @@ function MultiShotTower(pos, state){
   this.price = 300;
   this.orePrice = 0;
   this.icePrice = 0;
-  this.ironPrice = 0;
+  this.ironPrice = 5;
   this.uraniumPrice = 0;
   this.inProgress = false;
   this.eachShotDelay = 5;
@@ -234,7 +234,7 @@ function LaserTower(pos, state){
   this.orePrice = 0;
   this.icePrice = 0;
   this.ironPrice = 0;
-  this.uraniumPrice = 50;
+  this.uraniumPrice = 10;
   this.name = "Laser Tower";
 
   Structure.call(this, pos, this.price, this.health, 20, this.name, state);
@@ -263,9 +263,9 @@ function ShipTower(pos, state){
   this.kills = 0;
   this.targetType = "farthest";
   this.price = 1000;
-  this.orePrice = 0;
+  this.orePrice = 10;
   this.icePrice = 0;
-  this.ironPrice = 0;
+  this.ironPrice = 10;
   this.uraniumPrice = 0;
   this.name = "Ship Tower";
   this.shipShoots = false;
@@ -299,7 +299,7 @@ function BombTower(pos, state){
   this.orePrice = 0;
   this.icePrice = 0;
   this.ironPrice = 0;
-  this.uraniumPrice = 0;
+  this.uraniumPrice = 15;
   this.name = "Bomb Tower";
 
 
@@ -328,10 +328,10 @@ function Golaith(pos, state){
   this.kills = 0;
   this.targetType = "closest";
   this.price = 20000;
-  this.orePrice = 0;
-  this.icePrice = 0;
-  this.ironPrice = 0;
-  this.uraniumPrice = 0;
+  this.orePrice = 100;
+  this.icePrice = 100;
+  this.ironPrice = 100;
+  this.uraniumPrice = 100;
   this.name = "Golaith";
   this.bufferTime = 300; //frames
   this.currentBuffer = this.bufferTime;
