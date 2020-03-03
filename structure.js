@@ -88,6 +88,10 @@ Structure.prototype.findConnectedEnergyPath = function() {
 }
 
 Structure.prototype.getEnergyFor = function(n){
+  if(State.energy < n){
+    // if there is not enough energy available, abort
+    return false;
+  }
   var available = 0;
   var paths = [];
   var amounts = [];

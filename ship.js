@@ -35,7 +35,17 @@ Ship.prototype.shoot = function(state){
 
 Ship.prototype.move = function(state){
   if(this.target && distanceBetween(this,this.target) >= this.stopDistance){
-    this.position = add(this.position, multiply(unitVector(subtract(getClosestPoints(this.target,this)[0], this.position)), this.speed));
+    // uncomment below for no avoidance
+    //this.position = add(this.position, multiply(unitVector(subtract(getClosestPoints(this.target,this)[0], this.position)), this.speed));
+    let to_target = unitVector(subtract(getClosestPoints(this.target,this)[0], this.position));
+    let away_from_neighbors = {x:0,y:0};
+    for(i in state.world){
+      gobj = state.world[i];
+      if(gobj.enemy == this.enemy && distanceBetween(this, gobj) < 50){
+        away_from_neighbors = add(away_from_neighbors, unitVector(multiply(subtract(this.position, gobj.position), 10/distanceBetween(this, gobj))));
+      }
+    }
+    this.position = add(this.position, multiply(unitVector(add(to_target, away_from_neighbors)), this.speed));
   }
 }
 
