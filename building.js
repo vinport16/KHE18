@@ -20,6 +20,7 @@ function Building(pos, state){
   this.bufferTime = 30;
   this.currentBuffer = 0;
   this.healEnergy = 0;
+  this.upList = defaultBuildingList;
   Structure.call(this, pos, this.price, this.maxHealth, 100, this.name, state);
 
 }
@@ -153,6 +154,7 @@ function SolarPanel(pos, state){
   this.orePrice = 0;
   this.icePrice = 0;
   this.ironPrice = 0;
+  this.upList = [];
   Structure.call(this, pos, this.price, this.maxHealth, 200, this.name, state);
 
 }
@@ -175,6 +177,7 @@ function Battery(pos, state){
   this.icePrice = 0;
   this.ironPrice = 2;
   this.uraniumPrice = 0;
+  this.upList = [];
   Structure.call(this, pos, this.price, this.maxHealth, 500, this.name, state);
 
 }
@@ -200,6 +203,7 @@ function RepairBuilding(pos, state){
   this.bufferTime = 30;
   this.currentBuffer = 0;
   this.healEnergy = 25;
+  this.upList = [];
   Structure.call(this, pos, this.price, this.maxHealth, 20, this.name, state);
 
 }
@@ -225,6 +229,7 @@ function SheildBuilding(pos, state){
   this.bufferTime = 30;
   this.currentBuffer = 0;
   this.healEnergy = 1;
+  this.upList = [];
   Structure.call(this, pos, this.price, this.maxHealth, 20, this.name, state);
 
 }
@@ -250,6 +255,7 @@ function MegaBuilding(pos, state){
   this.bufferTime = 30;
   this.currentBuffer = 0;
   this.healEnergy = 40;
+  this.upList = [];
   Structure.call(this, pos, this.price, this.maxHealth, 20, this.name, state);
 }
 
@@ -271,6 +277,7 @@ function MasterBuilding(pos, state){
   this.bufferTime = 50;
   this.currentBuffer = 0;
   this.healEnergy = 30;
+  this.upList = [];
   Structure.call(this, pos, this.price, this.maxHealth, 20, this.name, state);
 
 }

@@ -150,11 +150,7 @@ function placeStructure(s, state){
 
   canvas.addEventListener("mousedown",function(event){
     s.position = absolute(getVector(event),state);
-    console.log("ore price: " + s.orePrice);
-    console.log("current ore: " + state.ore);
-    console.log(s.orePrice <= state.ore && s.icePrice <= state.ice && s.ironPrice <= state.iron && s.uraniumPrice <= state.uranium)
     if(s.price <= state.money && s.orePrice <= state.ore && s.icePrice <= state.ice && s.ironPrice <= state.iron && s.uraniumPrice <= state.uranium && !checkStructureOverlap(s, state)){
-      console.log("hi");
       state.world.push(s);
       state.money -= s.price;
       state.ice -= s.icePrice;

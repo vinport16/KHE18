@@ -146,26 +146,51 @@ function updateSelectedDetails(struct){
     if(struct.targetType){
       document.getElementById("selectTarget").value = struct.targetType;
     }
-    
-    if(struct.tree[0]){
-      document.getElementById("up1").innerHTML = struct.tree[0].name;
+    //COMMENTED CODE BELOW IS FOR THE TREE UPGRADE SYSTEMS. 
+    // if(struct.tree[0]){
+    //   document.getElementById("up1").innerHTML = struct.tree[0].name;
+    //   document.getElementById("up1").addEventListener("click", function(){
+    //     struct.upgrade(struct.tree[0], state);
+    //     updateSelectedDetails(state.selectedStructure);
+    //     drawEverything(state);
+    //   });
+    //   describeObject(document.getElementById("up1"),struct.tree[0]);
+    //   document.getElementById("up1").disabled = false;
+    // }
+
+    // if(struct.tree[1]){
+    //   document.getElementById("up2").innerHTML = struct.tree[1].name;
+    //   document.getElementById("up2").addEventListener("click", function(){
+    //     struct.upgrade(struct.tree[1], state);
+    //     updateSelectedDetails(state.selectedStructure);
+    //     drawEverything(state);
+    //   });
+    //   describeObject(document.getElementById("up2"),struct.tree[1]);
+    //   document.getElementById("up2").disabled = false;
+    // }
+
+    //CODE BELOW IS FOR THE LIST UPGRADE SYSTEM
+    if(struct.upList[0]){
+      document.getElementById("up1").innerHTML = struct.upList[0].name;
       document.getElementById("up1").addEventListener("click", function(){
-        struct.upgrade(struct.tree[0], state);
+        struct.upgrade(struct.upList[0], state);
+        struct.upList.splice(0,1);
         updateSelectedDetails(state.selectedStructure);
         drawEverything(state);
       });
-      describeObject(document.getElementById("up1"),struct.tree[0]);
+      describeObject(document.getElementById("up1"), struct.upList[0]);
       document.getElementById("up1").disabled = false;
     }
 
-    if(struct.tree[1]){
-      document.getElementById("up2").innerHTML = struct.tree[1].name;
+    if(struct.upList[1]){
+      document.getElementById("up2").innerHTML = struct.upList[1].name;
       document.getElementById("up2").addEventListener("click", function(){
-        struct.upgrade(struct.tree[1], state);
+        struct.upgrade(struct.upList[1], state);
+        struct.upList.splice(1,1);
         updateSelectedDetails(state.selectedStructure);
         drawEverything(state);
       });
-      describeObject(document.getElementById("up2"),struct.tree[1]);
+      describeObject(document.getElementById("up2"), struct.upList[1]);
       document.getElementById("up2").disabled = false;
     }
 

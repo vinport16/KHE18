@@ -55,17 +55,26 @@ seekingTowerTree = [
 shipTowerTree = [
 	{price:1000, name:"Ships can Shoot", shipShoots: true, color:"#929292", tree: false}];
 
-//Upgrade lists: 
-defaultBuildingList = [
+//Tower Upgrade lists: 
+defaultTowerList = [
   {price: 50, name: "Bigger Range", range: 400},
-  {price: 70, name: "More Damage",  projectileDamage: 110},
   {price: 100, name: "More Health", maxHealth: 260},
   {price: 150, name: "High Efficency", projectileEnergy: 10},
-  {price: 200, name: "Huge Range", range: 800},
+  {price: 200, name: "More Damage",  projectileDamage: 110},
   {price: 300, name: "Fast bullets", projectileSpeed: 15},
   {price: 350, name: "More Frequent Bullets", bufferTime: 8}
 ];
 
+
 shipTowerList = [
   {price: 800, name: "Ships can shoot", shipShoots: true}
+]
+
+//Building Upgrade Lists: 
+defaultBuildingList = [
+  {price: 50, name: "Bigger Battery", energyMax: 300},
+  {price: 100, name: "More Health", maxHealth: 260},
+  {price: 150, name: "Faster Energy Production", energyRate: 1},
+  {price: 200, name: "Healing Power!",  heal: 1, healEnergy: 3},
+  {price: 300, name: "Lower Buffer Time", bufferTime: 15},
 ]

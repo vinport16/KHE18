@@ -15,6 +15,7 @@ function Tower(pos, state){
   this.projectileSize = 3;
   this.destroyed = false;
   this.enemy = false;
+  this.upList = copyArray(defaultTowerList);
   this.tree = basicTowerTree;
   this.kills = 0;
   this.targetType = "closest";
@@ -137,6 +138,7 @@ function SeekingTower(pos, state){
   this.icePrice = 0;
   this.ironPrice = 0;
   this.uraniumPrice = 10;
+  this.upList = [];
 
   Structure.call(this, pos, this.price, this.health, 30, this.name, state);
 } 
@@ -183,6 +185,7 @@ function MultiShotTower(pos, state){
   this.eachShotDelay = 5;
   this.currentShotDelay = 0;
   this.shotsShot = 0;
+  this.upList = [];
   
   Structure.call(this, pos, this.price, this.health, 40, this.name, state);
 } 
@@ -236,6 +239,7 @@ function LaserTower(pos, state){
   this.ironPrice = 0;
   this.uraniumPrice = 10;
   this.name = "Laser Tower";
+  this.upList = [];
 
   Structure.call(this, pos, this.price, this.health, 20, this.name, state);
 } 
@@ -270,6 +274,7 @@ function ShipTower(pos, state){
   this.name = "Ship Tower";
   this.shipShoots = false;
   this.tree = shipTowerTree;
+  this.upList = [];
 
   Structure.call(this, pos, this.price, this.health, 20, this.name, state);
 }
@@ -301,6 +306,7 @@ function BombTower(pos, state){
   this.ironPrice = 0;
   this.uraniumPrice = 15;
   this.name = "Bomb Tower";
+  this.upList = [];
 
 
   Structure.call(this, pos, this.price, this.health, 20, this.name, state);
@@ -339,6 +345,7 @@ function Golaith(pos, state){
   this.projectileDamage = 1000;
   this.projectileEnergy = 150;
   this.projectileSize = 60;
+  this.upList = [];
 
   Structure.call(this, pos, this.price, this.health, 20, this.name, state);
 }
@@ -374,6 +381,7 @@ function CollectorTower(pos, state){
   this.bufferTime = 30;
   this.currentBuffer = 0;
   this.extractRate = 1;
+  this.upList = [];
   Structure.call(this, pos, this.price, this.health, 20, this.name, state);
 }
 
@@ -403,5 +411,4 @@ CollectorTower.prototype.extractResource = function(resource, state){
     state.uranium += this.extractRate;
   }
   resource.extract(this.extractRate);
-  //console.log("Extracted " + this.extractRate + " resource : " + resource.name);
 }

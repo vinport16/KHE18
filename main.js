@@ -92,12 +92,10 @@ function addResources(){
       case 1:
         if(oreAmountLeft == 0){
           i--; //don't add an item to this index this turn
-          console.log("Out of ore");
           break;
         }else if(amount <= oreAmountLeft){
           resources[i] = new Ore(location, amount, state);
           oreAmountLeft -= amount;
-          console.log(oreAmountLeft + " ore left");
         }else{
           amount = oreAmountLeft;
           resources[i] = new Ore(location, amount, state);
@@ -107,12 +105,10 @@ function addResources(){
       case 2:
         if(iceAmountLeft == 0){
           i--; //don't add an item to this index this turn
-          console.log("Out of ice");
           break;
         }else if(amount <= iceAmountLeft){
           resources[i] = new Ice(location, amount, state);
           iceAmountLeft -= amount;
-          console.log(iceAmountLeft + " ice left");
         }else{
           amount = iceAmountLeft;
           resources[i] = new Ice(location, amount, state);
@@ -122,12 +118,10 @@ function addResources(){
       case 3:
         if(ironAmountLeft == 0){
           i--; //don't add an item to this index this turn
-          console.log("Out of iron");
           break;
         }else if(amount <= ironAmountLeft){
           resources[i] = new Iron(location, amount, state);
           ironAmountLeft -= amount;
-          console.log(ironAmountLeft + " iron left");
         }else{
           amount = ironAmountLeft;
           resources[i] = new Iron(location, amount, state);
@@ -137,12 +131,10 @@ function addResources(){
       case 4:
         if(uraniumAmountLeft == 0){
           i--; //don't add an item to this index this turn
-          console.log("Out of uranium");
           break;
         }else if(amount <= uraniumAmountLeft){
           resources[i] = new Uranium(location, amount, state);
           uraniumAmountLeft -= amount;
-          console.log(uraniumAmountLeft + " iron uranium");
         }else{
           amount = uraniumAmountLeft;
           resources[i] = new Uranium(location, amount, state);
