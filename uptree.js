@@ -1,4 +1,4 @@
-
+//Trees aren't currently used. See the lists at the bottom of this file. 
 //BUILDING TREES
 BBL2a = [{price:450, name:"Huge Battery", energyMax: 500, energyRate: 2, color:"orange", tree: false}];
 BBL2b = [{price:350, name:"Thicc Gaurd", maxHealth: 700, health:700, color:"gold", tree: false}];
@@ -55,6 +55,8 @@ seekingTowerTree = [
 shipTowerTree = [
 	{price:1000, name:"Ships can Shoot", shipShoots: true, color:"#929292", tree: false}];
 
+
+
 //Tower Upgrade lists: 
 defaultTowerList = [
   {price: 50, name: "Bigger Range", range: 400},
@@ -70,11 +72,27 @@ shipTowerList = [
   {price: 800, name: "Ships can shoot", shipShoots: true}
 ]
 
+//I think we should use both multiples and replacements. Add a field for type 
+//and based on the type, the current value will either be replaced or 
+//multiplied by the upgrade value (this is done in script.js, 175 and structure.js, 35). 
+//Also, we should just have one upgrade for each value at a time. When that
+//upgrade is used, we add a new version to the end of the list with a 
+//higher price. This way upgrades can be added automatically in game. 
+//Also, we need to change the 'name' field as it replaces the building name. 
+//TODO: Add a field for upgrade name to the buildings/towers and upgrades.
+
 //Building Upgrade Lists: 
 defaultBuildingList = [
   {price: 50, name: "Bigger Battery", energyMax: 300},
   {price: 100, name: "More Health", maxHealth: 260},
-  {price: 150, name: "Faster Energy Production", energyRate: 1},
+  {price: 150, name: "Faster Energy Production", energyRate: 0.7},
   {price: 200, name: "Healing Power!",  heal: 1, healEnergy: 3},
   {price: 300, name: "Lower Buffer Time", bufferTime: 15},
+]
+
+solarBuildingList = [
+  {price: 400, name: "More Health", maxHealth: 150},
+  {price: 500, name: "Bigger Battery", energyMax: 500},
+  {price: 600, name: "Faster Energy Production", energyRate: 2},
+  {price: 700, name: "Lower Buffer Time", bufferTime: 15},
 ]
