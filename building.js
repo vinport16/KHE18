@@ -20,7 +20,7 @@ function Building(pos, state){
   this.bufferTime = 30;
   this.currentBuffer = 0;
   this.healEnergy = 0;
-  this.upList = defaultBuildingList;
+  this.upList = copyArray(defaultBuildingList);
   Structure.call(this, pos, this.price, this.maxHealth, 100, this.name, state);
 
 }
