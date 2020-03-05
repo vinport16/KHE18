@@ -13,6 +13,7 @@ function GameState() {
 	this.shipsKilled = 0;
 	this.currentStep = 0;
   this.selectedStructure = null;
+  this.proto = null; // preview this prototype building when not null
 }; 
 
 GameState.prototype.getEnergyCapacity = function() {

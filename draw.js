@@ -6,6 +6,9 @@ function drawEverything(state){
 	drawWorld(state);
   displayMoney(state);
   displayEnergy(state);
+  if(state.proto != null){
+    drawProto(state.proto, state);
+  }
 }
 
 function displayMoney(state){

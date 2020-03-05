@@ -141,11 +141,13 @@ function placeStructure(s, state){
     controlButtons[i].disabled = false;
   }
 
+  state.proto = s;
+
   canvas.addEventListener("mousemove",function(event){
     s.position = absolute(getVector(event),state);
     
     drawEverything(state);
-    drawProto(s, state);
+    //drawProto(s, state);
   });
 
   canvas.addEventListener("mousedown",function(event){
@@ -164,6 +166,8 @@ function placeStructure(s, state){
       s.disconnectAll(state);
     }
 
+    state.proto = null;
+
     clearListeners(state);
     resetCancel();
     enableAllButtons();
@@ -172,6 +176,7 @@ function placeStructure(s, state){
 
   document.getElementById("cancel").addEventListener("mousedown",function(event){
     s.disconnectAll(state);
+    state.proto = null;
     clearListeners(state);
     resetCancel();
     enableAllButtons();
