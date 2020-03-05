@@ -41,7 +41,7 @@ Ship.prototype.move = function(state){
     let away_from_neighbors = {x:0,y:0};
     for(i in state.world){
       gobj = state.world[i];
-      if(gobj.enemy == this.enemy && distanceBetween(this, gobj) < 50){
+      if(gobj.enemy == this.enemy && distanceBetween(this, gobj) < 50 && gobj == this){
         away_from_neighbors = add(away_from_neighbors, unitVector(multiply(subtract(this.position, gobj.position), 10/distanceBetween(this, gobj))));
       }
     }
