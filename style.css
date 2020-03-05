@@ -29,6 +29,17 @@ canvas{
   position: block;
 }
 
+div.stats{
+  position: absolute;
+  bottom: 5px;
+  width: 65%;
+  padding: 5px;
+}
+
+div.stats > div{
+  width: 33%
+}
+
 div.display{
   float: right;
   width: 29%;
@@ -86,7 +97,7 @@ button.cancel{
 }
 
 div.textbox{
-  height: 81%;
+  height: 100%;
   width: 100%;
   overflow-y: scroll;
 }
@@ -103,20 +114,20 @@ div.text{
 }
 
 div.gems{
-  height: 4%;
+  height: 30px;
   background-color: rgb(24, 24, 24);
   font-size: 18pt;
-  padding-top: 2.5%;
   text-align: center;
   color: gold;
   border-radius: 10px;
-  margin-bottom: 2%;
+  float: left;
 }
 
 div.energy{
-  height: 5%;
+  height: 30px;
   background-color: gray;
   border-radius: 10px;
+  float: left;
 }
 
 div.amount{
