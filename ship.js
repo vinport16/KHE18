@@ -342,7 +342,7 @@ FriendlyShip.prototype.shoot = function(state){
 }
 
 FriendlyShip.prototype.delete = function(state){
-  //var E1 = new Explosion(duplicate(this.position), this.explosionSize);
+  //var E1 = new Explosion(duplicate(this.position), this.explosionSize, false);
   //state.world.push(E1);
   GameObject.prototype.delete.call(this, state);
 }
