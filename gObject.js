@@ -13,7 +13,7 @@ GameObject.prototype.delete = function(state) {
 };
 
 var Projectile = function(tar, radius, pos, speed, damage, enemy, parent, state){
-	this.target = tar; 
+  this.target = tar; 
 	this.position = pos;
 	GameObject.call(this, pos);
 	this.radius = radius;
@@ -95,25 +95,29 @@ Projectile.prototype.collisionCheck = function(state){
 		if(gobj instanceof Projectile || gobj instanceof Laser || gobj instanceof Explosion || gobj instanceof Resource){
 		}else{
 			if(checkOverlap(this,gobj) && !(sameTeam(this, gobj))){
-				if(this.damage > gobj.health){
-					this.damage -= gobj.health;
-					if(this.parent instanceof FriendlyShip){
-						this.parent.parent.kills++;
-					}else{
-						this.parent.kills++;
-					}
-					if(gobj instanceof Building){
-					  var E1 = new Explosion(duplicate(gobj.position), (gobj.energyMax/10));
-					  state.world.push(E1);
-					}else if(gobj instanceof Tower){
-					  var E1 = new Explosion(duplicate(gobj.position), (gobj.projectileDamage/gobj.bufferTime * (gobj.range/10)));
-					  state.world.push(E1);
-					}
-					gobj.delete(state);
-				}else{
-					gobj.health -= this.damage;
-					this.delete(state);
-				}
+        if(this instanceof ActionProjectile){
+          this.doAction();
+        }else{
+          if(this.damage > gobj.health){
+            this.damage -= gobj.health;
+            if(this.parent instanceof FriendlyShip){
+              this.parent.parent.kills++;
+            }else{
+              this.parent.kills++;
+            }
+            if(gobj instanceof Building){
+              var E1 = new Explosion(duplicate(gobj.position), (gobj.energyMax/10), true);
+              state.world.push(E1);
+            }else if(gobj instanceof Tower){
+              var E1 = new Explosion(duplicate(gobj.position), (gobj.projectileDamage/gobj.bufferTime * (gobj.range/10)), true);
+              state.world.push(E1);
+            }
+            gobj.delete(state);
+          }else{
+            gobj.health -= this.damage;
+            this.delete(state);
+          }
+        }
 			}
 		}
 	}
@@ -122,6 +126,41 @@ Projectile.prototype.collisionCheck = function(state){
 Projectile.prototype.step = function(state){
   this.move(state);
   this.collisionCheck(state);
+}
+
+var ActionProjectile = function(tar, radius, pos, speed, damage, enemy, parent, type, state){
+  this.target = tar; 
+	this.position = pos;
+	GameObject.call(this, pos);
+	this.radius = radius;
+	this.velocity = multiply(unitVector(subtract(getClosestPoints(this.target,this)[0],this.position)), this.speed);
+	this.acceleration = 0.1;
+	this.speed = speed;
+	this.damage = damage;
+  	this.enemy = enemy;
+  	this.parent = parent;
+  	var pColor = function(enemy){
+  		if(enemy){
+  			return "red";
+  		}else{
+  			return "yellow";
+  		}
+  	}
+    this.color = pColor(this.enemy);
+    this.type = type;
+}
+ActionProjectile.prototype = Object.create(Projectile.prototype);
+ActionProjectile.prototype.constructor = ActionProjectile;
+
+ActionProjectile.prototype.doAction = function(){
+  if(this.type = "explode"){
+    var explosion = new Explosion(duplicate(this.position), 100, false);
+    explosion.damage = 5;
+    explosion.speed = 5;
+    state.world.push(explosion);
+    this.delete(state);
+  }
+  //Add the network tower here too.
 }
 
 var Laser = function(parent, target, damage, duration, /*healRate,*/ width, color, state){
@@ -172,24 +211,26 @@ var pColor = function(radius, maxRadius){
 	return colorStr;
 }
 
-var Explosion = function(pos, maxRadius){
+var Explosion = function(pos, maxRadius, friendlyFire){
 	this.maxRadius = maxRadius;
 	this.position = pos;
 	GameObject.call(this, pos);
 	this.radius = 1;
 	this.inProgress = true;
   	this.color = "red";
-  	this.damage = 1;
+    this.damage = 1;
+    this.friendlyFire = friendlyFire;
+    this.speed = 1;
 }
 Explosion.prototype = Object.create(GameObject.prototype);
 Explosion.prototype.constructor = Explosion;
 
 Explosion.prototype.step = function(state){
-	this.collisionCheck(state);
+	this.collisionCheck(state, this.friendlyFire);
 	if(this.inProgress){
 		if(this.radius < this.maxRadius){
 			this.color = pColor(this.radius, this.maxRadius);
-			this.radius++;
+			this.radius += this.speed;
 		}else{
 			this.radius = 0;
 			this.inProgress = false;
@@ -198,18 +239,29 @@ Explosion.prototype.step = function(state){
 	}
 }
 
-Explosion.prototype.collisionCheck = function(state){
+Explosion.prototype.collisionCheck = function(state, friendlyFire){
 	for(var i in state.world){
 		gobj = state.world[i];
 		if(gobj instanceof Projectile || gobj instanceof Laser || gobj instanceof Explosion){
-		}else{
+		}else if(friendlyFire){
 			if(checkOverlap(this,gobj)){
 				gobj.health -= this.damage;
 				if(gobj.health < 0){
 					gobj.delete(state);
 				}
 			}
-		}
+		}else{
+      if(gobj instanceof Tower || gobj instanceof Building){
+        //skip
+      }else{
+        if(checkOverlap(this,gobj)){
+          gobj.health -= this.damage;
+          if(gobj.health < 0){
+            gobj.delete(state);
+          }
+        }
+      }
+    }
 	}
 }
 

@@ -163,6 +163,20 @@ MotherShip.prototype.move = function(state){
   }
 }
 
+MotherShip.prototype.delete = function(state){
+  for(i = 0; i < 4; i++){
+    var s1 = new BigShip({x:this.position.x + i, y:this.position.y + i}, state);
+        s1.bounty = 101-state.level;
+        if(s1.bounty < 10){
+          s1.bounty = 10;
+        }
+        state.world.push(s1);
+  }
+  
+	state.money += this.bounty;
+	GameObject.prototype.delete.call(this, state);
+}
+
 function GrandmotherShip(pos, state) {
 	this.radius = 50;
 	this.maxHealth = 1000;
@@ -205,6 +219,20 @@ GrandmotherShip.prototype.move = function(state){
       this.position = add(this.position, rotateVector(multiply(unitVector(subtract(getClosestPoints(this.target,this)[0], this.position)), this.speed), 75) );
     }
   }
+}
+
+GrandmotherShip.prototype.delete = function(state){
+  for(i = 0; i < 4; i++){
+    var s1 = new MotherShip({x:this.position.x + i, y:this.position.y + i}, state);
+        s1.bounty = 301-state.level;
+        if(s1.bounty < 30){
+          s1.bounty = 30;
+        }
+        state.world.push(s1);
+  }
+  
+	state.money += this.bounty;
+	GameObject.prototype.delete.call(this, state);
 }
 
 function SpeedyShip(pos, state) {
@@ -326,7 +354,7 @@ FriendlyShip.prototype.shoot = function(state){
 }
 
 FriendlyShip.prototype.delete = function(state){
-  //var E1 = new Explosion(duplicate(this.position), this.explosionSize);
+  //var E1 = new Explosion(duplicate(this.position), this.explosionSize, false);
   //state.world.push(E1);
   GameObject.prototype.delete.call(this, state);
 }

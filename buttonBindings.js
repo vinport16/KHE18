@@ -80,6 +80,16 @@ document.getElementById("collectorTower").onclick = function(){
 }
 describeObject(document.getElementById("collectorTower"),new CollectorTower({x:0,y:0},fakestate));
 
+document.getElementById("fourShotTower").onclick = function(){
+  placeStructure(new fourShotTower({x:0, y:0}, state), state);
+}
+describeObject(document.getElementById("fourShotTower"),new fourShotTower({x:0,y:0},fakestate));
+
+document.getElementById("bombLauncher").onclick = function(){
+  placeStructure(new bombLauncher({x:0, y:0}, state), state);
+}
+describeObject(document.getElementById("bombLauncher"),new bombLauncher({x:0,y:0},fakestate));
+
 // SHIPS
 
 document.getElementById("ships").onclick = function(){
