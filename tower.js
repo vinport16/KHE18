@@ -359,6 +359,55 @@ Golaith.prototype.constructor = Golaith;
 //   state.world.push(bullet);
 // }
 
+function fourShotTower(pos, state){
+	this.radius = 10;
+  this.maxHealth = 110;
+	this.health = this.maxHealth;
+	this.color = "#9c9cff";
+	this.range = 200;
+	this.bufferTime = 15; //frames
+	this.currentBuffer = this.bufferTime;
+	this.projectileSpeed = 10;
+	this.projectileDamage = 30;
+	this.projectileEnergy = 5;
+  this.projectileSize = 3;
+  this.destroyed = false;
+  this.enemy = false;
+  this.upList = copyArray(defaultTowerList);
+  this.tree = basicTowerTree;
+  this.kills = 0;
+  this.targetType = "closest";
+  this.price = 100;
+  this.orePrice = 0;
+  this.icePrice = 0;
+  this.ironPrice = 0;
+  this.uraniumPrice = 0;
+  this.name = "four shot";
+  this.extractRate = 0;
+
+  Structure.call(this, pos, this.price, this.health, 20, this.name, state);
+} 
+fourShotTower.prototype = Object.create(Tower.prototype);
+fourShotTower.prototype.constructor = fourShotTower;
+
+fourShotTower.prototype.shoot = function(state){
+	var target1 = {radius: 10, position: {x: (this.position.x + 3000), y: (this.position.y)}};
+	var bullet1 = new Projectile(target1, this.projectileSize, this.position, this.projectileSpeed, this.projectileDamage, false, this, state);
+  state.world.push(bullet1);
+  
+  var target2 = {radius: 10, position: {x: (this.position.x - 3000), y: (this.position.y)}};
+	var bullet2 = new Projectile(target2, this.projectileSize, this.position, this.projectileSpeed, this.projectileDamage, false, this, state);
+  state.world.push(bullet2);
+  
+  var target3 = {radius: 10, position: {x: (this.position.x), y: (this.position.y + 3000)}};
+	var bullet3 = new Projectile(target3, this.projectileSize, this.position, this.projectileSpeed, this.projectileDamage, false, this, state);
+  state.world.push(bullet3);
+  
+  var target4 = {radius: 10, position: {x: (this.position.x), y: (this.position.y - 3000)}};
+	var bullet4 = new Projectile(target4, this.projectileSize, this.position, this.projectileSpeed, this.projectileDamage, false, this, state);
+	state.world.push(bullet4);
+}
+
 
 //Collector Towers: 
 function CollectorTower(pos, state){

@@ -13,7 +13,7 @@ GameObject.prototype.delete = function(state) {
 };
 
 var Projectile = function(tar, radius, pos, speed, damage, enemy, parent, state){
-	this.target = tar; 
+  this.target = tar; 
 	this.position = pos;
 	GameObject.call(this, pos);
 	this.radius = radius;
