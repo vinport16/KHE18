@@ -14,6 +14,7 @@ function Ship(pos, state) {
 	this.projectileSpeed = 10; 
 	this.projectileDamage = 20;
   this.enemy = true;
+  this.squad = null;
   this.destroyed = false;
   GameObject.call(this, pos);
   this.bounty = 50;
@@ -24,6 +25,11 @@ Ship.prototype.constructor = Ship;
 
 Ship.prototype.delete = function(state){
 	state.money += this.bounty;
+  if(this.squad){
+    // delete from squad
+    var index = this.squad.indexOf(this);
+    if (index !== -1) this.squad.splice(index, 1);
+  }
 	GameObject.prototype.delete.call(this, state);
 }
 
@@ -34,18 +40,24 @@ Ship.prototype.shoot = function(state){
 }
 
 Ship.prototype.move = function(state){
+  // if ship is not near target, move towards target
   if(this.target && distanceBetween(this,this.target) >= this.stopDistance){
-    // uncomment below for no avoidance
-    //this.position = add(this.position, multiply(unitVector(subtract(getClosestPoints(this.target,this)[0], this.position)), this.speed));
-    let to_target = unitVector(subtract(getClosestPoints(this.target,this)[0], this.position));
-    let away_from_neighbors = {x:0,y:0};
-    for(i in state.world){
-      gobj = state.world[i];
-      if(gobj.enemy == this.enemy && distanceBetween(this, gobj) < 50 && gobj == this){
-        away_from_neighbors = add(away_from_neighbors, unitVector(multiply(subtract(this.position, gobj.position), 10/distanceBetween(this, gobj))));
+    // if ship is in a squad, flock with that squad
+    if(this.squad){
+      let to_target = unitVector(subtract(getClosestPoints(this.target,this)[0], this.position));
+      let away_from_neighbors = {x:0,y:0};
+      for(i in this.squad){
+        ship = this.squad[i];
+        if(distanceBetween(this, ship) < 50 && ship != this){
+          away_from_neighbors = add(away_from_neighbors, unitVector(multiply(subtract(this.position, ship.position), 10/distanceBetween(this, ship))));
+        }
       }
+      this.position = add(this.position, multiply(unitVector(add(to_target, away_from_neighbors)), this.speed));
+    }else{
+      // just go towards ur target
+      this.position = add(this.position, multiply(unitVector(subtract(getClosestPoints(this.target,this)[0], this.position)), this.speed));
     }
-    this.position = add(this.position, multiply(unitVector(add(to_target, away_from_neighbors)), this.speed));
+    
   }
 }
 

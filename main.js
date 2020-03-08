@@ -224,6 +224,7 @@ function step(state){
     paused = true;
     alert("Game over, you lost on level " + state.level + "! Would you like to restart?");
     //Restart the game
+    // TODO should we just reload the page here? resetting the state is messy
     state.level = 1;
     state.world = []; //list of every game object
     state.position = {x:0,y:0};
