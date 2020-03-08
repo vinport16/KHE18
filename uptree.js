@@ -96,3 +96,6 @@ solarBuildingList = [
   {price: 600, name: "Faster Energy Production", energyRate: 2},
   {price: 700, name: "Lower Buffer Time", bufferTime: 15},
 ]
+
+
+//Putting new upgrade trees below: 
