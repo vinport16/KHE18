@@ -171,14 +171,14 @@ function updateSelectedDetails(struct){
 
     //CODE BELOW IS FOR THE LIST UPGRADE SYSTEM
     if(struct.tree[0]){
-      document.getElementById("up1").innerHTML = struct.tree[0].name;
+      document.getElementById("up1").innerHTML = struct.tree[0].upgradeName;
       document.getElementById("up1").addEventListener("click", function(){
         if(struct.tree[0].type == 0){//Regular upgrade
           struct.upgrade(struct.tree[0], state);
         }else if(struct.tree[0].type == 1){//replace
           struct.replace(struct.tree[0], state);
         }
-        struct.tree.splice(0,1);
+        //struct.tree.splice(0,1);
         updateSelectedDetails(state.selectedStructure);
         drawEverything(state);
       });
@@ -187,14 +187,14 @@ function updateSelectedDetails(struct){
     }
 
     if(struct.tree[1]){
-      document.getElementById("up2").innerHTML = struct.tree[1].name;
+      document.getElementById("up2").innerHTML = struct.tree[1].upgradeName;
       document.getElementById("up2").addEventListener("click", function(){
         if(struct.tree[1].type == 0){//Regular upgrade
           struct.upgrade(struct.tree[1], state);
         }else if(struct.tree[1].type == 1){//replace
           struct.replace(struct.tree[1], state);
         }
-        struct.tree.splice(0,1);
+        //struct.tree.splice(0,1);
         updateSelectedDetails(state.selectedStructure);
         drawEverything(state);
       });

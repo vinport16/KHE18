@@ -1,8 +1,11 @@
 //tower.js
-//wires 
+
+var SMALL_RADIUS = 10;
+var MEDIUM_RADIUS = 20;
+var LARGE_RADIUS = 40;
 
 function Tower(pos, state){
-	this.radius = 10;
+	this.radius = SMALL_RADIUS;
   this.maxHealth = 110;
 	this.health = this.maxHealth;
 	this.color = "#9c9cff";
@@ -15,7 +18,6 @@ function Tower(pos, state){
   this.projectileSize = 3;
   this.destroyed = false;
   this.enemy = false;
-  this.upList = copyArray(defaultTowerList);
   this.tree = copyArray(defaultTowerTree);
   this.kills = 0;
   this.targetType = "closest";
@@ -116,7 +118,7 @@ Tower.prototype.selectTarget = function(state){
 }
 
 function SeekingTower(pos, state){
-  this.radius = 14;
+  this.radius = MEDIUM_RADIUS;
   this.maxHealth = 150;
   this.health = 150; 
   this.color = "#e0e0e0";
@@ -138,7 +140,6 @@ function SeekingTower(pos, state){
   this.icePrice = 0;
   this.ironPrice = 0;
   this.uraniumPrice = 10;
-  this.upList = [];
 
   Structure.call(this, pos, this.price, this.health, 30, this.name, state);
 } 
@@ -152,7 +153,7 @@ SeekingTower.prototype.shoot = function(state){
 }
 
 function MultiShotTower(pos, state){
-  this.radius = 15;
+  this.radius = SMALL_RADIUS;
   this.health = 150; 
   this.color = "#ffff9c";
   this.range = 150;
@@ -172,7 +173,7 @@ function MultiShotTower(pos, state){
   this.projectileSize = 3;
   this.destroyed = false;
   this.enemy = false;
-  this.tree = multishotTowerTree;
+  this.tree = multiShotTowerTree;
   this.kills = 0;
   this.targetType = "closest";
   this.name = "Double Shot Tower";
@@ -185,8 +186,7 @@ function MultiShotTower(pos, state){
   this.eachShotDelay = 5;
   this.currentShotDelay = 0;
   this.shotsShot = 0;
-  this.upList = [];
-  
+
   Structure.call(this, pos, this.price, this.health, 40, this.name, state);
 } 
 MultiShotTower.prototype = Object.create(Tower.prototype);
@@ -217,7 +217,7 @@ MultiShotTower.prototype.step = function(state) {
 }
 
 function LaserTower(pos, state){
-  this.radius = 9;
+  this.radius = SMALL_RADIUS;
   this.maxHealth = 130;
   this.health = this.maxHealth;
   this.color = "#AABB99";
@@ -239,7 +239,6 @@ function LaserTower(pos, state){
   this.ironPrice = 0;
   this.uraniumPrice = 10;
   this.name = "Laser Tower";
-  this.upList = [];
 
   Structure.call(this, pos, this.price, this.health, 20, this.name, state);
 } 
@@ -253,7 +252,7 @@ LaserTower.prototype.shoot = function(state){
 }
 
 function ShipTower(pos, state){
-  this.radius = 15;
+  this.radius = MEDIUM_RADIUS;
   this.maxHealth = 110;
   this.health = this.maxHealth;
   this.color = "white";
@@ -263,7 +262,7 @@ function ShipTower(pos, state){
   this.destroyed = false;
   this.projectileEnergy = 40;
   this.enemy = false;
-  this.tree = basicTowerTree;
+  this.tree = false;
   this.kills = 0;
   this.targetType = "farthest";
   this.price = 1000;
@@ -274,7 +273,6 @@ function ShipTower(pos, state){
   this.name = "Ship Tower";
   this.shipShoots = false;
   this.tree = shipTowerTree;
-  this.upList = [];
 
   Structure.call(this, pos, this.price, this.health, 20, this.name, state);
 }
@@ -306,7 +304,6 @@ function BombTower(pos, state){
   this.ironPrice = 0;
   this.uraniumPrice = 0;
   this.name = "Bomb Tower";
-  this.upList = [];
 
 
   Structure.call(this, pos, this.price, this.health, 20, this.name, state);
@@ -323,7 +320,7 @@ BombTower.prototype.step = function(state){
 }
 
 function Golaith(pos, state){
-  this.radius = 30;
+  this.radius = LARGE_RADIUS;
   this.maxHealth = 200;
   this.health = this.maxHealth;
   this.color = "#BBBB99";
@@ -345,7 +342,6 @@ function Golaith(pos, state){
   this.projectileDamage = 1000;
   this.projectileEnergy = 150;
   this.projectileSize = 60;
-  this.upList = [];
 
   Structure.call(this, pos, this.price, this.health, 20, this.name, state);
 }
@@ -360,7 +356,7 @@ Golaith.prototype.constructor = Golaith;
 // }
 
 function fourShotTower(pos, state){
-	this.radius = 10;
+	this.radius = MEDIUM_RADIUS;
   this.maxHealth = 110;
 	this.health = this.maxHealth;
 	this.color = "#9c9cff";
@@ -373,8 +369,7 @@ function fourShotTower(pos, state){
   this.projectileSize = 3;
   this.destroyed = false;
   this.enemy = false;
-  this.upList = copyArray(defaultTowerList);
-  this.tree = basicTowerTree;
+  this.tree = false;
   this.kills = 0;
   this.targetType = "closest";
   this.price = 100;
@@ -409,7 +404,7 @@ fourShotTower.prototype.shoot = function(state){
 }
 
 function bombLauncher(pos, state){
-	this.radius = 10;
+	this.radius = LARGE_RADIUS;
   this.maxHealth = 110;
 	this.health = this.maxHealth;
 	this.color = "#9c9cff";
@@ -422,8 +417,7 @@ function bombLauncher(pos, state){
   this.projectileSize = 3;
   this.destroyed = false;
   this.enemy = false;
-  this.upList = copyArray(defaultTowerList);
-  this.tree = basicTowerTree;
+  this.tree = false;
   this.kills = 0;
   this.targetType = "closest";
   this.price = 100;
@@ -467,7 +461,6 @@ function CollectorTower(pos, state){
   this.bufferTime = 30;
   this.currentBuffer = 0;
   this.extractRate = 1;
-  this.upList = [];
   Structure.call(this, pos, this.price, this.health, 20, this.name, state);
 }
 
@@ -501,7 +494,6 @@ CollectorTower.prototype.extractResource = function(resource, state){
 
 
 function getNewTower(type, pos, state){
-  console.log("getting new tower type: " + type);
   switch(type){
     case "defaultTower":
       return new Tower(pos, state);
@@ -509,6 +501,19 @@ function getNewTower(type, pos, state){
       return new MultiShotTower(pos, state);
     case "laserTower":
       return new LaserTower(pos, state);
+    case "fourShotTower":
+      return new fourShotTower(pos, state);
+    case "seekingTower":
+      return new SeekingTower(pos, state);
+    case "shipTower":
+      return new ShipTower(pos, state);
+    case "golaithTower":
+      return new Golaith(pos, state);
+    case "bombTower":
+      return new bombLauncher(pos, state);
+    case "networkTower":
+      console.log("Tower not made yet");
+      return new Tower(pos, state);
     default: 
       return getNewBuilding(type, pos, state);
   }

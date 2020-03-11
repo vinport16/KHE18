@@ -37,7 +37,13 @@ Structure.prototype.upgrade = function(upgrade, state){
     state.money -= upgrade.price;
     for (var k in upgrade) {
       if (this.hasOwnProperty(k)) {
-       this[k] = upgrade[k];
+        if(k == "color" || k == "tree"){
+          this[k] = upgrade[k];
+        }else if(k == "price"){
+          this[k] += upgrade[k];
+        }else{
+          this[k] *= upgrade[k];
+        }
       }
     }
   }
