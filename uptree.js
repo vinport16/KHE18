@@ -102,14 +102,15 @@ solarBuildingList = [
 */
 
 //TODO: make upgrades have one of two types. 
-//  Type 1 is multipes. Just multiply some field by the given value. 
-//  Type 2 is a replace. Replace the current structure with another structure. ie, the default tower to multishot tower. 
+//  Type 0 is upgrade - just upgrade the field with the new value.
+//  Type 1 is a replace. Replace the current structure with another structure. ie, the default tower to multishot tower. 
 
 //Lets make some trees. 
 //SMALL TOWER: 
-basicTowerTree1 = [
-	{price:150, name:"laser tower", newS: "laserTower", type: 1, tree: false}, 
-	{price:150, name:"Heavy Tower", type: 0, maxHealth: 260, health: 260, bufferTime: 35, projectileDamage: 110, projectileSpeed:5, bufferTime: 15, color:"#4e4eff", tree: BTL2b}];
+defaultTowerTree = [
+  {price:150, name:"Heavy Tower", type: 0, maxHealth: 260, health: 260, bufferTime: 35, projectileDamage: 110, projectileSpeed:5, bufferTime: 15, color:"#4e4eff", tree: BTL2b},
+	{price:150, name:"laser tower", newS: "laserTower", type: 1, tree: false}
+];
 
 
 //Medium Tower

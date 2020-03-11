@@ -16,7 +16,7 @@ function Tower(pos, state){
   this.destroyed = false;
   this.enemy = false;
   this.upList = copyArray(defaultTowerList);
-  this.tree = copyArray(basicTowerTree1);
+  this.tree = copyArray(defaultTowerTree);
   this.kills = 0;
   this.targetType = "closest";
   this.price = 100;

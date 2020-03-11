@@ -43,15 +43,16 @@ Structure.prototype.upgrade = function(upgrade, state){
   }
 }
 
-// Structure.prototype.replace = function(replace, state){
-//   if(state.money >= replace.price){
-//     state.money -= replace.price
-//     var newStruct = replace.
-//     newStruct.kills = this.kills;
-//     newStruct.position = this.position;
-//     return newStruct;
-//   }
-// }
+Structure.prototype.replace = function(replace, state){
+  if(state.money >= replace.price){
+    state.money -= replace.price;
+    var newStruct = getNewTower(replace.newS, this.position, state);
+    newStruct.kills = this.kills;
+    state.world.push(newStruct);
+    state.selectedStructure = newStruct;
+    this.delete(state);
+  }
+}
 
 Structure.prototype.connectToAll = function(state){
   for(var i = 0; i < state.world.length; i++){
