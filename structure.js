@@ -43,6 +43,16 @@ Structure.prototype.upgrade = function(upgrade, state){
   }
 }
 
+// Structure.prototype.replace = function(replace, state){
+//   if(state.money >= replace.price){
+//     state.money -= replace.price
+//     var newStruct = replace.
+//     newStruct.kills = this.kills;
+//     newStruct.position = this.position;
+//     return newStruct;
+//   }
+// }
+
 Structure.prototype.connectToAll = function(state){
   for(var i = 0; i < state.world.length; i++){
     var o2 = state.world[i];

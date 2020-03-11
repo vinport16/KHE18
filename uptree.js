@@ -72,15 +72,6 @@ shipTowerList = [
   {price: 800, name: "Ships can shoot", shipShoots: true}
 ]
 
-//I think we should use both multiples and replacements. Add a field for type 
-//and based on the type, the current value will either be replaced or 
-//multiplied by the upgrade value (this is done in script.js, 175 and structure.js, 35). 
-//Also, we should just have one upgrade for each value at a time. When that
-//upgrade is used, we add a new version to the end of the list with a 
-//higher price. This way upgrades can be added automatically in game. 
-//Also, we need to change the 'name' field as it replaces the building name. 
-//TODO: Add a field for upgrade name to the buildings/towers and upgrades.
-
 //Building Upgrade Lists: 
 defaultBuildingList = [
   {price: 50, name: "Bigger Battery", energyMax: 300},
@@ -99,3 +90,53 @@ solarBuildingList = [
 
 
 //Putting new upgrade trees below: 
+//So we will have 9 structures the player can buy: 
+/*
+  Type            | Small       | Medium  | Large 
+  Tower           | Default     | 4 shot  | Goliath
+  Building        | Default     | Repair  | Nuclear Reactor
+  Speical Tower   | Collection  | Freeze  | Bomb
+
+  Each of these structures have upgrades to both stats and to gain other featuers. The trees are below. 
+  TODO: Small items are unlocked on level 1, medium items are unlocked on level 7, large items are unlocked on level 15
+*/
+
+//TODO: make upgrades have one of two types. 
+//  Type 1 is multipes. Just multiply some field by the given value. 
+//  Type 2 is a replace. Replace the current structure with another structure. ie, the default tower to multishot tower. 
+
+//Lets make some trees. 
+//SMALL TOWER: 
+basicTowerTree1 = [
+	{price:150, name:"laser tower", newS: "laserTower", type: 1, tree: false}, 
+	{price:150, name:"Heavy Tower", type: 0, maxHealth: 260, health: 260, bufferTime: 35, projectileDamage: 110, projectileSpeed:5, bufferTime: 15, color:"#4e4eff", tree: BTL2b}];
+
+
+//Medium Tower
+
+
+//Large Tower
+
+
+
+
+
+//Small Building
+
+
+//Medium building
+
+
+//Large Building
+
+
+
+
+
+//Small Special tower 
+
+
+//Medium Special tower
+
+
+//Large Special Tower

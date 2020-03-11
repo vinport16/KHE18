@@ -284,3 +284,8 @@ function MasterBuilding(pos, state){
 MasterBuilding.prototype = Object.create(Building.prototype);
 MasterBuilding.prototype.constructor = MasterBuilding;
 
+
+
+function getNewBuilding(type, pos, state){
+  console.log("getting new building");
+}

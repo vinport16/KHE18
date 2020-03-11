@@ -170,27 +170,42 @@ function updateSelectedDetails(struct){
     // }
 
     //CODE BELOW IS FOR THE LIST UPGRADE SYSTEM
-    if(struct.upList[0]){
-      document.getElementById("up1").innerHTML = struct.upList[0].name;
+    if(struct.tree[0]){
+      var newStruct = {};
+      document.getElementById("up1").innerHTML = struct.tree[0].name;
       document.getElementById("up1").addEventListener("click", function(){
-        struct.upgrade(struct.upList[0], state);
-        struct.upList.splice(0,1);
+        if(struct.tree[0].type == 0){//Regular upgrade
+          struct.upgrade(struct.tree[0], state);
+        }else if(struct.tree[0].type == 1){//replace
+          console.log("hi")
+          var replace = struct.tree[0];
+          if(state.money >= replace.price){
+            state.money -= replace.price;
+            newStruct = getNewTower(replace.newS, struct.position, state);
+            console.log("New strucut: " + newStruct);
+            newStruct.kills = struct.kills;
+            state.world.push(newStruct);
+            state.selectedStructure = newStruct;
+            struct.delete(state);
+          }
+        }
+        struct.tree.splice(0,1);
         updateSelectedDetails(state.selectedStructure);
         drawEverything(state);
       });
-      describeObject(document.getElementById("up1"), struct.upList[0]);
+      describeObject(document.getElementById("up1"), struct.tree[0]);
       document.getElementById("up1").disabled = false;
     }
 
-    if(struct.upList[1]){
-      document.getElementById("up2").innerHTML = struct.upList[1].name;
+    if(struct.tree[1]){
+      document.getElementById("up2").innerHTML = struct.tree[1].name;
       document.getElementById("up2").addEventListener("click", function(){
-        struct.upgrade(struct.upList[1], state);
-        struct.upList.splice(1,1);
+        struct.upgrade(struct.tree[1], state);
+        struct.tree.splice(1,1);
         updateSelectedDetails(state.selectedStructure);
         drawEverything(state);
       });
-      describeObject(document.getElementById("up2"), struct.upList[1]);
+      describeObject(document.getElementById("up2"), struct.tree[1]);
       document.getElementById("up2").disabled = false;
     }
 

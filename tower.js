@@ -16,7 +16,7 @@ function Tower(pos, state){
   this.destroyed = false;
   this.enemy = false;
   this.upList = copyArray(defaultTowerList);
-  this.tree = basicTowerTree;
+  this.tree = copyArray(basicTowerTree1);
   this.kills = 0;
   this.targetType = "closest";
   this.price = 100;
@@ -497,4 +497,19 @@ CollectorTower.prototype.extractResource = function(resource, state){
     state.uranium += this.extractRate;
   }
   resource.extract(this.extractRate);
+}
+
+
+function getNewTower(type, pos, state){
+  console.log("getting new tower type: " + type);
+  switch(type){
+    case "defaultTower":
+      return new Tower(pos, state);
+    case "multiShotTower":
+      return new MultiShotTower(pos, state);
+    case "laserTower":
+      return new LaserTower(pos, state);
+    default: 
+      return getNewBuilding(type, pos, state);
+  }
 }
