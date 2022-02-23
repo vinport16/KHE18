@@ -1,6 +1,6 @@
-function Structure(pos, price, maxHealth, ER, name, state){
+function Structure(pos, price, maxHealth, ER, name, state) {
 
-  GameObject.call(this,pos);
+  GameObject.call(this, pos);
 
   this.name = name;
 
@@ -12,36 +12,45 @@ function Structure(pos, price, maxHealth, ER, name, state){
   this.connected = [];
   this.activeConnections = [];
 
-  this.connectToAll(state);  
+  this.connectToAll(state);
 }
 
 Structure.prototype = Object.create(GameObject.prototype);
 Structure.prototype.constructor = Structure;
 
-Structure.prototype.delete = function(state){
+Structure.prototype.delete = function (state) {
   GameObject.prototype.delete.call(this, state);
-  for( i in this.connected){
+  for (i in this.connected) {
     index = this.connected[i].connected.indexOf(this);
     if (index !== -1) this.connected[i].connected.splice(index, 1);
   }
 }
 
 
-Structure.prototype.sell = function(state){
-  state.money += this.price*(this.health/this.maxHealth);
+Structure.prototype.sell = function (state) {
+  state.money += this.price * (this.health / this.maxHealth);
   this.delete(state);
 }
 
-Structure.prototype.upgrade = function(upgrade, state){
-  if(state.money >= upgrade.price){
+Structure.prototype.upgrade = function (upgrade, state) {
+  if (state.money >= upgrade.price) {
     state.money -= upgrade.price;
     for (var k in upgrade) {
+      console.log("k = " + k)
+      if (k == "next") {
+        console.log([upgrade["next"]])
+        if (upgrade["next"] != null) {
+          this["tree"][upgrade["type"]] = upgrade["next"]
+        } else {
+          this["tree"][upgrade["type"]] = { upgradeName: "No Upgrade Available" }
+        }
+      }
       if (this.hasOwnProperty(k)) {
-        if(k == "color" || k == "tree"){
+        if (k == "color") {
           this[k] = upgrade[k];
-        }else if(k == "price"){
+        } else if (k == "price") {
           this[k] += upgrade[k];
-        }else{
+        } else {
           this[k] *= upgrade[k];
         }
       }
@@ -49,8 +58,8 @@ Structure.prototype.upgrade = function(upgrade, state){
   }
 }
 
-Structure.prototype.replace = function(replace, state){
-  if(state.money >= replace.price){
+Structure.prototype.replace = function (replace, state) {
+  if (state.money >= replace.price) {
     state.money -= replace.price;
     var newStruct = getNewTower(replace.newS, this.position, state);
     newStruct.kills = this.kills;
@@ -60,38 +69,38 @@ Structure.prototype.replace = function(replace, state){
   }
 }
 
-Structure.prototype.connectToAll = function(state){
-  for(var i = 0; i < state.world.length; i++){
+Structure.prototype.connectToAll = function (state) {
+  for (var i = 0; i < state.world.length; i++) {
     var o2 = state.world[i];
-    if(o2 instanceof Structure && distanceBetween(this,o2) < this.energyRange + o2.energyRange){
+    if (o2 instanceof Structure && distanceBetween(this, o2) < this.energyRange + o2.energyRange) {
       this.connect(o2);
     }
   }
 }
 
-Structure.prototype.disconnectAll = function(){
-  for( i in this.connected){
+Structure.prototype.disconnectAll = function () {
+  for (i in this.connected) {
     index = this.connected[i].connected.indexOf(this);
     if (index !== -1) this.connected[i].connected.splice(index, 1);
   }
   this.connected = [];
 }
 
-Structure.prototype.connect = function(struct){
+Structure.prototype.connect = function (struct) {
   this.connected.push(struct);
   struct.connected.push(this);
 }
 
-Structure.prototype.findConnectedEnergyPath = function() {
+Structure.prototype.findConnectedEnergyPath = function () {
   var q = [[this]];
   var visited = [this];
-  while(q.length != 0){
-    var b = q[0][q[0].length-1];
-    if(b.energyMax && b.energy > 0){
-      return(q[0]);
-    }else{
-      for(var i = 0; i < b.connected.length; i++){
-        if(!visited.includes(b.connected[i])){
+  while (q.length != 0) {
+    var b = q[0][q[0].length - 1];
+    if (b.energyMax && b.energy > 0) {
+      return (q[0]);
+    } else {
+      for (var i = 0; i < b.connected.length; i++) {
+        if (!visited.includes(b.connected[i])) {
           var path = copyArray(q[0]);
           path.push(b.connected[i]);
           visited.push(b.connected[i]);
@@ -99,13 +108,13 @@ Structure.prototype.findConnectedEnergyPath = function() {
         }
       }
     }
-    q.splice(0,1);
+    q.splice(0, 1);
   }
   return false;
 }
 
-Structure.prototype.getEnergyFor = function(n, state){
-  if(state.energy < n){
+Structure.prototype.getEnergyFor = function (n, state) {
+  if (state.energy < n) {
     // if there is not enough energy available, abort
     return false;
   }
@@ -113,36 +122,36 @@ Structure.prototype.getEnergyFor = function(n, state){
   var paths = [];
   var amounts = [];
   var path = this.findConnectedEnergyPath();
-  while(path && available < n){
+  while (path && available < n) {
 
-    var source = path[path.length-1];
-    if(source.energy < n-available){
+    var source = path[path.length - 1];
+    if (source.energy < n - available) {
       amounts.push(source.energy);
       available += source.energy;
       source.energy = 0;
-    }else{
-      amounts.push(n-available);
-      source.energy = source.energy - (n-available);
+    } else {
+      amounts.push(n - available);
+      source.energy = source.energy - (n - available);
       available = n;
     }
 
     paths.push(path);
     path = this.findConnectedEnergyPath();
   }
-  if(available < n){
+  if (available < n) {
     //return energy
-    for(var i = 0; i < paths.length; i++){
+    for (var i = 0; i < paths.length; i++) {
       var path = paths[i];
-      var source = path[path.length-1];
+      var source = path[path.length - 1];
       source.energy += amounts[i];
     }
     return false;
-  }else{
-    for(var i = 0; i < paths.length; i++){
+  } else {
+    for (var i = 0; i < paths.length; i++) {
       var path = paths[i];
       //connect path
-      for(var j = 0; j < path.length-1; j++){
-        path[j].activeConnections.push(path[j+1]);
+      for (var j = 0; j < path.length - 1; j++) {
+        path[j].activeConnections.push(path[j + 1]);
       }
 
     }
@@ -150,26 +159,26 @@ Structure.prototype.getEnergyFor = function(n, state){
   }
 }
 
-function placeStructure(s, state){
+function placeStructure(s, state) {
   disableAllButtons();
   document.getElementById("cancel").disabled = false;
 
-  for(var i = 0; i < controlButtons.length; i++){
+  for (var i = 0; i < controlButtons.length; i++) {
     controlButtons[i].disabled = false;
   }
 
   state.proto = s;
 
-  canvas.addEventListener("mousemove",function(event){
-    s.position = absolute(getVector(event),state);
-    
+  canvas.addEventListener("mousemove", function (event) {
+    s.position = absolute(getVector(event), state);
+
     drawEverything(state);
     //drawProto(s, state);
   });
 
-  canvas.addEventListener("mousedown",function(event){
-    s.position = absolute(getVector(event),state);
-    if(s.price <= state.money && s.orePrice <= state.ore && s.icePrice <= state.ice && s.ironPrice <= state.iron && s.uraniumPrice <= state.uranium && !checkStructureOverlap(s, state)){
+  canvas.addEventListener("mousedown", function (event) {
+    s.position = absolute(getVector(event), state);
+    if (s.price <= state.money && s.orePrice <= state.ore && s.icePrice <= state.ice && s.ironPrice <= state.iron && s.uraniumPrice <= state.uranium && !checkStructureOverlap(s, state)) {
       state.world.push(s);
       state.money -= s.price;
       state.ice -= s.icePrice;
@@ -179,7 +188,7 @@ function placeStructure(s, state){
       state.selectedStructure = s;
       updateSelectedDetails(state.selectedStructure);
       drawEverything(state);
-    }else{
+    } else {
       s.disconnectAll(state);
     }
 
@@ -191,7 +200,7 @@ function placeStructure(s, state){
 
   });
 
-  document.getElementById("cancel").addEventListener("mousedown",function(event){
+  document.getElementById("cancel").addEventListener("mousedown", function (event) {
     s.disconnectAll(state);
     state.proto = null;
     clearListeners(state);
