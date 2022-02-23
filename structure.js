@@ -32,50 +32,68 @@ Structure.prototype.sell = function (state) {
   this.delete(state);
 }
 
-Structure.prototype.upgrade = function (upgrade, state) {
-  if (state.money >= upgrade.price) {
+function canAfford(upgrade, state) {
+  console.log(upgrade)
+  return (state.money >= upgrade.price && state.ice >= upgrade.icePrice && state.iron >= upgrade.ironPrice && state.ore >= upgrade.orePrice && state.uranium >= upgrade.uraniumPrice);
+
+}
+
+Structure.prototype.upgrade = function (upgradeList, index, state) {
+  upgrade = upgradeList[index];
+  if (canAfford(upgrade, state)) {
     state.money -= upgrade.price;
-    for (var k in upgrade) {
-      console.log("k = " + k)
-      if (k == "next") {
-        console.log([upgrade["next"]])
-        if (upgrade["next"] != null) {
-          this["tree"][upgrade["type"]] = upgrade["next"]
-        } else {
-          this["tree"][upgrade["type"]] = { upgradeName: "No Upgrade Available" }
-        }
-      }
+    state.ice -= upgrade.icePrice;
+    state.iron -= upgrade.ironPrice;
+    state.ore -= upgrade.orePrice;
+    state.uranium -= upgrade.uraniumPrice;
+    this["price"] += upgrade.price
+    console.log("upgradaee");
+
+    for (var k in upgrade.updateProperties) {
       if (this.hasOwnProperty(k)) {
-        if (k == "color") {
-          this[k] = upgrade[k];
-        } else if (k == "price") {
-          this[k] += upgrade[k];
-        } else {
-          this[k] = upgrade[k];
-        }
+        this[k] = upgrade.updateProperties[k];
       }
+    }
+    if (upgrade["next"] != null) {
+      this["tree"][index] = upgrade["next"]
+    } else {
+      this["tree"][index] = { name: "No Upgrade Available" }
     }
   }
 }
 
+Structure.prototype.replace = function (upgradeList, index, state) {
+  upgrade = upgradeList[index];
+  if (canAfford(upgrade, state)) {
+    state.money -= upgrade.price;
+    state.ice -= upgrade.icePrice;
+    state.iron -= upgrade.ironPrice;
+    state.ore -= upgrade.orePrice;
+    state.uranium -= upgrade.uraniumPrice;
 
-Structure.prototype.replace = function (replace, state) {
-  if (state.money >= replace.price && state.ice >= replace.ice && state.iron >= replace.iron && state.ore >= replace.ore && state.uranium >= replace.uranium) {
-    state.money -= replace.price;
-    state.ice -= replace.ice;
-    state.iron -= replace.iron;
-    state.ore -= replace.ore;
-    state.uranium -= replace.uranium;
+    var newStruct = getNewTower(upgrade.newStruct, this.position, state);
+    console.log(newStruct)
+    for (var k in this) {
+      if (k == "name") {
+        newStruct[k] = this.upgrade.name;
+      } else if (k == "price") {
+        newStruct[k] = this.price + this.upgrade.price
+      } else if (k == "tree") {
+        if (upgrade["next"] != null) {
+          nextUpgrade = upgrade["next"];
+        } else {
+          nextUpgrade = { name: "No Upgrade Available" }
+        }
+        if (index == 0) {
+          newStruct.tree = [nextUpgrade, this.tree[1]]
+        } else {
+          newStruct.tree = [this.tree[0], nextUpgrade]
+        }
+      } else {
+        newStruct[k] = this[k];
+      }
+    }
 
-    var newStruct = getNewTower(replace.newS, this.position, state);
-    newStruct.kills = this.kills;
-    newStruct.tree = [this.tree[0], replace["next"]]
-    newStruct.range = this.range;
-    newStruct.currentBuffer = this.currentBuffer = this.bufferTime;
-    newStruct.projectileSpeed = this.projectileSpeed;
-    newStruct.projectileDamage = this.projectileDamage;
-    newStruct.projectileEnergy = this.projectileEnergy;
-    newStruct.projectileSize = this.projectileSize;
     state.world.push(newStruct);
     state.selectedStructure = newStruct;
     this.delete(state);

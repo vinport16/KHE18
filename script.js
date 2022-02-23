@@ -171,12 +171,13 @@ function updateSelectedDetails(struct) {
 
     //CODE BELOW IS FOR THE LIST UPGRADE SYSTEM
     if (struct.tree[0]) {
-      document.getElementById("up1").innerHTML = struct.tree[0].upgradeName;
+      document.getElementById("up1").innerHTML = struct.tree[0].name;
       document.getElementById("up1").addEventListener("click", function () {
-        if (struct.tree[0].type == 0) {//Regular upgrade
-          struct.upgrade(struct.tree[0], state);
-        } else if (struct.tree[0].type == 1) {//replace
-          struct.replace(struct.tree[0], state);
+        if (struct.tree[0] instanceof t1Upgrade) {//Regular upgrade
+          // the 0 is to indicate upgrade is from frist line
+          struct.upgrade(struct.tree, 0, state);
+        } else if (struct.tree[0] instanceof t2Upgrade) {//replace
+          struct.replace(struct.tree, 0, state);
         }
         //struct.tree.splice(0,1);
         updateSelectedDetails(state.selectedStructure);
@@ -184,16 +185,17 @@ function updateSelectedDetails(struct) {
       });
       describeObject(document.getElementById("up1"), struct.tree[0]);
       // If no upgrades left, keep button disabled
-      document.getElementById("up1").disabled = (struct.tree[0].upgradeName == "No Upgrade Available");
+      document.getElementById("up1").disabled = (struct.tree[0].name == "No Upgrade Available");
     }
 
     if (struct.tree[1]) {
-      document.getElementById("up2").innerHTML = struct.tree[1].upgradeName;
+      document.getElementById("up2").innerHTML = struct.tree[1].name;
       document.getElementById("up2").addEventListener("click", function () {
-        if (struct.tree[1].type == 0) {//Regular upgrade
-          struct.upgrade(struct.tree[1], state);
-        } else if (struct.tree[1].type == 1) {//replace
-          struct.replace(struct.tree[1], state);
+        if (struct.tree[1] instanceof t1Upgrade) {//Regular upgrade
+          // the 1 is to indicate upgrade is from second line
+          struct.upgrade(struct.tree, 1, state);
+        } else if (struct.tree[1] instanceof t2Upgrade) {//replace
+          struct.replace(struct.tree, 1, state);
         }
         //struct.tree.splice(0,1);
         updateSelectedDetails(state.selectedStructure);
@@ -201,7 +203,7 @@ function updateSelectedDetails(struct) {
       });
       describeObject(document.getElementById("up2"), struct.tree[1]);
       // If no upgrades left, keep button disabled
-      document.getElementById("up2").disabled = (struct.tree[1].upgradeName == "No Upgrade Available");
+      document.getElementById("up2").disabled = (struct.tree[1].name == "No Upgrade Available");
     }
 
     document.getElementById("selectSell").addEventListener("click", function () {
