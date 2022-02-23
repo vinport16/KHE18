@@ -71,6 +71,11 @@ shipTowerTree = [
 // ];
 
 basicTowerUpgrades = [
-  { price: 150, upgradeName: "faster bullets", type: 0, projectileSpeed: 2, color: "#4e4eff", next: { price: 150, upgradeName: "More damage", type: 0, projectileDamage: 2, color: "#4e4eff", next: { price: 150, upgradeName: "More range", type: 0, range: 1.5, color: "#4e4eff", next: null } } },
+  { price: 150, upgradeName: "faster bullets", type: 0, projectileSpeed: 20, color: "#4e4eff", next: { price: 150, upgradeName: "More damage", type: 0, projectileDamage: 50, color: "#4e4eff", next: { price: 150, upgradeName: "More range", type: 0, range: 350, color: "#4e4eff", next: null } } },
   { price: 150, ice: 10, iron: 0, ore: 0, uranium: 0, upgradeName: "Four-shot Tower", type: 1, newS: "fourShotTower", next: { price: 150, ice: 0, iron: 0, ore: 10, uranium: 0, upgradeName: "Multi-shot Tower", type: 1, newS: "multiShotTower", next: { price: 150, ice: 0, iron: 0, ore: 0, uranium: 20, upgradeName: "Laser Tower ", type: 1, newS: "laserTower", next: null } } }
+]
+
+seekingTowerUpgrades = [
+  { price: 150, upgradeName: "Higher Damagee", type: 0, projectileDamage: 300, color: "#4e4eff", next: { price: 150, upgradeName: "Bullets Explode", type: 0, bulletExplode: true, color: "#4e4eff", next: { price: 150, upgradeName: "More range", type: 0, range: 500, color: "#4e4eff", next: null } } },
+  { price: 150, ice: 10, iron: 0, ore: 0, uranium: 0, upgradeName: "Ship Tower", type: 1, newS: "shipTower", next: { price: 150, ice: 0, iron: 0, ore: 10, uranium: 0, upgradeName: "Ships Can Shoot x3", type: 1, shipShoots: true, next: { price: 150, ice: 0, iron: 0, ore: 0, uranium: 20, upgradeName: "Ships Can Shoot Unlimited ", type: 0, shipShotsLimit: 100, next: null } } }
 ]

@@ -1,9 +1,11 @@
 <html>
+
 <head>
-  <meta charset="utf-8"/>
+  <meta charset="utf-8" />
   <title> Tower Defense II </title>
   <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
+
 <body>
 
   <div id="container">
@@ -19,14 +21,16 @@
       <canvas id="map" class="map"></canvas>
       <div class="message" id="message">Build towers and buildings, then press "resume" to play</div>
       <table class="buttons" id="buildingButtons">
-        <tr><td><button class="building" id="defaultBuilding">default building</button></td>
-            <td><button class="tower1" id="defaultTower">default tower</button></td>
-            <td><button class="tower1" id="collectorTower">Collector Tower</button></td></tr>
+        <tr>
+          <td><button class="building" id="defaultBuilding">default building</button></td>
+          <td><button class="tower1" id="defaultTower">default tower</button></td>
+          <td><button class="tower1" id="collectorTower">Collector Tower</button></td>
+        </tr>
         </tr>
         <tr>
-           <td><button class="building" id="repairBuilding">repair building</button></td>
-            <td><button class="building" id="fourShotTower">four shot tower</button></a></td>
-            <td><button class="building" id="fake">freeze tower</button></a></td>
+          <td><button class="building" id="repairBuilding">repair building</button></td>
+          <td><button class="building" id="fourShotTower">four shot tower</button></a></td>
+          <td><button class="building" id="fake">freeze tower</button></a></td>
         </tr>
         <tr>
           <td><button class="building" id="solarPanel">solar panel</button></td>
@@ -36,10 +40,12 @@
         <!-- <tr><td><button class="building" id="solarPanel">solar panel</button></td>
             <td><button class="tower1" id="laserTower">laser tower</button></td></tr>
         <tr><td><button class="building" id="sheildBuilding">sheild building</button></td>
-            <td><button class="tower1" id="multiShotTower">multishot tower</button></td></tr>
-        <tr><td><button class="building" id="battery">battery</button></td>
-            <td><button class="tower1" id="seekingTower">seeking tower</button></td></tr>
-        <tr><td><button class="building" id="repairBuilding">repair building</button></td>
+            <td><button class="tower1" id="multiShotTower">multishot tower</button></td></tr> -->
+        <tr>
+          <td><button class="building" id="battery">battery</button></td>
+          <td><button class="tower1" id="seekingTower">seeking tower</button></td>
+        </tr>
+        <!--<tr><td><button class="building" id="repairBuilding">repair building</button></td>
             <td><button class="tower1" id="shipTower">ship tower</button></td></tr>
         <tr><td><button class="building" id="megaBuilding">mega building</button></td>
           <td><button class="tower1" id="golaith">golaith</button></td></tr>
@@ -52,35 +58,50 @@
       </table>
 
       <table class="buttons" id="selectButtons">
-        <tr><td><div id="selectName"></div></td>
-            <td><div id="selectKills"></div></td></tr>
-        <tr><td><button class="tower2" id="up1">upgrade</button></td>
-            <td><button class="tower2" id="up2">upgrade</button></td></tr>
-        <tr><td><button class="tower2" id="selectSell">SELL</button></td>
-            <td><select id="selectTarget">
-                  <option>closest</option>
-                  <option>farthest</option>
-                  <option>strongest</option>
-                  <option>weakest</option>
-                </select>
-            </td>
-          </tr>
-        </table>
+        <tr>
+          <td>
+            <div id="selectName"></div>
+          </td>
+          <td>
+            <div id="selectKills"></div>
+          </td>
+        </tr>
+        <tr>
+          <td><button class="tower2" id="up1">upgrade</button></td>
+          <td><button class="tower2" id="up2">upgrade</button></td>
+        </tr>
+        <tr>
+          <td><button class="tower2" id="selectSell">SELL</button></td>
+          <td><select id="selectTarget">
+              <option>closest</option>
+              <option>farthest</option>
+              <option>strongest</option>
+              <option>weakest</option>
+            </select>
+          </td>
+        </tr>
+      </table>
 
       <table class="buttons">
-        <tr><td><button class="pause" id="heal">pause healing</button></td>
-            <td><button class="cancel" id="ships">make enemy ships</button></td></tr>
-        <tr><td><button class="pause" id="pause">Start</button></td>
-            <td><button class="cancel" id="cancel">cancel</button></td></tr>
+        <tr>
+          <td><button class="pause" id="heal">pause healing</button></td>
+          <td><button class="cancel" id="ships">make enemy ships</button></td>
+        </tr>
+        <tr>
+          <td><button class="pause" id="pause">Start</button></td>
+          <td><button class="cancel" id="cancel">cancel</button></td>
+        </tr>
 
       </table>
       <div class="text" id="text"> </div>
     </div>
-    
+
   </div>
 
   <div id="stats" class="stats">
-    <div class="energy" id="energy"><div class="amount" id="amount">8%</div></div>
+    <div class="energy" id="energy">
+      <div class="amount" id="amount">8%</div>
+    </div>
     <div class="gems" id="gemsOreIce">80G</div>
     <div class="gems" id="ironUranium">IU</div>
   </div>
@@ -101,4 +122,5 @@
 <script src="script.js"></script>
 <script src="buttonBindings.js"></script>
 <script src="main.js"></script>
+
 </html>

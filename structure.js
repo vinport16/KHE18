@@ -51,7 +51,7 @@ Structure.prototype.upgrade = function (upgrade, state) {
         } else if (k == "price") {
           this[k] += upgrade[k];
         } else {
-          this[k] *= upgrade[k];
+          this[k] = upgrade[k];
         }
       }
     }
@@ -60,8 +60,6 @@ Structure.prototype.upgrade = function (upgrade, state) {
 
 
 Structure.prototype.replace = function (replace, state) {
-  //fix this = need to first check if property in upgrade, then check cost. 
-  // or just define all matrials in each upgrade   
   if (state.money >= replace.price && state.ice >= replace.ice && state.iron >= replace.iron && state.ore >= replace.ore && state.uranium >= replace.uranium) {
     state.money -= replace.price;
     state.ice -= replace.ice;

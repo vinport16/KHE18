@@ -28,6 +28,8 @@ function Tower(pos, state) {
   this.uraniumPrice = 0;
   this.name = "Basic Tower";
   this.extractRate = 0;
+  this.bulletExplode = false;
+
 
   Structure.call(this, pos, this.price, this.health, 20, this.name, state);
 }
@@ -117,41 +119,58 @@ Tower.prototype.selectTarget = function (state) {
   return target[0];
 }
 
-function SeekingTower(pos, state) {
-  this.radius = MEDIUM_RADIUS;
-  this.maxHealth = 150;
-  this.health = 150;
-  this.color = "#e0e0e0";
-  this.range = 300;
-  this.bufferTime = 100; //frames
+// Four shot tower is the upgrade for basic tower
+function fourShotTower(pos, state) {
+  this.radius = SMALL_RADIUS;
+  this.maxHealth = 110;
+  this.health = this.maxHealth;
+  this.color = "#9c9cff";
+  this.range = 200;
+  this.bufferTime = 15; //frames
   this.currentBuffer = this.bufferTime;
-  this.projectileSpeed = 5;
-  this.projectileDamage = 200;
-  this.projectileEnergy = 150;
-  this.projectileSize = 7;
+  this.projectileSpeed = 10;
+  this.projectileDamage = 30;
+  this.projectileEnergy = 5;
+  this.projectileSize = 3;
   this.destroyed = false;
   this.enemy = false;
-  this.tree = seekingTowerTree;
+  this.tree = false;
   this.kills = 0;
   this.targetType = "closest";
-  this.name = "Simple Seeking Tower";
-  this.price = 500;
-  this.orePrice = 5;
+  this.price = 100;
+  this.orePrice = 0;
   this.icePrice = 0;
   this.ironPrice = 0;
-  this.uraniumPrice = 10;
+  this.uraniumPrice = 0;
+  this.name = "four shot";
+  this.extractRate = 0;
+  this.bulletExplode = false;
 
-  Structure.call(this, pos, this.price, this.health, 30, this.name, state);
+
+  Structure.call(this, pos, this.price, this.health, 20, this.name, state);
 }
-SeekingTower.prototype = Object.create(Tower.prototype);
-SeekingTower.prototype.constructor = SeekingTower;
+fourShotTower.prototype = Object.create(Tower.prototype);
+fourShotTower.prototype.constructor = fourShotTower;
 
-SeekingTower.prototype.shoot = function (state) {
-  var target = this.selectTarget(state);
-  var bullet = new SeekingProjectile(target, this.projectileSize, this.position, this.projectileSpeed, this.projectileDamage, false, this, state);
-  state.world.push(bullet);
+fourShotTower.prototype.shoot = function (state) {
+  var target1 = { radius: 10, position: { x: (this.position.x + 3000), y: (this.position.y) } };
+  var bullet1 = new Projectile(target1, this.projectileSize, this.position, this.projectileSpeed, this.projectileDamage, false, this, state);
+  state.world.push(bullet1);
+
+  var target2 = { radius: 10, position: { x: (this.position.x - 3000), y: (this.position.y) } };
+  var bullet2 = new Projectile(target2, this.projectileSize, this.position, this.projectileSpeed, this.projectileDamage, false, this, state);
+  state.world.push(bullet2);
+
+  var target3 = { radius: 10, position: { x: (this.position.x), y: (this.position.y + 3000) } };
+  var bullet3 = new Projectile(target3, this.projectileSize, this.position, this.projectileSpeed, this.projectileDamage, false, this, state);
+  state.world.push(bullet3);
+
+  var target4 = { radius: 10, position: { x: (this.position.x), y: (this.position.y - 3000) } };
+  var bullet4 = new Projectile(target4, this.projectileSize, this.position, this.projectileSpeed, this.projectileDamage, false, this, state);
+  state.world.push(bullet4);
 }
 
+// Multishot tower is upgrade for four shot tower
 function MultiShotTower(pos, state) {
   this.radius = SMALL_RADIUS;
   this.health = 150;
@@ -159,7 +178,7 @@ function MultiShotTower(pos, state) {
   this.range = 150;
   this.bufferTime = 60; //frames
   this.currentBuffer = this.bufferTime;
-  this.numberOfShots = 2;
+  this.numberOfShots = 3;
   this.projectileSpeed = 6;
   this.projectileDamage = 50;
   var pEnergy = function (numberOfShots) {
@@ -186,6 +205,8 @@ function MultiShotTower(pos, state) {
   this.eachShotDelay = 5;
   this.currentShotDelay = 0;
   this.shotsShot = 0;
+  this.bulletExplode = false;
+
 
   Structure.call(this, pos, this.price, this.health, 40, this.name, state);
 }
@@ -216,6 +237,7 @@ MultiShotTower.prototype.step = function (state) {
   this.waitToShoot(state);
 }
 
+// Laser tower is upgrade for multishot tower
 function LaserTower(pos, state) {
   this.radius = SMALL_RADIUS;
   this.maxHealth = 130;
@@ -239,6 +261,8 @@ function LaserTower(pos, state) {
   this.ironPrice = 0;
   this.uraniumPrice = 10;
   this.name = "Laser Tower";
+  this.bulletExplode = false;
+
 
   Structure.call(this, pos, this.price, this.health, 20, this.name, state);
 }
@@ -250,6 +274,47 @@ LaserTower.prototype.shoot = function (state) {
   laser = new Laser(this, target, this.projectileDamage, this.bufferTime / 2, /*healRate,*/ this.projectileSize, "rgba(150,215,200,0.8)", state);
   state.world.push(laser);
 }
+
+function SeekingTower(pos, state) {
+  this.radius = MEDIUM_RADIUS;
+  this.maxHealth = 150;
+  this.health = 150;
+  this.color = "#e0e0e0";
+  this.range = 300;
+  this.bufferTime = 100; //frames
+  this.currentBuffer = this.bufferTime;
+  this.projectileSpeed = 5;
+  this.projectileDamage = 100;
+  this.projectileEnergy = 150;
+  this.projectileSize = 7;
+  this.destroyed = false;
+  this.enemy = false;
+  this.tree = copyArray(seekingTowerUpgrades);;
+  this.kills = 0;
+  this.targetType = "closest";
+  this.name = "Simple Seeking Tower";
+  this.price = 500;
+  this.orePrice = 5;
+  this.icePrice = 0;
+  this.ironPrice = 0;
+  this.uraniumPrice = 10;
+  this.bulletExplode = false;
+
+  Structure.call(this, pos, this.price, this.health, 30, this.name, state);
+}
+SeekingTower.prototype = Object.create(Tower.prototype);
+SeekingTower.prototype.constructor = SeekingTower;
+
+SeekingTower.prototype.shoot = function (state) {
+  var target = this.selectTarget(state);
+  var bullet = new SeekingProjectile(target, this.projectileSize, this.position, this.projectileSpeed, this.projectileDamage, false, this, state);
+  bullet.explode = this.bulletExplode;
+  state.world.push(bullet);
+}
+
+
+
+
 
 function ShipTower(pos, state) {
   this.radius = MEDIUM_RADIUS;
@@ -272,6 +337,9 @@ function ShipTower(pos, state) {
   this.uraniumPrice = 0;
   this.name = "Ship Tower";
   this.shipShoots = false;
+  this.bulletExplode = false;
+  this.shipShotsLimit = 3;
+
 
   Structure.call(this, pos, this.price, this.health, 20, this.name, state);
 }
@@ -282,7 +350,7 @@ ShipTower.prototype.constructor = ShipTower;
 
 ShipTower.prototype.shoot = function (state) {
   var target = this.selectTarget(state);
-  var FShip = new FriendlyShip(duplicate(this.position), this, this.shipShoots, state);
+  var FShip = new FriendlyShip(duplicate(this.position), this, this.shipShoots, this.shipShotsLimit, state);
   state.world.push(FShip);
 }
 
@@ -303,6 +371,8 @@ function BombTower(pos, state) {
   this.ironPrice = 0;
   this.uraniumPrice = 0;
   this.name = "Bomb Tower";
+  this.bulletExplode = false;
+
 
 
   Structure.call(this, pos, this.price, this.health, 20, this.name, state);
@@ -341,6 +411,8 @@ function Golaith(pos, state) {
   this.projectileDamage = 1000;
   this.projectileEnergy = 150;
   this.projectileSize = 60;
+  this.bulletExplode = false;
+
 
   Structure.call(this, pos, this.price, this.health, 20, this.name, state);
 }
@@ -354,53 +426,7 @@ Golaith.prototype.constructor = Golaith;
 //   state.world.push(bullet);
 // }
 
-function fourShotTower(pos, state) {
-  this.radius = MEDIUM_RADIUS;
-  this.maxHealth = 110;
-  this.health = this.maxHealth;
-  this.color = "#9c9cff";
-  this.range = 200;
-  this.bufferTime = 15; //frames
-  this.currentBuffer = this.bufferTime;
-  this.projectileSpeed = 10;
-  this.projectileDamage = 30;
-  this.projectileEnergy = 5;
-  this.projectileSize = 3;
-  this.destroyed = false;
-  this.enemy = false;
-  this.tree = false;
-  this.kills = 0;
-  this.targetType = "closest";
-  this.price = 100;
-  this.orePrice = 0;
-  this.icePrice = 0;
-  this.ironPrice = 0;
-  this.uraniumPrice = 0;
-  this.name = "four shot";
-  this.extractRate = 0;
 
-  Structure.call(this, pos, this.price, this.health, 20, this.name, state);
-}
-fourShotTower.prototype = Object.create(Tower.prototype);
-fourShotTower.prototype.constructor = fourShotTower;
-
-fourShotTower.prototype.shoot = function (state) {
-  var target1 = { radius: 10, position: { x: (this.position.x + 3000), y: (this.position.y) } };
-  var bullet1 = new Projectile(target1, this.projectileSize, this.position, this.projectileSpeed, this.projectileDamage, false, this, state);
-  state.world.push(bullet1);
-
-  var target2 = { radius: 10, position: { x: (this.position.x - 3000), y: (this.position.y) } };
-  var bullet2 = new Projectile(target2, this.projectileSize, this.position, this.projectileSpeed, this.projectileDamage, false, this, state);
-  state.world.push(bullet2);
-
-  var target3 = { radius: 10, position: { x: (this.position.x), y: (this.position.y + 3000) } };
-  var bullet3 = new Projectile(target3, this.projectileSize, this.position, this.projectileSpeed, this.projectileDamage, false, this, state);
-  state.world.push(bullet3);
-
-  var target4 = { radius: 10, position: { x: (this.position.x), y: (this.position.y - 3000) } };
-  var bullet4 = new Projectile(target4, this.projectileSize, this.position, this.projectileSpeed, this.projectileDamage, false, this, state);
-  state.world.push(bullet4);
-}
 
 function bombLauncher(pos, state) {
   this.radius = LARGE_RADIUS;
