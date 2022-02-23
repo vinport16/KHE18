@@ -173,7 +173,7 @@ function MultiShotTower(pos, state) {
   this.projectileSize = 3;
   this.destroyed = false;
   this.enemy = false;
-  this.tree = multiShotTowerTree;
+  this.tree = false;
   this.kills = 0;
   this.targetType = "closest";
   this.name = "Double Shot Tower";
@@ -230,7 +230,7 @@ function LaserTower(pos, state) {
   this.projectileSize = 3;
   this.destroyed = false;
   this.enemy = false;
-  this.tree = laserTowerTree;
+  this.tree = false;
   this.kills = 0;
   this.targetType = "closest";
   this.price = 300;
@@ -272,7 +272,6 @@ function ShipTower(pos, state) {
   this.uraniumPrice = 0;
   this.name = "Ship Tower";
   this.shipShoots = false;
-  this.tree = shipTowerTree;
 
   Structure.call(this, pos, this.price, this.health, 20, this.name, state);
 }
@@ -295,7 +294,7 @@ function BombTower(pos, state) {
   this.range = 2;
   this.destroyed = false;
   this.enemy = false;
-  this.tree = [];
+  this.tree = false;
   this.kills = 0;
   this.targetType = "closest";
   this.price = 800;
@@ -452,7 +451,6 @@ function CollectorTower(pos, state) {
   this.tree = false;
   this.enemy = false;
   this.name = "Resource Collector";
-  this.tree = false;
   this.price = 200;
   this.orePrice = 0;
   this.icePrice = 0;

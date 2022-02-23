@@ -58,11 +58,26 @@ Structure.prototype.upgrade = function (upgrade, state) {
   }
 }
 
+
 Structure.prototype.replace = function (replace, state) {
-  if (state.money >= replace.price) {
+  //fix this = need to first check if property in upgrade, then check cost. 
+  // or just define all matrials in each upgrade   
+  if (state.money >= replace.price && state.ice >= replace.ice && state.iron >= replace.iron && state.ore >= replace.ore && state.uranium >= replace.uranium) {
     state.money -= replace.price;
+    state.ice -= replace.ice;
+    state.iron -= replace.iron;
+    state.ore -= replace.ore;
+    state.uranium -= replace.uranium;
+
     var newStruct = getNewTower(replace.newS, this.position, state);
     newStruct.kills = this.kills;
+    newStruct.tree = [this.tree[0], replace["next"]]
+    newStruct.range = this.range;
+    newStruct.currentBuffer = this.currentBuffer = this.bufferTime;
+    newStruct.projectileSpeed = this.projectileSpeed;
+    newStruct.projectileDamage = this.projectileDamage;
+    newStruct.projectileEnergy = this.projectileEnergy;
+    newStruct.projectileSize = this.projectileSize;
     state.world.push(newStruct);
     state.selectedStructure = newStruct;
     this.delete(state);
