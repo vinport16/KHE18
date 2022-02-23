@@ -37,9 +37,26 @@ Structure.prototype.upgrade = function(upgrade, state){
     state.money -= upgrade.price;
     for (var k in upgrade) {
       if (this.hasOwnProperty(k)) {
-       this[k] = upgrade[k];
+        if(k == "color" || k == "tree"){
+          this[k] = upgrade[k];
+        }else if(k == "price"){
+          this[k] += upgrade[k];
+        }else{
+          this[k] *= upgrade[k];
+        }
       }
     }
+  }
+}
+
+Structure.prototype.replace = function(replace, state){
+  if(state.money >= replace.price){
+    state.money -= replace.price;
+    var newStruct = getNewTower(replace.newS, this.position, state);
+    newStruct.kills = this.kills;
+    state.world.push(newStruct);
+    state.selectedStructure = newStruct;
+    this.delete(state);
   }
 }
 
