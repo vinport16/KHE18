@@ -33,9 +33,7 @@ Structure.prototype.sell = function (state) {
 }
 
 function canAfford(upgrade, state) {
-  console.log(upgrade)
   return (state.money >= upgrade.price && state.ice >= upgrade.icePrice && state.iron >= upgrade.ironPrice && state.ore >= upgrade.orePrice && state.uranium >= upgrade.uraniumPrice);
-
 }
 
 Structure.prototype.upgrade = function (upgradeList, index, state) {
@@ -47,7 +45,6 @@ Structure.prototype.upgrade = function (upgradeList, index, state) {
     state.ore -= upgrade.orePrice;
     state.uranium -= upgrade.uraniumPrice;
     this["price"] += upgrade.price
-    console.log("upgradaee");
 
     for (var k in upgrade.updateProperties) {
       if (this.hasOwnProperty(k)) {

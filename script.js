@@ -184,8 +184,8 @@ function updateSelectedDetails(struct) {
         drawEverything(state);
       });
       describeObject(document.getElementById("up1"), struct.tree[0]);
-      // If no upgrades left, keep button disabled
-      document.getElementById("up1").disabled = (struct.tree[0].name == "No Upgrade Available");
+      // If no upgrades left (or player can't afford), keep button disabled
+      document.getElementById("up1").disabled = (struct.tree[0].name == "No Upgrade Available" || !canAfford(struct.tree[0], state));
     }
 
     if (struct.tree[1]) {
@@ -202,8 +202,8 @@ function updateSelectedDetails(struct) {
         drawEverything(state);
       });
       describeObject(document.getElementById("up2"), struct.tree[1]);
-      // If no upgrades left, keep button disabled
-      document.getElementById("up2").disabled = (struct.tree[1].name == "No Upgrade Available");
+      // If no upgrades left (or player can't afford), keep button disabled
+      document.getElementById("up2").disabled = (struct.tree[1].name == "No Upgrade Available" || !canAfford(struct.tree[1], state));
     }
 
     document.getElementById("selectSell").addEventListener("click", function () {
