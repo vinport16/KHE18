@@ -45,16 +45,22 @@ document.getElementById("defaultTower").onclick = function () {
 }
 describeObject(document.getElementById("defaultTower"), new Tower({ x: 0, y: 0 }, fakestate));
 
-// document.getElementById("laserTower").onclick = function(){
-//   placeStructure(new LaserTower({x:0, y:0}, state), state);
-// }
-// describeObject(document.getElementById("laserTower"),new LaserTower({x:0,y:0},fakestate));
-
 document.getElementById("seekingTower").onclick = function () {
   placeStructure(new SeekingTower({ x: 0, y: 0 }, state), state);
 }
 describeObject(document.getElementById("seekingTower"), new SeekingTower({ x: 0, y: 0 }, fakestate));
 
+document.getElementById("golaith").onclick = function () {
+  placeStructure(new Golaith({ x: 0, y: 0 }, state), state);
+}
+describeObject(document.getElementById("golaith"), new Golaith({ x: 0, y: 0 }, fakestate));
+
+document.getElementById("bomb").onclick = function () {
+  placeStructure(new BombTower({ x: 0, y: 0 }, state), state);
+}
+describeObject(document.getElementById("bomb"), new BombTower({ x: 0, y: 0 }, fakestate));
+
+//Player cannot place these towers anymore
 // document.getElementById("multiShotTower").onclick = function(){
 //   placeStructure(new MultiShotTower({x:0, y:0}, state), state);
 // }
@@ -65,25 +71,15 @@ describeObject(document.getElementById("seekingTower"), new SeekingTower({ x: 0,
 // }
 // describeObject(document.getElementById("shipTower"),new ShipTower({x:0,y:0},fakestate));
 
-document.getElementById("bomb").onclick = function () {
-  placeStructure(new BombTower({ x: 0, y: 0 }, state), state);
-}
-describeObject(document.getElementById("bomb"), new BombTower({ x: 0, y: 0 }, fakestate));
+// document.getElementById("collectorTower").onclick = function () {
+//   placeStructure(new CollectorTower({ x: 0, y: 0 }, state), state);
+// }
+// describeObject(document.getElementById("collectorTower"), new CollectorTower({ x: 0, y: 0 }, fakestate));
 
-document.getElementById("golaith").onclick = function () {
-  placeStructure(new Golaith({ x: 0, y: 0 }, state), state);
-}
-describeObject(document.getElementById("golaith"), new Golaith({ x: 0, y: 0 }, fakestate));
-
-document.getElementById("collectorTower").onclick = function () {
-  placeStructure(new CollectorTower({ x: 0, y: 0 }, state), state);
-}
-describeObject(document.getElementById("collectorTower"), new CollectorTower({ x: 0, y: 0 }, fakestate));
-
-document.getElementById("fourShotTower").onclick = function () {
-  placeStructure(new fourShotTower({ x: 0, y: 0 }, state), state);
-}
-describeObject(document.getElementById("fourShotTower"), new fourShotTower({ x: 0, y: 0 }, fakestate));
+// document.getElementById("fourShotTower").onclick = function () {
+//   placeStructure(new fourShotTower({ x: 0, y: 0 }, state), state);
+// }
+// describeObject(document.getElementById("fourShotTower"), new fourShotTower({ x: 0, y: 0 }, fakestate));
 
 // document.getElementById("bombLauncher").onclick = function(){
 //   placeStructure(new bombLauncher({x:0, y:0}, state), state);
