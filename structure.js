@@ -68,13 +68,15 @@ Structure.prototype.replace = function (upgradeList, index, state) {
     state.ore -= upgrade.orePrice;
     state.uranium -= upgrade.uraniumPrice;
 
+    console.log("str: " + upgrade.newStruct)
     var newStruct = getNewTower(upgrade.newStruct, this.position, state);
     console.log(newStruct)
+    console.log('done')
     for (var k in this) {
       if (k == "name") {
-        newStruct[k] = this.upgrade.name;
+        newStruct[k] = upgrade.name;
       } else if (k == "price") {
-        newStruct[k] = this.price + this.upgrade.price
+        newStruct[k] = this.price + upgrade.price
       } else if (k == "tree") {
         if (upgrade["next"] != null) {
           nextUpgrade = upgrade["next"];
@@ -86,8 +88,15 @@ Structure.prototype.replace = function (upgradeList, index, state) {
         } else {
           newStruct.tree = [this.tree[0], nextUpgrade]
         }
+      } else if (k == "constructor" || k == "activeConnections" || k == "connected" || k == "shoot" || k == "step" || k == "waitToShoot") {
+        // ignore these
       } else {
+        if (newStruct[k] != this[k]) {
+          console.log("new value: " + k)
+          console.log("this: " + this[k] + "newStruct: " + newStruct[k])
+        }
         newStruct[k] = this[k];
+
       }
     }
 
