@@ -10,7 +10,7 @@ function Tower(pos, state) {
   this.health = this.maxHealth;
   this.color = "#9c9cff";
   this.range = 200;
-  this.bufferTime = 15; //frames
+  this.bufferTime = 30; //frames
   this.currentBuffer = this.bufferTime;
   this.projectileSpeed = 10;
   this.projectileDamage = 30;
@@ -178,7 +178,7 @@ function MultiShotTower(pos, state) {
   this.range = 150;
   this.bufferTime = 60; //frames
   this.currentBuffer = this.bufferTime;
-  this.numberOfShots = 3;
+  this.numberOfShots = 2;
   this.projectileSpeed = 6;
   this.projectileDamage = 50;
   var pEnergy = function (numberOfShots) {
@@ -206,6 +206,7 @@ function MultiShotTower(pos, state) {
   this.currentShotDelay = 0;
   this.shotsShot = 0;
   this.bulletExplode = false;
+  this.seeking = false;
 
 
   Structure.call(this, pos, this.price, this.health, 40, this.name, state);
@@ -216,7 +217,12 @@ MultiShotTower.prototype.constructor = MultiShotTower;
 MultiShotTower.prototype.shoot = function (state) {
   this.inProgress = true;
   var target = this.selectTarget(state);
-  var bullet = new Projectile(target, this.projectileSize, this.position, this.projectileSpeed, this.projectileDamage, false, this, state);
+  if (this.seeking) {
+    var bullet = new SeekingProjectile(target, this.projectileSize, this.position, this.projectileSpeed, this.projectileDamage, false, this, state);
+
+  } else {
+    var bullet = new Projectile(target, this.projectileSize, this.position, this.projectileSpeed, this.projectileDamage, false, this, state);
+  }
   state.world.push(bullet);
   this.shotsShot++;
   if (this.shotsShot == this.numberOfShots) {
@@ -393,10 +399,10 @@ function Golaith(pos, state) {
   this.maxHealth = 200;
   this.health = this.maxHealth;
   this.color = "#BBBB99";
-  this.range = 500;
+  this.range = 400;
   this.destroyed = false;
   this.enemy = false;
-  this.tree = false;
+  this.tree = copyArray(golaithTowerUpgrades);
   this.kills = 0;
   this.targetType = "closest";
   this.price = 20000;
@@ -409,7 +415,7 @@ function Golaith(pos, state) {
   this.currentBuffer = this.bufferTime;
   this.projectileSpeed = 8;
   this.projectileDamage = 1000;
-  this.projectileEnergy = 150;
+  this.projectileEnergy = 500;
   this.projectileSize = 60;
   this.bulletExplode = false;
 
@@ -420,11 +426,11 @@ function Golaith(pos, state) {
 Golaith.prototype = Object.create(Tower.prototype);
 Golaith.prototype.constructor = Golaith;
 
-// Golaith.prototype.shoot = function(state){
-//   var target = this.selectTarget(state);
-//   var bullet = new SeekingProjectile(target, this.projectileSize, this.position, this.projectileSpeed, this.projectileDamage, false, this, state);
-//   state.world.push(bullet);
-// }
+Golaith.prototype.shoot = function (state) {
+  var target = this.selectTarget(state);
+  var bullet = new Projectile(target, this.projectileSize, this.position, this.projectileSpeed, this.projectileDamage, false, this, state);
+  state.world.push(bullet);
+}
 
 
 

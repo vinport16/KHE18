@@ -39,8 +39,8 @@ bT21 = new t2Upgrade("Four Shot Tower", 500, 0, 0, 0, 20, "fourShotTower", bT22)
 basicTowerUpgrades = [bT11, bT21]
 
 sT13 = new t1Upgrade("Larger Range", 500, 0, 0, 0, 0, { range: 500 });
-sT12 = new t1Upgrade("Bullets Explode", 300, 0, 0, 0, 0, { bulletExplode: true }, bT13);
-sT11 = new t1Upgrade("Higher Damage", 50, 0, 0, 0, 0, { projectileDamage: 300 }, bT12);
+sT12 = new t1Upgrade("Bullets Explode", 300, 0, 0, 0, 0, { bulletExplode: true }, sT13);
+sT11 = new t1Upgrade("Higher Damage", 50, 0, 0, 0, 0, { projectileDamage: 300 }, sT12);
 
 sT23 = new t1Upgrade("Ships can shoot unlimited", 500, 0, 0, 0, 20, { shipShotsLimit: 100 });
 sT22 = new t1Upgrade("Ships Can Shoot x3", 500, 0, 0, 0, 20, { shipShoots: true }, sT23);
@@ -48,3 +48,12 @@ sT21 = new t2Upgrade("Ship Tower", 500, 0, 0, 0, 20, "shipTower", sT22);
 
 seekingTowerUpgrades = [sT11, sT21]
 
+gT13 = new t1Upgrade("Giant Range", 500, 0, 0, 0, 0, { range: 700 });
+gT12 = new t1Upgrade("More Efficient", 300, 0, 0, 0, 0, { projectileEnergy: 300 }, gT13);
+gT11 = new t1Upgrade("Faster Reload", 50, 0, 0, 0, 0, { bufferTime: 200 }, gT12);
+
+gT23 = new t1Upgrade("Seeking Bullets", 500, 0, 0, 0, 20, { seeking: true });
+gT22 = new t1Upgrade("MultiShot x5", 500, 0, 0, 0, 20, { numberOfShots: 5 }, gT23);
+gT21 = new t2Upgrade("MultiShot tower x2", 5000, 0, 0, 0, 20, "multiShotTower", gT22);
+
+golaithTowerUpgrades = [gT11, gT21]
