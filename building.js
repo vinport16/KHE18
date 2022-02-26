@@ -142,12 +142,12 @@ function SolarPanel(pos, state) {
   this.height = 150;
   this.width = 100;
   this.maxHealth = 75;
-  this.energyMax = 200;
-  this.energyRate = 0.7;
+  this.energyMax = 100;
+  this.energyRate = 0.6;
   this.energy = 0;
   this.enemy = false;
   this.name = "Solar Panel";
-  this.tree = false;
+  this.tree = copyArray(solarBuildingUpgrades);
   this.price = 500;
   this.uraniumPrice = 10;
   this.orePrice = 0;
@@ -190,7 +190,7 @@ function RepairBuilding(pos, state) {
   this.energy = 0;
   this.enemy = false;
   this.name = "Repair Building";
-  this.tree = false;
+  this.tree = copyArray(repairBuildingUpgrades);
   this.price = 300;
   this.icePrice = 10;
   this.orePrice = 0;
@@ -209,13 +209,13 @@ RepairBuilding.prototype.constructor = RepairBuilding;
 function SheildBuilding(pos, state) {
   this.height = 30;
   this.width = 40;
-  this.maxHealth = 1500;
+  this.maxHealth = 1000;
   this.energyMax = 20;
   this.energyRate = 0;
   this.energy = 0;
   this.enemy = false;
   this.name = "Sheild Building";
-  this.tree = false;
+  this.tree = copyArray(sheildBuildingUpgrades);
   this.price = 500;
   this.ironPrice = 10;
   this.orePrice = 5;
@@ -256,7 +256,7 @@ function MegaBuilding(pos, state) {
 MegaBuilding.prototype = Object.create(Building.prototype);
 MegaBuilding.prototype.constructor = MegaBuilding;
 
-function MasterBuilding(pos, state) {
+function MainBuilding(pos, state) {
   this.height = 100;
   this.width = 100;
   this.maxHealth = 500;
@@ -264,7 +264,7 @@ function MasterBuilding(pos, state) {
   this.energyRate = 0.1;
   this.energy = 0;
   this.enemy = false;
-  this.name = "Master Building";
+  this.name = "Main Building";
   this.tree = false;
   this.price = 0;
   this.heal = 15;
@@ -274,10 +274,8 @@ function MasterBuilding(pos, state) {
   Structure.call(this, pos, this.price, this.maxHealth, 20, this.name, state);
 
 }
-MasterBuilding.prototype = Object.create(Building.prototype);
-MasterBuilding.prototype.constructor = MasterBuilding;
-
-
+MainBuilding.prototype = Object.create(Building.prototype);
+MainBuilding.prototype.constructor = MainBuilding;
 
 function getNewBuilding(type, pos, state) {
   console.log("getting new building");

@@ -212,7 +212,7 @@ function updateSelectedDetails(struct) {
       drawEverything(state);
       resetSelect();
     });
-    document.getElementById("selectSell").disabled = false;
+    document.getElementById("selectSell").disabled = (struct.name == "Main Building");
     document.getElementById("selectSell").innerHTML += "<span class='tooltip'>" + (struct.price / (struct.maxHealth / struct.health)) + "$</span>";
 
     document.getElementById("selectTarget").disabled = false;

@@ -153,9 +153,9 @@ function addResources() {
 }
 
 
-//make the master tower
-var masterBuilding = new MasterBuilding({ x: 0, y: 0 }, state);
-state.world.push(masterBuilding);
+//make the main building
+var mainBuilding = new MainBuilding({ x: 0, y: 0 }, state);
+state.world.push(mainBuilding);
 
 addResources();
 
@@ -213,14 +213,14 @@ function step(state) {
       gobject.activeConnections = [];
     }
   });
-  var masterBuildingAlive = false;
+  var mainBuildingAlive = false;
   state.world.forEach(function (gobject) {
-    if (gobject instanceof MasterBuilding) {
-      masterBuildingAlive = true;
+    if (gobject instanceof MainBuilding) {
+      mainBuildingAlive = true;
     }
     gobject.step(state);
   });
-  if (!masterBuildingAlive) {
+  if (!mainBuildingAlive) {
     paused = true;
     alert("Game over, you lost on level " + state.level + "! Would you like to restart?");
     //Restart the game
@@ -243,9 +243,9 @@ function step(state) {
     paused = false;
     pause();
 
-    //make the master tower
-    var masterBuilding = new MasterBuilding({ x: 0, y: 0 }, state);
-    state.world.push(masterBuilding);
+    //make the main building
+    var mainBuilding = new MainBuilding({ x: 0, y: 0 }, state);
+    state.world.push(mainBuilding);
     addResources();
     //start the first level. 
     makeShips(zeroVector, 1000, 2000, state.level, state);
