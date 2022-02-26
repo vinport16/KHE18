@@ -57,3 +57,21 @@ gT22 = new t1Upgrade("MultiShot x5", 500, 0, 0, 0, 20, { numberOfShots: 5 }, gT2
 gT21 = new t2Upgrade("MultiShot tower x2", 5000, 0, 0, 0, 20, "multiShotTower", gT22);
 
 golaithTowerUpgrades = [gT11, gT21]
+
+
+//Building upgrades
+bB12 = new t1Upgrade("Bigger Battery", 300, 0, 0, 0, 0, { energyMax: 300 });
+bB11 = new t1Upgrade("More Health", 50, 0, 0, 0, 0, { maxHealth: 200 }, bB12);
+
+bB22 = new t1Upgrade("Healing Power", 500, 0, 0, 0, 20, { heal: 10, healEnergy: 10 });
+bB21 = new t1Upgrade("Faster Energy Production", 5000, 0, 0, 0, 20, { energyRate: 0.5 }, bB22);
+
+basicBuildingUpgrades = [bB11, bB21]
+
+batB12 = new t1Upgrade("Giant Battery", 300, 0, 0, 0, 0, { energyMax: 5000 });
+batB11 = new t1Upgrade("Bigger Battery", 50, 0, 0, 0, 0, { energyMax: 3000 }, batB12);
+
+batB22 = new t1Upgrade("Faster Energy Production", 500, 0, 0, 0, 20, { energyRate: 0.4 });
+batB21 = new t1Upgrade("More Health", 5000, 0, 0, 0, 20, { maxHealth: 200 }, batB22);
+
+batteryBuildingUpgrades = [batB11, batB21]

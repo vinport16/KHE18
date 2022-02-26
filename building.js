@@ -3,14 +3,14 @@
 function Building(pos, state) {
   this.height = 50;
   this.width = 30;
-  this.maxHealth = 300;
-  this.health = 300;
-  this.energyMax = 150;
-  this.energyRate = 0.5;
+  this.maxHealth = 200;
+  this.health = 200;
+  this.energyMax = 100;
+  this.energyRate = 0.25;
   this.energy = 0;
   this.enemy = false;
   this.name = "Basic Tower";
-  this.tree = false;
+  this.tree = copyArray(basicBuildingUpgrades);
   this.price = 100;
   this.orePrice = 0;
   this.icePrice = 0;
@@ -169,7 +169,7 @@ function Battery(pos, state) {
   this.energy = 0;
   this.enemy = false;
   this.name = "Battery";
-  this.tree = false;
+  this.tree = copyArray(batteryBuildingUpgrades);
   this.price = 500;
   this.orePrice = 10;
   this.icePrice = 0;
