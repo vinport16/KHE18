@@ -215,7 +215,7 @@ function updateSelectedDetails(struct) {
     document.getElementById("selectSell").disabled = (struct.name == "Main Building");
     document.getElementById("selectSell").innerHTML += "<span class='tooltip'>" + (struct.price / (struct.maxHealth / struct.health)) + "$</span>";
 
-    document.getElementById("selectTarget").disabled = false;
+    document.getElementById("selectTarget").disabled = !(struct instanceof Tower);
   }
 }
 

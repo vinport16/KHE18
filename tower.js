@@ -405,7 +405,7 @@ function Golaith(pos, state) {
   this.tree = copyArray(golaithTowerUpgrades);
   this.kills = 0;
   this.targetType = "closest";
-  this.price = 20000;
+  this.price = 10000;
   this.orePrice = 100;
   this.icePrice = 100;
   this.ironPrice = 100;

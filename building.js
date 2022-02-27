@@ -170,7 +170,7 @@ function Battery(pos, state) {
   this.enemy = false;
   this.name = "Battery";
   this.tree = copyArray(batteryBuildingUpgrades);
-  this.price = 500;
+  this.price = 400;
   this.orePrice = 10;
   this.icePrice = 0;
   this.ironPrice = 2;
@@ -210,6 +210,7 @@ function SheildBuilding(pos, state) {
   this.height = 30;
   this.width = 40;
   this.maxHealth = 1000;
+  this.health = 1000;
   this.energyMax = 20;
   this.energyRate = 0;
   this.energy = 0;
