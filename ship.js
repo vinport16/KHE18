@@ -257,6 +257,40 @@ GrandmotherShip.prototype.delete = function (state) {
   GameObject.prototype.delete.call(this, state);
 }
 
+function BombShip(pos, state) {
+  this.radius = 40;
+  this.maxHealth = 300;
+  this.health = this.maxHealth;
+  this.color = "red";
+  this.speed = 1;
+  this.stopDistance = 5;
+  this.target;
+  this.bufferTime = 30;
+  this.currentBuffer = this.bufferTime;
+  this.range = 50;
+  this.projectileSpeed = 10;
+  this.projectileDamage = 30;
+  this.enemy = true;
+  this.destroyed = false;
+  GameObject.call(this, pos);
+  this.bounty = 100;
+}
+BombShip.prototype = Object.create(Ship.prototype);
+BombShip.prototype.constructor = BombShip;
+
+BombShip.prototype.shoot = function (state) {
+  // Doesn't shoot
+}
+
+BombShip.prototype.delete = function (state) {
+  var explosion = new Explosion(duplicate(this.position), 100, true);
+  explosion.damage = 4;
+  state.world.push(explosion);
+
+  state.money += this.bounty;
+  GameObject.prototype.delete.call(this, state);
+}
+
 function SpeedyShip(pos, state) {
   this.radius = 5;
   this.maxHealth = 50;

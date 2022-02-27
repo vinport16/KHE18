@@ -14,8 +14,8 @@ function getRandomInt(min, max) {
 
 function makeShips(point, r1, r2, level, state) {
   n = level * 5;
-  if (level % 5 == 0) {
-    for (i = 0; i < n; i++) {
+  if (level % 10 == 0) {
+    for (i = 0; i < n * 2; i++) {
       var s1 = new Ship(makePointIn(point, r1, r2, state));
       s1.bounty = 20;
       state.world.push(s1);
@@ -23,7 +23,7 @@ function makeShips(point, r1, r2, level, state) {
   } else {
     for (i = 0; i < n; i++) {
       var type = getRandomInt(0, level);
-      if (type <= 3) {
+      if (type <= 5) {
         var s1 = new BasicShip(makePointIn(point, r1, r2, state));
         s1.bounty = 31 - level;
         if (s1.bounty < 5) {
@@ -37,21 +37,21 @@ function makeShips(point, r1, r2, level, state) {
           s1.bounty = 5;
         }
         state.world.push(s1);
-      } else if (type <= 10) {
+      } else if (type <= 13) {
         var s1 = new BigShip(makePointIn(point, r1, r2, state));
         s1.bounty = 101 - level;
         if (s1.bounty < 10) {
           s1.bounty = 10;
         }
         state.world.push(s1);
-      } else if (type <= 14) {
+      } else if (type <= 16) {
         var s1 = new SpeedyShip(makePointIn(point, r1, r2, state));
         s1.bounty = 21 - level;
         if (s1.bounty < 2) {
           s1.bounty = 2;
         }
         state.world.push(s1);
-      } else if (type <= 18) {
+      } else if (type <= 19) {
         var s1 = new MotherShip(makePointIn(point, r1, r2, state));
         s1.bounty = 301 - level;
         if (s1.bounty < 30) {
@@ -59,6 +59,14 @@ function makeShips(point, r1, r2, level, state) {
         }
         state.world.push(s1);
       } else if (type <= 22) {
+        var s1 = new BombShip(makePointIn(point, r1, r2, state));
+        s1.bounty = 101 - level;
+        if (s1.bounty < 20) {
+          s1.bounty = 20;
+        }
+        state.world.push(s1);
+      }
+      else if (type <= 25) {
         var s1 = new GrandmotherShip(makePointIn(point, r1, r2, state));
         s1.bounty = 501 - level * 2;
         if (s1.bounty < 50) {
