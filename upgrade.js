@@ -101,22 +101,11 @@ rB21 = new t1Upgrade("More Health", 5000, 0, 0, 0, 20, { maxHealth: 350 }, rB22)
 repairBuildingUpgrades = [rB11, rB21]
 
 
+//Collector tower
+cT12 = new t1Upgrade("Extract even faster", 300, 0, 0, 0, 0, { extractRate: 4 });
+cT11 = new t1Upgrade("Extract Faster", 50, 0, 0, 0, 0, { extractRate: 2 }, cT12);
 
-this.height = 70;
-this.width = 150;
-this.maxHealth = 150;
-this.energyMax = 200;
-this.energyRate = 0;
-this.energy = 0;
-this.enemy = false;
-this.name = "Repair Building";
-this.tree = false;
-this.price = 300;
-this.icePrice = 10;
-this.orePrice = 0;
-this.ironPrice = 5;
-this.uraniumPrice = 0;
-this.heal = 30;
-this.bufferTime = 30;
-this.currentBuffer = 0;
-this.healEnergy = 25;
+cT22 = new t1Upgrade("Efficient Extraction", 500, 0, 0, 0, 20, { collectionEnergy: 15 });
+cT21 = new t1Upgrade("More Health", 5000, 0, 0, 0, 20, { maxHealth: 400 }, cT22);
+
+collectionTowerUpgrades = [cT11, cT21]

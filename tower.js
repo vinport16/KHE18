@@ -55,7 +55,7 @@ Tower.prototype.step = function (state) {
   if (this instanceof CollectorTower) {
     if (this.currentBuffer <= 0) {
       currentResource = this.onAResource(state);
-      if (currentResource != -1) {
+      if (currentResource != -1 && this.getEnergyFor(this.collectionEnergy, state)) {
         this.extractResource(currentResource, state);
       }
       this.currentBuffer = this.bufferTime;
@@ -477,10 +477,10 @@ function CollectorTower(pos, state) {
   this.range = 30;
   this.color = "#551A8B";
   this.destroyed = false;
-  this.maxHealth = 300;
+  this.maxHealth = 200;
   this.health = this.maxHealth;
   this.enemy = false;
-  this.tree = false;
+  this.tree = copyArray(collectionTowerUpgrades);
   this.enemy = false;
   this.name = "Resource Collector";
   this.price = 200;
@@ -491,6 +491,7 @@ function CollectorTower(pos, state) {
   this.bufferTime = 30;
   this.currentBuffer = 0;
   this.extractRate = 1;
+  this.collectionEnergy = 30;
   Structure.call(this, pos, this.price, this.health, 20, this.name, state);
 }
 
