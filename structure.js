@@ -28,7 +28,7 @@ Structure.prototype.delete = function (state) {
 
 
 Structure.prototype.sell = function (state) {
-  state.money += this.price * (this.health / this.maxHealth);
+  state.money += Math.floor(this.price * (this.health / this.maxHealth));
   this.delete(state);
 }
 

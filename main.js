@@ -169,8 +169,13 @@ function allKilled(state) {
       return state;
     }
   }
+  if (state.givelevelBonus) {
+    state.money += Math.max(550 - (state.level * 50), 0);
+    state.givelevelBonus = false;
+  }
   if (delay == 250) {
     state.level++;
+    state.givelevelBonus = true;
     updateLevelDisplay("Level " + state.level);
     if (state.level > state.highestLevel) {
       state.highestLevel = state.level;
@@ -178,7 +183,7 @@ function allKilled(state) {
     }
     writeMessage("Level " + state.level + " in progress.");
     delay = 0;
-    return makeShips(zeroVector, 1200, 1500, state.level, state);
+    return makeShips(zeroVector, 1200, 1700, state.level, state);
   } else {
     delay++;
     var nextLevel = state.level + 1
@@ -229,10 +234,10 @@ function step(state) {
     state.world = []; //list of every game object
     state.position = { x: 0, y: 0 };
     state.money = 2000;
-    state.iron = 0;
-    state.ore = 0;
-    state.ice = 0;
-    state.uranium = 0;
+    state.iron = 10;
+    state.ore = 10;
+    state.ice = 10;
+    state.uranium = 10;
     state.level = 1;
     state.shipsKilled = 0;
     state.currentStep = 0;
