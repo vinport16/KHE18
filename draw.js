@@ -1,107 +1,107 @@
 // drawing functions
 
-function drawEverything(state){
-	clearCanvas();
+function drawEverything(state) {
+  clearCanvas();
   clearMap();
-	drawWorld(state);
+  drawWorld(state);
   displayMoney(state);
   displayEnergy(state);
-  if(state.proto != null){
+  if (state.proto != null) {
     drawProto(state.proto, state);
   }
 }
 
-function displayMoney(state){
-  document.getElementById("gemsOreIce").innerHTML = "$" + state.money + "; " + "<span style='color:#545e60;'>"+state.ore + " ore;</span> <span style='color:#add8e6;'>" + state.ice + " ice </span>"
-  document.getElementById("ironUranium").innerHTML = "<span style='color:#804000;'>"+state.iron + " iron;</span> <span style='color:#a5a500;'>" + state.uranium +" uranium </span>" 
+function displayMoney(state) {
+  document.getElementById("gemsOreIce").innerHTML = "$" + state.money + "; " + "<span style='color:#545e60;'>" + state.ore + " ore;</span> <span style='color:#add8e6;'>" + state.ice + " ice </span>"
+  document.getElementById("ironUranium").innerHTML = "<span style='color:#804000;'>" + state.iron + " iron;</span> <span style='color:#a5a500;'>" + state.uranium + " uranium </span>"
 }
 
-function displayEnergy(state){
+function displayEnergy(state) {
   ec = state.getEnergyCapacity();
   et = state.getEnergyTotal();
-  if(ec>0){
-    document.getElementById("amount").style.width = ""+(100*et/ec)+"%";
-  }else{
+  if (ec > 0) {
+    document.getElementById("amount").style.width = "" + (100 * et / ec) + "%";
+  } else {
     document.getElementById("amount").style.width = "0%";
   }
-  document.getElementById("amount").innerHTML ="&nbsp" + Math.round(et) + "e";
+  document.getElementById("amount").innerHTML = "&nbsp" + Math.round(et) + "e";
 }
 
-function drawWorld(state){
-  for(var i in state.world){
+function drawWorld(state) {
+  for (var i in state.world) {
     gobj = state.world[i];
-    if(gobj instanceof Resource){
+    if (gobj instanceof Resource) {
       drawResource(gobj, state);
     }
   }
   // draw ranges
-  for(var i in state.world){
+  for (var i in state.world) {
     gobj = state.world[i];
-    if(gobj instanceof Tower){
+    if (gobj instanceof Tower) {
       drawRange(gobj, state);
       mapDrawTowerRange(gobj, state)
     }
   }
   // draw connections
-  for(var i in state.world){
+  for (var i in state.world) {
     gobj = state.world[i];
 
-    if(gobj.connected){
+    if (gobj.connected) {
       others = gobj.connected;
-      for(var j in others){
+      for (var j in others) {
         points = getClosestPoints(gobj, others[j]);
-        drawLine(relative(points[0],state),relative(points[1],state),  "rgba(20,80,200,0.3)");
+        drawLine(relative(points[0], state), relative(points[1], state), "rgba(20,80,200,0.3)");
       }
     }
 
-    if(gobj.activeConnections){
+    if (gobj.activeConnections) {
       others = gobj.activeConnections;
-      for(var j in others){
+      for (var j in others) {
         points = getClosestPoints(gobj, others[j]);
-        drawLine(relative(points[0],state),relative(points[1],state),  "rgba(50,255,200,0.5)");
+        drawLine(relative(points[0], state), relative(points[1], state), "rgba(50,255,200,0.5)");
       }
     }
   }
   // draw gobjects
-	for(var i in state.world){
+  for (var i in state.world) {
     gobj = state.world[i];
-    if(gobj instanceof Explosion){
+    if (gobj instanceof Explosion) {
       drawExplosion(gobj, state);
-		}else if(gobj instanceof Building){
-			drawBuilding(gobj, state);
+    } else if (gobj instanceof Building) {
+      drawBuilding(gobj, state);
       mapDrawBuilding(gobj, state);
-		}else if(gobj instanceof Ship){
-			drawShip(gobj, state);
+    } else if (gobj instanceof Ship) {
+      drawShip(gobj, state);
       mapDrawShip(gobj, state);
-		}else if(gobj instanceof Tower){
-			drawTower(gobj, state);
+    } else if (gobj instanceof Tower) {
+      drawTower(gobj, state);
       mapDrawTower(gobj, state);
-		}else if(gobj instanceof Projectile){
+    } else if (gobj instanceof Projectile) {
       drawProjectile(gobj, state);
-    }else if(gobj instanceof Laser){
+    } else if (gobj instanceof Laser) {
       drawLaser(gobj, state);
-    }else if(gobj instanceof Resource){
+    } else if (gobj instanceof Resource) {
       mapDrawResource(gobj, state);
-    }else{
-			console.log(typeof gobj);
-		}
+    } else {
+      console.log(typeof gobj);
+    }
 
-    
-	}
-  if(state.selectedStructure){
-    highlight(state.selectedStructure,state); 
+
+  }
+  if (state.selectedStructure) {
+    highlight(state.selectedStructure, state);
   }
 }
 
-function clearCanvas(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
+function clearCanvas() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
-function clearMap(){
-  maptx.clearRect(0,0,map.width,map.height);
+function clearMap() {
+  maptx.clearRect(0, 0, map.width, map.height);
 }
 
-function clearListeners(state){
+function clearListeners(state) {
   var clone = canvas.cloneNode(true);
   canvas.parentNode.replaceChild(clone, canvas);
   canvas = clone;
@@ -111,7 +111,7 @@ function clearListeners(state){
   resetSelect();
 }
 
-function clearMapListeners(state){
+function clearMapListeners(state) {
   var clone = map.cloneNode(true);
   map.parentNode.replaceChild(clone, map);
   map = clone;
@@ -120,8 +120,8 @@ function clearMapListeners(state){
   drawEverything(state);
 }
 
-function drawCircle(position, r, fill, stroke){
-	ctx.beginPath();
+function drawCircle(position, r, fill, stroke) {
+  ctx.beginPath();
   ctx.arc(position.x, position.y, r, 0, 2 * Math.PI, false);
   ctx.fillStyle = fill;
   ctx.strokeStyle = stroke;
@@ -130,7 +130,7 @@ function drawCircle(position, r, fill, stroke){
   ctx.stroke();
 }
 
-function drawRectangle(tl, h, w, fill, stroke){
+function drawRectangle(tl, h, w, fill, stroke) {
   ctx.beginPath();
   ctx.fillStyle = fill;
   ctx.strokeStyle = stroke;
@@ -140,32 +140,32 @@ function drawRectangle(tl, h, w, fill, stroke){
   ctx.stroke();
 }
 
-function drawLine(v1, v2, stroke){
-	drawLineWidth(v1, v2, stroke, 2);
+function drawLine(v1, v2, stroke) {
+  drawLineWidth(v1, v2, stroke, 2);
 }
 
-function drawLineWidth(v1, v2, stroke, width){
+function drawLineWidth(v1, v2, stroke, width) {
   ctx.beginPath();
-  ctx.moveTo(v1.x,v1.y);
-  ctx.lineTo(v2.x,v2.y);
+  ctx.moveTo(v1.x, v1.y);
+  ctx.lineTo(v2.x, v2.y);
   ctx.lineWidth = width;
   ctx.strokeStyle = stroke;
   ctx.stroke();
 }
 
-function highlight(struct, state){
-  if(struct.width){
-    drawRectangle(relative(subtract(struct.position, {x:struct.width/2+20,y:struct.height/2+20}),state), struct.height+40, struct.width+40, "rgba(255,255,255,0)","rgba(255,255,255,1)" )
-  }else{
-    drawCircle(relative(struct.position,state),struct.radius+20,"rgba(255,255,255,0)","rgba(255,255,255,1)");
+function highlight(struct, state) {
+  if (struct.width) {
+    drawRectangle(relative(subtract(struct.position, { x: struct.width / 2 + 20, y: struct.height / 2 + 20 }), state), struct.height + 40, struct.width + 40, "rgba(255,255,255,0)", "rgba(255,255,255,1)")
+  } else {
+    drawCircle(relative(struct.position, state), struct.radius + 20, "rgba(255,255,255,0)", "rgba(255,255,255,1)");
   }
 }
 
-function mapDrawTowerRange(tower, state){
-  rp = multiply({x:map.width/2, y:map.height/2}, mapscale);
-  rp = add(tower.position, subtract(rp, add(state.position, {x:canvas.width/2, y:canvas.height/2})));
-  rp = divide(rp,mapscale);
-  radius = (tower.radius+tower.range)/mapscale;
+function mapDrawTowerRange(tower, state) {
+  rp = multiply({ x: map.width / 2, y: map.height / 2 }, mapscale);
+  rp = add(tower.position, subtract(rp, add(state.position, { x: canvas.width / 2, y: canvas.height / 2 })));
+  rp = divide(rp, mapscale);
+  radius = (tower.radius + tower.range) / mapscale;
 
   maptx.beginPath();
   maptx.arc(rp.x, rp.y, radius, 0, 2 * Math.PI, false);
@@ -177,11 +177,11 @@ function mapDrawTowerRange(tower, state){
 
 }
 
-function mapDrawTower(tower, state){
-  rp = multiply({x:map.width/2, y:map.height/2}, mapscale);
-  rp = add(tower.position, subtract(rp, add(state.position, {x:canvas.width/2, y:canvas.height/2})));
-  rp = divide(rp,mapscale);
-  radius = (tower.radius*2)/mapscale;
+function mapDrawTower(tower, state) {
+  rp = multiply({ x: map.width / 2, y: map.height / 2 }, mapscale);
+  rp = add(tower.position, subtract(rp, add(state.position, { x: canvas.width / 2, y: canvas.height / 2 })));
+  rp = divide(rp, mapscale);
+  radius = (tower.radius * 2) / mapscale;
 
   maptx.beginPath();
   maptx.fillStyle = tower.color;
@@ -192,11 +192,11 @@ function mapDrawTower(tower, state){
   maptx.stroke();
 }
 
-function mapDrawResource(resource, state){
-  rp = multiply({x:map.width/2, y:map.height/2}, mapscale);
-  rp = add(resource.position, subtract(rp, add(state.position, {x:canvas.width/2, y:canvas.height/2})));
-  rp = divide(rp,mapscale);
-  radius = resource.radius/mapscale;
+function mapDrawResource(resource, state) {
+  rp = multiply({ x: map.width / 2, y: map.height / 2 }, mapscale);
+  rp = add(resource.position, subtract(rp, add(state.position, { x: canvas.width / 2, y: canvas.height / 2 })));
+  rp = divide(rp, mapscale);
+  radius = resource.radius / mapscale;
 
   maptx.beginPath();
   maptx.fillStyle = resource.color;
@@ -207,12 +207,12 @@ function mapDrawResource(resource, state){
   maptx.stroke();
 }
 
-function mapDrawBuilding(building, state){
-  rp = multiply({x:map.width/2, y:map.height/2}, mapscale);
-  rp = add(subtract(building.position,{x:building.width/2, y:building.height/2}), subtract(rp, add(state.position, {x:canvas.width/2, y:canvas.height/2})));
-  rp = divide(rp,mapscale);
-  width = building.width/mapscale;
-  height = building.height/mapscale;
+function mapDrawBuilding(building, state) {
+  rp = multiply({ x: map.width / 2, y: map.height / 2 }, mapscale);
+  rp = add(subtract(building.position, { x: building.width / 2, y: building.height / 2 }), subtract(rp, add(state.position, { x: canvas.width / 2, y: canvas.height / 2 })));
+  rp = divide(rp, mapscale);
+  width = building.width / mapscale;
+  height = building.height / mapscale;
 
   maptx.beginPath();
   maptx.fillStyle = "rgba(100,255,255,0.7)";
@@ -223,13 +223,13 @@ function mapDrawBuilding(building, state){
   maptx.stroke();
 }
 
-function mapDrawShip(ship, state){
-  rp = multiply({x:map.width/2, y:map.height/2}, mapscale);
-  rp = add(ship.position, subtract(rp, add(state.position, {x:canvas.width/2, y:canvas.height/2})));
-  rp = divide(rp,mapscale);
+function mapDrawShip(ship, state) {
+  rp = multiply({ x: map.width / 2, y: map.height / 2 }, mapscale);
+  rp = add(ship.position, subtract(rp, add(state.position, { x: canvas.width / 2, y: canvas.height / 2 })));
+  rp = divide(rp, mapscale);
 
-  radius = (ship.radius)/mapscale;
-  if(radius < 2){ radius = 2; }
+  radius = (ship.radius) / mapscale;
+  if (radius < 2) { radius = 2; }
 
   maptx.beginPath();
   maptx.arc(rp.x, rp.y, radius, 0, 2 * Math.PI, false);
@@ -240,124 +240,124 @@ function mapDrawShip(ship, state){
   maptx.stroke();
 }
 
-function drawTower(o,state){
+function drawTower(o, state) {
   rp = relative(o.position, state);
-  drawCircle(rp,o.radius,o.color,"rgba(255,255,100,1)");
+  drawCircle(rp, o.radius, o.color, "rgba(255,255,100,1)");
   //draw health level
-  var p1 = subtract(rp,{x:10,y:(4+o.radius)});
-  var p2 = {x:(p1.x+20),y:(p1.y)};
-  drawLine(p1,p2,"rgba(200,50,50,1)");
-  p2.x = p1.x + 20*(o.health/o.maxHealth);
-  drawLine(p1,p2,"rgba(150,200,150,1)");
+  var p1 = subtract(rp, { x: 10, y: (4 + o.radius) });
+  var p2 = { x: (p1.x + 20), y: (p1.y) };
+  drawLine(p1, p2, "rgba(200,50,50,1)");
+  p2.x = p1.x + 20 * (o.health / o.maxHealth);
+  drawLine(p1, p2, "rgba(150,200,150,1)");
 }
 
-function drawRange(o,state){
+function drawRange(o, state) {
   rp = relative(o.position, state);
   //draw range
-  drawCircle(rp, o.range+o.radius, "rgba(0,255,0,0.06)", "rgba(255,255,255,0.0)");
+  drawCircle(rp, o.range + o.radius, "rgba(0,255,0,0.06)", "rgba(255,255,255,0.0)");
 }
 
-function drawProto(proto, state){
-  if(proto instanceof Tower){
+function drawProto(proto, state) {
+  if (proto instanceof Tower) {
     drawProtoTower(proto, state);
-  }else{
+  } else {
     drawProtoBuilding(proto, state);
   }
 }
 
-function drawProtoTower(proto,state){
+function drawProtoTower(proto, state) {
   rp = relative(proto.position, state);
-  if(proto.price > state.money || proto.orePrice > state.ore || proto.icePrice > state.ice || proto.ironPrice > state.iron || proto.uraniumPrice > state.uranium || checkStructureOverlap(proto,state)){
-    drawCircle(rp,proto.radius,"rgba(0,0,0,0)","rgba(255,100,100,100)");
-  }else{
-    drawCircle(rp,proto.radius,"rgba(0,0,0,0)","rgba(100,255,100,100)");
+  if (proto.price > state.money || proto.orePrice > state.ore || proto.icePrice > state.ice || proto.ironPrice > state.iron || proto.uraniumPrice > state.uranium || checkStructureOverlap(proto, state)) {
+    drawCircle(rp, proto.radius, "rgba(0,0,0,0)", "rgba(255,100,100,100)");
+  } else {
+    drawCircle(rp, proto.radius, "rgba(0,0,0,0)", "rgba(100,255,100,100)");
   }
 
   //draw connections
   proto.disconnectAll(state);
   proto.connectToAll(state);
 
-  for(var j = 0; j < proto.connected.length; j++){
+  for (var j = 0; j < proto.connected.length; j++) {
     var o = proto.connected[j];
     points = getClosestPoints(proto, o);
-    drawLine(relative(points[0], state),relative(points[1], state), "rgba(20,80,200,1)");
+    drawLine(relative(points[0], state), relative(points[1], state), "rgba(20,80,200,1)");
   }
 
   //draw firing radius
   drawCircle(rp, proto.range, "rgba(0,0,0,0)", "rgba(255,255,255,0.6)");
 }
 
-function drawBuilding(o, state){
+function drawBuilding(o, state) {
   rp = relative(o.position, state);
-  var topLeft = subtract(rp,{x:o.width/2,y:o.height/2});
-  var bottomRight = add(rp,{x:o.width/2,y:o.height/2});
-  drawRectangle(topLeft, o.height, o.width,"rgba(0,255,0,0.1)","rgba(100,255,255,1)");
+  var topLeft = subtract(rp, { x: o.width / 2, y: o.height / 2 });
+  var bottomRight = add(rp, { x: o.width / 2, y: o.height / 2 });
+  drawRectangle(topLeft, o.height, o.width, "rgba(0,255,0,0.1)", "rgba(100,255,255,1)");
   //draw energy level
-  var p1 = subtract(topLeft,{x:0,y:3});
-  var p2 = {x:bottomRight.x,y:p1.y};
-  drawLine(p1,p2,"rgba(100,100,100,1)");
-  p2.x = p1.x + (o.energy/o.energyMax)*(p2.x-p1.x);
-  drawLine(p1,p2,"rgba(100,150,200,1)");
+  var p1 = subtract(topLeft, { x: 0, y: 3 });
+  var p2 = { x: bottomRight.x, y: p1.y };
+  drawLine(p1, p2, "rgba(100,100,100,1)");
+  p2.x = p1.x + (o.energy / o.energyMax) * (p2.x - p1.x);
+  drawLine(p1, p2, "rgba(100,150,200,1)");
   //draw health level
-  p1 = subtract(topLeft,{x:0,y:6});
-  p2 = {x:bottomRight.x,y:p1.y};
-  drawLine(p1,p2,"rgba(200,50,50,1)");
-  p2.x = p1.x + (o.health/o.maxHealth)*(p2.x-p1.x);
-  drawLine(p1,p2,"rgba(150,200,150,1)");
+  p1 = subtract(topLeft, { x: 0, y: 6 });
+  p2 = { x: bottomRight.x, y: p1.y };
+  drawLine(p1, p2, "rgba(200,50,50,1)");
+  p2.x = p1.x + (o.health / o.maxHealth) * (p2.x - p1.x);
+  drawLine(p1, p2, "rgba(150,200,150,1)");
 }
 
-function drawProtoBuilding(proto, state){
+function drawProtoBuilding(proto, state) {
   rp = relative(proto.position, state);
-  tl = subtract(rp,{x:proto.width/2, y:proto.height/2});
-  if(proto.price > state.money || proto.orePrice > state.ore || proto.icePrice > state.ice || proto.ironPrice > state.iron || proto.uraniumPrice > state.uranium || checkStructureOverlap(proto, state)){
+  tl = subtract(rp, { x: proto.width / 2, y: proto.height / 2 });
+  if (proto.price > state.money || proto.orePrice > state.ore || proto.icePrice > state.ice || proto.ironPrice > state.iron || proto.uraniumPrice > state.uranium || checkStructureOverlap(proto, state)) {
     drawRectangle(tl, proto.height, proto.width, "rgba(0,0,0,0)", "rgba(255,100,100,100)");
-  }else{
-    drawRectangle(tl, proto.height, proto.width, "rgba(0,0,0,0)","rgba(100,255,100,100)");
+  } else {
+    drawRectangle(tl, proto.height, proto.width, "rgba(0,0,0,0)", "rgba(100,255,100,100)");
   }
 
   //draw connections
   proto.disconnectAll(state);
   proto.connectToAll(state);
 
-  for(var j = 0; j < proto.connected.length; j++){
+  for (var j = 0; j < proto.connected.length; j++) {
     var o = proto.connected[j];
     points = getClosestPoints(proto, o);
-    drawLine(relative(points[0], state),relative(points[1], state), "rgba(20,80,200,1)");
+    drawLine(relative(points[0], state), relative(points[1], state), "rgba(20,80,200,1)");
   }
 }
 
-function drawShip(o, state){
+function drawShip(o, state) {
   rp = relative(o.position, state);
-  drawCircle(rp,o.radius,o.color,"rgba(255,255,255,0.3)");
+  drawCircle(rp, o.radius, o.color, "rgba(255,255,255,0.3)");
   //draw health level
-  var p1 = subtract(rp,{x:10,y:(4+o.radius)});
-  var p2 = {x:(p1.x+20),y:(p1.y)};
-  drawLine(p1,p2,"rgba(200,50,50,1)");
-  p2.x = p1.x + 20*(o.health/o.maxHealth);
-  drawLine(p1,p2,"rgba(150,200,150,1)");
+  var p1 = subtract(rp, { x: 10, y: (4 + o.radius) });
+  var p2 = { x: (p1.x + 20), y: (p1.y) };
+  drawLine(p1, p2, "rgba(200,50,50,1)");
+  p2.x = p1.x + 20 * (o.health / o.maxHealth);
+  drawLine(p1, p2, "rgba(150,200,150,1)");
 }
 
-function drawProjectile(p, state){
+function drawProjectile(p, state) {
   rp = relative(p.position, state);
-  drawCircle(rp,p.radius,p.color,"rgba(0,0,0,0)");
+  drawCircle(rp, p.radius, p.color, "rgba(0,0,0,0)");
 }
 
-function drawLaser(laser, state){
+function drawLaser(laser, state) {
   rp1 = relative(laser.parent.position, state);
   rp2 = relative(laser.target.position, state);
   drawLineWidth(rp1, rp2, laser.color, laser.width);
 }
 
-function drawExplosion(exp, state){
+function drawExplosion(exp, state) {
   rp = relative(exp.position, state);
-  if(exp.radius < 5){
-    drawCircle(rp,50,exp.color,"rgba(255,255,255,0)");
-  }else{
-    drawCircle(rp,exp.radius,exp.color,"rgba(255,255,255,0)");
+  if (exp.radius < 5) {
+    drawCircle(rp, 50, exp.color, "rgba(255,255,255,0)");
+  } else {
+    drawCircle(rp, exp.radius, exp.color, "rgba(255,255,255,0)");
   }
 }
 
-function drawResource(res, state){
+function drawResource(res, state) {
   rp = relative(res.position, state);
   drawCircle(rp, res.radius, res.color, "rgba(0,0,0,0)");
 }

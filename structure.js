@@ -68,10 +68,7 @@ Structure.prototype.replace = function (upgradeList, index, state) {
     state.ore -= upgrade.orePrice;
     state.uranium -= upgrade.uraniumPrice;
 
-    console.log("str: " + upgrade.newStruct)
     var newStruct = getNewTower(upgrade.newStruct, this.position, state);
-    console.log(newStruct)
-    console.log('done')
     for (var k in this) {
       if (k == "name") {
         newStruct[k] = upgrade.name;
@@ -92,8 +89,6 @@ Structure.prototype.replace = function (upgradeList, index, state) {
         // ignore these
       } else {
         if (newStruct[k] != this[k]) {
-          console.log("new value: " + k)
-          console.log("this: " + this[k] + "newStruct: " + newStruct[k])
         }
         newStruct[k] = this[k];
 
