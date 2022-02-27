@@ -105,6 +105,28 @@ Ship.prototype.selectMoveTarget = function (state) {
   return closest[0];
 }
 
+
+function BasicShip(pos, state) {
+  this.radius = 10;
+  this.maxHealth = 130;
+  this.health = this.maxHealth;
+  this.color = "red";
+  this.speed = 2.5;
+  this.stopDistance = 5;
+  this.target;
+  this.bufferTime = 30;
+  this.currentBuffer = this.bufferTime;
+  this.range = 50;
+  this.projectileSpeed = 10;
+  this.projectileDamage = 30;
+  this.enemy = true;
+  this.destroyed = false;
+  GameObject.call(this, pos);
+  this.bounty = 30;
+}
+BasicShip.prototype = Object.create(Ship.prototype);
+BasicShip.prototype.constructor = BasicShip;
+
 function BigShip(pos, state) {
   this.radius = 15;
   this.maxHealth = 200;

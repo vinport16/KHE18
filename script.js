@@ -232,10 +232,10 @@ function pause() {
     for (var i = 0; i < controlButtons.length; i++) {
       controlButtons[i].disabled = false;
     }
-    document.getElementById("pause").innerHTML = "pause";
+    document.getElementById("pause").innerHTML = "Pause";
   } else {
     enableAllButtons();
-    document.getElementById("pause").innerHTML = "resume";
+    document.getElementById("pause").innerHTML = "Resume";
   }
 }
 
