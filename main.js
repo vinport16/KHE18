@@ -198,7 +198,7 @@ function allKilled(state) {
     }
     writeMessage("Level " + state.level + " in progress.");
     delay = 0;
-    return makeShips(zeroVector, 1200, 1700, state.level, state);
+    return makeShips(zeroVector, 1000, 3000, state.level, state);
   } else {
     delay++;
     var nextLevel = state.level + 1
@@ -268,7 +268,7 @@ function step(state) {
     state.world.push(mainBuilding);
     addResources();
     //start the first level. 
-    makeShips(zeroVector, 1000, 2000, state.level, state);
+    makeShips(zeroVector, 1000, 3000, state.level, state);
     var delay = 0;
 
   }
