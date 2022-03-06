@@ -55,7 +55,7 @@ describeObject(document.getElementById("collectorTower"), new CollectorTower({ x
 
 // SHIPS
 
-document.getElementById("ships").onclick = function () {
-  makeShips(zeroVector, 800, 2850, 50, state);
-  drawEverything(state);
-}
+// document.getElementById("ships").onclick = function () {
+//   makeShips(zeroVector, 800, 2850, 50, state);
+//   drawEverything(state);
+// }

@@ -108,17 +108,17 @@ Ship.prototype.selectMoveTarget = function (state) {
 
 function BasicShip(pos, state) {
   this.radius = 10;
-  this.maxHealth = 130;
+  this.maxHealth = 80;
   this.health = this.maxHealth;
   this.color = "red";
-  this.speed = 2.5;
+  this.speed = 1.5;
   this.stopDistance = 5;
   this.target;
   this.bufferTime = 30;
   this.currentBuffer = this.bufferTime;
-  this.range = 50;
+  this.range = 20;
   this.projectileSpeed = 10;
-  this.projectileDamage = 30;
+  this.projectileDamage = 10;
   this.enemy = true;
   this.destroyed = false;
   GameObject.call(this, pos);

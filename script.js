@@ -95,10 +95,21 @@ function toggleHeal() {
 
 document.getElementById("heal").addEventListener("click", toggleHeal);
 
+function toggleCollection() {
+  collection = !collection;
+  if (collection) {
+    document.getElementById("collection").innerHTML = "pause resource collection";
+  } else {
+    document.getElementById("collection").innerHTML = "resume resource collection";
+  }
+}
+
+document.getElementById("collection").addEventListener("click", toggleCollection);
+
 var controlButtons = [
   document.getElementById("pause"),
   document.getElementById("cancel"),
-  document.getElementById("ships"),
+  document.getElementById("collection"),
   document.getElementById("heal")
 ]
 

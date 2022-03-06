@@ -55,7 +55,7 @@ Tower.prototype.step = function (state) {
   if (this instanceof CollectorTower) {
     if (this.currentBuffer <= 0) {
       currentResource = this.onAResource(state);
-      if (currentResource != -1 && this.getEnergyFor(this.collectionEnergy, state)) {
+      if (collection && currentResource != -1 && this.getEnergyFor(this.collectionEnergy, state)) {
         this.extractResource(currentResource, state);
       }
       this.currentBuffer = this.bufferTime;
@@ -521,6 +521,7 @@ CollectorTower.prototype.extractResource = function (resource, state) {
     state.uranium += this.extractRate;
   }
   resource.extract(this.extractRate);
+
 }
 
 

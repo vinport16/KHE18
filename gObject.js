@@ -86,7 +86,7 @@ Projectile.prototype.move = function (state) {
     this.velocity = multiply(unitVector(subtract(getClosestPoints(this.target, this)[0], this.position)), this.speed);
   }
   this.position = add(this.position, this.velocity);
-  if (this.position.x > 2000 || this.position.x < -2000 || this.position.y > 2000 || this.position.y < -2000) {
+  if (this.position.x > 5000 || this.position.x < -5000 || this.position.y > 5000 || this.position.y < -5000) {
     this.delete(state);
   }
 
