@@ -224,7 +224,7 @@ function updateSelectedDetails(struct) {
       resetSelect();
     });
     document.getElementById("selectSell").disabled = (struct.name == "Main Building");
-    document.getElementById("selectSell").innerHTML += "<span class='tooltip'>" + (struct.price / (struct.maxHealth / struct.health)) + "$</span>";
+    document.getElementById("selectSell").innerHTML += "<span class='tooltip'>" + Math.floor(struct.price * (struct.health / struct.maxHealth) * 0.9) + "$</span>";
 
     document.getElementById("selectTarget").disabled = !(struct instanceof Tower);
   }

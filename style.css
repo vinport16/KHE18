@@ -160,3 +160,7 @@ span.tooltip {
 button:hover:enabled .tooltip {
     visibility: visible;
 }
+
+button.tower2:hover .tooltip {
+  visibility: visible;
+}
