@@ -158,7 +158,7 @@ function MotherShip(pos, state) {
   this.maxHealth = 500;
   this.health = this.maxHealth;
   this.color = "red";
-  this.speed = 0.1;
+  this.speed = 1.0;
   this.stopDistance = 100;
   this.target;
   this.bufferTime = 300;
@@ -194,8 +194,8 @@ MotherShip.prototype.move = function (state) {
 }
 
 MotherShip.prototype.delete = function (state) {
-  for (i = 0; i < 4; i++) {
-    var s1 = new BigShip({ x: this.position.x + i, y: this.position.y + i }, state);
+  for (i = -5; i < 5; i++) {
+    var s1 = new BigShip({ x: this.position.x + (i * 10), y: this.position.y + (i * 10) }, state);
     s1.bounty = 101 - state.level;
     if (s1.bounty < 10) {
       s1.bounty = 10;
@@ -255,8 +255,8 @@ GrandmotherShip.prototype.move = function (state) {
 }
 
 GrandmotherShip.prototype.delete = function (state) {
-  for (i = 0; i < 4; i++) {
-    var s1 = new MotherShip({ x: this.position.x + i, y: this.position.y + i }, state);
+  for (i = -10; i < 10; i++) {
+    var s1 = new MotherShip({ x: this.position.x + (i * 10), y: this.position.y + (i * 10) }, state);
     s1.bounty = 301 - state.level;
     if (s1.bounty < 30) {
       s1.bounty = 30;
@@ -310,7 +310,7 @@ function SpeedyShip(pos, state) {
   this.speed = 20;
   this.stopDistance = 10;
   this.target;
-  this.bufferTime = 2;
+  this.bufferTime = 5;
   this.currentBuffer = this.bufferTime;
   this.range = 20;
   this.projectileSpeed = 10;
@@ -359,6 +359,9 @@ function FriendlyShip(pos, parent, shoots, shotsLimit, state) {
   this.stopDistance = 10;
   this.target;
   this.bufferTime = 25;
+  this.speed = 2;
+  this.maxHealth = 200;
+  this.health = 200;
   this.currentBuffer = this.bufferTime;
   this.range = 150;
   this.projectileSpeed = 10;

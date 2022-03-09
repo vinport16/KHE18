@@ -43,7 +43,7 @@ sT12 = new t1Upgrade("Bullets Explode", 1000, 0, 0, 0, 0, { bulletExplode: true 
 sT11 = new t1Upgrade("Higher Damage", 250, 0, 0, 0, 0, { projectileDamage: 300 }, sT12);
 
 sT23 = new t1Upgrade("Ships can shoot unlimited", 5000, 0, 0, 30, 0, { shipShotsLimit: 100 });
-sT22 = new t1Upgrade("Ships Can Shoot x3", 1000, 10, 20, 0, 0, { shipShoots: true }, sT23);
+sT22 = new t1Upgrade("Ships Can Shoot x3", 1000, 10, 20, 0, 0, { shipShoots: true, }, sT23);
 sT21 = new t2Upgrade("Ship Tower", 300, 10, 0, 10, 0, "shipTower", sT22);
 
 seekingTowerUpgrades = [sT11, sT21]
