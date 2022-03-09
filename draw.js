@@ -249,6 +249,12 @@ function drawTower(o, state) {
   drawLine(p1, p2, "rgba(200,50,50,1)");
   p2.x = p1.x + 20 * (o.health / o.maxHealth);
   drawLine(p1, p2, "rgba(150,200,150,1)");
+  //write kill count:
+  if (o.kills > 0) {
+    ctx.font = "15px Arial";
+    ctx.fillStyle = "black"
+    ctx.fillText(o.kills, rp.x - (o.radius / 2), rp.y + (o.radius / 2));
+  }
 }
 
 function drawRange(o, state) {
