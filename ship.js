@@ -195,7 +195,7 @@ MotherShip.prototype.move = function (state) {
 
 MotherShip.prototype.delete = function (state) {
   for (i = -5; i < 5; i++) {
-    var s1 = new BigShip({ x: this.position.x + (i * 10), y: this.position.y + (i * 10) }, state);
+    var s1 = new BigShip({ x: this.position.x + (i * getRndInteger(-10, 10)), y: this.position.y + (i * getRndInteger(-10, 10)) }, state);
     s1.bounty = 101 - state.level;
     if (s1.bounty < 10) {
       s1.bounty = 10;
@@ -256,7 +256,7 @@ GrandmotherShip.prototype.move = function (state) {
 
 GrandmotherShip.prototype.delete = function (state) {
   for (i = -10; i < 10; i++) {
-    var s1 = new MotherShip({ x: this.position.x + (i * 10), y: this.position.y + (i * 10) }, state);
+    var s1 = new MotherShip({ x: this.position.x + (i * getRndInteger(-10, 10)), y: this.position.y + (i * getRndInteger(-10, 10)) }, state);
     s1.bounty = 301 - state.level;
     if (s1.bounty < 30) {
       s1.bounty = 30;
