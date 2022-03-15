@@ -115,7 +115,7 @@ function BasicShip(pos, state) {
   this.health = this.maxHealth;
   this.color = "red";
   this.speed = 1.5;
-  this.stopDistance = 5;
+  this.stopDistance = 10;
   this.target;
   this.bufferTime = 30;
   this.currentBuffer = this.bufferTime;
@@ -126,6 +126,7 @@ function BasicShip(pos, state) {
   this.destroyed = false;
   GameObject.call(this, pos);
   this.bounty = 30;
+  this.shotCount = 1;
 }
 BasicShip.prototype = Object.create(Ship.prototype);
 BasicShip.prototype.constructor = BasicShip;
@@ -285,6 +286,7 @@ function BombShip(pos, state) {
   this.destroyed = false;
   GameObject.call(this, pos);
   this.bounty = 100;
+  this.shotCount = 1;
 }
 BombShip.prototype = Object.create(Ship.prototype);
 BombShip.prototype.constructor = BombShip;
@@ -319,6 +321,7 @@ function SpeedyShip(pos, state) {
   this.destroyed = false;
   GameObject.call(this, pos);
   this.bounty = 20;
+  this.shotCount = 1;
 }
 SpeedyShip.prototype = Object.create(Ship.prototype);
 SpeedyShip.prototype.constructor = SpeedyShip;
