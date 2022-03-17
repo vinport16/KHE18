@@ -92,14 +92,14 @@ function addResources() {
     if (i < 5) {
       var location = makePointIn(zeroVector, 70, 250, state)
       var amount = getRandomInt(10, Math.max(Math.abs(location.x) + Math.abs(location.y), 50));
-    } else if (i < 10) {
+    } else if (i < 15) {
       var location = makePointIn(zeroVector, 200, 600, state)
       var amount = getRandomInt(50, Math.max(Math.abs(location.x) + Math.abs(location.y), 100));
     } else if (i < 30) {
-      var location = makePointIn(zeroVector, 500, 1500, state)
+      var location = makePointIn(zeroVector, 500, 1000, state)
       var amount = getRandomInt(100, Math.abs(location.x) + Math.abs(location.y) / 1.5);
     } else {
-      var location = makePointIn(zeroVector, 1200, 2000, state)
+      var location = makePointIn(zeroVector, 800, 1500, state)
       var amount = getRandomInt(150, (Math.abs(location.x) + Math.abs(location.y)) / 2);
     }
 
@@ -200,7 +200,7 @@ function allKilled(state) {
     }
     writeMessage("Level " + state.level + " in progress.");
     delay = 0;
-    return makeShips(zeroVector, 2000, 3000, state.level, state);
+    return makeShips(zeroVector, 2000, 2000 + (50 * state.level), state.level, state);
   } else {
     delay++;
     var nextLevel = state.level + 1
@@ -270,7 +270,7 @@ function step(state) {
     state.world.push(mainBuilding);
     addResources();
     //start the first level. 
-    makeShips(zeroVector, 2000, 3000, state.level, state);
+    makeShips(zeroVector, 2000, 2000 + (50 * state.level), state.level, state);
     var delay = 0;
 
   }
