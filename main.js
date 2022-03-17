@@ -91,7 +91,7 @@ function addResources() {
     var location = { x: 0, y: 0 };
     var amount = 0;
     if (i < 5) {
-      var location = makePointIn(zeroVector, 50, 250, state)
+      var location = makePointIn(zeroVector, 70, 250, state)
       var amount = getRandomInt(10, Math.max(Math.abs(location.x) + Math.abs(location.y), 50));
     } else if (i < 10) {
       var location = makePointIn(zeroVector, 200, 600, state)

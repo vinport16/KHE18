@@ -223,9 +223,18 @@ function updateSelectedDetails(struct) {
       drawEverything(state);
       resetSelect();
     });
-    document.getElementById("selectSell").disabled = (struct.name == "Main Building");
-    document.getElementById("selectSell").innerHTML += "<span class='tooltip'>" + Math.floor(struct.price * (struct.health / struct.maxHealth) * 0.9) + "$</span>";
 
+    //Remove previous tool tips for cost to sell items
+    const list = document.getElementById("selectSell");
+    while (list.childElementCount > 0) {
+      list.removeChild(list.lastChild);
+    }
+    // Can't sell main buildling or collection tower. Collecting resources is too easy if towers can be sold at will.
+    document.getElementById("selectSell").disabled = (struct.name == "Main Building") || (struct.name == "Resource Collector");
+
+    if (!document.getElementById("selectSell").disabled) {
+      document.getElementById("selectSell").innerHTML += "<span class='tooltip'>" + Math.floor(struct.price * (struct.health / struct.maxHealth) * 0.9) + "$</span>";
+    }
     document.getElementById("selectTarget").disabled = !(struct instanceof Tower);
   }
 }
