@@ -30,7 +30,7 @@ function displayEnergy(state) {
 function drawWorld(state) {
   for (var i in state.world) {
     gobj = state.world[i];
-    if (gobj instanceof Resource) {
+    if (gobj instanceof Resource && isDisplayed(gobj, state)) {
       drawResource(gobj, state);
     }
   }
@@ -65,17 +65,23 @@ function drawWorld(state) {
   // draw gobjects
   for (var i in state.world) {
     gobj = state.world[i];
-    if (gobj instanceof Explosion) {
+    if (gobj instanceof Explosion && isDisplayed(gobj, state)) {
       drawExplosion(gobj, state);
     } else if (gobj instanceof Building) {
-      drawBuilding(gobj, state);
       mapDrawBuilding(gobj, state);
+      if (isDisplayed(gobj, state)) {
+        drawBuilding(gobj, state);
+      }
     } else if (gobj instanceof Ship) {
-      drawShip(gobj, state);
       mapDrawShip(gobj, state);
+      if (isDisplayed(gobj, state)) {
+        drawShip(gobj, state);
+      }
     } else if (gobj instanceof Tower) {
-      drawTower(gobj, state);
       mapDrawTower(gobj, state);
+      if (isDisplayed(gobj, state)) {
+        drawTower(gobj, state);
+      }
     } else if (gobj instanceof Projectile) {
       drawProjectile(gobj, state);
     } else if (gobj instanceof Laser) {
@@ -118,6 +124,19 @@ function clearMapListeners(state) {
   maptx = map.getContext("2d");
 
   drawEverything(state);
+}
+
+function isDisplayed(obj, state) {
+  displayedCanvasObj = { position: { x: state.position.x + canvas.width / 2, y: state.position.y + canvas.height / 2 }, width: canvas.width, height: canvas.height }
+  //drawBuilding(displayedCanvasObj, state);
+  // Circle Objects:
+  if (obj instanceof Explosion || obj instanceof Ship || obj instanceof Tower || obj instanceof Projectile || obj instanceof Resource) {
+    return checkMixedOverlap(obj, displayedCanvasObj);
+  } else if (obj instanceof Building) {
+    return checkRectOverlap(obj, displayedCanvasObj);
+  } else {
+    return true;
+  }
 }
 
 function drawCircle(position, r, fill, stroke) {
