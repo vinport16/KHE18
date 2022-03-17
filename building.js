@@ -20,7 +20,8 @@ function Building(pos, state) {
   this.bufferTime = 30;
   this.currentBuffer = 0;
   this.healEnergy = 0;
-  Structure.call(this, pos, this.price, this.maxHealth, 100, this.name, state);
+  this.energyRange = 20;
+  Structure.call(this, pos, this.price, this.maxHealth, this.energyRange, this.name, state);
 
 }
 
@@ -153,7 +154,8 @@ function SolarPanel(pos, state) {
   this.orePrice = 0;
   this.icePrice = 0;
   this.ironPrice = 0;
-  Structure.call(this, pos, this.price, this.maxHealth, 200, this.name, state);
+  this.energyRange = 20;
+  Structure.call(this, pos, this.price, this.maxHealth, this.energyRange, this.name, state);
 
 }
 SolarPanel.prototype = Object.create(Building.prototype);
@@ -175,7 +177,8 @@ function Battery(pos, state) {
   this.icePrice = 0;
   this.ironPrice = 2;
   this.uraniumPrice = 0;
-  Structure.call(this, pos, this.price, this.maxHealth, 500, this.name, state);
+  this.energyRange = 20;
+  Structure.call(this, pos, this.price, this.maxHealth, this.energyRange, this.name, state);
 
 }
 Battery.prototype = Object.create(Building.prototype);
@@ -200,7 +203,8 @@ function RepairBuilding(pos, state) {
   this.bufferTime = 30;
   this.currentBuffer = 0;
   this.healEnergy = 25;
-  Structure.call(this, pos, this.price, this.maxHealth, 20, this.name, state);
+  this.energyRange = 20;
+  Structure.call(this, pos, this.price, this.maxHealth, this.energyRange, this.name, state);
 
 }
 RepairBuilding.prototype = Object.create(Building.prototype);
@@ -226,7 +230,8 @@ function SheildBuilding(pos, state) {
   this.bufferTime = 30;
   this.currentBuffer = 0;
   this.healEnergy = 1;
-  Structure.call(this, pos, this.price, this.maxHealth, 20, this.name, state);
+  this.energyRange = 20;
+  Structure.call(this, pos, this.price, this.maxHealth, this.energyRange, this.name, state);
 
 }
 SheildBuilding.prototype = Object.create(Building.prototype);
@@ -251,7 +256,8 @@ function MegaBuilding(pos, state) {
   this.bufferTime = 30;
   this.currentBuffer = 0;
   this.healEnergy = 40;
-  Structure.call(this, pos, this.price, this.maxHealth, 20, this.name, state);
+  this.energyRange = 20;
+  Structure.call(this, pos, this.price, this.maxHealth, this.energyRange, this.name, state);
 }
 
 MegaBuilding.prototype = Object.create(Building.prototype);
@@ -272,7 +278,8 @@ function MainBuilding(pos, state) {
   this.bufferTime = 50;
   this.currentBuffer = 0;
   this.healEnergy = 30;
-  Structure.call(this, pos, this.price, this.maxHealth, 20, this.name, state);
+  this.energyRange = 20;
+  Structure.call(this, pos, this.price, this.maxHealth, this.energyRange, this.name, state);
 
 }
 MainBuilding.prototype = Object.create(Building.prototype);

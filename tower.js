@@ -29,9 +29,9 @@ function Tower(pos, state) {
   this.name = "Basic Tower";
   this.extractRate = 0;
   this.bulletExplode = false;
+  this.energyRange = 20;
 
-
-  Structure.call(this, pos, this.price, this.health, 20, this.name, state);
+  Structure.call(this, pos, this.price, this.health, this.radius + this.radius + this.energyRange, this.name, state);
 }
 Tower.prototype = Object.create(Structure.prototype);
 Tower.prototype.constructor = Tower;
@@ -145,9 +145,9 @@ function fourShotTower(pos, state) {
   this.name = "four shot";
   this.extractRate = 0;
   this.bulletExplode = false;
+  this.energyRange = 20;
 
-
-  Structure.call(this, pos, this.price, this.health, 20, this.name, state);
+  Structure.call(this, pos, this.price, this.health, this.radius + this.energyRange, this.name, state);
 }
 fourShotTower.prototype = Object.create(Tower.prototype);
 fourShotTower.prototype.constructor = fourShotTower;
@@ -207,9 +207,9 @@ function MultiShotTower(pos, state) {
   this.shotsShot = 0;
   this.bulletExplode = false;
   this.seeking = false;
+  this.energyRange = 20;
 
-
-  Structure.call(this, pos, this.price, this.health, 40, this.name, state);
+  Structure.call(this, pos, this.price, this.health, this.radius + this.energyRange, this.name, state);
 }
 MultiShotTower.prototype = Object.create(Tower.prototype);
 MultiShotTower.prototype.constructor = MultiShotTower;
@@ -268,9 +268,9 @@ function LaserTower(pos, state) {
   this.uraniumPrice = 10;
   this.name = "Laser Tower";
   this.bulletExplode = false;
+  this.energyRange = 20;
 
-
-  Structure.call(this, pos, this.price, this.health, 20, this.name, state);
+  Structure.call(this, pos, this.price, this.health, this.radius + this.energyRange, this.name, state);
 }
 LaserTower.prototype = Object.create(Tower.prototype);
 LaserTower.prototype.constructor = LaserTower;
@@ -305,8 +305,9 @@ function SeekingTower(pos, state) {
   this.ironPrice = 0;
   this.uraniumPrice = 10;
   this.bulletExplode = false;
+  this.energyRange = 20;
 
-  Structure.call(this, pos, this.price, this.health, 30, this.name, state);
+  Structure.call(this, pos, this.price, this.health, this.radius + this.energyRange, this.name, state);
 }
 SeekingTower.prototype = Object.create(Tower.prototype);
 SeekingTower.prototype.constructor = SeekingTower;
@@ -317,10 +318,6 @@ SeekingTower.prototype.shoot = function (state) {
   bullet.explode = this.bulletExplode;
   state.world.push(bullet);
 }
-
-
-
-
 
 function ShipTower(pos, state) {
   this.radius = MEDIUM_RADIUS;
@@ -345,9 +342,9 @@ function ShipTower(pos, state) {
   this.shipShoots = false;
   this.bulletExplode = false;
   this.shipShotsLimit = 3;
+  this.energyRange = 20;
 
-
-  Structure.call(this, pos, this.price, this.health, 20, this.name, state);
+  Structure.call(this, pos, this.price, this.health, this.radius + this.energyRange, this.name, state);
 }
 
 ShipTower.prototype = Object.create(Tower.prototype);
@@ -378,10 +375,9 @@ function BombTower(pos, state) {
   this.uraniumPrice = 0;
   this.name = "Bomb Tower";
   this.bulletExplode = false;
+  this.energyRange = 20;
 
-
-
-  Structure.call(this, pos, this.price, this.health, 20, this.name, state);
+  Structure.call(this, pos, this.price, this.health, this.radius + this.energyRange, this.name, state);
 }
 
 BombTower.prototype = Object.create(Tower.prototype);
@@ -418,9 +414,9 @@ function Golaith(pos, state) {
   this.projectileEnergy = 500;
   this.projectileSize = 60;
   this.bulletExplode = false;
+  this.energyRange = 20;
 
-
-  Structure.call(this, pos, this.price, this.health, 20, this.name, state);
+  Structure.call(this, pos, this.price, this.health, this.radius + this.energyRange, this.name, state);
 }
 
 Golaith.prototype = Object.create(Tower.prototype);
@@ -458,8 +454,9 @@ function bombLauncher(pos, state) {
   this.uraniumPrice = 0;
   this.name = "four shot";
   this.extractRate = 0;
+  this.energyRange = 20;
 
-  Structure.call(this, pos, this.price, this.health, 20, this.name, state);
+  Structure.call(this, pos, this.price, this.health, this.radius + this.energyRange, this.name, state);
 }
 bombLauncher.prototype = Object.create(Tower.prototype);
 bombLauncher.prototype.constructor = bombLauncher;
@@ -492,7 +489,9 @@ function CollectorTower(pos, state) {
   this.currentBuffer = 0;
   this.extractRate = 1;
   this.collectionEnergy = 30;
-  Structure.call(this, pos, this.price, this.health, 20, this.name, state);
+  this.energyRange = 20;
+
+  Structure.call(this, pos, this.price, this.health, this.radius + this.energyRange, this.name, state);
 }
 
 CollectorTower.prototype = Object.create(Tower.prototype);
