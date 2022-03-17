@@ -361,8 +361,8 @@ function FriendlyShip(pos, parent, shoots, shotsLimit, state) {
   this.target;
   this.bufferTime = 25;
   this.speed = 2;
-  this.maxHealth = 200;
-  this.health = 200;
+  this.maxHealth = 250;
+  this.health = 250;
   this.currentBuffer = this.bufferTime;
   this.range = 150;
   this.projectileSpeed = 10;

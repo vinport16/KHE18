@@ -89,7 +89,7 @@ function drawWorld(state) {
     } else if (gobj instanceof Resource) {
       mapDrawResource(gobj, state);
     } else {
-      console.log(typeof gobj);
+      console.log(gobj);
     }
 
 
