@@ -13,7 +13,7 @@ function Tower(pos, state) {
   this.bufferTime = 30; //frames
   this.currentBuffer = this.bufferTime;
   this.projectileSpeed = 10;
-  this.projectileDamage = 30;
+  this.projectileDamage = 25;
   this.projectileEnergy = 20;
   this.projectileSize = 3;
   this.destroyed = false;
@@ -290,8 +290,8 @@ function SeekingTower(pos, state) {
   this.bufferTime = 100; //frames
   this.currentBuffer = this.bufferTime;
   this.projectileSpeed = 5;
-  this.projectileDamage = 100;
-  this.projectileEnergy = 150;
+  this.projectileDamage = 50;
+  this.projectileEnergy = 75;
   this.projectileSize = 7;
   this.destroyed = false;
   this.enemy = false;
