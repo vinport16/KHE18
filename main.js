@@ -23,6 +23,7 @@ function makeShips(point, r1, r2, level, state) {
   } else {
     for (i = 0; i < n; i++) {
       var type = getRandomInt(0, level);
+      type = type % 30;
       if (type <= 5) {
         var s1 = new BasicShip(makePointIn(point, r1, r2, state));
         s1.bounty = 31 - level;
@@ -65,7 +66,7 @@ function makeShips(point, r1, r2, level, state) {
           s1.bounty = 30;
         }
         state.world.push(s1);
-      } else if (type <= 35) {
+      } else if (type <= 40) {
         var s1 = new GrandmotherShip(makePointIn(point, r1, r2, state));
         s1.bounty = 501 - level * 2;
         if (s1.bounty < 50) {
