@@ -290,8 +290,8 @@ function SeekingTower(pos, state) {
   this.bufferTime = 100; //frames
   this.currentBuffer = this.bufferTime;
   this.projectileSpeed = 5;
-  this.projectileDamage = 50;
-  this.projectileEnergy = 75;
+  this.projectileDamage = 100;
+  this.projectileEnergy = 80;
   this.projectileSize = 7;
   this.destroyed = false;
   this.enemy = false;

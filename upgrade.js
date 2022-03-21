@@ -39,8 +39,8 @@ bT21 = new t2Upgrade("Four Shot Tower", 200, 10, 0, 0, 0, "fourShotTower", bT22)
 basicTowerUpgrades = [bT11, bT21]
 
 sT13 = new t1Upgrade("Larger Range", 2000, 0, 0, 0, 0, { range: 600 });
-sT12 = new t1Upgrade("Bullets Explode", 1000, 0, 0, 0, 0, { bulletExplode: true }, sT13);
-sT11 = new t1Upgrade("Higher Damage", 250, 0, 0, 0, 0, { projectileDamage: 150 }, sT12);
+sT12 = new t1Upgrade("Higher Damage", 1000, 0, 0, 0, 0, { projectileDamage: 190 }, sT13);
+sT11 = new t1Upgrade("Bullets Explode", 250, 0, 0, 0, 0, { bulletExplode: true }, sT12);
 
 sT23 = new t1Upgrade("Ships can shoot unlimited", 5000, 0, 0, 30, 0, { shipShotsLimit: 100 });
 sT22 = new t1Upgrade("Ships Can Shoot x3", 1000, 10, 20, 0, 0, { shipShoots: true, }, sT23);
