@@ -268,3 +268,9 @@ function rotateVector(vec, ang) {
 function getRndInteger(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+function upperCaseFirstLetter(str) {
+  return str.substring(0, 1).toUpperCase() + str.substring(1, str.length)
+}
+
+state = false;

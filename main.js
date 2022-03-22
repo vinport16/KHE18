@@ -5,6 +5,9 @@ function sleep(ms) {
 state = new GameState();
 state.position = { x: -canvas.width / 2, y: -canvas.height / 2 };
 
+// Populate the intitial tool tips
+updateToolTips(state);
+
 paused = false;
 pause(); //immediately pause the game
 
@@ -189,6 +192,7 @@ function allKilled(state) {
   }
   if (state.givelevelBonus) {
     state.money += Math.max(550 - (state.level * 50), 0);
+    updateToolTips(state);
     state.givelevelBonus = false;
   }
   if (delay == 250) {
@@ -263,6 +267,7 @@ function step(state) {
     writeMessage("Game Restarted. Level " + state.level + " starting soon.");
     updateLevelDisplay("Level " + state.level);
     state.position = { x: -canvas.width / 2, y: -canvas.height / 2 };
+    updateToolTips(state);
     paused = false;
     pause();
 

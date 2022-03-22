@@ -485,7 +485,7 @@ function CollectorTower(pos, state) {
   this.icePrice = 0;
   this.ironPrice = 0;
   this.uraniumPrice = 0;
-  this.bufferTime = 30;
+  this.bufferTime = 100;
   this.currentBuffer = 0;
   this.extractRate = 1;
   this.collectionEnergy = 30;
@@ -520,7 +520,7 @@ CollectorTower.prototype.extractResource = function (resource, state) {
     state.uranium += this.extractRate;
   }
   resource.extract(this.extractRate);
-
+  updateToolTips(state);
 }
 
 

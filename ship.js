@@ -26,6 +26,8 @@ Ship.prototype.constructor = Ship;
 
 Ship.prototype.delete = function (state) {
   state.money += this.bounty;
+  updateToolTips(state);
+
   if (this.squad) {
     // delete from squad
     var index = this.squad.indexOf(this);
@@ -206,6 +208,7 @@ MotherShip.prototype.delete = function (state) {
 
   state.money += this.bounty;
   GameObject.prototype.delete.call(this, state);
+  updateToolTips(state);
 }
 
 function GrandmotherShip(pos, state) {
@@ -267,6 +270,7 @@ GrandmotherShip.prototype.delete = function (state) {
 
   state.money += this.bounty;
   GameObject.prototype.delete.call(this, state);
+  updateToolTips(state);
 }
 
 function BombShip(pos, state) {
@@ -296,11 +300,8 @@ BombShip.prototype.shoot = function (state) {
 
   state.money += this.bounty;
   GameObject.prototype.delete.call(this, state);
+  updateToolTips(state);
 }
-
-// BombShip.prototype.delete = function (state) {
-
-// }
 
 function SpeedyShip(pos, state) {
   this.radius = 5;

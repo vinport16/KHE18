@@ -30,6 +30,7 @@ Structure.prototype.delete = function (state) {
 Structure.prototype.sell = function (state) {
   state.money += Math.floor(this.price * (this.health / this.maxHealth) * 0.9);
   this.delete(state);
+  updateToolTips(state);
 }
 
 function canAfford(upgrade, state) {
@@ -56,6 +57,7 @@ Structure.prototype.upgrade = function (upgradeList, index, state) {
     } else {
       this["tree"][index] = { name: "No Upgrade Available" }
     }
+    updateToolTips(state);
   }
 }
 
@@ -98,6 +100,7 @@ Structure.prototype.replace = function (upgradeList, index, state) {
     state.world.push(newStruct);
     state.selectedStructure = newStruct;
     this.delete(state);
+    updateToolTips(state);
   }
 }
 
@@ -220,6 +223,7 @@ function placeStructure(s, state) {
       state.selectedStructure = s;
       updateSelectedDetails(state.selectedStructure);
       drawEverything(state);
+      updateToolTips(state);
     } else {
       s.disconnectAll(state);
     }

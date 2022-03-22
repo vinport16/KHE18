@@ -164,3 +164,7 @@ button:hover:enabled .tooltip {
 button.tower2:hover .tooltip {
   visibility: visible;
 }
+
+.tooExpensive{
+  color: rgb(148, 21, 21);
+}

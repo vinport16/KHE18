@@ -11,23 +11,31 @@ function updateHighestLevelDisplay(levelMessage) {
   document.getElementById("highestLevel").innerHTML = levelMessage;
 }
 
-function describeObject(element, object) {
-
+function describeObject(element, object, state = null) {
+  while (element.childElementCount > 0) {
+    element.removeChild(element.lastChild);
+  }
   tip = "<span class=\"tooltip\">";
 
-  tip += "name: " + object.name;
-  tip += "<br>price: " + object.price;
-  if (object.orePrice != 0) {
-    tip += "<br>ore price: " + object.orePrice;
-  }
-  if (object.icePrice != 0) {
-    tip += "<br>ice price: " + object.icePrice;
-  }
-  if (object.ironPrice != 0) {
-    tip += "<br>iron price: " + object.ironPrice;
-  }
-  if (object.uraniumPrice != 0) {
-    tip += "<br>uranium price: " + object.uraniumPrice;
+  tip += "Name: " + object.name;
+  for (var key in object) {
+    tooExpensive = false;
+    if (key.toLocaleLowerCase().includes("price") && object[key] != 0) {
+      resourceName = key.toLocaleLowerCase().split("price")[0];
+      if (key == "price") {
+        resourceName = "";
+        tooExpensive = state.money <= object.price - 1;
+      } else {
+        tooExpensive = state[resourceName] < object[key];
+      }
+
+      // display the values that are too expensive in red
+      if (tooExpensive) {
+        tip += "<br><span class=\"tooExpensive\">" + upperCaseFirstLetter(resourceName) + " Price" + ": " + object[key] + "</span>";
+      } else {
+        tip += "<br>" + upperCaseFirstLetter(resourceName) + " Price" + ": " + object[key];
+      }
+    }
   }
 
   if (object instanceof Tower) {
@@ -49,7 +57,7 @@ function describeObject(element, object) {
     }
   } else {
     for (var key in object) {
-      if (object.hasOwnProperty(key) && key != "name" && key != "price" && key != "tree") {
+      if (object.hasOwnProperty(key) && key != "name" && !key.toLocaleLowerCase().includes("price") && key != "tree" && key != "next" && key != "updateProperties") {
         tip += "<br>" + key + ": " + object[key];
       }
     }
@@ -194,7 +202,7 @@ function updateSelectedDetails(struct) {
         updateSelectedDetails(state.selectedStructure);
         drawEverything(state);
       });
-      describeObject(document.getElementById("up1"), struct.tree[0]);
+      describeObject(document.getElementById("up1"), struct.tree[0], state);
       // If no upgrades left (or player can't afford), keep button disabled
       document.getElementById("up1").disabled = (struct.tree[0].name == "No Upgrade Available" || !canAfford(struct.tree[0], state));
     }
@@ -212,7 +220,7 @@ function updateSelectedDetails(struct) {
         updateSelectedDetails(state.selectedStructure);
         drawEverything(state);
       });
-      describeObject(document.getElementById("up2"), struct.tree[1]);
+      describeObject(document.getElementById("up2"), struct.tree[1], state);
       // If no upgrades left (or player can't afford), keep button disabled
       document.getElementById("up2").disabled = (struct.tree[1].name == "No Upgrade Available" || !canAfford(struct.tree[1], state));
     }
