@@ -103,6 +103,14 @@ Projectile.prototype.collisionCheck = function (state) {
         } else {
           if (this.damage > gobj.health) {
             this.damage -= gobj.health;
+            if (gobj instanceof Ship) {
+              if (gobj.name in state.shipsKilled) {
+                state.shipsKilled[gobj.name] += 1;
+              } else {
+                state.shipsKilled[gobj.name] = 1;
+              }
+            }
+
             if (this.parent instanceof FriendlyShip) {
               this.parent.parent.kills++;
             } else {
@@ -256,6 +264,13 @@ Explosion.prototype.collisionCheck = function (state, friendlyFire) {
       if (checkOverlap(this, gobj)) {
         gobj.health -= this.damage;
         if (gobj.health < 0) {
+          if (gobj instanceof Ship) {
+            if (gobj.name in state.shipsKilled) {
+              state.shipsKilled[gobj.name] += 1;
+            } else {
+              state.shipsKilled[gobj.name] = 1;
+            }
+          }
           gobj.delete(state);
         }
       }
@@ -266,6 +281,13 @@ Explosion.prototype.collisionCheck = function (state, friendlyFire) {
         if (checkOverlap(this, gobj)) {
           gobj.health -= this.damage;
           if (gobj.health < 0) {
+            if (gobj instanceof Ship) {
+              if (gobj.name in state.shipsKilled) {
+                state.shipsKilled[gobj.name] += 1;
+              } else {
+                state.shipsKilled[gobj.name] = 1;
+              }
+            }
             gobj.delete(state);
           }
         }

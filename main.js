@@ -261,7 +261,7 @@ function step(state) {
     state.ice = 10;
     state.uranium = 10;
     state.level = 1;
-    state.shipsKilled = 0;
+    state.shipsKilled = {};
     state.currentStep = 0;
     state.selectedStructure = null;
     writeMessage("Game Restarted. Level " + state.level + " starting soon.");

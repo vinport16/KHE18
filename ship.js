@@ -1,6 +1,7 @@
 //ship.js
 
 function Ship(pos, state) {
+  this.name = "Default Ship"
   this.radius = 10;
   this.maxHealth = 130;
   this.health = this.maxHealth;
@@ -112,6 +113,7 @@ Ship.prototype.selectMoveTarget = function (state) {
 
 
 function BasicShip(pos, state) {
+  this.name = "Basic Ship"
   this.radius = 10;
   this.maxHealth = 80;
   this.health = this.maxHealth;
@@ -134,6 +136,7 @@ BasicShip.prototype = Object.create(Ship.prototype);
 BasicShip.prototype.constructor = BasicShip;
 
 function BigShip(pos, state) {
+  this.name = "Big Ship"
   this.radius = 15;
   this.maxHealth = 200;
   this.health = this.maxHealth;
@@ -157,6 +160,7 @@ BigShip.prototype = Object.create(Ship.prototype);
 BigShip.prototype.constructor = BigShip;
 
 function MotherShip(pos, state) {
+  this.name = "Mother Ship"
   this.radius = 45;
   this.maxHealth = 500;
   this.health = this.maxHealth;
@@ -212,6 +216,7 @@ MotherShip.prototype.delete = function (state) {
 }
 
 function GrandmotherShip(pos, state) {
+  this.name = "Grandmother Ship"
   this.radius = 60;
   this.maxHealth = 1000;
   this.health = this.maxHealth;
@@ -274,6 +279,7 @@ GrandmotherShip.prototype.delete = function (state) {
 }
 
 function BombShip(pos, state) {
+  this.name = "Bomb Ship"
   this.radius = 25;
   this.maxHealth = 300;
   this.health = this.maxHealth;
@@ -304,6 +310,7 @@ BombShip.prototype.shoot = function (state) {
 }
 
 function SpeedyShip(pos, state) {
+  this.name = "Speedy Ship"
   this.radius = 5;
   this.maxHealth = 50;
   this.health = this.maxHealth;
@@ -326,6 +333,7 @@ SpeedyShip.prototype = Object.create(Ship.prototype);
 SpeedyShip.prototype.constructor = SpeedyShip;
 
 function LaserShip(pos, state) {
+  this.name = "Laser Ship"
   this.radius = 15;
   this.maxHealth = 200;
   this.health = this.maxHealth;
@@ -354,6 +362,7 @@ LaserShip.prototype.shoot = function (state) {
 }
 
 function FriendlyShip(pos, parent, shoots, shotsLimit, state) {
+  this.name = "Friendly Ship"
   this.radius = 10;
 
   this.color = "yellow";

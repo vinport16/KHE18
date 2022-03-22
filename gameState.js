@@ -10,12 +10,12 @@ function GameState() {
   this.uranium = 10;
   this.level = 1;
   this.highestLevel = 1;
-  this.shipsKilled = 0;
   this.currentStep = 0;
   this.selectedStructure = null;
   this.proto = null; // preview this prototype building when not null
   this.givelevelBonus = true;
-};
+  this.shipsKilled = {};
+}
 
 GameState.prototype.getEnergyCapacity = function () {
   energy = 0;

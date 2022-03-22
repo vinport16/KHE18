@@ -9,7 +9,7 @@ function Building(pos, state) {
   this.energyRate = 0.25;
   this.energy = 0;
   this.enemy = false;
-  this.name = "Basic Tower";
+  this.name = "Basic Building";
   this.tree = copyArray(basicBuildingUpgrades);
   this.price = 100;
   this.orePrice = 0;
