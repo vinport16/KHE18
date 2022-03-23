@@ -285,6 +285,34 @@ function MainBuilding(pos, state) {
 MainBuilding.prototype = Object.create(Building.prototype);
 MainBuilding.prototype.constructor = MainBuilding;
 
+function ConnectionBuilding(pos, state) {
+  this.height = 20;
+  this.width = 20;
+  this.maxHealth = 20;
+  this.health = 20;
+  this.energyMax = 20;
+  this.energyRate = 0;
+  this.energy = 0;
+  this.enemy = false;
+  this.name = "Connection Building";
+  this.tree = false;
+  this.price = 50;
+  this.orePrice = 5;
+  this.icePrice = 5;
+  this.ironPrice = 5;
+  this.uraniumPrice = 5;
+  this.heal = 0;
+  this.bufferTime = 30;
+  this.currentBuffer = 0;
+  this.healEnergy = 0;
+  this.energyRange = 200;
+  Structure.call(this, pos, this.price, this.maxHealth, this.energyRange, this.name, state);
+
+}
+
+ConnectionBuilding.prototype = Object.create(Building.prototype);
+ConnectionBuilding.prototype.constructor = ConnectionBuilding;
+
 function getNewBuilding(type, pos, state) {
   console.log("getting new building");
 }

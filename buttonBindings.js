@@ -19,6 +19,10 @@ document.getElementById("repairBuilding").onclick = function () {
   placeStructure(new RepairBuilding({ x: 0, y: 0 }, state), state);
 }
 
+document.getElementById("connectionBuilding").onclick = function () {
+  placeStructure(new ConnectionBuilding({ x: 0, y: 0 }, state), state);
+}
+
 // TOWERS
 document.getElementById("defaultTower").onclick = function () {
   placeStructure(new Tower({ x: 0, y: 0 }, state), state);
@@ -50,6 +54,7 @@ function updateToolTips(state) {
   describeObject(document.getElementById("sheildBuilding"), new SheildBuilding({ x: 0, y: 0 }, fakeState), state);
   describeObject(document.getElementById("battery"), new Battery({ x: 0, y: 0 }, fakeState), state);
   describeObject(document.getElementById("repairBuilding"), new RepairBuilding({ x: 0, y: 0 }, fakeState), state);
+  describeObject(document.getElementById("connectionBuilding"), new ConnectionBuilding({ x: 0, y: 0 }, fakeState), state);
   describeObject(document.getElementById("defaultTower"), new Tower({ x: 0, y: 0 }, fakeState), state);
   describeObject(document.getElementById("seekingTower"), new SeekingTower({ x: 0, y: 0 }, fakeState), state);
   describeObject(document.getElementById("golaith"), new Golaith({ x: 0, y: 0 }, fakeState), state);
