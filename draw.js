@@ -65,8 +65,10 @@ function drawWorld(state) {
   // draw gobjects
   for (var i in state.world) {
     gobj = state.world[i];
-    if (gobj instanceof Explosion && isDisplayed(gobj, state)) {
-      drawExplosion(gobj, state);
+    if (gobj instanceof Explosion) {
+      if (isDisplayed(gobj, state)) {
+        drawExplosion(gobj, state);
+      }
     } else if (gobj instanceof Building) {
       mapDrawBuilding(gobj, state);
       if (isDisplayed(gobj, state)) {
@@ -89,6 +91,7 @@ function drawWorld(state) {
     } else if (gobj instanceof Resource) {
       mapDrawResource(gobj, state);
     } else {
+      console.log("object not drawn:")
       console.log(gobj);
     }
 
