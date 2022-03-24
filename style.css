@@ -23,7 +23,7 @@ canvas{
   position: block;
 }
 
-#highestLevel {
+.stat {
   color:white;
   font-size: 15px;
   position: block;

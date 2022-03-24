@@ -109,6 +109,7 @@ Projectile.prototype.collisionCheck = function (state) {
               } else {
                 state.shipsKilled[gobj.name] = 1;
               }
+              updateShipsKilledDisplay(state.shipsKilled)
             }
 
             if (this.parent instanceof FriendlyShip) {
@@ -270,6 +271,7 @@ Explosion.prototype.collisionCheck = function (state, friendlyFire) {
             } else {
               state.shipsKilled[gobj.name] = 1;
             }
+            updateShipsKilledDisplay(state.shipsKilled)
           }
           gobj.delete(state);
         }
@@ -287,6 +289,7 @@ Explosion.prototype.collisionCheck = function (state, friendlyFire) {
               } else {
                 state.shipsKilled[gobj.name] = 1;
               }
+              updateShipsKilledDisplay(state.shipsKilled)
             }
             gobj.delete(state);
           }
