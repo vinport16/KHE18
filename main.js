@@ -26,7 +26,7 @@ function makeShips(point, r1, r2, level, state) {
   } else {
     for (i = 0; i < n; i++) {
       var type = getRandomInt(0, level);
-      type = type % 30;
+      type = type % 40;
       if (type <= 5) {
         var s1 = new BasicShip(makePointIn(point, r1, r2, state));
         s1.bounty = 31 - level;

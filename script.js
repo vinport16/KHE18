@@ -322,11 +322,8 @@ function resetSelect() {
 
 function updateShipsKilledDisplay(shipsKilled) {
   skFormatted = "<div>Ships Killed:</div>";
-  console.log(skFormatted)
   if (shipsKilled != {}) {
-    console.log(skFormatted);
     for (const [key, value] of Object.entries(shipsKilled)) {
-      console.log(key, value);
       skFormatted += "<div>" + key + ": " + value + "</div>";
     }
 
