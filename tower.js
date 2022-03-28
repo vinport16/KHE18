@@ -31,7 +31,7 @@ function Tower(pos, state) {
   this.bulletExplode = false;
   this.energyRange = 20;
 
-  Structure.call(this, pos, this.price, this.health, this.radius + this.radius + this.energyRange, this.name, state);
+  Structure.call(this, pos, this.price, this.health, this.radius + this.energyRange, this.name, state);
 }
 Tower.prototype = Object.create(Structure.prototype);
 Tower.prototype.constructor = Tower;
@@ -62,6 +62,16 @@ Tower.prototype.step = function (state) {
     } else {
       this.currentBuffer--;
     }
+  } else if (this instanceof FlyingTower) {
+    // get new angle: 
+    this.angle += Math.acos(1 - Math.pow(this.flyingSpeed / this.flyingRadius, 2) / 2);
+
+    // find new x and y
+    var newX = this.centerPos.x + this.flyingRadius * Math.cos(this.angle);
+    var newY = this.centerPos.y + this.flyingRadius * Math.sin(this.angle);
+
+    this.position = { x: newX, y: newY }
+    this.waitToShoot(state);
   } else {
     this.waitToShoot(state);
   }
@@ -428,6 +438,43 @@ Golaith.prototype.shoot = function (state) {
   state.world.push(bullet);
 }
 
+function FlyingTower(pos, state) {
+  this.radius = SMALL_RADIUS;
+  this.maxHealth = 110;
+  this.health = this.maxHealth;
+  this.color = "#9c9cff";
+  this.range = 200;
+  this.bufferTime = 30; //frames
+  this.currentBuffer = this.bufferTime;
+  this.projectileSpeed = 10;
+  this.projectileDamage = 25;
+  this.projectileEnergy = 20;
+  this.projectileSize = 3;
+  this.destroyed = false;
+  this.enemy = false;
+  this.tree = false;
+  this.kills = 0;
+  this.targetType = "closest";
+  this.price = 100;
+  this.orePrice = 0;
+  this.icePrice = 0;
+  this.ironPrice = 0;
+  this.uraniumPrice = 0;
+  this.name = "Flying Tower";
+  this.extractRate = 0;
+  this.bulletExplode = false;
+  this.energyRange = 20;
+
+  this.angle = 0;
+  this.flyingRadius = 100;
+  this.centerPos = pos;
+  this.flyingSpeed = 3;
+
+
+  Structure.call(this, pos, this.price, this.health, this.radius + this.energyRange, this.name, state);
+}
+FlyingTower.prototype = Object.create(Tower.prototype);
+FlyingTower.prototype.constructor = FlyingTower;
 
 
 function bombLauncher(pos, state) {

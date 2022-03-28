@@ -44,6 +44,9 @@ document.getElementById("collectorTower").onclick = function () {
   placeStructure(new CollectorTower({ x: 0, y: 0 }, state), state);
 }
 
+document.getElementById("flyingTower").onclick = function () {
+  placeStructure(new FlyingTower({ x: 0, y: 0 }, state), state);
+}
 // Empty state for updating the tool tips
 fakeState = new GameState();
 
@@ -60,4 +63,5 @@ function updateToolTips(state) {
   describeObject(document.getElementById("golaith"), new Golaith({ x: 0, y: 0 }, fakeState), state);
   describeObject(document.getElementById("bomb"), new BombTower({ x: 0, y: 0 }, fakeState), state);
   describeObject(document.getElementById("collectorTower"), new CollectorTower({ x: 0, y: 0 }, fakeState), state);
+  describeObject(document.getElementById("flyingTower"), new FlyingTower({ x: 0, y: 0 }, fakeState), state);
 }
