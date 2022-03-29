@@ -58,6 +58,16 @@ gT21 = new t2Upgrade("MultiShot tower x2", 5000, 50, 0, 20, 0, "multiShotTower",
 
 golaithTowerUpgrades = [gT11, gT21]
 
+fT13 = new t1Upgrade("Shoot More Often", 1500, 0, 10, 0, 0, { bufferTime: 20 });
+fT12 = new t1Upgrade("More Damage", 750, 0, 0, 5, 0, { projectileDamage: 125 }, fT13);
+fT11 = new t1Upgrade("More Health", 200, 5, 0, 0, 0, { maxHealth: 300 }, fT12);
+
+fT23 = new t1Upgrade("Giant Range", 2000, 0, 10, 10, 10, { range: 800 });
+fT22 = new t1Upgrade("Bigger Loop", 1000, 0, 0, 8, 0, { flyingRadius: 500 }, fT23);
+fT21 = new t1Upgrade("Fly Faster", 500, 0, 5, 0, 10, { flyingSpeed: 6 }, fT22);
+
+flyingTowerUpgrades = [fT11, fT21]
+
 
 //Building upgrades
 bB12 = new t1Upgrade("Bigger Battery", 200, 0, 0, 0, 0, { energyMax: 300 });
