@@ -153,7 +153,7 @@ function BigShip(pos, state) {
   this.destroyed = false;
   GameObject.call(this, pos);
   this.bounty = 100;
-  this.shotCount = 2;
+  this.shotCount = 1;
 
 }
 BigShip.prototype = Object.create(Ship.prototype);
@@ -185,7 +185,7 @@ MotherShip.prototype.constructor = MotherShip;
 MotherShip.prototype.shoot = function (state) {
   var target = this.selectTarget(state);
   for (let i = 0; i < this.shotCount; i++) {
-    var babyShip = new Ship(duplicate(this.position), state);
+    var babyShip = new Ship(duplicate({ x: this.position.x + getRndInteger(-5, 5), y: this.position.y + getRndInteger(-5, 5) }), state);
     state.world.push(babyShip);
   }
 }
@@ -244,10 +244,10 @@ GrandmotherShip.prototype.shoot = function (state) {
     var randInt = getRandomInt(0, 10);
     var babyShip;
     if (randInt > 7) {
-      var babyShip = new MotherShip(duplicate(this.position), state);
+      var babyShip = new MotherShip(duplicate({ x: this.position.x + getRndInteger(-5, 5), y: this.position.y + getRndInteger(-5, 5) }), state);
       state.world.push(babyShip);
     } else {
-      var babyShip = new BigShip(duplicate(this.position), state);
+      var babyShip = new BigShip(duplicate({ x: this.position.x + getRndInteger(-5, 5), y: this.position.y + getRndInteger(-5, 5) }), state);
       state.world.push(babyShip);
     }
   }
