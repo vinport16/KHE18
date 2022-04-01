@@ -161,6 +161,8 @@ function updateSelectedDetails(struct) {
     document.getElementById("selectName").innerHTML = struct.name;
     if (struct.kills) {
       document.getElementById("selectKills").innerHTML = "kills: " + struct.kills;
+    } else if (struct instanceof CollectorTower) {
+      document.getElementById("selectKills").innerHTML = struct.action + struct.currentResource;
     }
     if (struct.targetType) {
       document.getElementById("selectTarget").value = struct.targetType;

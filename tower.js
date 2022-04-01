@@ -57,6 +57,8 @@ Tower.prototype.step = function (state) {
       currentResource = this.onAResource(state);
       if (collection && currentResource != -1 && this.getEnergyFor(this.collectionEnergy, state)) {
         this.extractResource(currentResource, state);
+      } else if (currentResource == -1) {
+        this.action = "Finished Collecting "
       }
       this.currentBuffer = this.bufferTime;
     } else {
@@ -537,6 +539,8 @@ function CollectorTower(pos, state) {
   this.extractRate = 1;
   this.collectionEnergy = 30;
   this.energyRange = 20;
+  this.action = "Currently Collecting: ";
+  this.currentResource = "";
 
   Structure.call(this, pos, this.price, this.health, this.radius + this.energyRange, this.name, state);
 }
@@ -559,12 +563,16 @@ CollectorTower.prototype.onAResource = function (state) {
 CollectorTower.prototype.extractResource = function (resource, state) {
   if (resource instanceof Ore) {
     state.ore += this.extractRate;
+    this.currentResource = "Ore"
   } else if (resource instanceof Ice) {
     state.ice += this.extractRate;
+    this.currentResource = "Ice"
   } else if (resource instanceof Iron) {
     state.iron += this.extractRate;
+    this.currentResource = "Iron"
   } else if (resource instanceof Uranium) {
     state.uranium += this.extractRate;
+    this.currentResource = "Uranium"
   }
   resource.extract(this.extractRate);
   updateToolTips(state);
