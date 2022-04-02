@@ -1,31 +1,31 @@
 // How upgrades work: 
 // Two types of upgrades: 0 is stat upgrades, 1 is replace upgrades 
 // If a structure supports upgrades, it has a list in this file with two upgrade objects. 
-function Upgrade(name, price, icePrice, ironPrice, orePrice, uraniumPrice, next = null) {
-  this.name = name;
-  this.price = price;
-  this.icePrice = icePrice;
-  this.ironPrice = ironPrice;
-  this.orePrice = orePrice;
-  this.uraniumPrice = uraniumPrice;
-  this.next = next;
+class Upgrade {
+  constructor(name, price, icePrice, ironPrice, orePrice, uraniumPrice, next = null) {
+    this.name = name;
+    this.price = price;
+    this.icePrice = icePrice;
+    this.ironPrice = ironPrice;
+    this.orePrice = orePrice;
+    this.uraniumPrice = uraniumPrice;
+    this.next = next;
+  }
 }
 
-function t1Upgrade(name, price, icePrice, ironPrice, orePrice, uraniumPrice, updateProperties, next = null) {
-  Upgrade.call(this, name, price, icePrice, ironPrice, orePrice, uraniumPrice, next);
-
-  this.updateProperties = updateProperties;
+class t1Upgrade extends Upgrade {
+  constructor(name, price, icePrice, ironPrice, orePrice, uraniumPrice, updateProperties, next = null) {
+    super(name, price, icePrice, ironPrice, orePrice, uraniumPrice, next);
+    this.updateProperties = updateProperties;
+  }
 }
-t1Upgrade.prototype = Object.create(Upgrade.prototype);
-t1Upgrade.prototype.constructor = t1Upgrade;
 
-function t2Upgrade(name, price, icePrice, ironPrice, orePrice, uraniumPrice, newStruct, next = null) {
-  Upgrade.call(this, name, price, icePrice, ironPrice, orePrice, uraniumPrice, next);
-
-  this.newStruct = newStruct;
+class t2Upgrade extends Upgrade {
+  constructor(name, price, icePrice, ironPrice, orePrice, uraniumPrice, newStruct, next = null) {
+    super(name, price, icePrice, ironPrice, orePrice, uraniumPrice, next);
+    this.newStruct = newStruct;
+  }
 }
-t2Upgrade.prototype = Object.create(Upgrade.prototype);
-t2Upgrade.prototype.constructor = t2Upgrade;
 
 // BT13 = Basic Tower Option 1, 3rd upgrade 
 bT13 = new t1Upgrade("Larger Range", 400, 0, 0, 0, 0, { range: 350 });
