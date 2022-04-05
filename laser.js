@@ -1,7 +1,7 @@
 class Laser extends GameObject {
   constructor(parent, target, damage, duration, width, color) {
+    super(parent.position);
     this.parent = parent;
-    this.position = parent.position;
     this.target = target;
     this.damage = damage;
     this.duration = duration;

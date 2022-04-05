@@ -1,7 +1,5 @@
 //gameObjects
 
-var GameObject = function (pos) {
-}
 class GameObject {
   constructor(pos) {
     this.position = pos;

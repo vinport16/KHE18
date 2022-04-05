@@ -7,7 +7,7 @@ resourceTypeValues = {
 }
 class Resource extends GameObject {
   constructor(pos, initialAmt, type) {
-    this.position = pos;
+    super(pos);
     this.amount = initialAmt;
     this.radius = this.amount / this.density;
     this.name = type;

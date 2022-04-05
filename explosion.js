@@ -5,7 +5,7 @@ class Explosion extends GameObject {
   damage = 1;
   speed = 1;
   constructor(pos, maxRadius, friendlyFire) {
-    this.position = pos;
+    super(pos);
     this.maxRadius = maxRadius;
     this.friendlyFire = friendlyFire;
   }

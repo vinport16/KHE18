@@ -12,8 +12,8 @@ class Projectile extends GameObject {
   acceleration = 0.1;
 
   constructor(tar, radius, pos, speed, damage, enemy, parent, isSeeking = false, explode = false) {
+    super(pos);
     this.target = tar;
-    this.position = pos;
     this.radius = radius;
     this.speed = speed;
     this.damage = damage;
